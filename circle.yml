@@ -1,0 +1,17 @@
+## Customize the test machine
+
+
+
+machine:
+    xcode:
+    version: 7.3
+
+dependencies:
+  override:
+    - pod install:
+        timeout: 300
+
+test:
+  override:
+    - ./bin/tests
+
