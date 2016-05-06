@@ -11,5 +11,5 @@ machine:
 
 test:
   override:
-    - ./ChampySwiftTests
+    - ./ChampySwiftTests/ChampySwiftTests.swift
 
