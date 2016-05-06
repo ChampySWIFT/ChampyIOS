@@ -10,7 +10,6 @@ machine:
 dependencies:
   override:
     - pod install:
-        timeout: 300
 
 test:
   override:
