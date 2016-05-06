@@ -77,7 +77,7 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       appDelegate.mainViewController = self
     }
     
-    
+    //    asdas
     let userObject:JSON       = CHSession().currentUserObject
     self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
     self.wins                 = userObject["successChallenges"].intValue
