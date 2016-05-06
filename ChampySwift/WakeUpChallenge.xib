@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
+            <string>BebasNeueRegular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WakeUpChallenge" customModule="ChampySwift" customModuleProvider="target">
+            <connections>
+                <outlet property="topBarBackground" destination="Iav-9k-oxH" id="af3-xC-9XB"/>
+                <outlet property="wakeUpIcon" destination="FQi-fJ-1t3" id="751-6h-AaJ"/>
+                <outlet property="wakeUpLabel" destination="aWg-5B-7EE" id="f1i-3O-cAv"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iav-9k-oxH">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wake-up" translatesAutoresizingMaskIntoConstraints="NO" id="FQi-fJ-1t3">
+                            <rect key="frame" x="78" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="DPs-NQ-pIg"/>
+                                <constraint firstAttribute="height" constant="44" id="yQF-PY-yyL"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAKE - UP CHALLEHGE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWg-5B-7EE">
+                            <rect key="frame" x="59" y="53" width="83" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="83" id="QLR-UX-5Bp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.71501361733333768" blue="0.21737093274064812" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="FQi-fJ-1t3" firstAttribute="centerX" secondItem="Iav-9k-oxH" secondAttribute="centerX" id="7oG-2I-J1c"/>
+                        <constraint firstItem="aWg-5B-7EE" firstAttribute="top" secondItem="FQi-fJ-1t3" secondAttribute="bottom" constant="3" id="AjX-PS-4x8"/>
+                        <constraint firstItem="FQi-fJ-1t3" firstAttribute="top" secondItem="Iav-9k-oxH" secondAttribute="top" constant="8" id="Cmx-4h-6jP"/>
+                        <constraint firstItem="aWg-5B-7EE" firstAttribute="top" secondItem="FQi-fJ-1t3" secondAttribute="bottom" constant="1" id="Fwe-Ce-bQO"/>
+                        <constraint firstAttribute="height" constant="80" id="SWl-uj-dcT"/>
+                        <constraint firstItem="aWg-5B-7EE" firstAttribute="centerX" secondItem="FQi-fJ-1t3" secondAttribute="centerX" id="cwt-Jq-jRT"/>
+                        <constraint firstAttribute="bottom" secondItem="aWg-5B-7EE" secondAttribute="bottom" id="iM2-MH-r7c"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="AjX-PS-4x8"/>
+                        </mask>
+                    </variation>
+                </view>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phb-ZY-Xgu">
+                    <rect key="frame" x="0.0" y="247" width="200" height="44"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="yiv-dP-5Zg"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="kvg-TM-EgG"/>
+                        <barButtonItem image="CancleIcon" style="plain" id="RDf-Dd-LzP">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bxL-Ac-JO8">
+                                <rect key="frame" x="21" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancleIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="uco-Jm-dGe"/>
+                        <barButtonItem style="plain" id="gOC-Bz-OAK">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e7u-UO-Faf">
+                                <rect key="frame" x="78" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ToFriendIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ybK-rD-VJ3"/>
+                        <barButtonItem style="plain" id="sxz-DY-u2T">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mE2-5w-8Iz">
+                                <rect key="frame" x="141" y="0.0" width="38" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ShareIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="DD3-kL-tqU"/>
+                    </items>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake up at 6 AM every morning during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tc-75-thr">
+                    <rect key="frame" x="23" y="88" width="154" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="154" id="9I0-na-iZm"/>
+                        <constraint firstAttribute="height" constant="45" id="ddo-xe-1d7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-Bb-TTM">
+                    <rect key="frame" x="8" y="135" width="184" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="Q1H-Uy-jxc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="41"/>
+                    <color key="textColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zX-BJ-LY9">
+                    <rect key="frame" x="8" y="183" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="27e-dp-DVQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156862745101" green="0.81960784313725488" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="5zX-BJ-LY9" firstAttribute="top" secondItem="mHu-Bb-TTM" secondAttribute="bottom" constant="-3" id="0Zl-c9-yjj"/>
+                <constraint firstAttribute="trailing" secondItem="phb-ZY-Xgu" secondAttribute="trailing" id="4jT-IC-PBu"/>
+                <constraint firstAttribute="trailing" secondItem="5zX-BJ-LY9" secondAttribute="trailing" constant="8" id="7lo-h8-Bm7"/>
+                <constraint firstItem="mHu-Bb-TTM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="BPg-EB-IoR"/>
+                <constraint firstAttribute="trailing" secondItem="mHu-Bb-TTM" secondAttribute="trailing" constant="8" id="GKh-tc-nh1"/>
+                <constraint firstAttribute="bottom" secondItem="phb-ZY-Xgu" secondAttribute="bottom" id="GPf-Dd-vfG"/>
+                <constraint firstItem="4tc-75-thr" firstAttribute="top" secondItem="Iav-9k-oxH" secondAttribute="bottom" constant="8" id="GTl-jd-Wak"/>
+                <constraint firstItem="Iav-9k-oxH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PEV-wK-3eA"/>
+                <constraint firstItem="4tc-75-thr" firstAttribute="centerX" secondItem="Iav-9k-oxH" secondAttribute="centerX" id="Urw-ge-gjt"/>
+                <constraint firstItem="5zX-BJ-LY9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="VMF-xd-wmF"/>
+                <constraint firstItem="mHu-Bb-TTM" firstAttribute="top" secondItem="4tc-75-thr" secondAttribute="bottom" constant="2" id="WWj-wT-7Ly"/>
+                <constraint firstItem="phb-ZY-Xgu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cLz-WM-V73"/>
+                <constraint firstAttribute="trailing" secondItem="Iav-9k-oxH" secondAttribute="trailing" id="fC5-pv-uyr"/>
+                <constraint firstItem="Iav-9k-oxH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hY6-U6-RMW"/>
+                <constraint firstItem="5zX-BJ-LY9" firstAttribute="top" secondItem="mHu-Bb-TTM" secondAttribute="bottom" constant="-10" id="ufG-sN-loz"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ufG-sN-loz"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="248" y="364.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CancleIcon" width="44" height="44"/>
+        <image name="ShareIcon" width="38" height="44"/>
+        <image name="ToFriendIcon" width="44" height="44"/>
+        <image name="Wake-up" width="100" height="100"/>
+    </resources>
+</document>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
+            <string>BebasNeueRegular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelfImprovementDone" customModule="ChampySwift" customModuleProvider="target">
+            <connections>
+                <outlet property="selfImprovementLabel" destination="cEb-07-oX8" id="y6T-OK-eqj"/>
+                <outlet property="selfImprovementUpIcon" destination="xFL-Tz-HAh" id="I2e-5Q-X1f"/>
+                <outlet property="topBarBackground" destination="FdG-5w-Lyc" id="dQl-XV-zi7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="x4n-DL-Amt">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdG-5w-Lyc">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelfImprovement" translatesAutoresizingMaskIntoConstraints="NO" id="xFL-Tz-HAh">
+                            <rect key="frame" x="78" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="VFX-Vv-6bd"/>
+                                <constraint firstAttribute="width" constant="44" id="vt5-hT-Dfb"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELF-IMPROVEMENT CHALLENGE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEb-07-oX8">
+                            <rect key="frame" x="59" y="53" width="83" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="83" id="G8n-Iz-LOr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="xFL-Tz-HAh" firstAttribute="top" secondItem="FdG-5w-Lyc" secondAttribute="top" constant="8" id="30Q-rc-qmj"/>
+                        <constraint firstItem="cEb-07-oX8" firstAttribute="top" secondItem="xFL-Tz-HAh" secondAttribute="bottom" constant="1" id="Ors-NZ-hpc"/>
+                        <constraint firstAttribute="height" constant="80" id="acn-cV-jd2"/>
+                        <constraint firstItem="cEb-07-oX8" firstAttribute="centerX" secondItem="xFL-Tz-HAh" secondAttribute="centerX" id="bcp-P2-GNK"/>
+                        <constraint firstItem="xFL-Tz-HAh" firstAttribute="centerX" secondItem="FdG-5w-Lyc" secondAttribute="centerX" id="gKJ-hd-fYo"/>
+                        <constraint firstItem="cEb-07-oX8" firstAttribute="top" secondItem="xFL-Tz-HAh" secondAttribute="bottom" constant="3" id="lVO-pO-rDZ"/>
+                        <constraint firstAttribute="bottom" secondItem="cEb-07-oX8" secondAttribute="bottom" id="nLW-LR-fS0"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="lVO-pO-rDZ"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do 10 push-ups every day during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XI2-9R-uNa">
+                    <rect key="frame" x="23" y="88" width="154" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="1k5-Kz-sga"/>
+                        <constraint firstAttribute="width" constant="154" id="IDt-js-rlx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edp-LF-MPQ">
+                    <rect key="frame" x="8" y="135" width="184" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="UvB-2D-yVW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="41"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1b-JF-lzL">
+                    <rect key="frame" x="8" y="183" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="Xoa-zj-gT8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRw-Y2-fRJ">
+                    <rect key="frame" x="0.0" y="247" width="200" height="44"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="P3v-Hb-hiR"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="RF1-j3-LKM"/>
+                        <barButtonItem image="CancleIcon" style="plain" id="CeB-fi-v1l">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0KJ-cM-FzE">
+                                <rect key="frame" x="21" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancleIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NJA-kN-pGH"/>
+                        <barButtonItem style="plain" id="JP9-SR-WzA">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yz4-jP-07c">
+                                <rect key="frame" x="78" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ToFriendIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jjK-WU-9YV"/>
+                        <barButtonItem style="plain" id="69E-rZ-Tsf">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g6N-W6-aK6">
+                                <rect key="frame" x="141" y="0.0" width="38" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ShareIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="GaN-Pp-I0n"/>
+                    </items>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="edp-LF-MPQ" firstAttribute="leading" secondItem="x4n-DL-Amt" secondAttribute="leading" constant="8" id="5GU-M6-nxX"/>
+                <constraint firstItem="h1b-JF-lzL" firstAttribute="top" secondItem="edp-LF-MPQ" secondAttribute="bottom" constant="-10" id="DOj-SW-3FP"/>
+                <constraint firstItem="h1b-JF-lzL" firstAttribute="leading" secondItem="x4n-DL-Amt" secondAttribute="leading" constant="8" id="E66-TG-bB9"/>
+                <constraint firstAttribute="bottom" secondItem="sRw-Y2-fRJ" secondAttribute="bottom" id="GC5-Y7-Kel"/>
+                <constraint firstItem="sRw-Y2-fRJ" firstAttribute="leading" secondItem="x4n-DL-Amt" secondAttribute="leading" id="IeQ-Uf-gcO"/>
+                <constraint firstItem="FdG-5w-Lyc" firstAttribute="top" secondItem="x4n-DL-Amt" secondAttribute="top" id="W6e-CL-vKx"/>
+                <constraint firstItem="XI2-9R-uNa" firstAttribute="centerX" secondItem="FdG-5w-Lyc" secondAttribute="centerX" id="ZB2-PH-veK"/>
+                <constraint firstAttribute="trailing" secondItem="FdG-5w-Lyc" secondAttribute="trailing" id="bCR-Ye-MRf"/>
+                <constraint firstAttribute="trailing" secondItem="edp-LF-MPQ" secondAttribute="trailing" constant="8" id="gSM-Fx-33h"/>
+                <constraint firstItem="XI2-9R-uNa" firstAttribute="top" secondItem="FdG-5w-Lyc" secondAttribute="bottom" constant="8" id="hF3-7m-Hxs"/>
+                <constraint firstItem="h1b-JF-lzL" firstAttribute="top" secondItem="edp-LF-MPQ" secondAttribute="bottom" constant="-3" id="meO-84-I9I"/>
+                <constraint firstAttribute="trailing" secondItem="sRw-Y2-fRJ" secondAttribute="trailing" id="r9W-4j-gfE"/>
+                <constraint firstItem="edp-LF-MPQ" firstAttribute="top" secondItem="XI2-9R-uNa" secondAttribute="bottom" constant="2" id="szo-4N-rm0"/>
+                <constraint firstItem="FdG-5w-Lyc" firstAttribute="leading" secondItem="x4n-DL-Amt" secondAttribute="leading" id="wzY-dS-gzz"/>
+                <constraint firstAttribute="trailing" secondItem="h1b-JF-lzL" secondAttribute="trailing" constant="8" id="yp3-Xg-YuB"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="DOj-SW-3FP"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="248" y="364.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CancleIcon" width="44" height="44"/>
+        <image name="SelfImprovement" width="100" height="100"/>
+        <image name="ShareIcon" width="38" height="44"/>
+        <image name="ToFriendIcon" width="44" height="44"/>
+    </resources>
+</document>
