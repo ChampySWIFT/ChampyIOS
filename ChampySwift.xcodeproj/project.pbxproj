@@ -21,6 +21,8 @@
 		57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */; };
 		57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */; };
 		57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */; };
+		576B035A1CDDFF2700C19079 /* PendingFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576B03591CDDFF2700C19079 /* PendingFriendsController.swift */; };
+		576B035C1CDE0CD700C19079 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576B035B1CDE0CD700C19079 /* FriendsTableViewController.swift */; };
 		5770CCF41CD9E99700D10E5A /* CHImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770CCF31CD9E99700D10E5A /* CHImages.swift */; };
 		5770CCF61CD9EBD300D10E5A /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770CCF51CD9EBD300D10E5A /* IJReachability.swift */; };
 		577D5F931CCE2AB20002F0E0 /* ScoreBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D5F921CCE2AB20002F0E0 /* ScoreBorder.swift */; };
@@ -39,11 +41,13 @@
 		579C18721CCB595700D6EEA9 /* ChampySwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C18711CCB595700D6EEA9 /* ChampySwiftTests.swift */; };
 		579C187D1CCB595800D6EEA9 /* ChampySwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C187C1CCB595800D6EEA9 /* ChampySwiftUITests.swift */; };
 		57A3C6D41CDB7C2200997E41 /* privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 57A3C6D31CDB7C2200997E41 /* privacy.html */; };
+		57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */; };
+		57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */; };
 		57AD26671CD895E9000F33CB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD26661CD895E9000F33CB /* AuthViewController.swift */; };
 		57B3912B1CDBA6C000F58A15 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B391281CDBA6C000F58A15 /* FBSDKCoreKit.framework */; };
 		57B3912C1CDBA6C000F58A15 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B391291CDBA6C000F58A15 /* FBSDKLoginKit.framework */; };
 		57B3912D1CDBA6C000F58A15 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B3912A1CDBA6C000F58A15 /* FBSDKShareKit.framework */; };
-		57B3912F1CDBA8A800F58A15 /* ExampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3912E1CDBA8A800F58A15 /* ExampleTableViewController.swift */; };
+		57B3912F1CDBA8A800F58A15 /* AllFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3912E1CDBA8A800F58A15 /* AllFriendsTableViewController.swift */; };
 		57B391311CDBA9E700F58A15 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B391301CDBA9E700F58A15 /* FriendCell.xib */; };
 		57B632C61CD78A1C000D6868 /* SelfImprovementInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B632C51CD78A1C000D6868 /* SelfImprovementInProgress.swift */; };
 		57B632C81CD78A35000D6868 /* SelfImprovementWin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B632C71CD78A35000D6868 /* SelfImprovementWin.swift */; };
@@ -105,6 +109,8 @@
 		57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementInProgress.xib; sourceTree = "<group>"; };
 		57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementWin.xib; sourceTree = "<group>"; };
 		57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementDone.swift; sourceTree = "<group>"; };
+		576B03591CDDFF2700C19079 /* PendingFriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingFriendsController.swift; sourceTree = "<group>"; };
+		576B035B1CDE0CD700C19079 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		5770CCF31CD9E99700D10E5A /* CHImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHImages.swift; sourceTree = "<group>"; };
 		5770CCF51CD9EBD300D10E5A /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
 		577D5F921CCE2AB20002F0E0 /* ScoreBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBorder.swift; sourceTree = "<group>"; };
@@ -131,11 +137,13 @@
 		579C187C1CCB595800D6EEA9 /* ChampySwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampySwiftUITests.swift; sourceTree = "<group>"; };
 		579C187E1CCB595800D6EEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57A3C6D31CDB7C2200997E41 /* privacy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy.html; sourceTree = "<group>"; };
+		57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPendingRequests.xib; sourceTree = "<group>"; };
+		57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPendingRequests.swift; sourceTree = "<group>"; };
 		57AD26661CD895E9000F33CB /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		57B391281CDBA6C000F58A15 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		57B391291CDBA6C000F58A15 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		57B3912A1CDBA6C000F58A15 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		57B3912E1CDBA8A800F58A15 /* ExampleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTableViewController.swift; sourceTree = "<group>"; };
+		57B3912E1CDBA8A800F58A15 /* AllFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllFriendsTableViewController.swift; sourceTree = "<group>"; };
 		57B391301CDBA9E700F58A15 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		57B632C51CD78A1C000D6868 /* SelfImprovementInProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementInProgress.swift; sourceTree = "<group>"; };
 		57B632C71CD78A35000D6868 /* SelfImprovementWin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementWin.swift; sourceTree = "<group>"; };
@@ -270,7 +278,9 @@
 				57AD26661CD895E9000F33CB /* AuthViewController.swift */,
 				57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */,
 				57ED480C1CD8E12800E2CCFF /* SettingsTableViewController.swift */,
-				57B3912E1CDBA8A800F58A15 /* ExampleTableViewController.swift */,
+				57B3912E1CDBA8A800F58A15 /* AllFriendsTableViewController.swift */,
+				576B03591CDDFF2700C19079 /* PendingFriendsController.swift */,
+				576B035B1CDE0CD700C19079 /* FriendsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -308,6 +318,7 @@
 				577D5F921CCE2AB20002F0E0 /* ScoreBorder.swift */,
 				57336C161CD771EC00C5B6F1 /* Carts */,
 				57B96FF21CDBAAE2004B1753 /* FriendCell.swift */,
+				57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -328,6 +339,7 @@
 				579C18651CCB595700D6EEA9 /* LaunchScreen.storyboard */,
 				57B632CD1CD78DEB000D6868 /* Carts */,
 				57B391301CDBA9E700F58A15 /* FriendCell.xib */,
+				57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -561,6 +573,7 @@
 				57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */,
 				57336C231CD783D700C5B6F1 /* BebasNeue Thin.otf in Resources */,
 				57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */,
+				57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */,
 				57336C151CD771E700C5B6F1 /* WakeUpChallenge.xib in Resources */,
 				577D5F971CCE33A50002F0E0 /* Images.xcassets in Resources */,
 				579C18671CCB595700D6EEA9 /* LaunchScreen.storyboard in Resources */,
@@ -687,6 +700,7 @@
 				572626C71CD8F7F90022C389 /* CHPush.swift in Sources */,
 				5770CCF41CD9E99700D10E5A /* CHImages.swift in Sources */,
 				57B632C81CD78A35000D6868 /* SelfImprovementWin.swift in Sources */,
+				576B035A1CDDFF2700C19079 /* PendingFriendsController.swift in Sources */,
 				57B96FF31CDBAAE2004B1753 /* FriendCell.swift in Sources */,
 				57B632CB1CD78DB9000D6868 /* UICountingLabel.m in Sources */,
 				57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */,
@@ -694,8 +708,10 @@
 				577D5F931CCE2AB20002F0E0 /* ScoreBorder.swift in Sources */,
 				57336C131CD771CE00C5B6F1 /* WakeUpChallenge.swift in Sources */,
 				57B632C61CD78A1C000D6868 /* SelfImprovementInProgress.swift in Sources */,
+				576B035C1CDE0CD700C19079 /* FriendsTableViewController.swift in Sources */,
 				577D5FA41CCF5B840002F0E0 /* FriendsViewController.swift in Sources */,
 				579C18621CCB595700D6EEA9 /* ChampySwift.xcdatamodeld in Sources */,
+				57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */,
 				57AD26671CD895E9000F33CB /* AuthViewController.swift in Sources */,
 				577D5FA61CCF5B9D0002F0E0 /* SettingsViewController.swift in Sources */,
 				579C185C1CCB595700D6EEA9 /* MainViewController.swift in Sources */,
@@ -707,7 +723,7 @@
 				57FBC97F1CD9F49900341A2D /* APCustomBlurView.swift in Sources */,
 				577D5F951CCE30670002F0E0 /* CHUIAnimations.swift in Sources */,
 				579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */,
-				57B3912F1CDBA8A800F58A15 /* ExampleTableViewController.swift in Sources */,
+				57B3912F1CDBA8A800F58A15 /* AllFriendsTableViewController.swift in Sources */,
 				5770CCF61CD9EBD300D10E5A /* IJReachability.swift in Sources */,
 				57ED480D1CD8E12900E2CCFF /* SettingsTableViewController.swift in Sources */,
 				577D5FA21CCF5B3C0002F0E0 /* HistoryViewController.swift in Sources */,

@@ -11,9 +11,9 @@ import UIKit
 class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
-  var table1 = ExampleTableViewController()
-  var table2 = ExampleTableViewController()
-  var table3 = ExampleTableViewController()
+  var table1 = AllFriendsTableViewController()
+  var table2 = PendingFriendsController()
+  var table3 = FriendsTableViewController()
   
   let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
   var pageImages: [UIImage]       = []
@@ -98,7 +98,8 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
   
   func scrollViewDidScroll(scrollView: UIScrollView!) {
     // Load the pages that are now on screen
-    
+//    let point = CGPointMake(scrollView.contentOffset.x, 0)
+//    scrollView.setContentOffset(point, animated: false)
     loadVisiblePages()
   }
   
@@ -107,9 +108,9 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-    table1 = mainStoryboard.instantiateViewControllerWithIdentifier("ExampleTableViewController") as! ExampleTableViewController
-    table2 = mainStoryboard.instantiateViewControllerWithIdentifier("ExampleTableViewController") as! ExampleTableViewController
-    table3 = mainStoryboard.instantiateViewControllerWithIdentifier("ExampleTableViewController") as! ExampleTableViewController
+    table1 = mainStoryboard.instantiateViewControllerWithIdentifier("AllFriendsTableViewController") as! AllFriendsTableViewController
+    table2 = mainStoryboard.instantiateViewControllerWithIdentifier("PendingFriendsController") as! PendingFriendsController
+    table3 = mainStoryboard.instantiateViewControllerWithIdentifier("FriendsTableViewController") as! FriendsTableViewController
     
     
     
@@ -129,60 +130,39 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     
     loadVisiblePages()
+    contentScrollView.setContentOffset(CGPointMake(0, 0), animated: false)
   }
   
   
   func setUpFrames() {
+
+    
     let pagesScrollViewSize = contentScrollView.frame.size
-    contentScrollView.contentSize  = CGSizeMake(pagesScrollViewSize.width * 3, pagesScrollViewSize.height)
+    contentScrollView.contentSize  = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height - 88)
     
     var firstFrame:CGRect  = table1.tableView.frame
     firstFrame.origin.x    = 0
-    firstFrame.size.width  = self.view.frame.size.width
+    firstFrame.origin.y    = 0
+    firstFrame.size.width  = self.contentScrollView.frame.size.width
     firstFrame.size.height = self.contentScrollView.frame.size.height
     table1.tableView.frame = firstFrame
     
     //    privateUserSecondScreen                 = mainStoryboard.instantiateViewControllerWithIdentifier("PrivateProfileSecondScreenTableViewController") as! PrivateProfileSecondScreenTableViewController
     var secondFrame:CGRect  = table2.tableView.frame
-    secondFrame.origin.x    = self.view.frame.size.width
-    secondFrame.size.width  = self.view.frame.size.width
+    secondFrame.origin.x    = self.contentScrollView.frame.size.width
+    secondFrame.origin.y    = 0
+    secondFrame.size.width  = self.contentScrollView.frame.size.width
     secondFrame.size.height = self.contentScrollView.frame.size.height
     table2.tableView.frame = secondFrame
     
     var thirdFrame:CGRect  = table3.tableView.frame
-    thirdFrame.origin.x    = self.view.frame.size.width * 2
-    thirdFrame.size.width  = self.view.frame.size.width
+    thirdFrame.origin.x    = self.contentScrollView.frame.size.width * 2
+    thirdFrame.origin.y    = 0
+    thirdFrame.size.width  = self.contentScrollView.frame.size.width
     thirdFrame.size.height = self.contentScrollView.frame.size.height
     table3.tableView.frame = thirdFrame
   }
   
-  
-  func loadPage(page: Int) {
-    
-    if page < 0 || page >= pageImages.count {
-      // If it's outside the range of what you have to display, then do nothing
-      return
-    }
-    
-    if let pageView = pageViews[page] {
-      // Do nothing. The view is already loaded.
-    } else {
-      var frame       = contentScrollView.bounds
-      frame.origin.x  = frame.size.width * CGFloat(page)
-      frame.origin.y  = 0.0
-      let newPageView = UIImageView(image: pageImages[page])
-      pageViews[page] = newPageView
-    }
-  }
-  
-  func purgePage(page: Int) {
-    
-    if page < 0 || page >= pageImages.count {
-      // If it's outside the range of what you have to display, then do nothing
-      return
-    }
-    
-  }
   
   func loadVisiblePages() {
     
@@ -192,14 +172,12 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     
     if page == 0 {
-      self.title = "All friends"
       segmentControl.selectedSegmentIndex = 0
       
       return
     }
     
     if page == 1 {
-      self.title = "All friends"
       segmentControl.selectedSegmentIndex = 1
       
       return
@@ -207,7 +185,6 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     
     if page == 2 {
-      self.title = "All friends"
       segmentControl.selectedSegmentIndex = 2
       
       return

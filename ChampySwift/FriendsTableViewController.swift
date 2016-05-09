@@ -1,4 +1,11 @@
 //
+//      } FriendsTableViewController.swift
+//  ChampySwift
+//
+//  Created by Molnar Kristian on 5/7/16.
+//  Copyright © 2016 AzinecLLC. All rights reserved.
+//
+//
 //  ExampleTableViewController.swift
 //  ChampySwift
 //
@@ -7,23 +14,35 @@
 //
 
 import UIKit
-
-class ExampleTableViewController: UITableViewController {
+import SwiftyJSON
+import Async
+class FriendsTableViewController: UITableViewController {
   
-  var identifiers:[String] = ["1","2","3"]
+  var identifiers:[String]    = []
   
-  var selectedRow:Int = -1
+  var selectedRow:Int         = -1
   var friendsContent:[UIView] = []
-  var heights:[CGFloat] = []
+  var heights:[CGFloat]       = []
+  let center = NSNotificationCenter.defaultCenter()
+  
+  
   
   func clearArrays() {
     //    friendsContent.removeAll()
     heights.removeAll()
   }
   
+  override func viewDidDisappear(animated: Bool) {
+    center.removeObserver(self, name: "friendsReload", object: nil)
+    
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
-//    self.tableView.backgroundView = self.view
+    center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: "friendsReload", object: nil)
+    
+    
+    self.fillArray()
+    //    self.tableView.backgroundView = self.view
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
@@ -45,14 +64,16 @@ class ExampleTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return 3
+    return friendsContent.count
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     if indexPath.row == self.selectedRow {
-      heights.append(200.0)
-      return 200
+      heights.append(220.0)
+      return 220
     } else {
+      let content = friendsContent[indexPath.row] as! FriendCell
+      content.close()
       heights.append(66)
       return 66
     }
@@ -72,10 +93,7 @@ class ExampleTableViewController: UITableViewController {
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         
-        let content = FriendCell(frame: CGRect(x: 0, y: 0, width: cell!.frame.size.width, height: heights[indexPath.row]))
-        //        content.width = self.view.frame.size.width
-        content.setUp()
-        self.friendsContent.append(content)
+        let content = friendsContent[indexPath.row] as! FriendCell
         cell?.addSubview(content)
         cell!.backgroundColor = UIColor.clearColor()
       }
@@ -84,6 +102,7 @@ class ExampleTableViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.beginUpdates()
     if indexPath.row == selectedRow {
       let content = friendsContent[indexPath.row] as! FriendCell
       content.close()
@@ -94,7 +113,38 @@ class ExampleTableViewController: UITableViewController {
       self.selectedRow = indexPath.row
     }
     clearArrays()
-    tableView.reloadData()
+    //    tableView.reloadData()
+    tableView.endUpdates()
+  }
+  
+  func fillArray() {
+    self.selectedRow = -1
+    self.friendsContent.removeAll()
+    for friend in CHUsers().getFriends(CHSession().currentUserId) {
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      content.status = "Friends"
+      content.setUp(friend["owner"])
+      self.friendsContent.append(content)
+      identifiers.append("\(friend["_id"].stringValue)")
+    }
+  }
+  
+  @IBOutlet weak var refreshTableView: UIRefreshControl!
+  
+  @IBAction func refreshTableViewAction(sender: AnyObject) {
+    
+    CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
+      if result {
+        Async.main {
+          self.fillArray()
+          self.tableView.reloadData()
+          self.refreshTableView.endRefreshing()
+        }
+      }
+    })
+    
+    
+    
   }
   
   /*
@@ -123,7 +173,7 @@ class ExampleTableViewController: UITableViewController {
    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
    } else if editingStyle == .Insert {
    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   }    
+   }
    }
    */
   
@@ -153,3 +203,5 @@ class ExampleTableViewController: UITableViewController {
    */
   
 }
+
+

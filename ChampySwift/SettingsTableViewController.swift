@@ -237,13 +237,13 @@ class SettingsTableViewController: UITableViewController {
   }
   
   @IBAction func privacyPolicAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com") {
+    if let requestUrl = NSURL(string: "http://champyapp.com/privacy.html") {
       UIApplication.sharedApplication().openURL(requestUrl)
     }
   }
   
   @IBAction func enUserAgreementAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com") {
+    if let requestUrl = NSURL(string: "http://champyapp.com/Terms.html") {
       UIApplication.sharedApplication().openURL(requestUrl)
     }
   }

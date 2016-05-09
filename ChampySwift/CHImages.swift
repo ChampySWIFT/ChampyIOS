@@ -29,8 +29,25 @@ class CHImages: NSObject {
     }
   }
   
+  func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
+    let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
+    let myCache = ImageCache(name: userId)
+    
+    if IJReachability.isConnectedToNetwork() {
+      myCache.clearDiskCache()
+      myCache.clearMemoryCache()
+      myCache.cleanExpiredDiskCache()
+    }
+    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      print("Downloading")
+    }) { (image, error, cacheType, imageURL) in
+      print("Downloaded")
+      
+    }
+  }
+  
   func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
-    let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
+    let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
     let myCache = ImageCache(name: "\(url)")
     
     let optionInfo: KingfisherOptionsInfo = [
@@ -39,9 +56,9 @@ class CHImages: NSObject {
       .Transition(ImageTransition.Fade(1))
     ]
     if IJReachability.isConnectedToNetwork() {
-      myCache.clearDiskCache()
-      myCache.clearMemoryCache()
-      myCache.cleanExpiredDiskCache()
+//      myCache.clearDiskCache()
+//      myCache.clearMemoryCache()
+//      myCache.cleanExpiredDiskCache()
     }
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: optionInfo, progressBlock: { (receivedSize, totalSize) in
       print("Downloading")

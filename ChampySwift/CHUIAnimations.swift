@@ -43,7 +43,7 @@ extension UIView {
     newView.backgroundColor    = UIColor.whiteColor()
     newView.layer.cornerRadius = view.frame.width / 2
     newView.layer.opacity      = 0.50
-    
+    newView.layer.setValue("inner", forKey: "type")
     newView.transform = CGAffineTransformMakeScale(0.001, 0.001)
     self.superview!.addSubview(newView)
     self.superview?.sendSubviewToBack(newView)

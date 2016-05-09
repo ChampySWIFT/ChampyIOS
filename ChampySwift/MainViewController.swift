@@ -70,6 +70,17 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   override func viewDidLoad(){
     
     super.viewDidLoad()
+    Async.background{
+      CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
+        
+      })
+      CHRequests().getAllUsers { (result, json) in
+        
+      }
+    }
+    
+    
+    
     
     //    printFonts()
     

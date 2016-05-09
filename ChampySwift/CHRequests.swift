@@ -99,7 +99,7 @@ class CHRequests: NSObject {
     let url = "\(self.APIurl)/users/\(userId)/photo?token=\(self.token)"
     let operationQueue = NSOperationQueue()
     do {
-      let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 20)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
+      let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 70)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
       opt.onFinish = { response in
         let json = JSON(data: response.data)
         print(json)
@@ -195,13 +195,155 @@ class CHRequests: NSObject {
     }
   }
   
-  
+  func getAllUsers(completitionHandler:(result:Bool, json:JSON)->()) {
+    if !canPerform {
+      return
+    }
+    let url = "\(self.APIurl)/users?token=\(self.token)"
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.GET(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        print(json)
+//        CHPush().localPush("localReload", object: [])
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "userList")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
   
   func getFacebookImageById(facebookId:String) -> UIImage {
     let urlString = "http://graph.facebook.com/\(facebookId)/picture?type=large&redirect=true&width=500&height=500"
     let url = NSURL(string: urlString)
     let data = NSData(contentsOfURL: url!)
     return UIImage(data: data!)!
+  }
+
+  func getFriends(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    if !canPerform {
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/friends?token=\(self.token)"
+    print(url)
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.GET(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        print(json)
+        //        CHPush().localPush("localReload", object: [])
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
+  
+  func sendFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    if !canPerform {
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/friends?token=\(self.token)"
+    let params = [
+      "friend": friendId
+    ]
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.POST(url, parameters: params)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        print(json)
+        CHPush().localPush("pendingReload", object: [])
+        CHPush().localPush("friendsReload", object: [])
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
+  
+  func acceptFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    //users/:owner/friends/:friend?token=:token
+    
+    if !canPerform {
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/friends/\(friendId)?token=\(self.token)"
+    print(url)
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.PUT(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        print(json)
+        CHPush().localPush("friendsReload", object: [])
+        CHPush().localPush("allReload", object: [])
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
+  
+  func removeFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    //users/:owner/friends/:friend?token=:token
+    
+    if !canPerform {
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/friends/\(friendId)?token=\(self.token)"
+    print(url)
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.DELETE(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        print(json)
+        CHPush().localPush("friendsReload", object: [])
+        CHPush().localPush("allReload", object: [])
+        CHPush().localPush("pendingReload", object: [])
+        
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
   }
   
 }
