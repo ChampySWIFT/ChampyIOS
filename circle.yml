@@ -19,12 +19,12 @@ test:
             PROVISIONING_PROFILE=
             -sdk iphonesimulator
             -destination 'platform=iOS Simulator,OS=8.1,name=iPhone 6'
-            -workspace App.xcworkspace
-            -scheme "App"
+            -workspace ChampySwift.xcworkspace
+            -scheme "ChampySwift"
             -derivedDataPath ./build
             analyze clean build test |
         tee $CIRCLE_ARTIFACTS/xcode_raw.log |
-        xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml        -scheme "My Scheme"
+        xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml        -scheme "ChampySwift"
         clean build test |
       tee $CIRCLE_ARTIFACTS/xcode_raw.log |
       xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
