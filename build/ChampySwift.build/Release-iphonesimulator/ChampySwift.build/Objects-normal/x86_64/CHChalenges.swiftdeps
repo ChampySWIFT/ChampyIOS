@@ -1,0 +1,219 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CHChalenges"
+provides-nominal:
+- "C11ChampySwift11CHChalenges"
+provides-member:
+- ["C11ChampySwift11CHChalenges", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "=="
+- "String"
+- !private "!="
+- !private "&&"
+- !private "CHSettings"
+- !private "CHUsers"
+- "CHChalenges"
+- !private "StringLiteralType"
+- "JSON"
+- "NSObject"
+- !private "CHSession"
+depends-member:
+- !private ["Ps9AnyObject", "CHSession"]
+- !private ["Ps9AnyObject", "CHSettings"]
+- !private ["Ps9AnyObject", "CHUsers"]
+- !private ["Ps9AnyObject", "CurrentUser"]
+- !private ["Ps9AnyObject", "deinit"]
+- ["Ps9AnyObject", "init"]
+- !private ["Ps9AnyObject", "objectForKey"]
+- !private ["Ps9AnyObject", "stringForKey"]
+- !private ["Ps9AnyObject", "stringToJSON"]
+- ["Ps9AnyObject", ""]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["Ps25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps11BooleanType", "_getBuiltinLogicValue"]
+- !private ["C11ChampySwift11CHChalenges", "CHSession"]
+- !private ["C11ChampySwift11CHChalenges", "CHSettings"]
+- !private ["C11ChampySwift11CHChalenges", "CHUsers"]
+- ["C11ChampySwift11CHChalenges", "JSON"]
+- ["C11ChampySwift11CHChalenges", "String"]
+- ["C11ChampySwift11CHChalenges", "deinit"]
+- ["C11ChampySwift11CHChalenges", "init"]
+- !private ["C11ChampySwift9CHSession", "CurrentUser"]
+- !private ["C11ChampySwift9CHSession", "init"]
+- !private ["C11ChampySwift7CHUsers", "init"]
+- !private ["C11ChampySwift7CHUsers", "stringToJSON"]
+- !private ["Ps11CVarArgType", "CHSession"]
+- !private ["Ps11CVarArgType", "CHSettings"]
+- !private ["Ps11CVarArgType", "CHUsers"]
+- !private ["Ps11CVarArgType", "CurrentUser"]
+- ["Ps11CVarArgType", "init"]
+- !private ["Ps11CVarArgType", "objectForKey"]
+- !private ["Ps11CVarArgType", "stringForKey"]
+- !private ["Ps11CVarArgType", "stringToJSON"]
+- ["Ps11CVarArgType", ""]
+- !private ["Ps28CustomDebugStringConvertible", "CHSession"]
+- !private ["Ps28CustomDebugStringConvertible", "CHSettings"]
+- !private ["Ps28CustomDebugStringConvertible", "CHUsers"]
+- !private ["Ps28CustomDebugStringConvertible", "CurrentUser"]
+- ["Ps28CustomDebugStringConvertible", "init"]
+- !private ["Ps28CustomDebugStringConvertible", "objectForKey"]
+- !private ["Ps28CustomDebugStringConvertible", "stringForKey"]
+- !private ["Ps28CustomDebugStringConvertible", "stringToJSON"]
+- ["Ps28CustomDebugStringConvertible", ""]
+- !private ["Ps23CustomStringConvertible", "CHSession"]
+- !private ["Ps23CustomStringConvertible", "CHSettings"]
+- !private ["Ps23CustomStringConvertible", "CHUsers"]
+- !private ["Ps23CustomStringConvertible", "CurrentUser"]
+- !private ["Ps23CustomStringConvertible", "_getBuiltinLogicValue"]
+- ["Ps23CustomStringConvertible", "init"]
+- !private ["Ps23CustomStringConvertible", "objectForKey"]
+- !private ["Ps23CustomStringConvertible", "stringForKey"]
+- !private ["Ps23CustomStringConvertible", "stringToJSON"]
+- ["Ps23CustomStringConvertible", ""]
+- !private ["Ps9Equatable", "CHSession"]
+- !private ["Ps9Equatable", "CHSettings"]
+- !private ["Ps9Equatable", "CHUsers"]
+- !private ["Ps9Equatable", "CurrentUser"]
+- !private ["Ps9Equatable", "_getBuiltinLogicValue"]
+- ["Ps9Equatable", "init"]
+- !private ["Ps9Equatable", "objectForKey"]
+- !private ["Ps9Equatable", "stringForKey"]
+- !private ["Ps9Equatable", "stringToJSON"]
+- ["Ps9Equatable", ""]
+- !private ["Ps8Hashable", "CHSession"]
+- !private ["Ps8Hashable", "CHSettings"]
+- !private ["Ps8Hashable", "CHUsers"]
+- !private ["Ps8Hashable", "CurrentUser"]
+- !private ["Ps8Hashable", "_getBuiltinLogicValue"]
+- ["Ps8Hashable", "init"]
+- !private ["Ps8Hashable", "objectForKey"]
+- !private ["Ps8Hashable", "stringForKey"]
+- !private ["Ps8Hashable", "stringToJSON"]
+- ["Ps8Hashable", ""]
+- !private ["CSo8NSObject", "CHSession"]
+- !private ["CSo8NSObject", "CHSettings"]
+- !private ["CSo8NSObject", "CHUsers"]
+- !private ["CSo8NSObject", "CurrentUser"]
+- ["CSo8NSObject", "JSON"]
+- ["CSo8NSObject", "String"]
+- ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "objectForKey"]
+- !private ["CSo8NSObject", "stringForKey"]
+- !private ["CSo8NSObject", "stringToJSON"]
+- ["CSo8NSObject", ""]
+- !private ["PSo16NSObjectProtocol", "CHSession"]
+- !private ["PSo16NSObjectProtocol", "CHSettings"]
+- !private ["PSo16NSObjectProtocol", "CHUsers"]
+- !private ["PSo16NSObjectProtocol", "CurrentUser"]
+- ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "objectForKey"]
+- !private ["PSo16NSObjectProtocol", "stringForKey"]
+- !private ["PSo16NSObjectProtocol", "stringToJSON"]
+- ["PSo16NSObjectProtocol", ""]
+- !private ["CSo14NSUserDefaults", "objectForKey"]
+- !private ["CSo14NSUserDefaults", "stringForKey"]
+- !private ["Sq", "deinit"]
+- !private ["Ps33_BuiltinBooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- !private ["Ps12_Reflectable", "_getBuiltinLogicValue"]
+depends-nominal:
+- "Ps9AnyObject"
+- !private "Sb"
+- !private "Ps25BooleanLiteralConvertible"
+- !private "Ps11BooleanType"
+- "C11ChampySwift11CHChalenges"
+- !private "C11ChampySwift9CHSession"
+- !private "C11ChampySwift7CHUsers"
+- "Ps11CVarArgType"
+- "Ps28CustomDebugStringConvertible"
+- "Ps23CustomStringConvertible"
+- "Ps9Equatable"
+- "Ps8Hashable"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- !private "CSo14NSUserDefaults"
+- !private "Sq"
+- !private "Ps33_BuiltinBooleanLiteralConvertible"
+- !private "Ps21_ObjectiveCBridgeable"
+- !private "Ps12_Reflectable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/ChampySwift-Bridging-Header.h"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/UICountingLabel.h"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/iCarousel.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequestDataAttachment.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphErrorRecoveryProcessor.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppLinkResolver.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKButton.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKUtility.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKTestUsersManager.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKSettings.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKProfilePictureView.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKProfile.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKMutableCopying.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequest.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKConstants.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKApplicationDelegate.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppLinkUtility.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppEvents.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKMacros.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequestConnection.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKCopying.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAccessToken.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKCoreKit.h"
+- "./FBSDKCoreKit.framework/Modules/module.modulemap"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginTooltipView.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginManagerLoginResult.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginConstants.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKTooltipView.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginManager.h"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/FBSDKCoreKit.framework/Modules/module.modulemap"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginButton.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginKit.h"
+- "./FBSDKLoginKit.framework/Modules/module.modulemap"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareVideoContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareVideo.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharePhotoContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharePhoto.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphAction.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareLinkContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareDialogMode.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareConstants.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphValueContainer.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphObject.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareAPI.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharingButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSendButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharingContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharing.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKMessageDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeControl.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLiking.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeObjectType.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKGameRequestDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKGameRequestContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppInviteDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppInviteContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupJoinDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupAddDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareKit.h"
+- "./FBSDKShareKit.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/AVFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreMedia.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreAudio.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreData.swiftmodule"
+interface-hash: "8e5a4fac3969d432fa756b966543c83c"

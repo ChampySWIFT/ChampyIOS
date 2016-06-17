@@ -11,8 +11,9 @@ import PresenterKit
 import ALCameraViewController
 import Async
 import SwiftyJSON
+import Fusuma
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, FusumaDelegate {
   
   @IBOutlet weak var userAvatar: UIImageView!
   @IBOutlet weak var userName: UILabel!
@@ -87,13 +88,16 @@ class SettingsTableViewController: UITableViewController {
       self!.view.endEditing(true)
       if let textFields      = forgot.textFields{
         let theTextFields      = textFields as [UITextField]
-        let enteredText:String = theTextFields[0].text!
-        
+        var enteredText:String = theTextFields[0].text!
+        enteredText = enteredText.condenseWhitespace()
+        enteredText = enteredText.stringByTrimmingCharactersInSet(
+          NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
         guard enteredText != "" else {
           CHPush().alertPush("Name should not be blank", type: "Warning")
           return
         }
-        if let intVal = Int(enteredText)  {
+        if Int(enteredText) != nil  {
           CHPush().alertPush("Wrong symbols", type: "Warning")
           return
         }
@@ -107,8 +111,6 @@ class SettingsTableViewController: UITableViewController {
           CHPush().alertPush("Entered name is too long", type: "Warning")
           return
         }
-        
-        
         
         CHRequests().updateUserProfile(CHSession().currentUserId, params: ["name": enteredText], completitionHandler: { (result, json) in
           if result {
@@ -124,8 +126,8 @@ class SettingsTableViewController: UITableViewController {
       })
     
     let Cancle = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
-    forgot.addAction(action)
     forgot.addAction(Cancle)
+    forgot.addAction(action)
     
     presentViewController(forgot, animated: true, completion: nil)
   }
@@ -144,10 +146,17 @@ class SettingsTableViewController: UITableViewController {
     self.logOutButton.hidden = false
     self.confirmationLogOutContainer.hidden = true
     
-    CHSession().clearSession()
-    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-    presentViewController(roleControlViewController, type: .push, animated: false)
+    CHRequests().logout(CHSession().currentUserId) { (result, json) in
+      if result {
+        Async.main {
+          CHSession().clearSession()
+          let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+          self.presentViewController(roleControlViewController, type: .push, animated: false)
+        }
+      }
+    }
+    
     
   }
   
@@ -193,42 +202,91 @@ class SettingsTableViewController: UITableViewController {
     }
   }
   
-  
-  @IBAction func upoadPhotoAction(sender: AnyObject) {
-    let cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak self] image, asset in
-      if image != nil {
-        let banner = CHBanners(withTarget: (self!.navigationController?.view)!, andType: .Info)
-        Async.main {
-          banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
-        }
-        
-        CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image!, completitionHandler: { (result, json) in
-          if result {
-            Async.main {
-              banner.changeText("Uploaded")
-              banner.changeType(.Success)
-              banner.dismissView(true)
-              //              CHPush().localPu sh("setUpBackground", object: [])
-              CHPush().updateImageOnSettings(image!)
-              self!.userAvatar.image = image
-            }
-          } else {
-            banner.changeText("Uploaded")
-            banner.changeType(.Warning)
-            banner.dismissView(true)
-          }
-        })
-      }
-      self!.dismissViewControllerAnimated(true, completion: nil)
-      
+  func fusumaImageSelected(image: UIImage) {
+    
+    let banner = CHBanners(withTarget: (self.navigationController?.view)!, andType: .Info)
+    Async.main {
+      banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
     }
     
-    presentViewController(cameraViewController, animated: true, completion: nil)
+    CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image, completitionHandler: { (result, json) in
+      if result {
+        Async.main {
+          banner.changeText("Uploaded")
+          banner.changeType(.Success)
+          banner.dismissView(true)
+//          CHImages().setUpAvatar(self.userAvatar)
+          CHPush().updateImageOnSettings(image)
+          self.userAvatar.image = image
+          
+        }
+      } else {
+        banner.changeText("Uploaded")
+        banner.changeType(.Warning)
+        banner.dismissView(true)
+      }
+    })
+  
+  }
+
+  // Return the image but called after is dismissed.
+  func fusumaDismissedWithImage(image: UIImage) {
+    
+    print("Called just after FusumaViewController is dismissed.")
   }
   
-  //  if let requestUrl = NSURL(string: "http://www.iSecurityPlus.com") {
-  //    UIApplication.sharedApplication().openURL(requestUrl)
-  //  }
+  // When camera roll is not authorized, this method is called.
+  func fusumaCameraRollUnauthorized() {
+    
+    print("Camera roll unauthorized")
+  }
+  
+  @IBAction func upoadPhotoAction(sender: AnyObject) {
+    guard IJReachability.isConnectedToNetwork() else {
+      CHPush().alertPush("No internet connection", type: "Warning")
+      return
+    }
+    let fusuma = FusumaViewController()
+    fusuma.delegate = self
+    self.presentViewController(fusuma, animated: true, completion: nil)
+//    var cameraViewController:CameraViewController! = nil
+//    
+//    cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak self] image, asset in
+//      if image != nil {
+//        let banner = CHBanners(withTarget: (self!.navigationController?.view)!, andType: .Info)
+//        Async.main {
+//          banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
+//        }
+//        
+//        CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image!, completitionHandler: { (result, json) in
+//          if result {
+//            Async.main {
+//              banner.changeText("Uploaded")
+//              banner.changeType(.Success)
+//              banner.dismissView(true)
+//              CHImages().setUpAvatar(self!.userAvatar)
+//              CHPush().updateImageOnSettings(image!)
+//              self!.userAvatar.image = image
+//              
+//            }
+//          } else {
+//            banner.changeText("Uploaded")
+//            banner.changeType(.Warning)
+//            banner.dismissView(true)
+//          }
+//        })
+//      }
+//      
+//      cameraViewController.dismissViewControllerAnimated(true, completion: { 
+//        cameraViewController.view.removeFromSuperview()
+//      })
+//      self!.dismissViewControllerAnimated(true, completion: nil)
+      
+//    }
+    
+//    presentViewController(cameraViewController, animated: true, completion: nil)
+  }
+  
   
   @IBAction func aboutPage(sender: AnyObject) {
     if let requestUrl = NSURL(string: "http://champyapp.com") {

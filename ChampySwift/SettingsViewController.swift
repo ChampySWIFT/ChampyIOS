@@ -26,6 +26,20 @@ class SettingsViewController: UIViewController {
       appDelegate.settingsViewController = self
     }
     setUpBackground()
+    
+    Async.background{
+      CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
+        if !status {
+          CHPush().alertPush(json.stringValue, type: "Warning")
+          Async.main {
+            CHSession().clearSession()
+            let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+            let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+            self.presentViewController(roleControlViewController, type: .push, animated: false)
+          }
+        }
+      }
+    }
   }
   
   override func viewDidDisappear(animated: Bool) {

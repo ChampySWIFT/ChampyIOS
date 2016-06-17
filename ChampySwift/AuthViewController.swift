@@ -12,6 +12,7 @@ import PresenterKit
 
 class AuthViewController: UIViewController {
   
+  
   var tapped:Bool = false
   
   override func viewDidLoad() {
@@ -27,6 +28,8 @@ class AuthViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  
   
   
   @IBAction func authWithFacebook(sender: AnyObject) {
@@ -87,21 +90,18 @@ class AuthViewController: UIViewController {
           "email": email
         ]
         
-        Async.background {
-          CHRequests().createUser(params, completitionHandler: { (json, status) in
-            self.tapped = false
-            if status {
-              Async.main {
-                self.tapped = false
-                CHPush().alertPush("Succesfully authorized", type: "Success")
-                let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-                let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-                self.presentViewController(roleControlViewController, type: .push, animated: false)
-              }
+        CHRequests().createUser(params, completitionHandler: { (json, status) in
+          self.tapped = false
+          if status {
+            Async.main {
+              self.tapped = false
+              CHPush().alertPush("Succesfully authorized", type: "Success")
+              let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+              self.presentViewController(roleControlViewController, type: .push, animated: false)
             }
-          })
-        }
-        
+          }
+        })
         
         
       })

@@ -1,0 +1,511 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CHRequests"
+provides-nominal:
+- "C11ChampySwift10CHRequests"
+provides-member:
+- ["C11ChampySwift10CHRequests", ""]
+provides-dynamic-lookup:
+- "SocketUrl"
+- "appDelegate"
+- "APIurl"
+- "canPerform"
+- "token"
+- "getFacebookImageById"
+depends-top-level:
+- !private "!"
+- !private "NSData"
+- "UIImage"
+- "BooleanLiteralType"
+- !private "IJReachability"
+- "String"
+- "Bool"
+- "JSON"
+- "NSObject"
+- "CHRequests"
+- !private "print"
+- !private "NSURL"
+- "StringLiteralType"
+- !private "CHPush"
+- !private "Upload"
+- !private "NSOperationQueue"
+- !private "UIImageJPEGRepresentation"
+- "UIApplication"
+- !private "CHSession"
+- !private "Dictionary"
+- "AppDelegate"
+- !private "HTTP"
+depends-member:
+- ["Ps9AnyObject", "APIurl"]
+- !private ["Ps9AnyObject", "CHPush"]
+- !private ["Ps9AnyObject", "CHSession"]
+- !private ["Ps9AnyObject", "HTTP"]
+- !private ["Ps9AnyObject", "IJReachability"]
+- !private ["Ps9AnyObject", "NSData"]
+- !private ["Ps9AnyObject", "NSOperationQueue"]
+- !private ["Ps9AnyObject", "NSURL"]
+- ["Ps9AnyObject", "SocketUrl"]
+- ["Ps9AnyObject", "UIApplication"]
+- !private ["Ps9AnyObject", "UIImage"]
+- !private ["Ps9AnyObject", "UIImageJPEGRepresentation"]
+- !private ["Ps9AnyObject", "Upload"]
+- !private ["Ps9AnyObject", "addOperation"]
+- !private ["Ps9AnyObject", "alertPush"]
+- ["Ps9AnyObject", "appDelegate"]
+- ["Ps9AnyObject", "canPerform"]
+- !private ["Ps9AnyObject", "currentUserId"]
+- ["Ps9AnyObject", "delegate"]
+- ["Ps9AnyObject", "getFacebookImageById"]
+- !private ["Ps9AnyObject", "getToken"]
+- !private ["Ps9AnyObject", "getTokenWithFaceBookId"]
+- ["Ps9AnyObject", "init"]
+- !private ["Ps9AnyObject", "isConnectedToNetwork"]
+- !private ["Ps9AnyObject", "print"]
+- ["Ps9AnyObject", "sharedApplication"]
+- ["Ps9AnyObject", "token"]
+- ["Ps9AnyObject", ""]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["Sb", "deinit"]
+- !private ["Ps25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps11BooleanType", "_getBuiltinLogicValue"]
+- !private ["C11ChampySwift6CHPush", "alertPush"]
+- !private ["C11ChampySwift6CHPush", "init"]
+- ["C11ChampySwift10CHRequests", "APIurl"]
+- ["C11ChampySwift10CHRequests", "AppDelegate"]
+- ["C11ChampySwift10CHRequests", "Bool"]
+- !private ["C11ChampySwift10CHRequests", "CHPush"]
+- !private ["C11ChampySwift10CHRequests", "CHSession"]
+- !private ["C11ChampySwift10CHRequests", "HTTP"]
+- !private ["C11ChampySwift10CHRequests", "IJReachability"]
+- ["C11ChampySwift10CHRequests", "JSON"]
+- !private ["C11ChampySwift10CHRequests", "NSData"]
+- !private ["C11ChampySwift10CHRequests", "NSOperationQueue"]
+- !private ["C11ChampySwift10CHRequests", "NSURL"]
+- ["C11ChampySwift10CHRequests", "SocketUrl"]
+- ["C11ChampySwift10CHRequests", "String"]
+- ["C11ChampySwift10CHRequests", "UIApplication"]
+- ["C11ChampySwift10CHRequests", "UIImage"]
+- !private ["C11ChampySwift10CHRequests", "UIImageJPEGRepresentation"]
+- !private ["C11ChampySwift10CHRequests", "Upload"]
+- ["C11ChampySwift10CHRequests", "appDelegate"]
+- ["C11ChampySwift10CHRequests", "canPerform"]
+- ["C11ChampySwift10CHRequests", "deinit"]
+- ["C11ChampySwift10CHRequests", "getFacebookImageById"]
+- ["C11ChampySwift10CHRequests", "init"]
+- !private ["C11ChampySwift10CHRequests", "print"]
+- ["C11ChampySwift10CHRequests", "token"]
+- !private ["C11ChampySwift9CHSession", "currentUserId"]
+- !private ["C11ChampySwift9CHSession", "getToken"]
+- !private ["C11ChampySwift9CHSession", "getTokenWithFaceBookId"]
+- !private ["C11ChampySwift9CHSession", "init"]
+- ["Ps11CVarArgType", "APIurl"]
+- !private ["Ps11CVarArgType", "CHPush"]
+- !private ["Ps11CVarArgType", "CHSession"]
+- !private ["Ps11CVarArgType", "HTTP"]
+- !private ["Ps11CVarArgType", "IJReachability"]
+- !private ["Ps11CVarArgType", "NSData"]
+- !private ["Ps11CVarArgType", "NSOperationQueue"]
+- !private ["Ps11CVarArgType", "NSURL"]
+- ["Ps11CVarArgType", "SocketUrl"]
+- ["Ps11CVarArgType", "UIApplication"]
+- !private ["Ps11CVarArgType", "UIImage"]
+- !private ["Ps11CVarArgType", "UIImageJPEGRepresentation"]
+- !private ["Ps11CVarArgType", "Upload"]
+- !private ["Ps11CVarArgType", "addOperation"]
+- !private ["Ps11CVarArgType", "alertPush"]
+- ["Ps11CVarArgType", "appDelegate"]
+- ["Ps11CVarArgType", "canPerform"]
+- !private ["Ps11CVarArgType", "currentUserId"]
+- ["Ps11CVarArgType", "delegate"]
+- ["Ps11CVarArgType", "getFacebookImageById"]
+- !private ["Ps11CVarArgType", "getToken"]
+- !private ["Ps11CVarArgType", "getTokenWithFaceBookId"]
+- ["Ps11CVarArgType", "init"]
+- !private ["Ps11CVarArgType", "print"]
+- ["Ps11CVarArgType", "sharedApplication"]
+- ["Ps11CVarArgType", "token"]
+- ["Ps11CVarArgType", ""]
+- !private ["Vs9Character", "deinit"]
+- !private ["Ps14CollectionType", "Key"]
+- !private ["Ps14CollectionType", "Value"]
+- !private ["Ps10Comparable", "init"]
+- ["Ps28CustomDebugStringConvertible", "APIurl"]
+- !private ["Ps28CustomDebugStringConvertible", "CHPush"]
+- !private ["Ps28CustomDebugStringConvertible", "CHSession"]
+- !private ["Ps28CustomDebugStringConvertible", "HTTP"]
+- !private ["Ps28CustomDebugStringConvertible", "IJReachability"]
+- !private ["Ps28CustomDebugStringConvertible", "Key"]
+- !private ["Ps28CustomDebugStringConvertible", "NSData"]
+- !private ["Ps28CustomDebugStringConvertible", "NSOperationQueue"]
+- !private ["Ps28CustomDebugStringConvertible", "NSURL"]
+- ["Ps28CustomDebugStringConvertible", "SocketUrl"]
+- ["Ps28CustomDebugStringConvertible", "UIApplication"]
+- !private ["Ps28CustomDebugStringConvertible", "UIImage"]
+- !private ["Ps28CustomDebugStringConvertible", "UIImageJPEGRepresentation"]
+- !private ["Ps28CustomDebugStringConvertible", "Upload"]
+- !private ["Ps28CustomDebugStringConvertible", "Value"]
+- !private ["Ps28CustomDebugStringConvertible", "addOperation"]
+- !private ["Ps28CustomDebugStringConvertible", "alertPush"]
+- ["Ps28CustomDebugStringConvertible", "appDelegate"]
+- ["Ps28CustomDebugStringConvertible", "canPerform"]
+- !private ["Ps28CustomDebugStringConvertible", "currentUserId"]
+- ["Ps28CustomDebugStringConvertible", "delegate"]
+- ["Ps28CustomDebugStringConvertible", "getFacebookImageById"]
+- !private ["Ps28CustomDebugStringConvertible", "getToken"]
+- !private ["Ps28CustomDebugStringConvertible", "getTokenWithFaceBookId"]
+- ["Ps28CustomDebugStringConvertible", "init"]
+- !private ["Ps28CustomDebugStringConvertible", "print"]
+- ["Ps28CustomDebugStringConvertible", "sharedApplication"]
+- ["Ps28CustomDebugStringConvertible", "token"]
+- ["Ps28CustomDebugStringConvertible", ""]
+- ["Ps23CustomStringConvertible", "APIurl"]
+- !private ["Ps23CustomStringConvertible", "CHPush"]
+- !private ["Ps23CustomStringConvertible", "CHSession"]
+- !private ["Ps23CustomStringConvertible", "HTTP"]
+- !private ["Ps23CustomStringConvertible", "IJReachability"]
+- !private ["Ps23CustomStringConvertible", "Key"]
+- !private ["Ps23CustomStringConvertible", "NSData"]
+- !private ["Ps23CustomStringConvertible", "NSOperationQueue"]
+- !private ["Ps23CustomStringConvertible", "NSURL"]
+- ["Ps23CustomStringConvertible", "SocketUrl"]
+- ["Ps23CustomStringConvertible", "UIApplication"]
+- !private ["Ps23CustomStringConvertible", "UIImage"]
+- !private ["Ps23CustomStringConvertible", "UIImageJPEGRepresentation"]
+- !private ["Ps23CustomStringConvertible", "Upload"]
+- !private ["Ps23CustomStringConvertible", "Value"]
+- !private ["Ps23CustomStringConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps23CustomStringConvertible", "addOperation"]
+- !private ["Ps23CustomStringConvertible", "alertPush"]
+- ["Ps23CustomStringConvertible", "appDelegate"]
+- ["Ps23CustomStringConvertible", "canPerform"]
+- !private ["Ps23CustomStringConvertible", "currentUserId"]
+- ["Ps23CustomStringConvertible", "delegate"]
+- ["Ps23CustomStringConvertible", "getFacebookImageById"]
+- !private ["Ps23CustomStringConvertible", "getToken"]
+- !private ["Ps23CustomStringConvertible", "getTokenWithFaceBookId"]
+- ["Ps23CustomStringConvertible", "init"]
+- !private ["Ps23CustomStringConvertible", "print"]
+- ["Ps23CustomStringConvertible", "sharedApplication"]
+- ["Ps23CustomStringConvertible", "token"]
+- ["Ps23CustomStringConvertible", ""]
+- !private ["Vs10Dictionary", "Key"]
+- !private ["Vs10Dictionary", "Value"]
+- !private ["Ps28DictionaryLiteralConvertible", "Key"]
+- !private ["Ps28DictionaryLiteralConvertible", "Value"]
+- !private ["Sd", "deinit"]
+- ["Ps9Equatable", "APIurl"]
+- !private ["Ps9Equatable", "CHPush"]
+- !private ["Ps9Equatable", "CHSession"]
+- !private ["Ps9Equatable", "HTTP"]
+- !private ["Ps9Equatable", "IJReachability"]
+- !private ["Ps9Equatable", "NSData"]
+- !private ["Ps9Equatable", "NSOperationQueue"]
+- !private ["Ps9Equatable", "NSURL"]
+- ["Ps9Equatable", "SocketUrl"]
+- ["Ps9Equatable", "UIApplication"]
+- !private ["Ps9Equatable", "UIImage"]
+- !private ["Ps9Equatable", "UIImageJPEGRepresentation"]
+- !private ["Ps9Equatable", "Upload"]
+- !private ["Ps9Equatable", "_getBuiltinLogicValue"]
+- !private ["Ps9Equatable", "addOperation"]
+- !private ["Ps9Equatable", "alertPush"]
+- ["Ps9Equatable", "appDelegate"]
+- ["Ps9Equatable", "canPerform"]
+- !private ["Ps9Equatable", "currentUserId"]
+- ["Ps9Equatable", "delegate"]
+- ["Ps9Equatable", "getFacebookImageById"]
+- !private ["Ps9Equatable", "getToken"]
+- !private ["Ps9Equatable", "getTokenWithFaceBookId"]
+- ["Ps9Equatable", "init"]
+- !private ["Ps9Equatable", "print"]
+- ["Ps9Equatable", "sharedApplication"]
+- ["Ps9Equatable", "token"]
+- ["Ps9Equatable", ""]
+- !private ["Ps41ExtendedGraphemeClusterLiteralConvertible", "init"]
+- !private ["Sf", "deinit"]
+- ["Ps8Hashable", "APIurl"]
+- !private ["Ps8Hashable", "CHPush"]
+- !private ["Ps8Hashable", "CHSession"]
+- !private ["Ps8Hashable", "HTTP"]
+- !private ["Ps8Hashable", "IJReachability"]
+- !private ["Ps8Hashable", "NSData"]
+- !private ["Ps8Hashable", "NSOperationQueue"]
+- !private ["Ps8Hashable", "NSURL"]
+- ["Ps8Hashable", "SocketUrl"]
+- ["Ps8Hashable", "UIApplication"]
+- !private ["Ps8Hashable", "UIImage"]
+- !private ["Ps8Hashable", "UIImageJPEGRepresentation"]
+- !private ["Ps8Hashable", "Upload"]
+- !private ["Ps8Hashable", "_getBuiltinLogicValue"]
+- !private ["Ps8Hashable", "addOperation"]
+- !private ["Ps8Hashable", "alertPush"]
+- ["Ps8Hashable", "appDelegate"]
+- ["Ps8Hashable", "canPerform"]
+- !private ["Ps8Hashable", "currentUserId"]
+- ["Ps8Hashable", "delegate"]
+- ["Ps8Hashable", "getFacebookImageById"]
+- !private ["Ps8Hashable", "getToken"]
+- !private ["Ps8Hashable", "getTokenWithFaceBookId"]
+- ["Ps8Hashable", "init"]
+- !private ["Ps8Hashable", "print"]
+- ["Ps8Hashable", "sharedApplication"]
+- ["Ps8Hashable", "token"]
+- ["Ps8Hashable", ""]
+- !private ["C11ChampySwift14IJReachability", "isConnectedToNetwork"]
+- !private ["Ps9Indexable", "Key"]
+- !private ["Ps9Indexable", "Value"]
+- !private ["Si", "deinit"]
+- !private ["Vs5Int16", "deinit"]
+- !private ["Vs5Int32", "deinit"]
+- !private ["Vs5Int64", "deinit"]
+- !private ["Vs4Int8", "deinit"]
+- !private ["Ps14MirrorPathType", "init"]
+- !private ["PSo8NSCoding", "init"]
+- !private ["PSo9NSCopying", "init"]
+- !private ["CSo6NSData", "init"]
+- !private ["PSo16NSMutableCopying", "init"]
+- ["CSo8NSObject", "APIurl"]
+- ["CSo8NSObject", "AppDelegate"]
+- ["CSo8NSObject", "Bool"]
+- !private ["CSo8NSObject", "CHPush"]
+- !private ["CSo8NSObject", "CHSession"]
+- !private ["CSo8NSObject", "HTTP"]
+- !private ["CSo8NSObject", "IJReachability"]
+- ["CSo8NSObject", "JSON"]
+- !private ["CSo8NSObject", "NSData"]
+- !private ["CSo8NSObject", "NSOperationQueue"]
+- !private ["CSo8NSObject", "NSURL"]
+- ["CSo8NSObject", "SocketUrl"]
+- ["CSo8NSObject", "String"]
+- ["CSo8NSObject", "UIApplication"]
+- ["CSo8NSObject", "UIImage"]
+- !private ["CSo8NSObject", "UIImageJPEGRepresentation"]
+- !private ["CSo8NSObject", "Upload"]
+- !private ["CSo8NSObject", "addOperation"]
+- !private ["CSo8NSObject", "alertPush"]
+- ["CSo8NSObject", "appDelegate"]
+- ["CSo8NSObject", "canPerform"]
+- !private ["CSo8NSObject", "currentUserId"]
+- ["CSo8NSObject", "delegate"]
+- ["CSo8NSObject", "getFacebookImageById"]
+- !private ["CSo8NSObject", "getToken"]
+- !private ["CSo8NSObject", "getTokenWithFaceBookId"]
+- ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "print"]
+- ["CSo8NSObject", "sharedApplication"]
+- ["CSo8NSObject", "token"]
+- ["CSo8NSObject", ""]
+- ["PSo16NSObjectProtocol", "APIurl"]
+- !private ["PSo16NSObjectProtocol", "CHPush"]
+- !private ["PSo16NSObjectProtocol", "CHSession"]
+- !private ["PSo16NSObjectProtocol", "HTTP"]
+- !private ["PSo16NSObjectProtocol", "IJReachability"]
+- !private ["PSo16NSObjectProtocol", "NSData"]
+- !private ["PSo16NSObjectProtocol", "NSOperationQueue"]
+- !private ["PSo16NSObjectProtocol", "NSURL"]
+- ["PSo16NSObjectProtocol", "SocketUrl"]
+- ["PSo16NSObjectProtocol", "UIApplication"]
+- !private ["PSo16NSObjectProtocol", "UIImage"]
+- !private ["PSo16NSObjectProtocol", "UIImageJPEGRepresentation"]
+- !private ["PSo16NSObjectProtocol", "Upload"]
+- !private ["PSo16NSObjectProtocol", "addOperation"]
+- !private ["PSo16NSObjectProtocol", "alertPush"]
+- ["PSo16NSObjectProtocol", "appDelegate"]
+- ["PSo16NSObjectProtocol", "canPerform"]
+- !private ["PSo16NSObjectProtocol", "currentUserId"]
+- ["PSo16NSObjectProtocol", "delegate"]
+- ["PSo16NSObjectProtocol", "getFacebookImageById"]
+- !private ["PSo16NSObjectProtocol", "getToken"]
+- !private ["PSo16NSObjectProtocol", "getTokenWithFaceBookId"]
+- ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "print"]
+- ["PSo16NSObjectProtocol", "sharedApplication"]
+- ["PSo16NSObjectProtocol", "token"]
+- ["PSo16NSObjectProtocol", ""]
+- !private ["CSo16NSOperationQueue", "addOperation"]
+- !private ["CSo16NSOperationQueue", "init"]
+- !private ["PSo14NSSecureCoding", "init"]
+- !private ["CSo8NSString", "init"]
+- !private ["CSo5NSURL", "init"]
+- ["Sq", "deinit"]
+- !private ["Ps16OutputStreamType", "init"]
+- !private ["Ps12SequenceType", "Key"]
+- !private ["Ps12SequenceType", "Value"]
+- !private ["Ps10Streamable", "init"]
+- !private ["SS", "init"]
+- !private ["Ps30StringInterpolationConvertible", "init"]
+- !private ["Ps24StringLiteralConvertible", "init"]
+- !private ["PSo29UIAccessibilityIdentification", "init"]
+- ["CSo13UIApplication", "delegate"]
+- ["CSo13UIApplication", "sharedApplication"]
+- !private ["CSo7UIImage", "init"]
+- ["CSo11UIResponder", "delegate"]
+- ["CSo11UIResponder", "sharedApplication"]
+- !private ["Su", "deinit"]
+- !private ["Vs6UInt16", "deinit"]
+- !private ["Vs6UInt32", "deinit"]
+- !private ["Vs6UInt64", "deinit"]
+- !private ["Vs5UInt8", "deinit"]
+- !private ["Sc", "deinit"]
+- !private ["Ps31UnicodeScalarLiteralConvertible", "init"]
+- !private ["Ps33_BuiltinBooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps49_BuiltinExtendedGraphemeClusterLiteralConvertible", "init"]
+- !private ["Ps32_BuiltinStringLiteralConvertible", "init"]
+- !private ["Ps37_BuiltinUTF16StringLiteralConvertible", "init"]
+- !private ["Ps39_BuiltinUnicodeScalarLiteralConvertible", "init"]
+- !private ["Ps32_FileReferenceLiteralConvertible", "init"]
+- !private ["Ps24_ImageLiteralConvertible", "init"]
+- !private ["Ps21_ObjectiveCBridgeable", "Key"]
+- !private ["Ps21_ObjectiveCBridgeable", "Value"]
+- !private ["Ps21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- !private ["Ps21_ObjectiveCBridgeable", "init"]
+- !private ["Ps12_Reflectable", "Key"]
+- !private ["Ps12_Reflectable", "Value"]
+- !private ["Ps12_Reflectable", "_getBuiltinLogicValue"]
+- !private ["Ps12_Reflectable", "init"]
+depends-nominal:
+- "Ps9AnyObject"
+- !private "Sb"
+- !private "Ps25BooleanLiteralConvertible"
+- !private "Ps11BooleanType"
+- !private "C11ChampySwift6CHPush"
+- "C11ChampySwift10CHRequests"
+- !private "C11ChampySwift9CHSession"
+- "Ps11CVarArgType"
+- !private "Vs9Character"
+- !private "Ps14CollectionType"
+- !private "Ps10Comparable"
+- "Ps28CustomDebugStringConvertible"
+- "Ps23CustomStringConvertible"
+- !private "Vs10Dictionary"
+- !private "Ps28DictionaryLiteralConvertible"
+- !private "Sd"
+- "Ps9Equatable"
+- !private "Ps41ExtendedGraphemeClusterLiteralConvertible"
+- !private "Sf"
+- "Ps8Hashable"
+- !private "C11ChampySwift14IJReachability"
+- !private "Ps9Indexable"
+- !private "Si"
+- !private "Vs5Int16"
+- !private "Vs5Int32"
+- !private "Vs5Int64"
+- !private "Vs4Int8"
+- !private "Ps14MirrorPathType"
+- !private "PSo8NSCoding"
+- !private "PSo9NSCopying"
+- !private "CSo6NSData"
+- !private "PSo16NSMutableCopying"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- !private "CSo16NSOperationQueue"
+- !private "PSo14NSSecureCoding"
+- !private "CSo8NSString"
+- !private "CSo5NSURL"
+- "Sq"
+- !private "Ps16OutputStreamType"
+- !private "Ps12SequenceType"
+- !private "Ps10Streamable"
+- !private "SS"
+- !private "Ps30StringInterpolationConvertible"
+- !private "Ps24StringLiteralConvertible"
+- !private "PSo29UIAccessibilityIdentification"
+- "CSo13UIApplication"
+- !private "CSo7UIImage"
+- "CSo11UIResponder"
+- !private "Su"
+- !private "Vs6UInt16"
+- !private "Vs6UInt32"
+- !private "Vs6UInt64"
+- !private "Vs5UInt8"
+- !private "Sc"
+- !private "Ps31UnicodeScalarLiteralConvertible"
+- !private "Ps33_BuiltinBooleanLiteralConvertible"
+- !private "Ps49_BuiltinExtendedGraphemeClusterLiteralConvertible"
+- !private "Ps32_BuiltinStringLiteralConvertible"
+- !private "Ps37_BuiltinUTF16StringLiteralConvertible"
+- !private "Ps39_BuiltinUnicodeScalarLiteralConvertible"
+- !private "Ps32_FileReferenceLiteralConvertible"
+- !private "Ps24_ImageLiteralConvertible"
+- !private "Ps21_ObjectiveCBridgeable"
+- !private "Ps12_Reflectable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/ChampySwift-Bridging-Header.h"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/UICountingLabel.h"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/ChampySwift/iCarousel.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequestDataAttachment.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphErrorRecoveryProcessor.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppLinkResolver.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKButton.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKUtility.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKTestUsersManager.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKSettings.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKProfilePictureView.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKProfile.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKMutableCopying.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequest.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKConstants.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKApplicationDelegate.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppLinkUtility.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAppEvents.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKMacros.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKGraphRequestConnection.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKCopying.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKAccessToken.h"
+- "./FBSDKCoreKit.framework/Headers/FBSDKCoreKit.h"
+- "./FBSDKCoreKit.framework/Modules/module.modulemap"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginTooltipView.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginManagerLoginResult.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginConstants.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKTooltipView.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginManager.h"
+- "/Volumes/10.9/work/CHAMPY/ChampySwift01/ChampySwift/FBSDKCoreKit.framework/Modules/module.modulemap"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginButton.h"
+- "./FBSDKLoginKit.framework/Headers/FBSDKLoginKit.h"
+- "./FBSDKLoginKit.framework/Modules/module.modulemap"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareVideoContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareVideo.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharePhotoContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharePhoto.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphAction.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareLinkContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareDialogMode.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareConstants.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphValueContainer.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphObject.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareAPI.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharingButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSendButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharingContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKSharing.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKMessageDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeControl.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLiking.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeObjectType.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKLikeButton.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKGameRequestDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKGameRequestContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppInviteDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppInviteContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupJoinDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupContent.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKAppGroupAddDialog.h"
+- "./FBSDKShareKit.framework/Headers/FBSDKShareKit.h"
+- "./FBSDKShareKit.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/AVFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreMedia.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreAudio.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreData.swiftmodule"
+interface-hash: "9fd60b52f5bfda9d2ce379da0173d5d2"

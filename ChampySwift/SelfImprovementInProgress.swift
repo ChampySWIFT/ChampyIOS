@@ -7,14 +7,20 @@
 //
 
 import UIKit
-
-class SelfImprovementInProgress: UIView {
+import SwiftyJSON
+@IBDesignable class SelfImprovementInProgress: UIView {
 
   var view: UIView!
   
   @IBOutlet weak var topBarBackground: UIView!
   @IBOutlet weak var selfImprovementUpIcon: UIImageView!
   @IBOutlet weak var selfImprovementLabel: UILabel!
+  @IBOutlet weak var descLabel: UILabel!
+  @IBOutlet weak var doneForToday: UILabel!
+  @IBOutlet weak var revardLabel: UILabel!
+  
+  var objectChallenge:JSON! = nil
+  var tapped = false
   
   func xibSetup() {
     view                  = loadViewFromNib()
@@ -40,12 +46,9 @@ class SelfImprovementInProgress: UIView {
     super.init(frame: frame)
     // 3. Setup view from .xib file
     xibSetup()
-    
-    
-    
   }
   
-  func setUp(){
+  func setUp(object:JSON = nil){
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
@@ -54,6 +57,12 @@ class SelfImprovementInProgress: UIView {
     self.bringSubviewToFront(self.topBarBackground)
     self.topBarBackground.bringSubviewToFront(selfImprovementUpIcon)
     self.topBarBackground.bringSubviewToFront(selfImprovementLabel)
+    self.doneForToday.adjustsFontSizeToFitWidth = true
+    if object != nil {
+      self.objectChallenge = object
+      self.descLabel.text = object["challenge"]["name"].stringValue
+    }
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -64,4 +73,50 @@ class SelfImprovementInProgress: UIView {
     xibSetup()
   }
 
+  @IBAction func acceptAction(sender: AnyObject) {
+    guard !tapped else {
+      return
+    }
+    let button = sender as! UIButton
+    
+    tapped = true
+    button.hidden = self.tapped
+    
+    CHRequests().checkChallenge(self.objectChallenge["_id"].stringValue) { (result, json) in
+      if result {
+        self.tapped = false
+//        button.hidden = self.tapped
+        CHPush().localPush("refreshIcarousel", object: [])
+//        CHPush().alertPush("Confirmed", type: "Success")
+      } else {
+        self.tapped = false
+        button.hidden = self.tapped
+        CHPush().alertPush(json["error"].stringValue, type: "Warning")
+      }
+    }
+  }
+  
+  @IBAction func failAction(sender: AnyObject) {
+    guard !tapped else {
+      return
+    }
+    
+    let button = sender as! UIButton
+    tapped = true
+    button.hidden = self.tapped
+    
+    CHRequests().surrender(self.objectChallenge["_id"].stringValue) { (result, json) in
+      if result {
+        self.tapped = false
+//        button.hidden = self.tapped
+        CHPush().localPush("refreshIcarousel", object: [])
+//        CHPush().alertPush("You are a looser", type: "Success")
+      } else {
+        self.tapped = false
+        button.hidden = self.tapped
+        CHPush().alertPush(json["error"].stringValue, type: "Warning")
+      }
+    }
+  }
+  
 }

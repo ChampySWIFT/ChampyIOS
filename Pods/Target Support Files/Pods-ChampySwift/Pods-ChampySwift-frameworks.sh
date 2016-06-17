@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -59,8 +59,8 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements \"$1\""
-    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$1"
+    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements \"$1\""
+    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1"
   fi
 }
 
@@ -84,30 +84,32 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-ChampySwift/ALCameraViewController.framework"
-  install_framework "Pods-ChampySwift/Alamofire.framework"
-  install_framework "Pods-ChampySwift/Async.framework"
-  install_framework "Pods-ChampySwift/CryptoSwift.framework"
-  install_framework "Pods-ChampySwift/DynamicBlurView.framework"
-  install_framework "Pods-ChampySwift/JWT.framework"
-  install_framework "Pods-ChampySwift/Kingfisher.framework"
-  install_framework "Pods-ChampySwift/PresenterKit.framework"
-  install_framework "Pods-ChampySwift/ReachabilitySwift.framework"
-  install_framework "Pods-ChampySwift/Socket_IO_Client_Swift.framework"
-  install_framework "Pods-ChampySwift/SwiftHTTP.framework"
-  install_framework "Pods-ChampySwift/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ALCameraViewController/ALCameraViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AsyncSwift/Async.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CryptoSwift/CryptoSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DynamicBlurView/DynamicBlurView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Fusuma/Fusuma.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSONWebToken/JWT.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Kingfisher/Kingfisher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PresenterKit/PresenterKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Socket.IO-Client-Swift/Socket_IO_Client_Swift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftHTTP/SwiftHTTP.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwipyCell/SwipyCell.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-ChampySwift/ALCameraViewController.framework"
-  install_framework "Pods-ChampySwift/Alamofire.framework"
-  install_framework "Pods-ChampySwift/Async.framework"
-  install_framework "Pods-ChampySwift/CryptoSwift.framework"
-  install_framework "Pods-ChampySwift/DynamicBlurView.framework"
-  install_framework "Pods-ChampySwift/JWT.framework"
-  install_framework "Pods-ChampySwift/Kingfisher.framework"
-  install_framework "Pods-ChampySwift/PresenterKit.framework"
-  install_framework "Pods-ChampySwift/ReachabilitySwift.framework"
-  install_framework "Pods-ChampySwift/Socket_IO_Client_Swift.framework"
-  install_framework "Pods-ChampySwift/SwiftHTTP.framework"
-  install_framework "Pods-ChampySwift/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ALCameraViewController/ALCameraViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AsyncSwift/Async.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CryptoSwift/CryptoSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DynamicBlurView/DynamicBlurView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Fusuma/Fusuma.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSONWebToken/JWT.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Kingfisher/Kingfisher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PresenterKit/PresenterKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Socket.IO-Client-Swift/Socket_IO_Client_Swift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftHTTP/SwiftHTTP.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwipyCell/SwipyCell.framework"
 fi

@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
+import Async
 class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
-  var table1 = AllFriendsTableViewController()
+  var table3 = AllFriendsTableViewController()
   var table2 = PendingFriendsController()
-  var table3 = FriendsTableViewController()
+  var table1 = FriendsTableViewController()
   
   let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
   var pageImages: [UIImage]       = []
@@ -31,8 +31,25 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
       appDelegate.friendsViewController = self
     }
     CHImages().setUpBackground(background, frame: self.view.frame)
+    
+    
+    Async.background{
+      CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
+        if !status {
+          CHPush().alertPush(json.stringValue, type: "Warning")
+          Async.main {
+            CHSession().clearSession()
+            let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+            let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+            self.presentViewController(roleControlViewController, type: .push, animated: false)
+          }
+        }
+      }
+    }
     // Do any additional setup after loading the view.
   }
+  
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -62,15 +79,6 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
   }
   
   @IBAction func inviteFriend(sender: AnyObject) {
-    //    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-    //    content.appLinkURL = [NSURL URLWithString:@"https://www.mydomain.com/myapplink"];
-    //    //optionally set previewImageURL
-    //    content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://www.mydomain.com/my_invite_image.jpg"];
-    //    
-    //    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
-    //    [FBSDKAppInviteDialog showWithContent:content
-    //    delegate:self];
-    
     
     var inviteDialog:FBSDKAppInviteDialog = FBSDKAppInviteDialog()
     if(inviteDialog.canShow()){
@@ -83,6 +91,9 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
       inviteDialog.delegate = self
       inviteDialog.show()
     }
+
+    
+  
   }
   
   
@@ -108,9 +119,27 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-    table1 = mainStoryboard.instantiateViewControllerWithIdentifier("AllFriendsTableViewController") as! AllFriendsTableViewController
-    table2 = mainStoryboard.instantiateViewControllerWithIdentifier("PendingFriendsController") as! PendingFriendsController
-    table3 = mainStoryboard.instantiateViewControllerWithIdentifier("FriendsTableViewController") as! FriendsTableViewController
+    
+    if appDelegate.table3 != nil {
+      table3 = appDelegate.table3
+    } else {
+      appDelegate.table3 = mainStoryboard.instantiateViewControllerWithIdentifier("AllFriendsTableViewController") as! AllFriendsTableViewController
+      table3 = appDelegate.table3
+    }
+    
+    if appDelegate.table2 != nil {
+      table2 = appDelegate.table2
+    } else {
+      appDelegate.table2 = mainStoryboard.instantiateViewControllerWithIdentifier("PendingFriendsController") as! PendingFriendsController
+      table2 = appDelegate.table2
+    }
+    
+    if appDelegate.table1 != nil {
+      table1 = appDelegate.table1
+    } else {
+      appDelegate.table1 = mainStoryboard.instantiateViewControllerWithIdentifier("FriendsTableViewController") as! FriendsTableViewController
+      table1 = appDelegate.table1
+    }
     
     
     
@@ -131,8 +160,13 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     
     loadVisiblePages()
     contentScrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.inviteFriend(_:)), name: "inviteFriend", object: nil)
   }
   
+  override func viewDidDisappear(animated: Bool) {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: "inviteFriend", object: nil)
+  }
   
   func setUpFrames() {
 

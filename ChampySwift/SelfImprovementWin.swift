@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelfImprovementWin: UIView {
+@IBDesignable class SelfImprovementWin: UIView {
 
   var view: UIView!
   
@@ -40,9 +40,6 @@ class SelfImprovementWin: UIView {
     super.init(frame: frame)
     // 3. Setup view from .xib file
     xibSetup()
-    
-    
-    
   }
   
   

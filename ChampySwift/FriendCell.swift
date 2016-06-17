@@ -15,6 +15,7 @@ import Async
   var width:CGFloat = 0.0
   var opened:Bool = false
   @IBOutlet var mainContent: UIView!
+  @IBOutlet weak var separator: UIView!
   
   @IBOutlet weak var plusButton: UIButton!
   @IBOutlet weak var minusButton: UIButton!
@@ -46,6 +47,9 @@ import Async
   
   var initialPlusFrame :CGRect! = nil
   var initialMinusFrame:CGRect! = nil
+  var initialAvatarFrame:CGRect! = nil
+  
+  
   
   var points = 0
   var inProgressChallenges = 0
@@ -53,13 +57,16 @@ import Async
   var status = "other"
   var userObject:JSON! = nil
   
+  var tapped:Bool = false
+  
   func animateScoreBorders() {
     firstScoreIndicator.rotateScoreViewToZero()
     firstScoreIndicator.rotateView(1.0)
     firstScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
       if ended {
+        self.firstScoreLabel.adjustsFontSizeToFitWidth = true
         self.firstScoreLabel.hidden = false
-        self.firstScoreIndicator.fillScoreBorder(1.0)
+        self.firstScoreIndicator.fillScoreBorder(0.5)
         self.firstContainer.bringSubviewToFront(self.firstScoreLabel)
         self.firstScoreLabel.method   = UILabelCountingMethodLinear
         self.firstScoreLabel.format   = "%d";
@@ -72,8 +79,9 @@ import Async
     secondScoreIndicator.rotateView(1.0)
     secondScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
       if ended {
+        self.secondScoreLabel.adjustsFontSizeToFitWidth = true
         self.secondScoreLabel.hidden = false
-        self.secondScoreIndicator.fillScoreBorder(1.0)
+        self.secondScoreIndicator.fillScoreBorder(0.5)
         self.secondContainer.bringSubviewToFront(self.secondScoreLabel)
         self.secondScoreLabel.method   = UILabelCountingMethodLinear
         self.secondScoreLabel.format   = "%d";
@@ -86,8 +94,9 @@ import Async
     thirdScoreIndicator.rotateView(1.0)
     thirdScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
       if ended {
+        self.thirdScoreLabel.adjustsFontSizeToFitWidth = true
         self.thirdScoreLabel.hidden = false
-        self.thirdScoreIndicator.fillScoreBorder(1.0)
+        self.thirdScoreIndicator.fillScoreBorder(0.5)
         self.thirdContainer.bringSubviewToFront(self.thirdScoreLabel)
         self.thirdScoreLabel.method   = UILabelCountingMethodLinear
         self.thirdScoreLabel.format   = "%d";
@@ -162,7 +171,7 @@ import Async
     self.initialNameLevel  = self.username.frame
     self.initialLevelFrame = self.userLevel.frame
     self.initialScoreFrame = self.scoreContainer.frame
-    
+    self.initialAvatarFrame = self.userAvatar.frame
     
     self.initialPlusFrame  = self.plusButton.frame
     self.initialPlusFrame.origin.x = self.width
@@ -179,10 +188,12 @@ import Async
       self.userLevel.text       = "Level \(json["level"]["number"].stringValue) Champy"
       
       self.wins = json["successChallenges"].intValue
-      self.inProgressChallenges = json["allChallengesCount"].intValue
-      self.points = json["score"].intValue
-      self.inProgressCount.text = json["allChallengesCount"].stringValue
-      self.allCount.text        = json["score"].stringValue
+      self.inProgressChallenges = json["inProgressChallengesCount"].intValue
+      self.points = json["inProgressChallengesCount"].intValue + json["allChallengesCount"].intValue
+      
+      
+      self.inProgressCount.text = json["inProgressChallengesCount"].stringValue
+      self.allCount.text        = "\(self.points)"
       self.winsCount.text       = json["successChallenges"].stringValue
       
       self.username.adjustsFontSizeToFitWidth        = true
@@ -204,7 +215,7 @@ import Async
       break
       
     case "Outgoing" :
-      self.minusButton.hidden = true
+      self.minusButton.hidden = false
       self.plusButton.hidden = true
       break
       
@@ -223,46 +234,13 @@ import Async
     
   }
   
-  //  func open() {
-  //    self.pointsContainer.hidden = true
-  //    
-  //    var viewFrame         = self.frame
-  //    viewFrame.size.height = 200
-  //    
-  //    var avaFrame = userAvatar.frame
-  //    avaFrame.origin.x = (self.view.frame.width / 2) - 25
-  //    
-  //    UIView.animateWithDuration(2.0, delay: 0, options: .CurveEaseOut, animations: {
-  //      self.frame                = viewFrame
-  //      self.userAvatar.frame     = avaFrame
-  //      self.userAvatar.transform = CGAffineTransformMakeScale(1.2, 1.2)
-  //      }, completion: { finished in
-  //    })
-  //    
-  //    print("open")
-  //  }
-  //  
-  //  func close() {
-  //    self.pointsContainer.hidden = false
-  //    
-  //    var viewFrame         = self.frame
-  //    viewFrame.size.height = 66
-  //    
-  //    var avaFrame = userAvatar.frame
-  //    avaFrame.origin.x = 8
-  //    
-  //    UIView.animateWithDuration(2.0, delay: 0, options: .CurveEaseOut, animations: {
-  //      self.frame                = viewFrame
-  //      self.userAvatar.frame     = avaFrame
-  //      self.userAvatar.transform = CGAffineTransformMakeScale(1.0, 1.0)
-  //      }, completion: { finished in
-  //    })
-  //    
-  //    
-  //    print("close")
-  //  }
   
   func open() {
+    print(self.userObject)
+    self.tapped = true
+    self.setTimeout(1.0) { 
+      self.tapped = false
+    }
     
     opened = !opened
     self.pointsContainer.hidden = true
@@ -285,35 +263,41 @@ import Async
     levelFrame.origin.y   = nameFrame.origin.y + nameFrame.height + 5
     
     var minusButtonFrame = self.minusButton.frame
-    minusButtonFrame.origin.x = 15
+    minusButtonFrame.origin.x = 23
     
     var plusButtonFrame = self.plusButton.frame
-    plusButtonFrame.origin.x = self.width - 15 - 52
+    plusButtonFrame.origin.x = self.width - 15 - 62
     
+    var separatorFrame = separator.frame
+    separatorFrame.origin.y = 219
     
     UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
       self.username.textAlignment  = .Center
       self.userLevel.textAlignment = .Center
       self.userAvatar.frame        = frame
-      self.userAvatar.transform    = CGAffineTransformMakeScale(1.2, 1.2)
+//      self.userAvatar.transform    = CGAffineTransformMakeScale(1.5, 1.5)
       self.username.frame          = nameFrame
       self.userLevel.frame         = levelFrame
+      self.separator.frame = separatorFrame
       }, completion: { finished in
         
-        var frame = self.initialScoreFrame
-        frame.origin.y = frame.origin.y - 112
         
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-          self.scoreContainer.frame = frame
-          self.scoreContainer.hidden = false
-          self.minusButton.frame = minusButtonFrame
-          self.plusButton.frame = plusButtonFrame
-          }, completion: { finished in
-            self.cleareScoreborder()
-            self.animateScoreBorders()
-        })
+        
     })
     
+    var frame1 = self.initialScoreFrame
+    frame1.origin.y = frame1.origin.y - 112
+    
+    UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+      self.scoreContainer.frame = frame1
+      self.scoreContainer.hidden = false
+      self.minusButton.frame = minusButtonFrame
+      self.plusButton.frame = plusButtonFrame
+      }, completion: { finished in
+        
+    })
+    self.cleareScoreborder()
+    self.animateScoreBorders()
     print("open")
   }
   
@@ -331,7 +315,12 @@ import Async
     var frame = userAvatar.frame
     frame.origin.x = 8
     
-    UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+    var separatorFrame = separator.frame
+    separatorFrame.origin.y = 65
+    
+    
+    UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: {
+      self.separator.frame = separatorFrame
       self.scoreContainer.frame = self.initialScoreFrame
       self.scoreContainer.hidden = true
       self.plusButton.frame = self.initialPlusFrame
@@ -342,7 +331,7 @@ import Async
     
     UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
       self.userAvatar.frame        = frame
-      self.userAvatar.transform    = CGAffineTransformMakeScale(1.0, 1.0)
+//      self.userAvatar.transform    = CGAffineTransformMakeScale(1.0, 1.0)
       self.username.layer.opacity = 0.0
       self.userLevel.layer.opacity = 0.0
       
@@ -367,114 +356,165 @@ import Async
     print("close")
   }
   
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  }
   
   @IBAction func addAction(sender: AnyObject) {
-    switch self.status {
-    case "Other" :
-      CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
-        if result {
-          Async.main {
-            CHPush().alertPush("Friend Request Sent", type: "Success")
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-              self.plusButton.frame = self.initialPlusFrame
-              self.minusButton.frame = self.initialMinusFrame
+    
+    if !tapped {
+      
+      self.tapped = true
+      switch self.status {
+      case "Other" :
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+          self.plusButton.frame = self.initialPlusFrame
+          self.minusButton.frame = self.initialMinusFrame
+          
+          }, completion: { finished in
             
-              }, completion: { finished in
-                
-            })
-          }
-        } else {
-          CHPush().alertPush("Could't send request now", type: "Warning")
-        }
-      }
-      break
-      
-    case "Incoming" :
-      CHRequests().acceptFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
-        if result {
-          Async.main {
-            CHPush().alertPush("Friend Request Accepted", type: "Success")
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-              self.plusButton.frame = self.initialPlusFrame
-              self.minusButton.frame = self.initialMinusFrame
+        })
+        CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
+          if result {
+            Async.main {
+              self.tapped = false
               
-              }, completion: { finished in
-                
-            })
+            }
+          } else {
+            CHPush().alertPush("Could't send request now", type: "Warning")
+            self.tapped = false
           }
-        } else {
-          CHPush().alertPush("Could't accept request now", type: "Warning")
         }
-      })
-      
-      break
-      
-    case "Friends" :
-      // TODO
-      break
-    default:
-      self.minusButton.hidden = true
-      self.plusButton.hidden = true
-      
+        break
+        
+      case "Incoming" :
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+          self.plusButton.frame = self.initialPlusFrame
+          self.minusButton.frame = self.initialMinusFrame
+          
+          }, completion: { finished in
+            
+        })
+        CHRequests().acceptFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
+          if result {
+            Async.main {
+              self.tapped = false
+              
+            }
+          } else {
+            self.tapped = false
+            CHPush().alertPush("Could't accept request now", type: "Warning")
+          }
+        })
+        
+        break
+        
+      case "Friends" :
+        self.tapped = false
+        CHSession().setSelectedFriend(self.userObject["_id"].stringValue)
+        CHPush().localPush("openDuelView", object: [])
+        break
+      default:
+        self.tapped = false
+        self.minusButton.hidden = true
+        self.plusButton.hidden = true
+        
+      }
     }
+    
+    
     
     
   }
   
   
   @IBAction func minusAction(sender: AnyObject) {
-    switch self.status {
-    case "Other" :
+    
+    if !tapped {
       
-      
-      break
-      
-    case "Incoming" :
-      
-      CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
-        if result {
-          Async.main {
-            CHPush().alertPush("Declined", type: "Success")
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-              self.plusButton.frame = self.initialPlusFrame
-              self.minusButton.frame = self.initialMinusFrame
+      self.tapped = true
+      switch self.status {
+      case "Other" :
+        
+        
+        break
+      case "Outgoing" :
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+          self.plusButton.frame = self.initialPlusFrame
+          self.minusButton.frame = self.initialMinusFrame
+          
+          }, completion: { finished in
+            
+        })
+        CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
+          if result {
+            Async.main {
+              self.tapped = false
               
-              }, completion: { finished in
-                
-            })
+            }
+          } else {
+             self.tapped = false
+            CHPush().alertPush("Couldn't decline now", type: "Warning")
           }
-        } else {
-          CHPush().alertPush("Couldn't decline now", type: "Warning")
-        }
-      })
-      
-
-      
-      break
-      
-    case "Friends" :
-      CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
-        if result {
-          Async.main {
-            CHPush().alertPush("Declined", type: "Success")
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-              self.plusButton.frame = self.initialPlusFrame
-              self.minusButton.frame = self.initialMinusFrame
+        })
+        
+        
+        
+        break
+      case "Incoming" :
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+          self.plusButton.frame = self.initialPlusFrame
+          self.minusButton.frame = self.initialMinusFrame
+          
+          }, completion: { finished in
+            
+        })
+        CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
+          if result {
+            Async.main {
+               self.tapped = false
               
-              }, completion: { finished in
-                
-            })
+            }
+          } else {
+             self.tapped = false
+            CHPush().alertPush("Couldn't decline now", type: "Warning")
           }
-        } else {
-          CHPush().alertPush("Couldn't decline now", type: "Warning")
-        }
-      })
-      break
-    default:
-      self.minusButton.hidden = true
-      self.plusButton.hidden = true
-      
+        })
+        
+        
+        
+        break
+        
+      case "Friends" :
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+          self.plusButton.frame = self.initialPlusFrame
+          self.minusButton.frame = self.initialMinusFrame
+          
+          }, completion: { finished in
+            
+        })
+        
+        CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
+          if result {
+            Async.main {
+               self.tapped = false
+              
+            }
+          } else {
+             self.tapped = false
+            CHPush().alertPush("Couldn't decline now", type: "Warning")
+          }
+        })
+        break
+      default:
+         self.tapped = false
+        self.minusButton.hidden = true
+        self.plusButton.hidden = true
+        
+      }
     }
+    
+    
   }
   
   required init?(coder aDecoder: NSCoder) {

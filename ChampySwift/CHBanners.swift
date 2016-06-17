@@ -52,6 +52,9 @@ class CHBanners: NSObject {
   }
   
   func showBannerForViewControllerAnimated(animated:Bool, message:String) {
+    if message == "" {
+      return
+    }
     self.bannerText = message
     self.createBanner(message)
     self.target.addSubview(self.banner)

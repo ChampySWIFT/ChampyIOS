@@ -1,4 +1,4 @@
-
+  
 //
 //  ViewController.swift
 //  ChampySwift
@@ -40,36 +40,159 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   @IBOutlet weak var wakeUpContainer: UIView!
   @IBOutlet weak var selfImprovementContainer: UIView!
   @IBOutlet weak var duelContainer: UIView!
-  
+
+  var centerTapped:Bool = false
   var inProgressChallenges:Int = 0
   var wins:Int = 0
   var points:Int = 0
   
   var items: [Int] = []
+  
+  var challenges:[JSON] = []
+  var itemViewArray:[UIView] = []
   @IBOutlet var carousel : iCarousel!
   
-  override func awakeFromNib()
-  {
-    super.awakeFromNib()
-    for i in 0...6
-    {
-      items.append(i)
-    }
-  }
+  let center = NSNotificationCenter.defaultCenter()
   
   func printFonts() {
     let fontFamilyNames = UIFont.familyNames()
     for familyName in fontFamilyNames {
       print("------------------------------")
       print("Font Family Name = [\(familyName)]")
-      let names = UIFont.fontNamesForFamilyName(familyName as! String)
+      let names = UIFont.fontNamesForFamilyName(familyName )
       print("Font Names = [\(names)]")
+    }
+  }
+  
+  
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  }
+
+  func fillCHallenges() {
+    CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
+      if result {
+        Async.main{
+          
+          for item in self.itemViewArray {
+            item.removeFromSuperview()
+          }
+          self.itemViewArray.removeAll()
+          self.challenges.removeAll()
+          self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reverse()
+          
+          let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
+          
+          
+          for challenge in self.challenges {
+            var containerView: UIView
+            let challengeType = CHChalenges().getChallengeType(challenge)
+            
+            let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)"
+            if self.appDelegate.mainViewCard[cardIdentifier] != nil {
+              containerView = self.appDelegate.mainViewCard[cardIdentifier]!
+            } else {
+              
+              switch challengeType {
+              case .unconfirmedDuelRecipient:
+                let itemView = UnConfirmedDuel(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .unconfirmedDuelSender:
+                let itemView = UnConfirmedDuelSender(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .startedSelfImprovement:
+                let itemView = SelfImprovementInProgress(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .confirmedSelfImprovement:
+                let itemView = SelfImprovementDone(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .wakeUpChallenge:
+                let itemView = WakeUpChallenge(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .startedDuel:
+                let itemView = ConfirmedDuel(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+              case .checkedForToday:
+                let itemView = CheckedDuel(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+              case .waitingForNextDayWakeUp:
+                let itemView = WakeUpChallenge(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+              case .timedOutWakeUp:
+                let itemView = TimedOutWakeUp(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+                break
+                
+                
+              default:
+                let itemView = WakeUpChallenge(frame:frame)
+                itemView.setUp(challenge)
+                containerView = itemView
+              }
+              
+              self.appDelegate.mainViewCard[cardIdentifier] = containerView
+            }
+            
+            
+            
+            self.itemViewArray.append(containerView)
+          }
+          
+          
+          self.carousel.reloadData()
+          let duration:Double = Double(self.challenges.count / 6)
+          if self.challenges.count > 15 {
+            self.carousel.scrollToItemAtIndex(self.challenges.count - 1, animated: true)
+          } else {
+            self.carousel.scrollToItemAtIndex(self.challenges.count - 1, duration: duration)
+          }
+        }
+      }
     }
   }
   
   override func viewDidLoad(){
     
     super.viewDidLoad()
+    
+    Async.background{
+      CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
+        if !status {
+          CHPush().alertPush(json.stringValue, type: "Warning")
+          Async.main {
+            CHSession().clearSession()
+            let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+            let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+            self.presentViewController(roleControlViewController, type: .push, animated: false)
+          }
+        }
+      }
+    }
+    
+    
     Async.background{
       CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
         
@@ -77,117 +200,130 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       CHRequests().getAllUsers { (result, json) in
         
       }
+      
+      CHRequests().getChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        
+      })
+      
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHWakeUpper().setUpWakeUp()
+        }
+      })
+      
     }
     
     
     
     
-    //    printFonts()
-    
-    if appDelegate.mainViewController == nil {
-      appDelegate.mainViewController = self
+    //estabilishing connection to sockets
+    CHRequests().updateUserFromRemote { (result, json) in
+      if result {
+        let userObject:JSON       = CHSession().currentUserObject
+        self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
+        self.wins                 = userObject["successChallenges"].intValue
+        self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+      }
+      
     }
     
-    //    asdas
     let userObject:JSON       = CHSession().currentUserObject
     self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
     self.wins                 = userObject["successChallenges"].intValue
-    self.points               = userObject["score"].intValue
+    self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
     
-    self.wellcomeLabel.text = "Wellcome \(CHSession().currentUserName)"
+    self.wellcomeLabel.text = "Welcome \(CHSession().currentUserName)"
     self.wellcomeLabel.adjustsFontSizeToFitWidth = true
     
-    carousel.delegate   = self
-    carousel.dataSource = self
-    carousel.type       = .Rotary
     
-    animateScoreBorders()
     
+    self.carousel.delegate   = self
+    self.carousel.dataSource = self
+    self.carousel.type       = .Rotary
+    self.carousel.layer.opacity = 0.0
+    
+    
+    
+    self.animateScoreBorders()
+    self.view.bringSubviewToFront(self.plusIcon)
+    
+    self.plusIcon.addGestureRecognizer(plusTapped)
+    
+    CHImages().setUpBackground(background, frame: self.view.frame)
     
     self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueRegular", size: 18)!,  NSForegroundColorAttributeName: CHUIElements().APPColors["title"]!]
     navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
     navigationController!.navigationBar.tintColor    = UIColor.whiteColor()
-    self.view.bringSubviewToFront(self.plusIcon)
     
-    self.plusIcon.addGestureRecognizer(plusTapped)
     self.navigationItem.hidesBackButton = true
     self.navigationItem.leftBarButtonItem = nil
-    CHImages().setUpBackground(background, frame: self.view.frame)
+    
+    
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
   }
   
   
-  override func viewDidAppear(animated: Bool) {
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    if let touch = touches.first {
+      if opened {
+        if touch.view != plusIcon {
+          checkerAction()
+        }
+      }
+    }
+    super.touchesBegan(touches, withEvent:event)
+    
     
   }
   
-  func numberOfItemsInCarousel(carousel: iCarousel) -> Int
-  {
-    return items.count
+  func refreshCarousel() {
+    
+    if opened {
+      checkerAction()
+    }
+    
+    
+    CHRequests().updateUserFromRemote { (result, json) in
+      if result {
+        Async.main {
+          self.challenges.removeAll()
+          self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reverse()
+//          self.carousel.reloadData()
+          self.fillCHallenges()
+          let userObject:JSON       = CHSession().currentUserObject
+          self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
+          self.wins                 = userObject["successChallenges"].intValue
+          self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+          self.firstNumber.text = "\(self.inProgressChallenges)"   //.countFrom(0, to: Float(self.inProgressChallenges))
+          self.secondNumber.text = "\(self.wins)" //.countFrom(0, to: Float(self.wins))
+          self.thirdNumber.text = "\(self.points)" //.countFrom(0, to: Float(self.points))
+        }
+      }
+    }
+    
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    center.addObserver(self, selector: #selector(MainViewController.refreshCarousel), name: "refreshIcarousel", object: nil)
+    
+  }
+  
+  override func viewDidDisappear(animated: Bool) {
+//    self.view.removeFromSuperview()
+    self.center.removeObserver(self, name: "refreshIcarousel", object: nil)
+    
+  }
+  
+  func numberOfItemsInCarousel(carousel: iCarousel) -> Int {
+//    return CHChalenges().getInProgressChallenges(CHSession().currentUserId).count
+    return self.itemViewArray.count
   }
   
   func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
-    var containerView: UIView
     
-    //create new view if no view is available for recycling
-    if (view == nil) {
-      
-      
-      //don't do anything specific to the index within
-      //this `if (view == nil) {...}` statement because the view will be
-      //recycled and used with other index values later
-      let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.7, height: self.view.frame.size.height / 2.2)
-      switch index {
-      case 0:
-        let itemView = WakeUpChallenge(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 1:
-        let itemView = SelfImprovementWin(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 2:
-        let itemView = SelfImprovementDone(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 3:
-        let itemView = SelfImprovementInProgress(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 4:
-        let itemView = SelfImprovementInProgress(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 5:
-        let itemView = SelfImprovementInProgress(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-      case 6:
-        let itemView = SelfImprovementInProgress(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        break
-        
-      default:
-        let itemView = WakeUpChallenge(frame:frame)
-        itemView.setUp()
-        containerView = itemView
-        
-      }
-      
-      
-    } else {
-      //get a reference to the label in the recycled view
-      let itemView = view!
-      containerView = itemView
-    }
-    
+    let containerView = itemViewArray[index]
     
     return containerView
   }
@@ -222,7 +358,14 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         self.firstNumber.method   = UILabelCountingMethodLinear
         self.firstNumber.format   = "%d";
         self.firstMiniIcon.hidden = false
-        self.firstNumber.countFrom(0, to: Float(self.inProgressChallenges))
+        if self.inProgressChallenges >= 15 {
+          self.firstNumber.text = "\(self.inProgressChallenges)"
+        } else {
+          self.firstNumber.animationDuration = 1.0
+          self.firstNumber.countFrom(0, to: Float(self.inProgressChallenges))
+        }
+        
+        
       }
     }
     
@@ -236,12 +379,20 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         self.secondNumber.method   = UILabelCountingMethodLinear
         self.secondNumber.format   = "%d";
         self.secondMiniIcon.hidden = false
-        self.secondNumber.countFrom(0, to: Float(self.wins))
+        if self.inProgressChallenges >= 15 {
+          self.secondNumber.text = "\(self.wins)"
+        } else {
+          self.secondNumber.animationDuration = 1.0
+          self.secondNumber.countFrom(0, to: Float(self.wins))
+        }
+        
       }
     }
     
     thirdScoreBorder.rotateScoreViewToZero()
     thirdScoreBorder.rotateView(1.0)
+    
+    
     thirdScoreBorder.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
       if ended {
         self.thirdNumber.hidden = false
@@ -250,11 +401,25 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         self.thirdNumber.method   = UILabelCountingMethodLinear
         self.thirdNumber.format   = "%d";
         self.thirdMiniIcon.hidden = false
-        self.thirdNumber.countFrom(0, to: Float(self.points))
+        
+        if self.points >= 15 {
+          self.thirdNumber.text = "\(self.points)"
+        } else {
+          self.thirdNumber.animationDuration = 1.0
+          self.thirdNumber.countFrom(0, to: Float(self.points))
+          
+        }
+        self.fillCHallenges()
+        
+        
       }
     }
     
-    carousel.scrollToItemAtIndex(99, duration: 2)
+    UIView.animateWithDuration(2.0) {
+      self.carousel.layer.opacity = 1.0
+    }
+    
+    
   }
   
   
@@ -262,18 +427,31 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   @IBAction func plusIconTappedAction(sender: AnyObject) {
     
-    opened ? closeAction(): openAction()
+   checkerAction()
     
-    self.opened = !self.opened
   }
   
   @IBOutlet var plusTapped: UITapGestureRecognizer!
   
   @IBAction func centerTappedAction(sender: AnyObject) {
-    opened ? closeAction(): openAction()
+    if self.challenges.count >= 30 {
+      CHPush().alertPush("Can`t add new challenge", type: "Warning")
+      return
+    }
+    checkerAction()
     
-    self.opened = !self.opened
-    
+  }
+  
+  func checkerAction() {
+    if !centerTapped {
+      centerTapped = true
+      opened ? closeAction(): openAction()
+      
+      self.opened = !self.opened
+      self.setTimeout(0.7, block: {
+        self.centerTapped = false
+      })
+    }
   }
   
   func closeAction() {
@@ -318,14 +496,13 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   
   @IBAction func logOutAction(sender: AnyObject) {
-    CHSession().clearSession()
-    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-    presentViewController(roleControlViewController, type: .push, animated: false)
+//    CHSession().clearSession()
+//    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+//    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+//    presentViewController(roleControlViewController, type: .push, animated: false)
   }
   
-  
-  
+ 
   
 }
 

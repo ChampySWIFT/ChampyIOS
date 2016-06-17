@@ -12,8 +12,7 @@ public enum ScoreBorderGlowMode {
   case Forward, Reverse, Constant, NoGlow
 }
 
-@IBDesignable
-public class ScoreBorder: UIView {
+@IBDesignable class ScoreBorder: UIView {
   
   private struct ConversionFunctions {
     static func DegreesToRadians (value:CGFloat) -> CGFloat {

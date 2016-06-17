@@ -16,15 +16,19 @@
 import UIKit
 import SwiftyJSON
 import Async
-class FriendsTableViewController: UITableViewController {
+import SwipyCell
+
+
+class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
   
   var identifiers:[String]    = []
-  
+  var tap:Bool = true
   var selectedRow:Int         = -1
   var friendsContent:[UIView] = []
   var heights:[CGFloat]       = []
   let center = NSNotificationCenter.defaultCenter()
-  
+  var inviteFriendsContent:InviteFriendsView! = nil
+  var userCount:Int = 0
   
   
   func clearArrays() {
@@ -34,20 +38,19 @@ class FriendsTableViewController: UITableViewController {
   
   override func viewDidDisappear(animated: Bool) {
     center.removeObserver(self, name: "friendsReload", object: nil)
+    center.removeObserver(self, name: "openDuelView", object: nil)
+    
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    center.addObserver(self, selector: #selector(FriendsTableViewController.refreshTableViewAction(_:)), name: "friendsReload", object: nil)
+    center.addObserver(self, selector: #selector(FriendsTableViewController.openDuelView), name: "openDuelView", object: nil)
     
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: "friendsReload", object: nil)
-    
     
     self.fillArray()
-    //    self.tableView.backgroundView = self.view
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
   
   override func didReceiveMemoryWarning() {
@@ -64,10 +67,18 @@ class FriendsTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
+    
+    if friendsContent.count == 0 {
+      return 1
+    }
     return friendsContent.count
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    if friendsContent.count == 0 {
+      return self.view.frame.size.height
+    }
+    
     if indexPath.row == self.selectedRow {
       heights.append(220.0)
       return 220
@@ -80,62 +91,129 @@ class FriendsTableViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    var isIpad = false
-    if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-      isIpad = true
+    var identifier = "first"
+    
+    if friendsContent.count > 0 {
+      identifier = self.identifiers[indexPath.row]
     }
-    let identifier = self.identifiers[indexPath.row]
-    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
-    //    cell = nil
+//    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
+    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
+    
+        cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
+        cell                 = SwipyCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         
-        let content = friendsContent[indexPath.row] as! FriendCell
-        cell?.addSubview(content)
-        cell!.backgroundColor = UIColor.clearColor()
+        
+        if friendsContent.count == 0 {
+          inviteFriendsContent.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+          cell?.addSubview(inviteFriendsContent)
+          cell!.backgroundColor = UIColor.clearColor()
+        } else {
+          let content = friendsContent[indexPath.row] as! FriendCell
+          cell?.addSubview(content)
+          cell!.backgroundColor = UIColor.clearColor()
+        }
       }
     }
     return cell!
   }
   
+  func openDuelView() {
+     self.navigationController?.performSegueWithIdentifier("showDuelViewController", sender: self)
+  }
+  
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.beginUpdates()
-    if indexPath.row == selectedRow {
-      let content = friendsContent[indexPath.row] as! FriendCell
-      content.close()
-      selectedRow = -1
-    } else {
-      let content = friendsContent[indexPath.row] as! FriendCell
-      content.open()
-      self.selectedRow = indexPath.row
+    if self.friendsContent.count == 0 {
+      return
     }
-    clearArrays()
-    //    tableView.reloadData()
-    tableView.endUpdates()
+    if tap {
+      disableTapForASec()
+      tableView.beginUpdates()
+      if indexPath.row == selectedRow {
+        let content = friendsContent[indexPath.row] as! FriendCell
+        content.close()
+        selectedRow = -1
+      } else {
+        let content = friendsContent[indexPath.row] as! FriendCell
+        content.open()
+        self.selectedRow = indexPath.row
+      }
+      clearArrays()
+      //    tableView.reloadData()
+      tableView.endUpdates()
+    }
+  }
+  
+  func disableTapForASec() {
+    tap = false
+    self.setTimeout(1.0) {
+      self.tap = true
+    }
+  }
+  
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  }
+  
+  func destroyAll() {
+    for item in self.friendsContent {
+      item.removeFromSuperview()
+    }
+    self.friendsContent.removeAll()
   }
   
   func fillArray() {
     self.selectedRow = -1
+    self.destroyAll()
+    
     self.friendsContent.removeAll()
     for friend in CHUsers().getFriends(CHSession().currentUserId) {
       let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      
       content.status = "Friends"
-      content.setUp(friend["owner"])
+      var object = friend["owner"]
+      if friend["owner"]["_id"].stringValue == CHSession().currentUserId {
+        object = friend["friend"]
+      }
+      
+      content.setUp(object)
       self.friendsContent.append(content)
       identifiers.append("\(friend["_id"].stringValue)")
     }
+    
+    
+    if friendsContent.count == 0 {
+      let content = InviteFriendsView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.tableView.frame.size.height))
+      content.backgroundColor = UIColor.clearColor()
+      self.inviteFriendsContent = content
+    } else {
+      if self.inviteFriendsContent != nil {
+        self.inviteFriendsContent.removeFromSuperview()
+      }
+    }
+    
+    self.userCount = self.friendsContent.count
+    
   }
   
   @IBOutlet weak var refreshTableView: UIRefreshControl!
   
   @IBAction func refreshTableViewAction(sender: AnyObject) {
-    
+    guard IJReachability.isConnectedToNetwork() else {
+      self.refreshTableView.endRefreshing()
+      CHPush().alertPush("No Internet Connection", type: "Warning")
+      return
+    }
     CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
       if result {
         Async.main {
+          if CHUsers().getFriends(CHSession().currentUserId).count == self.userCount {
+            self.refreshTableView.endRefreshing()
+            return
+          }
           self.fillArray()
           self.tableView.reloadData()
           self.refreshTableView.endRefreshing()
@@ -146,6 +224,39 @@ class FriendsTableViewController: UITableViewController {
     
     
   }
+  
+  
+  func viewWithImageName(imageName: String) -> UIView {
+    let image = UIImage(named: imageName)
+    let imageView = UIImageView(image: image)
+    imageView.contentMode = .Center
+    return imageView
+  }
+  
+  func viewWithLabel(text: String) -> UIView {
+    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
+    label.text = text
+    label.font = CHUIElements().font16
+    label.numberOfLines = 3
+    label.lineBreakMode = .ByWordWrapping
+    label.textColor = CHUIElements().APPColors["Info"]
+    return label
+  }
+  
+  func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
+    
+  }
+  
+  // When the user ends swiping the cell this method is called
+  func swipeableTableViewCellDidEndSwiping(cell: SwipyCell) {
+    
+  }
+  
+  // When the user is dragging, this method is called with the percentage from the border
+  func swipeableTableViewCell(cell: SwipyCell, didSwipeWithPercentage percentage: CGFloat) {
+    
+  }
+  
   
   /*
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

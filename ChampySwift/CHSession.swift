@@ -13,12 +13,21 @@ import SwiftyJSON
 class CHSession: NSObject {
   
   let CurrentUser = NSUserDefaults.standardUserDefaults()
+  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   var currentUserObject:JSON! = nil
   var currentUserId:String         = ""
   var currentUserFacebookId:String = ""
   var currentUserName:String       = ""
   var logined:Bool                 = false
+  
+  var selectedFriendId:String {
+    if NSUserDefaults.standardUserDefaults().objectForKey("selectedFriendId") != nil {
+      return NSUserDefaults.standardUserDefaults().stringForKey("selectedFriendId")!
+    }
+    return ""
+  }
+  
   
   override init() {
     let user = NSUserDefaults.standardUserDefaults()
@@ -31,6 +40,11 @@ class CHSession: NSObject {
     }
   }
   
+  func updateUserObject(userObject:JSON) {
+    self.currentUserObject     = userObject
+    self.CurrentUser.setObject("\(userObject)", forKey: "userObject")
+  }
+  
   func createSessionForTheUserWithFacebookId(facebookId:String, name:String, andObjectId objectId: String, userObject:JSON) {
     
     self.CurrentUser.setObject(facebookId, forKey: "facebookId")
@@ -40,6 +54,9 @@ class CHSession: NSObject {
     
   }
   
+  func setSelectedFriend(userId:String) {
+    NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "selectedFriendId")
+  }
   
   func clearSession() {
     self.CurrentUser.setObject(nil, forKey: "facebookId")
@@ -47,6 +64,29 @@ class CHSession: NSObject {
     self.CurrentUser.setObject(nil, forKey: "userId")
 //    self.CurrentUser.setObject(nil, forKey: "userObject")
     self.logined = false
+    appDelegate.subscribed = false
+    
+    if appDelegate.table1 != nil {
+      appDelegate.table1.removeFromParentViewController()
+      appDelegate.table2.removeFromParentViewController()
+      appDelegate.table3.removeFromParentViewController()
+    }
+    
+    appDelegate.table1 = nil
+    appDelegate.table2 = nil
+    appDelegate.table3 = nil
+    appDelegate.historyTable1 = nil
+    appDelegate.historyTable2 = nil
+    appDelegate.historyTable3 = nil
+    
+    
+    let array = appDelegate.mainViewCard as [String:UIView]
+    for (kind, item) in array {
+      item.removeFromSuperview()
+    }
+    
+    NSURLCache.sharedURLCache().removeAllCachedResponses()
+    
   }
   
   
@@ -65,6 +105,7 @@ class CHSession: NSObject {
       }
       
     }
+    
     return token
   }
   

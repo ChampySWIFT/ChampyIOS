@@ -13,15 +13,43 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
-  
+  var mainView:UIView! = nil
+  var subscribed:Bool = false
   var historyViewController: HistoryViewController!   = nil
   var friendsViewController: FriendsViewController!   = nil
   var settingsViewController: SettingsViewController! = nil
   var mainViewController: MainViewController!         = nil
   
+  var table3:AllFriendsTableViewController! = nil
+  var table2:PendingFriendsController! = nil
+  var table1:FriendsTableViewController! = nil
+  
+  
+  var historyTable1:InProgressTableViewController! = nil
+  var historyTable2:WinsTableViewController! = nil
+  var historyTable3:FailedTableViewController! = nil
+  
+  var mainViewCard:[String:UIView] = [:]
+  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+    let application: UIApplication = UIApplication.sharedApplication()
+    application.registerUserNotificationSettings(settings)
+    application.registerForRemoteNotifications()
+    
+    
+//    UILocalNotification *localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+//    if (localNotification)
+//    {
+//      [[NSNotificationCenter defaultCenter] postNotificationName:@"Resume" object:self userInfo:localNotification.userInfo];
+//      AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//    }
+    
+  
+          
+   
+    
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   
@@ -29,12 +57,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
   }
 
+  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    
+    let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
+    
+    let deviceTokenString: String = (deviceToken.description as NSString)
+      .stringByTrimmingCharactersInSet(characterSet)
+      .stringByReplacingOccurrencesOfString( " ", withString: "") as String
+    
+    let params = [
+      "APNIdentifier" : deviceTokenString//deviceToken.description as String
+    ]
+    
+    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
+      if result {
+        print("success")
+      }
+    }
+  }
+  
+  func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    if notification.userInfo != nil {
+      let data = notification.userInfo as! [String:String]
+        
+        if data["type"] == "WakeUp" {
+          CHBanners().setTimeout(3.0, block: {
+            CHPush().localPush("refreshIcarousel", object: [])
+          })
+          
+        }
+    }
+    
+  }
+  
+  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    print("\(error)")
+  }
+  
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
+    CHWakeUpper().setUpWakeUp()
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
   }
@@ -44,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   }
 
@@ -81,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
           dict[NSLocalizedFailureReasonErrorKey] = failureReason
 
-          dict[NSUnderlyingErrorKey] = error as NSError
+          dict[NSUnderlyingErrorKey] = error as! NSError
           let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
           // Replace this with code to handle the error appropriately.
           // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

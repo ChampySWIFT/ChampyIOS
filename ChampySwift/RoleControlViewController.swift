@@ -8,32 +8,167 @@
 
 import UIKit
 import Async
+import Socket_IO_Client_Swift
 
 class RoleControlViewController: UIViewController {
+  //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://192.168.1.104:3007")
+  //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://46.101.213.24:3007")
+  var socket:SocketIOClient = SocketIOClient(socketURL: CHRequests().SocketUrl)
+  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
     let center = NSNotificationCenter.defaultCenter()
     
     center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: "alert", object: nil)
-    
+    center.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: "toMainView", object: nil)
     self.navigationItem.leftBarButtonItem = nil
     
     navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
     let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
     let authViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AuthViewController")
-    let mainViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainViewController")
+    
+    let value = UIInterfaceOrientation.Portrait.rawValue
+    UIDevice.currentDevice().setValue(value, forKey: "orientation")
     
     if !CHSession().logined {
-      presentViewController(authViewController, type: .push, animated: false)
+      self.presentViewController(authViewController, type: .push, animated: false)
     } else {
-      presentViewController(mainViewController, type: .push, animated: false)
+      self.socket.connect()
+      self.handleSocketActions()
+      self.toMainView()
     }
+    
+    
     
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.hidesBackButton = true
+  }
+  
+  func toMainView() {
+    Async.main {
+      let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+      let mainViewController : MainViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+      self.appDelegate.mainViewController = mainViewController
+      self.presentViewController(self.appDelegate.mainViewController, type: .push, animated: false)
+      
+    }
     
-    // Do any additional setup after loading the view.
+  }
+  
+  func handleSocketActions(){
+    
+    //initializing new session for the user on socket server
+    self.socket.on("connect", callback: { (data, act) -> Void in
+      self.socket.emit("ready", CHRequests().token)
+    })
+    
+    self.socket.on("reconnect", callback: { (data, act) -> Void in
+      
+    })
+    
+    self.socket.on("connected") { (data, act) -> Void in
+      
+    }
+    
+    self.socket.on("Relationship:created") { (data, act) -> Void in
+      CHPush().alertPush("New Friend Request", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    self.socket.on("Relationship:created:removed") { (data, act) -> Void in
+      CHPush().alertPush("Friend Request Cancelled", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    self.socket.on("Relationship:created:accepted") { (data, act) -> Void in
+      CHPush().alertPush("Friend Request Accepted", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    
+    
+    self.socket.on("Relationship:new") { (data, act) -> Void in
+      CHPush().alertPush("New Friend Request", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    self.socket.on("Relationship:new:removed") { (data, act) -> Void in
+      CHPush().alertPush("Friend Request Cancelled", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    self.socket.on("Relationship:new:accepted") { (data, act) -> Void in
+      CHPush().alertPush("Friend Request Accepted", type: "Success")
+      self.sendReloadNotiFriends()
+    }
+    
+    //    InProgressChallenge:new
+    
+    self.socket.on("InProgressChallenge:new") { (data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        CHPush().alertPush("You got a new Challenge", type: "Success")
+        CHPush().localPush("refreshIcarousel", object: [])
+      })
+    }
+    
+    
+    self.socket.on("InProgressChallenge:accepted") { (data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("Your Friend Accepted your request", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+        
+      })
+    }
+    
+    self.socket.on("InProgressChallenge:failed") { (data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("Failed a challenge", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+      })
+    }
+    
+    self.socket.on("InProgressChallenge:checked") {(data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("Challenge Checked", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+      })
+    }
+    
+    
+    self.socket.on("InProgressChallenge:updated") {(data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("Challenge Updated", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+      })
+    }
+    
+    self.socket.on("InProgressChallenge:won") {(data, act) -> Void in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("You Won", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+      })
+    }
+    self.socket.onAny {
+      print("Got event: \($0.event)")
+    }
+    
+  }
+  
+  func sendReloadNotiFriends() {
+    CHPush().localPush("pendingReload", object: [])
+    CHPush().localPush("friendsReload", object: [])
+    CHPush().localPush("allReload", object: [])
   }
   
   func alert(notif:NSNotification) {
@@ -65,20 +200,17 @@ class RoleControlViewController: UIViewController {
     }
   }
   
+  override func shouldAutorotate() -> Bool {
+    if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
+      return true
+    }
+    return false
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
   
 }

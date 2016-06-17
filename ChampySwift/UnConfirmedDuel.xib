@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
+            <string>BebasNeueRegular</string>
+            <string>BebasNeueRegular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnConfirmedDuel" customModule="ChampySwift" customModuleProvider="target">
+            <connections>
+                <outlet property="acceptIcon" destination="JbL-rV-IMj" id="UwD-PG-kbx"/>
+                <outlet property="challengeDescriptionLabel" destination="rui-1E-h0M" id="FXs-Uh-NEI"/>
+                <outlet property="daysLabel" destination="oNh-Bd-NAz" id="hle-LF-Qwa"/>
+                <outlet property="declineIcon" destination="lef-H4-FhO" id="7RD-c6-aph"/>
+                <outlet property="duelIcon" destination="e6d-ah-mGq" id="9yw-J6-fbK"/>
+                <outlet property="duelLabel" destination="VrP-hb-pHg" id="TOp-sh-4b5"/>
+                <outlet property="historyIcon" destination="4E1-py-vOs" id="HN7-e6-lk6"/>
+                <outlet property="recipientImage" destination="K44-ut-w6e" id="x0N-Mo-ocq"/>
+                <outlet property="statsLabel" destination="NCf-qg-MuR" id="xaT-Je-dRR"/>
+                <outlet property="topBarBackground" destination="Wld-ap-yrB" id="3dX-XT-8ji"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="QfA-NV-9GQ">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-ap-yrB">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duel" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VrP-hb-pHg">
+                            <rect key="frame" x="0.0" y="53" width="200" height="32"/>
+                            <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="11"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K44-ut-w6e">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Duel" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-ah-mGq">
+                            <rect key="frame" x="78" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Y95-9X-4YV"/>
+                                <constraint firstAttribute="width" constant="44" id="hpj-Rc-aNm"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="VrP-hb-pHg" firstAttribute="leading" secondItem="Wld-ap-yrB" secondAttribute="leading" id="BsT-WQ-7GY"/>
+                        <constraint firstAttribute="height" constant="80" id="KXo-pZ-RKV"/>
+                        <constraint firstItem="VrP-hb-pHg" firstAttribute="top" secondItem="e6d-ah-mGq" secondAttribute="bottom" constant="1" id="L5z-ai-BHY"/>
+                        <constraint firstAttribute="bottom" secondItem="VrP-hb-pHg" secondAttribute="bottom" id="LjH-28-MuL"/>
+                        <constraint firstItem="VrP-hb-pHg" firstAttribute="top" secondItem="e6d-ah-mGq" secondAttribute="bottom" constant="1" id="OBY-6v-YyW"/>
+                        <constraint firstAttribute="bottom" secondItem="K44-ut-w6e" secondAttribute="bottom" id="Qb2-b0-T78"/>
+                        <constraint firstItem="e6d-ah-mGq" firstAttribute="top" secondItem="Wld-ap-yrB" secondAttribute="top" constant="8" id="RhC-cJ-HHP"/>
+                        <constraint firstItem="VrP-hb-pHg" firstAttribute="top" secondItem="e6d-ah-mGq" secondAttribute="bottom" constant="3" id="X55-5n-HDx"/>
+                        <constraint firstAttribute="trailing" secondItem="VrP-hb-pHg" secondAttribute="trailing" id="Xmu-dp-wzT"/>
+                        <constraint firstAttribute="bottom" secondItem="VrP-hb-pHg" secondAttribute="bottom" constant="-5" id="ZYg-2s-hoC"/>
+                        <constraint firstItem="K44-ut-w6e" firstAttribute="top" secondItem="Wld-ap-yrB" secondAttribute="top" id="bBK-su-Lfb"/>
+                        <constraint firstItem="VrP-hb-pHg" firstAttribute="centerX" secondItem="e6d-ah-mGq" secondAttribute="centerX" id="buQ-xp-yc7"/>
+                        <constraint firstItem="e6d-ah-mGq" firstAttribute="centerX" secondItem="Wld-ap-yrB" secondAttribute="centerX" id="kYV-j7-Nb4"/>
+                        <constraint firstAttribute="trailing" secondItem="K44-ut-w6e" secondAttribute="trailing" id="o7d-5c-M1l"/>
+                        <constraint firstItem="K44-ut-w6e" firstAttribute="leading" secondItem="Wld-ap-yrB" secondAttribute="leading" id="ylz-Cj-qS7"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="L5z-ai-BHY"/>
+                            <exclude reference="LjH-28-MuL"/>
+                            <exclude reference="X55-5n-HDx"/>
+                            <exclude reference="buQ-xp-yc7"/>
+                        </mask>
+                    </variation>
+                </view>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKD-u0-zvJ">
+                    <rect key="frame" x="0.0" y="247" width="200" height="44"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="m7l-M2-KUK"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="8CO-uz-cdP"/>
+                        <barButtonItem image="CancleIcon" style="plain" id="lef-H4-FhO">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ffQ-CA-XgE">
+                                <rect key="frame" x="21" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancleIcon"/>
+                                <connections>
+                                    <action selector="declineAction:" destination="-1" eventType="touchUpInside" id="0x0-Wa-JM5"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="declineAction:" destination="-1" id="6fQ-TS-VC5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="yRX-yx-82B"/>
+                        <barButtonItem style="plain" id="JbL-rV-IMj">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wxq-sT-dhy">
+                                <rect key="frame" x="78" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="AcceptIcon"/>
+                                <connections>
+                                    <action selector="acceptAction:" destination="-1" eventType="touchUpInside" id="t7D-nM-O8v"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="acceptAction:" destination="-1" id="t9S-9T-KCZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="UiL-hU-VU0"/>
+                        <barButtonItem style="plain" id="4E1-py-vOs">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UcM-3a-wQQ">
+                                <rect key="frame" x="141" y="0.0" width="38" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="TimeIcon"/>
+                                <connections>
+                                    <action selector="historyAction:" destination="-1" eventType="touchUpInside" id="ahH-LQ-Gc7"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="historyAction:" destination="-1" id="K4t-13-tpl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="l7P-I4-Okh"/>
+                    </items>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rui-1E-h0M">
+                    <rect key="frame" x="8" y="83" width="184" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="9nD-Rf-JwN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="20"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCf-qg-MuR">
+                    <rect key="frame" x="8" y="223" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="0Pk-rB-oKq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNh-Bd-NAz">
+                    <rect key="frame" x="8" y="221" width="184" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="Xm9-x0-r4P"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="25"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="every day for the next" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsg-h4-rHT">
+                    <rect key="frame" x="8" y="201" width="184" height="15"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="j4y-LX-nO2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Wld-ap-yrB" firstAttribute="top" secondItem="QfA-NV-9GQ" secondAttribute="top" id="0H7-9l-cZu"/>
+                <constraint firstItem="rui-1E-h0M" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" constant="8" id="92n-Ae-Sgc"/>
+                <constraint firstItem="wsg-h4-rHT" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" constant="8" id="AlD-da-e8Z"/>
+                <constraint firstItem="NCf-qg-MuR" firstAttribute="top" secondItem="oNh-Bd-NAz" secondAttribute="bottom" constant="-2" id="C7p-Kg-pRH"/>
+                <constraint firstItem="FKD-u0-zvJ" firstAttribute="top" secondItem="NCf-qg-MuR" secondAttribute="bottom" constant="2" id="L0b-hJ-05B"/>
+                <constraint firstItem="Wld-ap-yrB" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" id="LFS-2s-Aay"/>
+                <constraint firstAttribute="trailing" secondItem="rui-1E-h0M" secondAttribute="trailing" constant="8" id="Mch-U7-O7n"/>
+                <constraint firstItem="NCf-qg-MuR" firstAttribute="top" secondItem="rui-1E-h0M" secondAttribute="bottom" constant="-10" id="MwP-KZ-GyS"/>
+                <constraint firstItem="oNh-Bd-NAz" firstAttribute="top" secondItem="wsg-h4-rHT" secondAttribute="bottom" constant="5" id="OxA-oE-yj5"/>
+                <constraint firstAttribute="trailing" secondItem="FKD-u0-zvJ" secondAttribute="trailing" id="Pd3-WY-MDe"/>
+                <constraint firstItem="FKD-u0-zvJ" firstAttribute="top" secondItem="oNh-Bd-NAz" secondAttribute="bottom" constant="2" id="PfZ-bo-Zhh"/>
+                <constraint firstAttribute="trailing" secondItem="wsg-h4-rHT" secondAttribute="trailing" constant="8" id="Q2d-8D-iy1"/>
+                <constraint firstItem="FKD-u0-zvJ" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" id="gJh-uq-RsM"/>
+                <constraint firstItem="NCf-qg-MuR" firstAttribute="top" secondItem="oNh-Bd-NAz" secondAttribute="bottom" constant="8" symbolic="YES" id="gXF-ar-3mi"/>
+                <constraint firstAttribute="trailing" secondItem="NCf-qg-MuR" secondAttribute="trailing" constant="8" id="kXe-LK-B32"/>
+                <constraint firstItem="rui-1E-h0M" firstAttribute="top" secondItem="Wld-ap-yrB" secondAttribute="bottom" constant="3" id="ouV-om-oLH"/>
+                <constraint firstItem="NCf-qg-MuR" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" constant="8" id="vyf-bD-JrJ"/>
+                <constraint firstAttribute="trailing" secondItem="oNh-Bd-NAz" secondAttribute="trailing" constant="8" id="wwE-DW-HYZ"/>
+                <constraint firstItem="oNh-Bd-NAz" firstAttribute="leading" secondItem="QfA-NV-9GQ" secondAttribute="leading" constant="8" id="y23-Wc-WGE"/>
+                <constraint firstAttribute="bottom" secondItem="FKD-u0-zvJ" secondAttribute="bottom" id="y39-jF-KQq"/>
+                <constraint firstAttribute="trailing" secondItem="Wld-ap-yrB" secondAttribute="trailing" id="zrc-9R-cAM"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="MwP-KZ-GyS"/>
+                    <exclude reference="gXF-ar-3mi"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="248" y="364.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="AcceptIcon" width="44" height="44"/>
+        <image name="CancleIcon" width="44" height="44"/>
+        <image name="Duel" width="96" height="96"/>
+        <image name="TimeIcon" width="44" height="44"/>
+    </resources>
+</document>

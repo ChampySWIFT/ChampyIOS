@@ -9,78 +9,98 @@
 import UIKit
 import Kingfisher
 import DynamicBlurView
+import SwiftyJSON
 
 class CHImages: NSObject {
   
   func setUpAvatar(imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
-    let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
-    let myCache = ImageCache(name: urlString)
     
-    if IJReachability.isConnectedToNetwork() {
-      myCache.clearDiskCache()
-      myCache.clearMemoryCache()
-      myCache.cleanExpiredDiskCache()
+    let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
+    let userObject:JSON = CHUsers().getUserById(CHSession().currentUserId)
+    
+    var cachename = "initialCache"
+    if userObject["lastPhotoUpdated"].intValue != 0 {
+      cachename = userObject["lastPhotoUpdated"].stringValue
     }
+    let myCache = ImageCache(name: cachename)
+    
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
+
     }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
-      
     }
   }
   
   func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
     let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
-    let myCache = ImageCache(name: userId)
-    
-    if IJReachability.isConnectedToNetwork() {
-      myCache.clearDiskCache()
-      myCache.clearMemoryCache()
-      myCache.cleanExpiredDiskCache()
+    let userObject:JSON = CHUsers().getUserById(userId)
+    var cachename = "initialCache"
+    if userObject["lastPhotoUpdated"].intValue != 0 {
+      cachename = userObject["lastPhotoUpdated"].stringValue
     }
+    let myCache = ImageCache(name: cachename)
+
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
-    }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
-      
-    }
+    }) { (image, error, cacheType, imageURL) in }
   }
   
   func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
+    imageView.layer.masksToBounds = true
     let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
-    let myCache = ImageCache(name: "\(url)")
+    let userObject:JSON = CHUsers().getUserById(CHSession().currentUserId)
+    var cachename = "initialCache"
+    if userObject["lastPhotoUpdated"].intValue != 0 {
+      cachename = userObject["lastPhotoUpdated"].stringValue
+    }
+    let myCache = ImageCache(name: cachename)
+
     
     let optionInfo: KingfisherOptionsInfo = [
       .TargetCache(myCache),
       .DownloadPriority(1),
       .Transition(ImageTransition.Fade(1))
     ]
-    if IJReachability.isConnectedToNetwork() {
-//      myCache.clearDiskCache()
-//      myCache.clearMemoryCache()
-//      myCache.cleanExpiredDiskCache()
-    }
+    
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: optionInfo, progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
+
     }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
+
       
     }
     
-    //    let frame        = CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height)
-    //    let frame = frame
-    let blurView     = APCustomBlurView(withRadius: 10)
+//    let blurView     = APCustomBlurView(withRadius: 10)
     let gradient     = CAGradientLayer()
-    blurView.frame   = frame
     gradient.frame   = frame
     gradient.colors  = [CHGradients().backgroundGradiend1, CHGradients().backgroundGradiend2]//Or any colors
     gradient.opacity = 0.75
     
-    blurView.layer.addSublayer(gradient)
     
-    imageView.addSubview(blurView)
+    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+    var blurView = UIVisualEffectView(effect: blurEffect)
+    blurView.frame   = frame
+    blurView.frame = blurView.bounds
+    blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+    
+    imageView.makeBlurImage(imageView)
+    imageView.layer.addSublayer(gradient)
+    
+//    imageView.addSubview(blurView)
     
     
+  }
+  
+}
+
+extension UIImageView{
+  
+  func makeBlurImage(targetImageView:UIImageView?)
+  {
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    
+    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+    blurEffectView.alpha = 0.7
+    blurEffectView.frame = targetImageView!.bounds
+    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+    targetImageView?.addSubview(blurEffectView)
   }
   
 }
