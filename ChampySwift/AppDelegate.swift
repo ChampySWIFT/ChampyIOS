@@ -39,17 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     application.registerForRemoteNotifications()
     
     
-//    UILocalNotification *localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
-//    if (localNotification)
-//    {
-//      [[NSNotificationCenter defaultCenter] postNotificationName:@"Resume" object:self userInfo:localNotification.userInfo];
-//      AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    }
-    
-  
-          
-   
-    
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   

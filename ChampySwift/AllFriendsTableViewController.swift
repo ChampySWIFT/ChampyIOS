@@ -60,15 +60,19 @@ class AllFriendsTableViewController: UITableViewController, SwipyCellDelegate {
     self.selectedRow = -1
     self.destroyAll()
     self.friendsContent.removeAll()
+    self.identifiers.removeAll()
+    var i = 0
+    var j = 0
+    
     for friend in CHUsers().getUsers() {
       let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
       let status = CHUsers().getStatus(friend) //"Other"
-      print(status)
       content.status = status
       content.setUp(friend)
+      
       self.friendsContent.append(content)
       identifiers.append("\(friend["_id"].stringValue)")
-      
+      i = i + 1
     }
     self.userCount = self.friendsContent.count
   }
@@ -113,8 +117,6 @@ class AllFriendsTableViewController: UITableViewController, SwipyCellDelegate {
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         cell!.contentView.backgroundColor = UIColor.clearColor()
         cell!.delegate = self
-        
-        
         let content = friendsContent[indexPath.row] as! FriendCell
         content.close()
         cell?.addSubview(content)

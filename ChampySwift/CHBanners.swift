@@ -79,13 +79,7 @@ class CHBanners: NSObject {
     self.target.addSubview(self.banner)
     self.target.bringSubviewToFront(self.banner)
     animated ? self.animateView(): setUpOpacity()
-    
-    
-    
-    //    setTimeout(self.visibilityDuration, block: { () -> Void in
-    //      self.dismissView()
-    //    })
-    
+        
     return self
   }
   
@@ -139,14 +133,12 @@ class CHBanners: NSObject {
   
   func dismissView(withTimeOut:Bool = false) {
     var frame = banner.frame
-    frame.origin.x = 2 * frame.size.width
     var time:Double = 0.0
     if withTimeOut {
       time = 2.0
     }
     
     UIView.animateWithDuration(1.0, delay: time, options: .CurveEaseOut, animations: {
-      self.banner.frame = frame
       self.banner.layer.opacity = 0
       }, completion: { finished in
         self.banner.removeFromSuperview()
@@ -165,12 +157,10 @@ class CHBanners: NSObject {
     let newFrame = banner.frame
     
     frame.origin.x = -1 * frame.size.width
-    banner.frame = frame
     self.banner.layer.opacity = 0
     
     UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
       self.banner.layer.opacity = 1
-      self.banner.frame = newFrame
       }, completion: { finished in
         
     })
@@ -183,9 +173,4 @@ class CHBanners: NSObject {
   func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
     return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: #selector(NSOperation.main), userInfo: nil, repeats: false)
   }
-  
-  //  convenience override init() {
-  //    self.init(fromString:"John") // calls above mentioned controller with default name
-  //  }
-  
 }

@@ -146,17 +146,12 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
     self.logOutButton.hidden = false
     self.confirmationLogOutContainer.hidden = true
     
-    CHRequests().logout(CHSession().currentUserId) { (result, json) in
-      if result {
-        Async.main {
-          CHSession().clearSession()
-          let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-          self.presentViewController(roleControlViewController, type: .push, animated: false)
-        }
-      }
+    Async.main {
+      CHSession().clearSession()
+      let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+      let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+      self.presentViewController(roleControlViewController, type: .push, animated: false)
     }
-    
     
   }
   
@@ -249,42 +244,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
     let fusuma = FusumaViewController()
     fusuma.delegate = self
     self.presentViewController(fusuma, animated: true, completion: nil)
-//    var cameraViewController:CameraViewController! = nil
-//    
-//    cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak self] image, asset in
-//      if image != nil {
-//        let banner = CHBanners(withTarget: (self!.navigationController?.view)!, andType: .Info)
-//        Async.main {
-//          banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
-//        }
-//        
-//        CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image!, completitionHandler: { (result, json) in
-//          if result {
-//            Async.main {
-//              banner.changeText("Uploaded")
-//              banner.changeType(.Success)
-//              banner.dismissView(true)
-//              CHImages().setUpAvatar(self!.userAvatar)
-//              CHPush().updateImageOnSettings(image!)
-//              self!.userAvatar.image = image
-//              
-//            }
-//          } else {
-//            banner.changeText("Uploaded")
-//            banner.changeType(.Warning)
-//            banner.dismissView(true)
-//          }
-//        })
-//      }
-//      
-//      cameraViewController.dismissViewControllerAnimated(true, completion: { 
-//        cameraViewController.view.removeFromSuperview()
-//      })
-//      self!.dismissViewControllerAnimated(true, completion: nil)
-      
-//    }
-    
-//    presentViewController(cameraViewController, animated: true, completion: nil)
+
   }
   
   

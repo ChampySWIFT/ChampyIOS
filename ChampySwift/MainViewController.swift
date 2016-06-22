@@ -68,109 +68,124 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
     return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
   }
+  
+  
+  func fillCarousel() {
+    Async.main{
+      
+      for item in self.itemViewArray {
+        item.removeFromSuperview()
+      }
+      self.itemViewArray.removeAll()
+      self.challenges.removeAll()
+      self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reverse()
+      
+      let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
+      
+      
+      for challenge in self.challenges {
+        var containerView: UIView
+        let challengeType = CHChalenges().getChallengeType(challenge)
+        
+        let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)"
+        if self.appDelegate.mainViewCard[cardIdentifier] != nil {
+          containerView = self.appDelegate.mainViewCard[cardIdentifier]!
+        } else {
+          
+          switch challengeType {
+          case .unconfirmedDuelRecipient:
+            let itemView = UnConfirmedDuel(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .unconfirmedDuelSender:
+            let itemView = UnConfirmedDuelSender(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .startedSelfImprovement:
+            let itemView = SelfImprovementInProgress(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .confirmedSelfImprovement:
+            let itemView = SelfImprovementDone(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .wakeUpChallenge:
+            let itemView = WakeUpChallenge(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .startedDuel:
+            let itemView = ConfirmedDuel(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+          case .checkedForToday:
+            let itemView = CheckedDuel(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+          case .waitingForNextDayWakeUp:
+            let itemView = WakeUpChallenge(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+          case .timedOutWakeUp:
+            let itemView = TimedOutWakeUp(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+            break
+            
+            
+          default:
+            let itemView = WakeUpChallenge(frame:frame)
+            itemView.setUp(challenge)
+            containerView = itemView
+          }
+          
+          self.appDelegate.mainViewCard[cardIdentifier] = containerView
+        }
+        
+        
+        
+        self.itemViewArray.append(containerView)
+      }
+      
+      
+      self.carousel.reloadData()
+      let duration:Double = Double(self.challenges.count / 6)
+      if self.challenges.count > 15 {
+        self.carousel.scrollToItemAtIndex(self.challenges.count - 1, animated: true)
+      } else {
+        self.carousel.scrollToItemAtIndex(self.challenges.count - 1, duration: duration)
+      }
+      
+      self.firstNumber.text = "\(self.inProgressChallenges)"
+      self.secondNumber.text = "\(self.wins)"
+      self.thirdNumber.text = "\(self.points)"
+      
+     
+    }
+  }
 
   func fillCHallenges() {
-    CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
-      if result {
-        Async.main{
-          
-          for item in self.itemViewArray {
-            item.removeFromSuperview()
-          }
-          self.itemViewArray.removeAll()
-          self.challenges.removeAll()
-          self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reverse()
-          
-          let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
-          
-          
-          for challenge in self.challenges {
-            var containerView: UIView
-            let challengeType = CHChalenges().getChallengeType(challenge)
-            
-            let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)"
-            if self.appDelegate.mainViewCard[cardIdentifier] != nil {
-              containerView = self.appDelegate.mainViewCard[cardIdentifier]!
-            } else {
-              
-              switch challengeType {
-              case .unconfirmedDuelRecipient:
-                let itemView = UnConfirmedDuel(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .unconfirmedDuelSender:
-                let itemView = UnConfirmedDuelSender(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .startedSelfImprovement:
-                let itemView = SelfImprovementInProgress(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .confirmedSelfImprovement:
-                let itemView = SelfImprovementDone(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .wakeUpChallenge:
-                let itemView = WakeUpChallenge(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .startedDuel:
-                let itemView = ConfirmedDuel(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-              case .checkedForToday:
-                let itemView = CheckedDuel(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-              case .waitingForNextDayWakeUp:
-                let itemView = WakeUpChallenge(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-              case .timedOutWakeUp:
-                let itemView = TimedOutWakeUp(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-                break
-                
-                
-              default:
-                let itemView = WakeUpChallenge(frame:frame)
-                itemView.setUp(challenge)
-                containerView = itemView
-              }
-              
-              self.appDelegate.mainViewCard[cardIdentifier] = containerView
-            }
-            
-            
-            
-            self.itemViewArray.append(containerView)
-          }
-          
-          
-          self.carousel.reloadData()
-          let duration:Double = Double(self.challenges.count / 6)
-          if self.challenges.count > 15 {
-            self.carousel.scrollToItemAtIndex(self.challenges.count - 1, animated: true)
-          } else {
-            self.carousel.scrollToItemAtIndex(self.challenges.count - 1, duration: duration)
-          }
+    if IJReachability.isConnectedToNetwork() {
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
+        if result {
+          self.fillCarousel()
         }
       }
+    } else {
+      fillCarousel()
     }
   }
   
@@ -179,19 +194,22 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     super.viewDidLoad()
     
     Async.background{
-      CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
-        if !status {
-          CHPush().alertPush(json.stringValue, type: "Warning")
-          Async.main {
-            CHSession().clearSession()
-            let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-            let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-            self.presentViewController(roleControlViewController, type: .push, animated: false)
+      if IJReachability.isConnectedToNetwork()  {
+        
+        CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
+          if !status {
+            CHPush().alertPush(json.stringValue, type: "Warning")
+            Async.main {
+              CHSession().clearSession()
+              let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+              self.presentViewController(roleControlViewController, type: .push, animated: false)
+            }
           }
         }
       }
+      
     }
-    
     
     Async.background{
       CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
@@ -213,35 +231,17 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       
     }
     
+    self.getUserData()
     
-    
-    
-    //estabilishing connection to sockets
-    CHRequests().updateUserFromRemote { (result, json) in
-      if result {
-        let userObject:JSON       = CHSession().currentUserObject
-        self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
-        self.wins                 = userObject["successChallenges"].intValue
-        self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
-      }
-      
-    }
-    
-    let userObject:JSON       = CHSession().currentUserObject
-    self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
-    self.wins                 = userObject["successChallenges"].intValue
-    self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
     
     self.wellcomeLabel.text = "Welcome \(CHSession().currentUserName)"
     self.wellcomeLabel.adjustsFontSizeToFitWidth = true
-    
     
     
     self.carousel.delegate   = self
     self.carousel.dataSource = self
     self.carousel.type       = .Rotary
     self.carousel.layer.opacity = 0.0
-    
     
     
     self.animateScoreBorders()
@@ -262,6 +262,26 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     
     
     // Do any additional setup after loading the view, typically from a nib.
+  }
+  
+  
+  func getUserData() {
+    CHRequests().updateUserFromRemote { (result, json) in
+      if result {
+        let userObject:JSON       = CHSession().currentUserObject
+        self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
+        self.wins                 = userObject["successChallenges"].intValue
+        self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+      }
+      
+    }
+    
+    let userObject:JSON       = CHSession().currentUserObject
+    self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
+    self.wins                 = userObject["successChallenges"].intValue
+    self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+    
+  
   }
   
   
@@ -290,15 +310,21 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         Async.main {
           self.challenges.removeAll()
           self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reverse()
-//          self.carousel.reloadData()
           self.fillCHallenges()
-          let userObject:JSON       = CHSession().currentUserObject
-          self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
-          self.wins                 = userObject["successChallenges"].intValue
-          self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
-          self.firstNumber.text = "\(self.inProgressChallenges)"   //.countFrom(0, to: Float(self.inProgressChallenges))
-          self.secondNumber.text = "\(self.wins)" //.countFrom(0, to: Float(self.wins))
-          self.thirdNumber.text = "\(self.points)" //.countFrom(0, to: Float(self.points))
+          
+        }
+        CHRequests().updateUserFromRemote { (result, json) in
+          if result {
+            Async.main {
+              let userObject:JSON       = CHSession().currentUserObject
+              self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
+              self.wins                 = userObject["successChallenges"].intValue
+              self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+              self.firstNumber.text = "\(self.inProgressChallenges)"   //.countFrom(0, to: Float(self.inProgressChallenges))
+              self.secondNumber.text = "\(self.wins)" //.countFrom(0, to: Float(self.wins))
+              self.thirdNumber.text = "\(self.points)" //.countFrom(0, to: Float(self.points))
+            }
+          }
         }
       }
     }

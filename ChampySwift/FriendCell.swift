@@ -71,7 +71,9 @@ import Async
         self.firstScoreLabel.method   = UILabelCountingMethodLinear
         self.firstScoreLabel.format   = "%d";
         self.firstMiniIcon.hidden = false
-        self.firstScoreLabel.countFrom(0, to: Float(self.inProgressChallenges))
+//        self.firstScoreLabel.animationDuration = 0.5
+        self.firstScoreLabel.countFrom(0, to: Float(self.inProgressChallenges), withDuration: 0.5)
+        
       }
     }
     
@@ -86,7 +88,8 @@ import Async
         self.secondScoreLabel.method   = UILabelCountingMethodLinear
         self.secondScoreLabel.format   = "%d";
         self.secondMiniIcon.hidden = false
-        self.secondScoreLabel.countFrom(0, to: Float(self.wins))
+        self.secondScoreLabel.countFrom(0, to: Float(self.wins), withDuration: 0.5)
+//        self.secondScoreLabel.countFrom(0, to: Float(self.wins))
       }
     }
     
@@ -101,7 +104,7 @@ import Async
         self.thirdScoreLabel.method   = UILabelCountingMethodLinear
         self.thirdScoreLabel.format   = "%d";
         self.thirdScoreIcon.hidden = false
-        self.thirdScoreLabel.countFrom(0, to: Float(self.points))
+        self.thirdScoreLabel.countFrom(0, to: Float(self.points), withDuration: 0.5)
       }
     }
     
@@ -275,7 +278,6 @@ import Async
       self.username.textAlignment  = .Center
       self.userLevel.textAlignment = .Center
       self.userAvatar.frame        = frame
-//      self.userAvatar.transform    = CGAffineTransformMakeScale(1.5, 1.5)
       self.username.frame          = nameFrame
       self.userLevel.frame         = levelFrame
       self.separator.frame = separatorFrame

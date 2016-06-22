@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+        </mutableArray>
         <mutableArray key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
             <string>BebasNeueRegular</string>
@@ -127,9 +130,9 @@
                     <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </toolbar>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfR-hf-ALE">
-                    <rect key="frame" x="8" y="82" width="184" height="62"/>
+                    <rect key="frame" x="8" y="82" width="184" height="43"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="62" id="4LC-vy-ZgS"/>
+                        <constraint firstAttribute="height" constant="43" id="4LC-vy-ZgS"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="20"/>
                     <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -159,7 +162,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="t3q-Sg-AAV"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                    <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="11"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

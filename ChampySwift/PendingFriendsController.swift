@@ -298,12 +298,12 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
   override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     var title:String = ""
     
-    if section == 0 && self.pendingFriends.count > 0 {
-      title = "Incoming"
-    }
-    if section == 1 && self.pendingFriends.count > 0 {
-      title = "Outgoing"
-    }
+//    if section == 0 && self.pendingFriends.count > 0 {
+//      title = "Incoming"
+//    }
+//    if section == 1 && self.pendingFriends.count > 0 {
+//      title = "Outgoing"
+//    }
 
     let container = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
     let topSeparator = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 1))
@@ -313,14 +313,28 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
 
     let innercontainer = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
     let label = UILabel(frame: CGRect(x: 15, y:0, width: self.view.frame.size.width - 15, height: 30))
-    label.text = title
     label.textColor = CHUIElements().APPColors["Info"]
     label.font = CHUIElements().font16
     
-    container.addSubview(topSeparator)
-    container.addSubview(innercontainer)
-    container.addSubview(bottomSeparator)
-    container.addSubview(label)
+    if section == 0 && self.pendingFriends.count > 0 {
+      title = "Incoming"
+      label.text = title
+      container.addSubview(topSeparator)
+      container.addSubview(innercontainer)
+      container.addSubview(bottomSeparator)
+      container.addSubview(label)
+      return container
+    }
+    if section == 1 && self.pendingFriends.count > 0 {
+      title = "Outgoing"
+      label.text = title
+      container.addSubview(topSeparator)
+      container.addSubview(innercontainer)
+      container.addSubview(bottomSeparator)
+      container.addSubview(label)
+      return container
+    }
+    
     return container
   }
   

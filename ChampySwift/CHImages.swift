@@ -32,7 +32,14 @@ class CHImages: NSObject {
   
   func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
     let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
-    let userObject:JSON = CHUsers().getUserById(userId)
+    var userObject:JSON! = nil
+    
+    if userId == CHSession().currentUserId {
+      userObject = CHSession().currentUserObject
+    } else {
+      userObject = CHUsers().getUserById(userId)
+    }
+    
     var cachename = "initialCache"
     if userObject["lastPhotoUpdated"].intValue != 0 {
       cachename = userObject["lastPhotoUpdated"].stringValue
@@ -46,7 +53,8 @@ class CHImages: NSObject {
   func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
     imageView.layer.masksToBounds = true
     let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
-    let userObject:JSON = CHUsers().getUserById(CHSession().currentUserId)
+    let userObject:JSON =  CHSession().currentUserObject //CHUsers().getUserById(CHSession().currentUserId)
+    
     var cachename = "initialCache"
     if userObject["lastPhotoUpdated"].intValue != 0 {
       cachename = userObject["lastPhotoUpdated"].stringValue
@@ -67,23 +75,21 @@ class CHImages: NSObject {
       
     }
     
-//    let blurView     = APCustomBlurView(withRadius: 10)
+    
     let gradient     = CAGradientLayer()
     gradient.frame   = frame
     gradient.colors  = [CHGradients().backgroundGradiend1, CHGradients().backgroundGradiend2]//Or any colors
     gradient.opacity = 0.75
     
     
-    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-    var blurView = UIVisualEffectView(effect: blurEffect)
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+    let blurView = UIVisualEffectView(effect: blurEffect)
     blurView.frame   = frame
     blurView.frame = blurView.bounds
     blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
     
     imageView.makeBlurImage(imageView)
     imageView.layer.addSublayer(gradient)
-    
-//    imageView.addSubview(blurView)
     
     
   }

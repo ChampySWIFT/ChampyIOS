@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="BebasNeue Book.otf">
             <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
@@ -71,7 +72,7 @@
                         <constraint firstAttribute="width" constant="154" id="Vg0-7V-2cw"/>
                         <constraint firstAttribute="height" constant="45" id="xpk-rL-WHA"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>

@@ -28,17 +28,21 @@ class SettingsViewController: UIViewController {
     setUpBackground()
     
     Async.background{
-      CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
-        if !status {
-          CHPush().alertPush(json.stringValue, type: "Warning")
-          Async.main {
-            CHSession().clearSession()
-            let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-            let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-            self.presentViewController(roleControlViewController, type: .push, animated: false)
+      if IJReachability.isConnectedToNetwork()  {
+        
+        CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
+          if !status {
+            CHPush().alertPush(json.stringValue, type: "Warning")
+            Async.main {
+              CHSession().clearSession()
+              let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+              self.presentViewController(roleControlViewController, type: .push, animated: false)
+            }
           }
         }
       }
+      
     }
   }
   

@@ -34,8 +34,12 @@
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
             <string>BebasNeueRegular</string>
             <string>BebasNeueRegular</string>
             <string>BebasNeueRegular</string>
@@ -216,12 +220,13 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-GI-Eoo">
-                                        <rect key="frame" x="113" y="614" width="151" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-GI-Eoo">
+                                        <rect key="frame" x="112" y="614" width="151" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="151" id="03U-YB-zwo"/>
                                             <constraint firstAttribute="height" constant="30" id="RJm-UR-bYL"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="20"/>
                                         <state key="normal" title="Log In with Facebook">
                                             <color key="titleColor" red="0.97254901960784312" green="0.81176470588235294" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -2947,13 +2952,13 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1 challenge" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V06-vR-gkr">
                                                 <rect key="frame" x="0.0" y="3" width="95" height="62"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="18"/>
                                                 <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward +10 points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc9-eC-Pa9">
                                                 <rect key="frame" x="162" y="1" width="95" height="62"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2998,12 +3003,12 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="cSh-0d-j73"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="18"/>
                                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="06:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2CO-go-jWh">
-                                        <rect key="frame" x="82" y="54" width="97" height="30"/>
+                                        <rect key="frame" x="82" y="48" width="97" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="SIA-QB-lbL"/>
                                             <constraint firstAttribute="height" constant="30" id="mLO-vU-rc2"/>
@@ -3059,7 +3064,7 @@
                                     <constraint firstAttribute="trailing" secondItem="I9l-JR-23o" secondAttribute="trailing" constant="1" id="cIO-LO-udi"/>
                                     <constraint firstItem="9nd-Ix-7ia" firstAttribute="top" secondItem="Mfr-ZQ-7Nt" secondAttribute="bottom" constant="8" id="dQ1-kV-u8O"/>
                                     <constraint firstItem="Mfr-ZQ-7Nt" firstAttribute="top" secondItem="gDQ-hg-6Hu" secondAttribute="bottom" constant="2" id="frs-ap-M3C"/>
-                                    <constraint firstItem="2CO-go-jWh" firstAttribute="top" secondItem="gDQ-hg-6Hu" secondAttribute="bottom" constant="8" id="gtZ-ny-p6T"/>
+                                    <constraint firstItem="2CO-go-jWh" firstAttribute="top" secondItem="gDQ-hg-6Hu" secondAttribute="bottom" constant="2" id="gtZ-ny-p6T"/>
                                     <constraint firstItem="9nd-Ix-7ia" firstAttribute="leading" secondItem="7Dd-0r-Ux9" secondAttribute="leading" constant="8" id="m7Z-jl-BgX"/>
                                     <constraint firstAttribute="trailing" secondItem="gDQ-hg-6Hu" secondAttribute="trailing" id="skF-y0-PW5"/>
                                     <constraint firstItem="wGB-Mo-7lC" firstAttribute="top" secondItem="I3O-4U-GlO" secondAttribute="bottom" constant="11" id="tge-0P-Lxv"/>

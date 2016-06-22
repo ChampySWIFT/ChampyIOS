@@ -177,11 +177,13 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 70)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
       opt.onFinish = { response in
         let json = JSON(data: response.data)
-//        json)
+        
+        print(json)
         if response.error != nil {
           completitionHandler(result: false, json: json)
           return
         }
+        CHRequests().updateUser(json["data"])
         completitionHandler(result: true, json: json)
         
       }
@@ -718,6 +720,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return

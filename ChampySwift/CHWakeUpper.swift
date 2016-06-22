@@ -31,8 +31,9 @@ class CHWakeUpper: NSObject {
   }
   
   func setUpWakeUp()  {
-    
+//    self.setUpScheduledLocalNotification("Wake up", alertBody: "Wake up & check your challenge list", timeInterval: Double(10), type: "WakeUp")
     self.cleareScheduledNotifications()
+//    example()
     let generalArray = CHChalenges().getInProgressChallenges(CHSession().currentUserId)
     
     if generalArray.count > 0 {

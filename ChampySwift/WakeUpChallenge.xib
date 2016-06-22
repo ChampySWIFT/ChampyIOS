@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+        </mutableArray>
         <mutableArray key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
             <string>BebasNeueRegular</string>
@@ -110,7 +113,7 @@
                         <constraint firstAttribute="width" constant="154" id="9I0-na-iZm"/>
                         <constraint firstAttribute="height" constant="45" id="ddo-xe-1d7"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
