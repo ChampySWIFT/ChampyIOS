@@ -28,6 +28,7 @@ import SwiftyJSON
   @IBOutlet weak var historyIcon: UIBarButtonItem!
   @IBOutlet weak var acceptIcon: UIBarButtonItem!
   var challengeObject: JSON! = nil
+  var opponentId: String = ""
   func xibSetup() {
     view                  = loadViewFromNib()
     // use bounds not frame or it'll be offset
@@ -88,10 +89,12 @@ import SwiftyJSON
     switch  CHSession().currentUserId {
     case json["sender"]["_id"].stringValue:
       self.duelLabel.text = "New challenge from \(json["recipient"]["name"].stringValue)"
+      opponentId = json["recipient"]["_id"].stringValue
       CHImages().setImageForFriend(json["recipient"]["_id"].stringValue, imageView: self.recipientImage)
       break
     case json["recipient"]["_id"].stringValue:
       self.duelLabel.text = "New challenge from \(json["sender"]["name"].stringValue)"
+      opponentId = json["sender"]["_id"].stringValue
       CHImages().setImageForFriend(json["sender"]["_id"].stringValue, imageView: self.recipientImage)
       break
     default:
@@ -139,6 +142,7 @@ import SwiftyJSON
       if result {
         self.tapped = false
         CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has joined your challenge", options: "")
 //        CHPush().alertPush("Accepted", type: "Success")
       } else {
         self.tapped = false
@@ -162,6 +166,7 @@ import SwiftyJSON
       if result {
         self.tapped = false
         CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has declined your challenge", options: "")
 //        CHPush().alertPush("Rejected", type: "Success")
       } else {
         self.tapped = false

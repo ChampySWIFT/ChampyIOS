@@ -25,11 +25,11 @@ class CHChalenges: NSObject {
     
   }
   
-
+  
   func getAllChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("challenges") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("challenges")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("challenges")!)
       for (_, item): (String, JSON) in challenges {
         if item["type"]["_id"].stringValue == CHSettings().duelsId && item["approved"].boolValue && item["active"].boolValue {
           if item["createdBy"] == nil {
@@ -51,7 +51,7 @@ class CHChalenges: NSObject {
   func getAllSelfImprovementChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("challenges") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("challenges")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("challenges")!)
       for (_, item): (String, JSON) in challenges {
         if item["type"]["_id"].stringValue == CHSettings().selfImprovementsId && item["approved"].boolValue && item["active"].boolValue {
           if item["createdBy"] == nil {
@@ -72,7 +72,7 @@ class CHChalenges: NSObject {
   func getInProgressChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("inProgressChallenges\(userId)") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
       for (_, item): (String, JSON) in challenges {
         if item["status"].stringValue != "finished" {
           if item["status"].stringValue != "rejectedByRecipient" && item["status"].stringValue != "failedByRecipient" && item["status"].stringValue != "rejectedBySender" && item["status"].stringValue != "failedBySender"  {
@@ -89,7 +89,7 @@ class CHChalenges: NSObject {
   func getWinChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("inProgressChallenges\(userId)") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
       for (_, item): (String, JSON) in challenges {
         if item["sender"]["_id"].stringValue == userId && item["senderSuccess"].boolValue {
           result.append(item)
@@ -108,7 +108,7 @@ class CHChalenges: NSObject {
   func getFailedChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("inProgressChallenges\(userId)") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
       for (_, item): (String, JSON) in challenges {
         if item["status"].stringValue != "finished" {
           var keyWord = ""
@@ -199,7 +199,7 @@ class CHChalenges: NSObject {
         }
         
       }
-    
+      
       return .startedSelfImprovement
     }
     
@@ -224,6 +224,7 @@ class CHChalenges: NSObject {
         CHRequests().checkChallenge(item["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             CHPush().localPush("refreshIcarousel", object: [])
+            CHUIElements().playAudio()
             CHPush().alertPush("wake up challenge completed for today", type: "Success")
           }
         })
@@ -285,7 +286,7 @@ class CHChalenges: NSObject {
   func getAllActiveWakeUpChallenges(userId:String) -> [JSON] {
     var result:[JSON] = []
     if CHSession().CurrentUser.objectForKey("inProgressChallenges\(userId)") != nil {
-      let challenges = CHUsers().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
+      let challenges = CHUIElements().stringToJSON(CHSession().CurrentUser.stringForKey("inProgressChallenges\(userId)")!)
       for (_, item): (String, JSON) in challenges {
         if item["challenge"]["type"].stringValue == CHSettings().wakeUpIds {
           if item["status"].stringValue != "finished" {

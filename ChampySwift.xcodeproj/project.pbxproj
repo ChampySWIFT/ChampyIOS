@@ -27,6 +27,7 @@
 		57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */; };
 		57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */; };
 		57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */; };
+		574738391D25043200071A01 /* WakeUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574738381D25043200071A01 /* WakeUpInfoViewController.swift */; };
 		575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */; };
 		575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */; };
 		575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */; };
@@ -109,6 +110,7 @@
 		57DA51C81D006A8700AAA2B8 /* WinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA51C71D006A8700AAA2B8 /* WinsTableViewController.swift */; };
 		57DA51CA1D006A9A00AAA2B8 /* FailedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA51C91D006A9A00AAA2B8 /* FailedTableViewController.swift */; };
 		57DBF6291CEC6DF500659B79 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57DBF6281CEC6DF500659B79 /* Entitlements.plist */; };
+		57E9740D1D2685FD00E573CA /* out.wav in Resources */ = {isa = PBXBuildFile; fileRef = 57E9740C1D2685FD00E573CA /* out.wav */; };
 		57ED48091CD8BBDB00E2CCFF /* CHUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED48081CD8BBDB00E2CCFF /* CHUsers.swift */; };
 		57ED480B1CD8BD3300E2CCFF /* RoleControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */; };
 		57ED480D1CD8E12900E2CCFF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED480C1CD8E12800E2CCFF /* SettingsTableViewController.swift */; };
@@ -158,6 +160,7 @@
 		57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementInProgress.xib; sourceTree = "<group>"; };
 		57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementWin.xib; sourceTree = "<group>"; };
 		57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementDone.swift; sourceTree = "<group>"; };
+		574738381D25043200071A01 /* WakeUpInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeUpInfoViewController.swift; sourceTree = "<group>"; };
 		575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnConfirmedDuelSender.swift; sourceTree = "<group>"; };
 		575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmedDuel.xib; sourceTree = "<group>"; };
 		575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmedDuel.swift; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		57DA51C71D006A8700AAA2B8 /* WinsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinsTableViewController.swift; sourceTree = "<group>"; };
 		57DA51C91D006A9A00AAA2B8 /* FailedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedTableViewController.swift; sourceTree = "<group>"; };
 		57DBF6281CEC6DF500659B79 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		57E9740C1D2685FD00E573CA /* out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = out.wav; sourceTree = "<group>"; };
 		57ED48081CD8BBDB00E2CCFF /* CHUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUsers.swift; sourceTree = "<group>"; };
 		57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleControlViewController.swift; sourceTree = "<group>"; };
 		57ED480C1CD8E12800E2CCFF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 				57C763631CE9AF8100C3695A /* Fonts */,
 				57A3C6D31CDB7C2200997E41 /* privacy.html */,
 				571F789A1CF880AD008A45DE /* out.caf */,
+				57E9740C1D2685FD00E573CA /* out.wav */,
 				579C18591CCB595700D6EEA9 /* AppDelegate.swift */,
 				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
 				579C18681CCB595700D6EEA9 /* Info.plist */,
@@ -351,10 +356,11 @@
 				577D5FA51CCF5B9D0002F0E0 /* SettingsViewController.swift */,
 				57AD26661CD895E9000F33CB /* AuthViewController.swift */,
 				57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */,
-				57C763641CE9BC4900C3695A /* TableViews */,
 				57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */,
 				577FAD521CEC6D4300DA5F9D /* SelfImprovementViewController.swift */,
 				57B099371CEC98C900AA2D63 /* WakeUpViewController.swift */,
+				574738381D25043200071A01 /* WakeUpInfoViewController.swift */,
+				57C763641CE9BC4900C3695A /* TableViews */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				571F789B1CF880AD008A45DE /* out.caf in Resources */,
 				576D7E701CEAFB8E00AA7094 /* NewChallenge.xib in Resources */,
 				579C185F1CCB595700D6EEA9 /* Main.storyboard in Resources */,
+				57E9740D1D2685FD00E573CA /* out.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +984,7 @@
 				57FBC97F1CD9F49900341A2D /* APCustomBlurView.swift in Sources */,
 				57DA51C81D006A8700AAA2B8 /* WinsTableViewController.swift in Sources */,
 				5730E6EE1D0842B400D1EEA4 /* InviteFriendsView.swift in Sources */,
+				574738391D25043200071A01 /* WakeUpInfoViewController.swift in Sources */,
 				575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */,
 				577D5F951CCE30670002F0E0 /* CHUIAnimations.swift in Sources */,
 				579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */,
@@ -1146,7 +1154,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab7760be-57f9-4888-b8aa-2a806bad0d7f";
+				PROVISIONING_PROFILE = "f71e3153-72c4-44e8-bc9a-18f60e1d482d";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1173,7 +1181,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab7760be-57f9-4888-b8aa-2a806bad0d7f";
+				PROVISIONING_PROFILE = "f71e3153-72c4-44e8-bc9a-18f60e1d482d";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

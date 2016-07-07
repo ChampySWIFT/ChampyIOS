@@ -8,6 +8,10 @@
 
 import UIKit
 import AudioToolbox
+import AVFoundation
+import SwiftyJSON
+
+
 class CHUIElements: NSObject {
   
   
@@ -31,10 +35,43 @@ class CHUIElements: NSObject {
   func getCurretnTime()->Int{
     let dt:NSDate = NSDate()
     return Int(dt.timeIntervalSince1970)
+
   }
   
+  var bombSoundEffect: AVAudioPlayer!
+  
+  func playAudio() {
+    let path = NSBundle.mainBundle().pathForResource("out.caf", ofType:nil)!
+    let url = NSURL(fileURLWithPath: path)
+    
+    do {
+      let sound = try AVAudioPlayer(contentsOfURL: url)
+      bombSoundEffect = sound
+      sound.play()
+    } catch {
+      // couldn't load file :(
+    }
+  }
+  
+  func stringToJSON(jsonString:String) -> JSON {
+    do {
+      if let data:NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false){
+        if jsonString != "error" {
+          let jsonResult:JSON = JSON(data: data)
+          return jsonResult
+        }
+      }
+    }
+    catch let error as NSError {
+      
+    }
+    
+    return nil
+  }
   
 }
+
+
 
 extension UIApplication {
   class func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {

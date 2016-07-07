@@ -2,12 +2,15 @@ PODS:
   - Alamofire (2.0.2)
   - ALCameraViewController (1.2.0)
   - AsyncSwift (1.7.2)
+  - Bolts/Tasks (1.7.0)
   - CryptoSwift (0.4.1)
   - DynamicBlurView (1.1.0)
   - Fusuma (0.4.1)
   - JSONWebToken (1.5.0):
     - CryptoSwift (~> 0.4.0)
   - Kingfisher (2.4.1)
+  - Parse (1.13.0):
+    - Bolts/Tasks (~> 1.6)
   - PresenterKit (1.0.0)
   - Socket.IO-Client-Swift (3.1.6)
   - SwiftHTTP (1.0.5)
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - Fusuma
   - JSONWebToken
   - Kingfisher (~> 2.0)
+  - Parse
   - PresenterKit (from `https://github.com/jessesquires/PresenterKit.git`, branch `develop`)
   - Socket.IO-Client-Swift (~> 3.1.4)
   - SwiftHTTP
@@ -42,17 +46,19 @@ SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   ALCameraViewController: 03b480d0b41d3afc21fca48fc45345893ce2680a
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
   DynamicBlurView: 315b8e824d2264ec43d546273fe177dee840033e
   Fusuma: 4dbaa05a2a20ab11a41f8dedbe650c904ea99625
   JSONWebToken: 6c8968ace6b60b2e6156a7bbe5019fd9b5ff9b5a
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   PresenterKit: 11041ccd803d10623f4791eb8c2ed98a2cbc428d
   Socket.IO-Client-Swift: f80e4eec9f067ced71fbcdbfa55bf59ff0248e53
   SwiftHTTP: edb45e72f27d1d95d328d2b2c16a61aa94f1e9f7
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwipyCell: 717a9d6c5ac115c5c0acefa3d022842ca737c426
 
-PODFILE CHECKSUM: 6ea7d7b260a72382f554390bfe276d63cd9992a5
+PODFILE CHECKSUM: d9c3af70a59b9beb394866dc9f2312caa39c93ae
 
 COCOAPODS: 1.0.0

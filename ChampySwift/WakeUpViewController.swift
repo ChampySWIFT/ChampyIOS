@@ -242,10 +242,21 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   func backtoMain() {
     Async.main{
 //      self.performSegueWithIdentifier("backtoMain", sender: nil)
+//
+//      self.showModal()
       self.dismissViewControllerAnimated(true) {
+        CHPush().localPush("wakeUpCreated", object: [])
         CHPush().localPush("refreshIcarousel", object: [])
+        
       }
     }
+  }
+  
+  func showModal() {
+    let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+    let WakeUpInfoViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("WakeUpInfoViewController")
+    WakeUpInfoViewController.modalPresentationStyle = .OverCurrentContext
+    presentViewController(WakeUpInfoViewController, animated: true, completion: nil)
   }
   
   func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {

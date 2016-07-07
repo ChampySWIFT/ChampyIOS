@@ -16,6 +16,7 @@ class AuthViewController: UIViewController {
   var tapped:Bool = false
   
   override func viewDidLoad() {
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
     super.viewDidLoad()
     
     self.navigationItem.hidesBackButton = true

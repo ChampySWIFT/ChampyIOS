@@ -172,6 +172,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         if result {
           self.alertWithMessage("Sent", type: .Warning)
 //          CHPush().alertPush("Sent", type: "Success")
+          CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
           self.backtoMain()
         } else {
           self.alertWithMessage(json["error"].stringValue, type: .Warning)
@@ -224,6 +225,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         if status {
           CHPush().alertPush("Sent", type: "Success")
           self.backtoMain()
+          CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
         } else {
            CHPush().alertPush(json["error"].stringValue, type: "Warning")
         }

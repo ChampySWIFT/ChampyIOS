@@ -69,6 +69,12 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
   }
   
+  func showModal() {
+    let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+    let WakeUpInfoViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("WakeUpInfoViewController")
+    WakeUpInfoViewController.modalPresentationStyle = .OverCurrentContext
+    presentViewController(WakeUpInfoViewController, animated: true, completion: nil)
+  }
   
   func fillCarousel() {
     Async.main{
@@ -87,7 +93,12 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         var containerView: UIView
         let challengeType = CHChalenges().getChallengeType(challenge)
         
-        let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)"
+        var timeIdentifier = "0"
+        if  challenge["senderProgress"] != nil {
+          timeIdentifier = challenge["senderProgress"][challenge["senderProgress"].count - 1]["at"].stringValue
+        }
+        
+        let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)-\(timeIdentifier)"
         if self.appDelegate.mainViewCard[cardIdentifier] != nil {
           containerView = self.appDelegate.mainViewCard[cardIdentifier]!
         } else {
@@ -191,6 +202,7 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   override func viewDidLoad(){
     
+    self.navigationController?.setNavigationBarHidden(false, animated: false)
     super.viewDidLoad()
     
     Async.background{
@@ -320,6 +332,7 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
               self.inProgressChallenges = userObject["inProgressChallengesCount"].intValue
               self.wins                 = userObject["successChallenges"].intValue
               self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
+              
               self.firstNumber.text = "\(self.inProgressChallenges)"   //.countFrom(0, to: Float(self.inProgressChallenges))
               self.secondNumber.text = "\(self.wins)" //.countFrom(0, to: Float(self.wins))
               self.thirdNumber.text = "\(self.points)" //.countFrom(0, to: Float(self.points))
@@ -333,12 +346,14 @@ class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   override func viewDidAppear(animated: Bool) {
     center.addObserver(self, selector: #selector(MainViewController.refreshCarousel), name: "refreshIcarousel", object: nil)
-    
+    center.addObserver(self, selector: #selector(MainViewController.showModal), name: "wakeUpCreated", object: nil)
+    self.fillCarousel()
   }
   
   override func viewDidDisappear(animated: Bool) {
 //    self.view.removeFromSuperview()
     self.center.removeObserver(self, name: "refreshIcarousel", object: nil)
+    self.center.removeObserver(self, name: "wakeUpCreated", object: nil)
     
   }
   

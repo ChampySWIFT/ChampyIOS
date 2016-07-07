@@ -35,7 +35,7 @@ class CHSession: NSObject {
       self.currentUserId         = self.CurrentUser.stringForKey("userId")!
       self.currentUserName       = self.CurrentUser.stringForKey("userName")!
       self.currentUserFacebookId = self.CurrentUser.stringForKey("facebookId")!
-      self.currentUserObject     = CHUsers().stringToJSON(self.CurrentUser.stringForKey("userObject")!)
+      self.currentUserObject     = CHUIElements().stringToJSON(self.CurrentUser.stringForKey("userObject")!)
       self.logined               = true
     }
   }
@@ -89,7 +89,36 @@ class CHSession: NSObject {
     
   }
   
+  func getStringByKey(key:String) -> String {
+    if CurrentUser.objectForKey(key) != nil {
+      return CurrentUser.stringForKey(key)!
+    }
+    return ""
+  }
   
+  
+  func getIntByKey(key:String) -> Int {
+    if CurrentUser.objectForKey(key) != nil {
+      return CurrentUser.integerForKey(key)
+    }
+    return 0
+  }
+  
+  func getBoolByKey(key:String) -> Bool {
+    if CurrentUser.objectForKey(key) != nil {
+      return CurrentUser.boolForKey(key)
+    }
+    return false
+  }
+  
+  func getJSONByKey(key:String) -> JSON {
+    if CurrentUser.objectForKey(key) != nil {
+      let string = CurrentUser.stringForKey(key)!
+      return CHUIElements().stringToJSON(string)
+    }
+    
+    return nil
+  }
   
   func getToken() -> String {
     var token = ""

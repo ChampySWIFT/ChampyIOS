@@ -48,7 +48,9 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     self.fillArray()
+    self.refreshTableViewAction(self.refreshTableView)
     //    self.tableView.backgroundView = self.view
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false

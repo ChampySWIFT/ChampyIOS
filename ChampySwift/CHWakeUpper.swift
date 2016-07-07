@@ -20,6 +20,14 @@ class CHWakeUpper: NSObject {
     fireComponents.hour = 12
     fireComponents.minute = 00
     
+//    CHSession().CurrentUser.setInteger(hour, forKey: "hoursDN")
+//    CHSession().CurrentUser.setInteger(minute, forKey: "minsDN")
+    
+    if CHSession().CurrentUser.objectForKey("hoursDN") != nil {
+      fireComponents.hour = CHSession().CurrentUser.integerForKey("hoursDN")
+      fireComponents.minute = CHSession().CurrentUser.integerForKey("minsDN")
+    }
+    
     dateFire = calendar.dateFromComponents(fireComponents)!
     
     let localNotification = UILocalNotification()
@@ -80,7 +88,7 @@ class CHWakeUpper: NSObject {
 //    localNotification.category = "type"
 //    localNotification.identifi
     localNotification.fireDate    = NSDate(timeIntervalSince1970: timeInterval)
-    localNotification.soundName   = "out.caf" //UILocalNotificationDefaultSoundName;
+    localNotification.soundName   = "out.wav" //UILocalNotificationDefaultSoundName;
     UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
   }
   
@@ -94,7 +102,7 @@ class CHWakeUpper: NSObject {
       "wakeUpId": "asd"
     ]
     localNotification.fireDate    = NSDate(timeIntervalSince1970: Double(CHUIElements().getCurretnTime() + 5))
-    localNotification.soundName   = "out.caf" //UILocalNotificationDefaultSoundName;
+    localNotification.soundName   = "out.wav" //UILocalNotificationDefaultSoundName;
     UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
   }
   
@@ -107,7 +115,7 @@ class CHWakeUpper: NSObject {
       "wakeUpId": wakeUpId
     ]
     localNotification.fireDate    = NSDate(timeIntervalSince1970: timeInterval)
-    localNotification.soundName   = "out.caf" //UILocalNotificationDefaultSoundName;
+    localNotification.soundName   = "out.wav" //UILocalNotificationDefaultSoundName;
     UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
   }
   

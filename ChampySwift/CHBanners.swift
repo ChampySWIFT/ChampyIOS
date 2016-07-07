@@ -103,7 +103,9 @@ class CHBanners: NSObject {
   
   func changeType(type:CHBannerTypes) {
     self.backgroundColor = CHUIElements().APPColors[type.rawValue]
-    self.banner.backgroundColor = self.backgroundColor
+    if self.banner != nil {
+      self.banner.backgroundColor = self.backgroundColor
+    }
   }
   
   func createBanner(message:String) -> UIView {
@@ -132,6 +134,7 @@ class CHBanners: NSObject {
   }
   
   func dismissView(withTimeOut:Bool = false) {
+    if banner != nil {
     var frame = banner.frame
     var time:Double = 0.0
     if withTimeOut {
@@ -143,6 +146,7 @@ class CHBanners: NSObject {
       }, completion: { finished in
         self.banner.removeFromSuperview()
     })
+    }
   }
   
   func forceDismiss(){

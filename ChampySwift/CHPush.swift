@@ -7,11 +7,98 @@
 //
 
 import UIKit
-
+import Parse
 class CHPush: NSObject {
   let center = NSNotificationCenter.defaultCenter()
+  var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()
   
   //openImagePicker - open image picker from main view
+  
+  func sendPushToUser(userId:String, message:String, options:String, type:String = "usual", requestId:String = "nill")  {
+    let data = [
+      "alert" : message,
+      "badge" : "Increment",
+      "sounds" : "cheering.caf",
+      "type":type,
+      "requestId": requestId
+      
+    ]
+    
+    let info:[String:String] = [
+      "type":type
+    ]
+    
+    let push = PFPush()
+    push.setChannels(["user_\(userId)"])
+    push.setData(data)
+    
+    do {
+      try  push.sendPush()
+    } catch  {
+      
+    } catch  {
+      
+    }
+    
+    
+    
+    //    push.sendPushInBackground()
+  }
+  
+  /*
+   Subscribe User to channel
+   
+   types of channels:
+   
+   user_'deviceToken' : unknown user,
+   user_'objectId'    : logined and registered user
+   user_'spotId'      : user or business in host mode
+   */
+  
+  func subscribeUserTo(channelIdentifier:String){
+    let installation = PFInstallation.currentInstallation()
+    var deviceToken:NSData = NSData()
+    if CurrentUser.objectForKey("deviceToken") != nil{
+      deviceToken = CurrentUser.dataForKey("deviceToken")!
+    } else {
+      deviceToken = "valamicsoda".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+    }
+    
+    installation.setDeviceTokenFromData(deviceToken)
+    installation.addUniqueObject("user_\(channelIdentifier)", forKey: "channels")
+    installation.saveInBackground()
+  }
+  
+  /*
+   Unsubscribe User to channel
+   
+   types of channels:
+   
+   user_'deviceToken' : unknown user,
+   user_'objectId'    : logined and registered user
+   user_'spotId'      : user or business in host mode
+   */
+  
+  
+  
+  func unSubscribeUserFrom(channelIdentifier:String){
+    let currentInstallation = PFInstallation.currentInstallation()
+    currentInstallation.removeObject("user_\(channelIdentifier)", forKey: "channels")
+    currentInstallation.saveInBackground()
+    
+  }
+  
+  
+  /*
+   clear badge number
+   */
+  
+  func clearBadgeNumber(){
+    let currentInstallation = PFInstallation.currentInstallation()
+    currentInstallation.badge = 0;
+    currentInstallation.saveEventually()
+    
+  }
   
   
   func updateImageOnSettings(image:UIImage) {

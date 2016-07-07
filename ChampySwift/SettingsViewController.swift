@@ -44,6 +44,11 @@ class SettingsViewController: UIViewController {
       }
       
     }
+    
+    
+    
+    
+    
   }
   
   override func viewDidDisappear(animated: Bool) {

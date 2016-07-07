@@ -27,6 +27,7 @@ import Async
   
   @IBOutlet weak var declineIcon: UIBarButtonItem!
   @IBOutlet weak var acceptIcon: UIBarButtonItem!
+  var opponentId: String = ""
   
   var challengeObject: JSON! = nil
   func xibSetup() {
@@ -87,11 +88,13 @@ import Async
     case json["sender"]["_id"].stringValue:
       self.duelLabel.text = "Duel with \(json["recipient"]["name"].stringValue)"
       CHImages().setImageForFriend(json["recipient"]["_id"].stringValue, imageView: self.recipientImage)
+      opponentId = json["recipient"]["_id"].stringValue
       CHImages().setImageForFriend(json["sender"]["_id"].stringValue, imageView: self.sendertImage)
       break
     case json["recipient"]["_id"].stringValue:
       self.duelLabel.text = "Duel with \(json["sender"]["name"].stringValue)"
       CHImages().setImageForFriend(json["sender"]["_id"].stringValue, imageView: self.sendertImage)
+      opponentId = json["sender"]["_id"].stringValue
       CHImages().setImageForFriend(json["recipient"]["_id"].stringValue, imageView: self.recipientImage)
       break
     default:
@@ -123,6 +126,7 @@ import Async
       if result {
         self.tapped = false
         CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has done his challenge for today", options: "")
 //        CHPush().alertPush("Done For today", type: "Success")
       } else {
         self.tapped = false
@@ -146,6 +150,7 @@ import Async
       if result {
         self.tapped = false
         CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has failed the duel", options: "")
 //        CHPush().alertPush("You are a LOOSER", type: "Success")
       } else {
         self.tapped = false

@@ -13,7 +13,7 @@ import Async
 import SwiftyJSON
 import Fusuma
 
-class SettingsTableViewController: UITableViewController, FusumaDelegate {
+class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPickerViewDelegate, UITextFieldDelegate   {
   
   @IBOutlet weak var userAvatar: UIImageView!
   @IBOutlet weak var userName: UILabel!
@@ -31,6 +31,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
   @IBOutlet weak var challengeEnd: UISwitch!
   @IBOutlet weak var friendRequest: UISwitch!
   
+  var isHidden = true
+  var datePicker:UIDatePicker! = nil
   
   @IBAction func switchedSwitcher(sender: UISwitch!) {
     
@@ -46,6 +48,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
       "pushNotifications": "\(self.pushNotifications.on)"
     ]
     
+    
     print(params)
     
     CHRequests().updateUserProfileOptions(CHSession().currentUserId, params: params) { (result, json) in
@@ -54,8 +57,13 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
   }
   
   
+  @IBOutlet var timePickerView: UIDatePicker!
+  @IBOutlet weak var inputFieldsForTime: UITextField!
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+//    self.inputFieldsForTime.inputAccessoryView = self.timePickerView
     let userObject:JSON            = CHSession().currentUserObject
     userAvatar.layer.masksToBounds = true
     userAvatar.layer.cornerRadius  = 50.0
@@ -67,6 +75,63 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
     self.enwChallengeRequests.on  = userObject["profileOptions"]["newChallengeRequests"].boolValue
     self.pushNotifications.on     = userObject["profileOptions"]["pushNotifications"].boolValue
     CHImages().setUpAvatar(userAvatar)
+    
+    if CHSession().CurrentUser.objectForKey("isHiddenDN") != nil {
+      self.isHidden = CHSession().CurrentUser.boolForKey("isHiddenDN")
+    } else {
+      self.isHidden = true
+      CHSession().CurrentUser.setBool(true, forKey: "isHiddenDN")
+    }
+    
+    dailyNOtificatorButton.on = self.isHidden
+    self.pickerView.hidden  = !self.isHidden
+    
+    self.dailyLabel.hidden = self.isHidden
+  
+    
+    
+    datePicker = UIDatePicker() // Although you probably have an IBOutlet
+    datePicker.datePickerMode = UIDatePickerMode.Time
+    datePicker.backgroundColor = UIColor.lightGrayColor()
+    datePicker.tintColor = CHUIElements().APPColors["navigationBar"]
+    datePicker.minuteInterval = 30
+    
+    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    
+    let toolBar                             = UIToolbar(frame: CGRectMake(0,0,self.view.frame.size.width,44))
+    toolBar.barStyle                        = UIBarStyle.Default
+    let barButtonDone                       = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(SettingsTableViewController.valueChangedInDateField))
+    barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
+    toolBar.items                           = [spaceButton, barButtonDone]
+    self.inputFieldsForTime.inputAccessoryView = toolBar;
+    self.inputFieldsForTime.inputView = datePicker;
+    self.inputFieldsForTime.delegate  = self
+    
+    if CHSession().CurrentUser.objectForKey("hoursDN") != nil {
+      self.inputFieldsForTime.text = "\(CHSession().CurrentUser.stringForKey("hoursDN")!):\(CHSession().CurrentUser.stringForKey("minsDN")!)"
+    }
+    
+  }
+  
+  func valueChangedInDateField() {
+    let dateFormatter = NSDateFormatter()
+    
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter.dateFormat = "HH:mm"
+    let strDate = dateFormatter.stringFromDate(datePicker.date)
+    
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: datePicker.date)
+    let hour = comp.hour
+    let minute = comp.minute
+    
+    self.inputFieldsForTime.text = strDate
+    
+    inputFieldsForTime.resignFirstResponder()
+    
+    CHSession().CurrentUser.setInteger(hour, forKey: "hoursDN")
+    CHSession().CurrentUser.setInteger(minute, forKey: "minsDN")
+
   }
   
   override func didReceiveMemoryWarning() {
@@ -133,6 +198,10 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
   }
   
   @IBAction func logOutAction(sender: AnyObject) {
+    if !IJReachability.isConnectedToNetwork()  {
+      let a = CHRequests()
+      return
+    }
     self.logOutButton.hidden = true
     self.confirmationLogOutContainer.hidden = false
     
@@ -147,6 +216,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
     self.confirmationLogOutContainer.hidden = true
     
     Async.main {
+      CHPush().unSubscribeUserFrom(CHSession().currentUserId)
       CHSession().clearSession()
       let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
       let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
@@ -198,42 +268,61 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate {
   }
   
   func fusumaImageSelected(image: UIImage) {
-    
-    let banner = CHBanners(withTarget: (self.navigationController?.view)!, andType: .Info)
-    Async.main {
-      banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
-    }
-    
-    CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image, completitionHandler: { (result, json) in
-      if result {
-        Async.main {
-          banner.changeText("Uploaded")
-          banner.changeType(.Success)
-          banner.dismissView(true)
-//          CHImages().setUpAvatar(self.userAvatar)
-          CHPush().updateImageOnSettings(image)
-          self.userAvatar.image = image
-          
-        }
-      } else {
-        banner.changeText("Uploaded")
-        banner.changeType(.Warning)
-        banner.dismissView(true)
+    if IJReachability.isConnectedToNetwork() == false {
+      return
+    } else {
+      
+      let banner = CHBanners(withTarget: (self.navigationController?.view)!, andType: .Info)
+      Async.main {
+        banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
       }
-    })
+      
+      CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image, completitionHandler: { (result, json) in
+        if result {
+          Async.main {
+            banner.changeText("Uploaded")
+            banner.changeType(.Success)
+            banner.dismissView(true)
+            //          CHImages().setUpAvatar(self.userAvatar)
+            CHPush().updateImageOnSettings(image)
+            self.userAvatar.image = image
+            
+          }
+        } else {
+          banner.changeText("Uploaded")
+          banner.changeType(.Warning)
+          banner.dismissView(true)
+        }
+      })
+    }
   
   }
+  
+  
+  @IBOutlet weak var dailyLabel: UILabel!
+  @IBOutlet weak var pickerView: UIView!
+  
+  @IBOutlet weak var dailyNOtificatorButton: UISwitch!
 
+  @IBAction func triggerDailyNtificator(sender: AnyObject) {
+    
+    isHidden = dailyNOtificatorButton.on
+    
+    self.pickerView.hidden = !isHidden
+    self.dailyLabel.hidden = isHidden
+    CHSession().CurrentUser.setBool(isHidden, forKey: "isHiddenDN")
+    
+  }
   // Return the image but called after is dismissed.
   func fusumaDismissedWithImage(image: UIImage) {
     
-    print("Called just after FusumaViewController is dismissed.")
+//    print("Called just after FusumaViewController is dismissed.")
   }
   
   // When camera roll is not authorized, this method is called.
   func fusumaCameraRollUnauthorized() {
     
-    print("Camera roll unauthorized")
+//    print("Camera  roll unauthorized")
   }
   
   @IBAction func upoadPhotoAction(sender: AnyObject) {

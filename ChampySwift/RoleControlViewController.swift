@@ -17,6 +17,8 @@ class RoleControlViewController: UIViewController {
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   override func viewDidLoad() {
+//    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
     super.viewDidLoad()
     let center = NSNotificationCenter.defaultCenter()
     

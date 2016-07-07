@@ -22,6 +22,8 @@ class CHRequests: NSObject {
   var token:String    = ""
   var canPerform:Bool = true
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+ 
+  
   override init() {
     if !IJReachability.isConnectedToNetwork() {
       canPerform = false
@@ -762,5 +764,12 @@ class CHRequests: NSObject {
       
     }
   }
+  
+//  
+//  func sendWithDateAndTime(time:Int, url:String, params:[String:String], method:String) {
+//    var opt:HTTP! = nil
+//    case
+//    
+//  }
   
 }

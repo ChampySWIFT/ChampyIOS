@@ -8,9 +8,11 @@
 
 import UIKit
 import CoreData
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
   var window: UIWindow?
   var mainView:UIView! = nil
@@ -31,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var mainViewCard:[String:UIView] = [:]
   
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    CHPush().clearBadgeNumber()
+  }
+  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
@@ -38,32 +44,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     application.registerUserNotificationSettings(settings)
     application.registerForRemoteNotifications()
     
-    
+    if application.applicationState != UIApplicationState.Background {
+      
+      let preBackgroundPush  = !application.respondsToSelector("backgroundRefreshStatus")
+      let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+      var pushPayload        = false
+      if let options         = launchOptions {
+        pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
+      }
+      if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+      }
+    }
+    if application.respondsToSelector("registerUserNotificationSettings:") {
+      
+      
+      let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Badge, UIUserNotificationType.Alert, UIUserNotificationType.Sound]
+      let settings              = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+      application.registerUserNotificationSettings(settings)
+      application.registerForRemoteNotifications()
+    } else {
+      let types: UIRemoteNotificationType = [.Badge, .Alert, .Sound]
+      application.registerForRemoteNotificationTypes(types)
+    }
+    Parse.setApplicationId("aSCb7zJ3X1UAItiXYuse6SPjdTKVbviyjUT6fuLp", clientKey: "JlK8LZH3ctKr8weIZ5JCf5is0oaqHK0UdgmMPdEt")
+    CHPush().clearBadgeNumber()
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   
   func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
     return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
   }
-
+  
+  
   func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    let formatedDeviceToken:String = self.getSimpleDeviceToken("\(deviceToken)")
+    CurrentUser.setObject(deviceToken, forKey: "deviceToken")
+    CurrentUser.setObject(formatedDeviceToken, forKey: "deviceTokenString")
     
-    let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
-    
-    let deviceTokenString: String = (deviceToken.description as NSString)
-      .stringByTrimmingCharactersInSet(characterSet)
-      .stringByReplacingOccurrencesOfString( " ", withString: "") as String
-    
-    let params = [
-      "APNIdentifier" : deviceTokenString//deviceToken.description as String
-    ]
-    
-    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-      if result {
-        print("success")
-      }
+    if CHSession().logined {
+      CHPush().subscribeUserTo(CHSession().currentUserId)
+    } else {
+      CHPush().subscribeUserTo(formatedDeviceToken)
     }
+    
   }
+  
+  func getSimpleDeviceToken(deviceToken:String)->String{
+    var token:String = deviceToken.stringByReplacingOccurrencesOfString(" ", withString: "")
+    token = token.stringByReplacingOccurrencesOfString("<", withString: "")
+    token = token.stringByReplacingOccurrencesOfString(">", withString: "")
+    return token
+  }
+  
+  
+  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    
+  }
+
+//  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+//    
+//    let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
+//    
+//    let deviceTokenString: String = (deviceToken.description as NSString)
+//      .stringByTrimmingCharactersInSet(characterSet)
+//      .stringByReplacingOccurrencesOfString( " ", withString: "") as String
+//    
+//    let params = [
+//      "APNIdentifier" : deviceTokenString//deviceToken.description as String
+//    ]
+//    
+//    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
+//      if result {
+//        print("success")
+//      }
+//    }
+//  }
   
   func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
     if notification.userInfo != nil {
@@ -79,9 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
   }
   
-  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-    print("\(error)")
-  }
+  
   
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -95,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationWillEnterForeground(application: UIApplication) {
+    CHPush().localPush("refreshIcarousel", object: [])
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
   }
 

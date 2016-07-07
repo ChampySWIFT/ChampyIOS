@@ -157,7 +157,8 @@ class HistoryViewController: UIViewController {
     
     
     let pagesScrollViewSize = contentScrollView.frame.size
-    contentScrollView.contentSize  = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height - 88)
+    contentScrollView.contentSize  = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height )
+    contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     
     var firstFrame:CGRect  = table1.tableView.frame
     firstFrame.origin.x    = 0
@@ -166,7 +167,6 @@ class HistoryViewController: UIViewController {
     firstFrame.size.height = self.contentScrollView.frame.size.height
     table1.tableView.frame = firstFrame
     
-    //    privateUserSecondScreen                 = mainStoryboard.instantiateViewControllerWithIdentifier("PrivateProfileSecondScreenTableViewController") as! PrivateProfileSecondScreenTableViewController
     var secondFrame:CGRect  = table2.tableView.frame
     secondFrame.origin.x    = self.contentScrollView.frame.size.width
     secondFrame.origin.y    = 0

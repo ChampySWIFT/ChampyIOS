@@ -380,7 +380,7 @@ import Async
           if result {
             Async.main {
               self.tapped = false
-              
+              CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "New Friend Request From \(CHSession().currentUserName)", options: "")
             }
           } else {
             CHPush().alertPush("Could't send request now", type: "Warning")
@@ -401,7 +401,7 @@ import Async
           if result {
             Async.main {
               self.tapped = false
-              
+              CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has accepted your request", options: "")
             }
           } else {
             self.tapped = false
@@ -452,7 +452,7 @@ import Async
           if result {
             Async.main {
               self.tapped = false
-              
+              CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has cancelled his friend request", options: "")
             }
           } else {
              self.tapped = false
@@ -475,7 +475,7 @@ import Async
           if result {
             Async.main {
                self.tapped = false
-              
+              CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has Declined your friend request", options: "")
             }
           } else {
              self.tapped = false
@@ -500,7 +500,7 @@ import Async
           if result {
             Async.main {
                self.tapped = false
-              
+                CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has deleted you from his friends", options: "")
             }
           } else {
              self.tapped = false

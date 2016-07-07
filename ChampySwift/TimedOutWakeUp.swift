@@ -74,7 +74,7 @@ import SwiftyJSON
       }
       
       self.wakeUpDaysLeft.text = "\(remainedDays) \(day) to go"
-      self.wakeUpReward.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue)"
+//      self.wakeUpReward.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue)"
       self.wakeUpDaysLeft.adjustsFontSizeToFitWidth = true
       
     }

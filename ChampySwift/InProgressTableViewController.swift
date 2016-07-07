@@ -15,16 +15,17 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   let center = NSNotificationCenter.defaultCenter()
   var historyItems:[UIView] = []
   var identifiers:[String] = []
+  var tap:Bool = true
+  var selectedRow:Int         = -1
+  var heights:[CGFloat]       = []
+  
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.refreshTableViewAction(self.refreshTableView)
     self.center.addObserver(self, selector: #selector(InProgressTableViewController.refreshTableViewAction(_:)), name: "refreshIcarousel", object: nil)
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
   
   override func didReceiveMemoryWarning() {
@@ -34,7 +35,17 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return 80
+//    return 80
+    if indexPath.row == self.selectedRow {
+      heights.append(170)
+      return 170
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      heights.append(80)
+      return 80
+    }
+  
   }
   
   // MARK: - Table view data source
@@ -92,8 +103,15 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")
+      Async.main {
+        self.fillArray()
+        self.tableView.reloadData()
+        self.refreshTableView.endRefreshing()
+      }
+      
       return
     }
+    
     
     CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
       if result && json != nil {
@@ -106,10 +124,28 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
     }
   }
   
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    disableTapForASec()
+    tableView.beginUpdates()
+    if indexPath.row == selectedRow {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      selectedRow = -1
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.open()
+      self.selectedRow = indexPath.row
+    }
+    
+    tableView.endUpdates()
+  }
+  
   func fillArray() {
+    self.selectedRow = -1
     CHSettings().clearViewArray(historyItems)
     self.historyItems.removeAll()
     self.identifiers.removeAll()
+    
     for item in CHChalenges().getInProgressChallenges(CHSession().currentUserId)  {
       self.identifiers.append(item["_id"].stringValue)
       let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
@@ -119,8 +155,16 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
     }
   }
   
+  func disableTapForASec() {
+    tap = false
+    self.setTimeout(1.0) {
+      self.tap = true
+    }
+  }
   
-  
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  }
   
   
 }

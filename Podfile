@@ -13,6 +13,7 @@ target 'ChampySwift' do
   pod 'SwiftyJSON'
   pod 'SwiftHTTP'
   pod 'AsyncSwift'
+  pod 'Parse'
   pod 'Kingfisher', '~> 2.0'
   pod 'ALCameraViewController'
   pod 'DynamicBlurView'

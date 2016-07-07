@@ -19,6 +19,9 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
   let center = NSNotificationCenter.defaultCenter()
   var historyItems:[UIView] = []
   var identifiers:[String] = []
+  var tap:Bool = true
+  var selectedRow:Int         = -1
+  var heights:[CGFloat]       = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,7 +45,17 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return 80
+    //    return 80
+    if indexPath.row == self.selectedRow {
+      heights.append(170)
+      return 170
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      heights.append(80)
+      return 80
+    }
+    
   }
   
   func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
@@ -88,6 +101,11 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")
+      Async.main {
+        self.fillArray()
+        self.tableView.reloadData()
+        self.refreshTableView.endRefreshing()
+      }
       return
     }
     
@@ -103,6 +121,7 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   func fillArray() {
+    
     CHSettings().clearViewArray(historyItems)
     self.historyItems.removeAll()
     self.identifiers.removeAll()
@@ -110,11 +129,38 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
       self.identifiers.append(item["_id"].stringValue)
       let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       content.setUp(item)
-      
       self.historyItems.append(content)
     }
   }
   
+  func disableTapForASec() {
+    tap = false
+    self.setTimeout(1.0) {
+      self.tap = true
+    }
+  }
+  
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  }
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    if tap {
+      disableTapForASec()
+    tableView.beginUpdates()
+    if indexPath.row == selectedRow {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      selectedRow = -1
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.open()
+      self.selectedRow = indexPath.row
+    }
+    
+    tableView.endUpdates()
+    }
+  }
   
   
   /*

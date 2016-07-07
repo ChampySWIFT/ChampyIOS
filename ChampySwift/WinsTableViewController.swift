@@ -16,6 +16,9 @@ class WinsTableViewController: UITableViewController, SwipyCellDelegate {
   let center = NSNotificationCenter.defaultCenter()
   var historyItems:[UIView] = []
   var identifiers:[String] = []
+  var tap:Bool = true
+  var selectedRow:Int         = -1
+  var heights:[CGFloat]       = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,7 +45,33 @@ class WinsTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return 80
+    //    return 80
+    if indexPath.row == self.selectedRow {
+      heights.append(170)
+      return 170
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      heights.append(80)
+      return 80
+    }
+    
+  }
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    disableTapForASec()
+    tableView.beginUpdates()
+    if indexPath.row == selectedRow {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.close()
+      selectedRow = -1
+    } else {
+      let content = historyItems[indexPath.row] as! HistoryCell
+      content.open()
+      self.selectedRow = indexPath.row
+    }
+    
+    tableView.endUpdates()
   }
   
   func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
@@ -88,6 +117,11 @@ class WinsTableViewController: UITableViewController, SwipyCellDelegate {
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")
+      Async.main {
+        self.fillArray()
+        self.tableView.reloadData()
+        self.refreshTableView.endRefreshing()
+      }
       return
     }
     
@@ -113,6 +147,17 @@ class WinsTableViewController: UITableViewController, SwipyCellDelegate {
       
       self.historyItems.append(content)
     }
+  }
+  
+  func disableTapForASec() {
+    tap = false
+    self.setTimeout(1.0) {
+      self.tap = true
+    }
+  }
+  
+  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
+    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
   }
   
   /*
