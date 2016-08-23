@@ -147,18 +147,18 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     if tap {
       disableTapForASec()
-    tableView.beginUpdates()
-    if indexPath.row == selectedRow {
-      let content = historyItems[indexPath.row] as! HistoryCell
-      content.close()
-      selectedRow = -1
-    } else {
-      let content = historyItems[indexPath.row] as! HistoryCell
-      content.open()
-      self.selectedRow = indexPath.row
-    }
-    
-    tableView.endUpdates()
+      tableView.beginUpdates()
+      if indexPath.row == selectedRow {
+        let content = historyItems[indexPath.row] as! HistoryCell
+        content.close()
+        selectedRow = -1
+      } else {
+        let content = historyItems[indexPath.row] as! HistoryCell
+        content.open()
+        self.selectedRow = indexPath.row
+      }
+      
+      tableView.endUpdates()
     }
   }
   

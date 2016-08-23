@@ -53,7 +53,7 @@ class CHImages: NSObject {
   func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
     imageView.layer.masksToBounds = true
     let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
-    let userObject:JSON =  CHSession().currentUserObject //CHUsers().getUserById(CHSession().currentUserId)
+    let userObject:JSON =  CHSession().currentUserObject
     
     var cachename = "initialCache"
     if userObject["lastPhotoUpdated"].intValue != 0 {
@@ -98,8 +98,7 @@ class CHImages: NSObject {
 
 extension UIImageView{
   
-  func makeBlurImage(targetImageView:UIImageView?)
-  {
+  func makeBlurImage(targetImageView:UIImageView?) {
     let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
     
     let blurEffectView = UIVisualEffectView(effect: blurEffect)

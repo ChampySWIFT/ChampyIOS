@@ -12,7 +12,7 @@ import Async
 
 
 class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
-
+  
   
   @IBOutlet weak var toLabel: UILabel!
   @IBOutlet weak var challengeView: iCarousel!
@@ -22,7 +22,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var descView: UIView!
-    @IBOutlet weak var descLabel: UILabel!
+  @IBOutlet weak var descLabel: UILabel!
   @IBOutlet weak var acceptButton: UIButton!
   @IBOutlet weak var declineButton: UIButton!
   
@@ -33,64 +33,65 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   
   @IBAction func closeView(sender: AnyObject) {
-//    self.performSegueWithIdentifier("backToMain", sender: self)
+    //    self.performSegueWithIdentifier("backToMain", sender: self)
     self.dismissViewControllerAnimated(true) {
-//      self.navigationController?.performSegueWithIdentifier("showFriends", sender: self)
+      //      self.navigationController?.performSegueWithIdentifier("showFriends", sender: self)
     }
   }
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-      CHImages().setImageForFriend(CHSession().selectedFriendId, imageView: self.friendsAvatar)
-      CHImages().setUpAvatar(self.myAvatar)
-      
-      self.myAvatar.layer.masksToBounds = true
-      self.friendsAvatar.layer.masksToBounds = true
-      self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
-      print(userObject)
-      toLabel.text = "DUEL WITH \(self.userObject["name"].stringValue)"
-      self.myAvatar.layer.opacity = 0.5
-      self.friendsAvatar.layer.opacity = 0.5
-      
-      challengeView.delegate   = self
-      challengeView.dataSource = self
-      challengeView.type       = .Linear
-      
-//      self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
-      
-      CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
-        self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
-        self.challenges.insert(nil, atIndex: 0)
-        Async.main {
-          var i:Int = 0
-          self.viewObjects.removeAll()
-          for item in self.challenges {
-            let cardheight = self.view.frame.size.height - 44 - 50 - self.myAvatar.frame.size.height - 70
-            
-            let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.4, height: cardheight/*self.view.frame.size.height / 2.0*/)
-            let itemView = NewChallenge(frame:frame)
-            if item != nil {
-              itemView.setUp(item, empty: false)
-            } else {
-              itemView.setUp(item, empty: true)
-            }
-            self.viewObjects.append(itemView)
-            i = i + 1
+    super.viewDidLoad()
+    
+    CHImages().setImageForFriend(CHSession().selectedFriendId, imageView: self.friendsAvatar)
+    CHImages().setUpAvatar(self.myAvatar)
+    
+    self.myAvatar.layer.masksToBounds = true
+    self.friendsAvatar.layer.masksToBounds = true
+    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
+    print(userObject)
+    toLabel.text = "DUEL WITH \(self.userObject["name"].stringValue)"
+    self.myAvatar.layer.opacity = 0.5
+    self.friendsAvatar.layer.opacity = 0.5
+    
+    challengeView.delegate   = self
+    challengeView.dataSource = self
+    challengeView.type       = .Linear
+    
+    
+    //      self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
+    
+    CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
+      self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
+      self.challenges.insert(nil, atIndex: 0)
+      Async.main {
+        var i:Int = 0
+        self.viewObjects.removeAll()
+        for item in self.challenges {
+          let cardheight = self.view.frame.size.height - 44 - 50 - self.myAvatar.frame.size.height - 70
+          
+          let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.4, height: cardheight/*self.view.frame.size.height / 2.0*/)
+          let itemView = NewChallenge(frame:frame)
+          if item != nil {
+            itemView.setUp(item, empty: false)
+          } else {
+            itemView.setUp(item, empty: true)
           }
-          self.challengeView.reloadData()
-          self.challengeView.scrollToItemAtIndex(1, animated: false)
+          self.viewObjects.append(itemView)
+          i = i + 1
         }
+        self.challengeView.reloadData()
+        self.challengeView.scrollToItemAtIndex(1, animated: false)
       }
-      
-  }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+  }
   
-
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  
+  
   @IBAction func addAction(sender: AnyObject) {
     
   }
@@ -100,13 +101,13 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   }
   
   func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
-
+    
     
     return self.viewObjects[index]
   }
   
   func carouselDidScroll(carousel: iCarousel) {
-//    CHPush().localPush("dismissKeyboard", object: [])
+    //    CHPush().localPush("dismissKeyboard", object: [])
     close()
   }
   
@@ -123,7 +124,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   @IBAction func sendtoFriendAction(sender:AnyObject) {
     open()
-  
+    
   }
   
   @IBAction func confirm(sender:AnyObject) {
@@ -151,7 +152,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   func sendAction() {
     guard IJReachability.isConnectedToNetwork() else {
-//      CHPush().alertPush("No Internet Connection", type: "Warning")
+      //      CHPush().alertPush("No Internet Connection", type: "Warning")
       self.alertWithMessage("No Internet Connection", type: .Warning)
       return
     }
@@ -160,7 +161,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       return
     }
     
-  
+    
     
     if self.challenges[challengeView.currentItemIndex] != nil {
       let params:[String:String] = [
@@ -171,12 +172,12 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       CHRequests().createDuelInProgressChallenge(params) { (result, json) in
         if result {
           self.alertWithMessage("Sent", type: .Warning)
-//          CHPush().alertPush("Sent", type: "Success")
+          //          CHPush().alertPush("Sent", type: "Success")
           CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
           self.backtoMain()
         } else {
           self.alertWithMessage(json["error"].stringValue, type: .Warning)
-//          CHPush().alertPush(json["error"].stringValue, type: "Warning")
+          //          CHPush().alertPush(json["error"].stringValue, type: "Warning")
         }
       }
     } else {
@@ -193,7 +194,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       var dayNumber:String = view.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
       dayNumber = dayNumber.stringByReplacingOccurrencesOfString(" Day", withString: "")
       
-
+      
       guard enteredText.isValidChallengeName() else{
         self.alertWithMessage("Invalid Challenge Name", type: .Warning)
         return
@@ -201,13 +202,13 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       
       guard conditions.isValidConditions() else {
         self.alertWithMessage("Invalid Challenge Name", type: .Warning)
-//        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
+        //        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
         return
       }
       
       guard dayNumber.isDayNumber() else {
         self.alertWithMessage("Invlid Day Count", type: .Warning)
-//        CHPush().alertPush("Invalid Day Count", type: "Warning")
+        //        CHPush().alertPush("Invalid Day Count", type: "Warning")
         return
       }
       
@@ -221,13 +222,13 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         "duration": "\(daysec)"
       ]
       
-      CHRequests().createChallengeAndSendIt(params, completitionHandler: { (json, status) in
+      CHRequests().createChallengeAndSendIt(CHSession().selectedFriendId, params: params, completitionHandler: { (json, status) in
         if status {
           CHPush().alertPush("Sent", type: "Success")
           self.backtoMain()
           CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
         } else {
-           CHPush().alertPush(json["error"].stringValue, type: "Warning")
+          CHPush().alertPush(json["error"].stringValue, type: "Warning")
         }
       })
       
@@ -243,7 +244,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       })
     }
   }
-
+  
   
   func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
     Async.main {

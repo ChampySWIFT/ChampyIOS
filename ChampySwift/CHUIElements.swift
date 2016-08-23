@@ -24,6 +24,7 @@ class CHUIElements: NSObject {
     "title": UIColor(red: 246/255.0, green: 201/255.0, blue: 133/255.0, alpha: 1),
     ]
   
+  var bombSoundEffect: AVAudioPlayer!
   var font12:UIFont     = UIFont(name: "BebasNeueRegular", size: 12)!
   var font16:UIFont     = UIFont(name: "BebasNeueRegular", size: 16)!
   
@@ -31,17 +32,15 @@ class CHUIElements: NSObject {
     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
   }
   
-  
   func getCurretnTime()->Int{
     let dt:NSDate = NSDate()
     return Int(dt.timeIntervalSince1970)
-
+    
   }
   
-  var bombSoundEffect: AVAudioPlayer!
   
   func playAudio() {
-    let path = NSBundle.mainBundle().pathForResource("out.caf", ofType:nil)!
+    let path = NSBundle.mainBundle().pathForResource("out.wav", ofType:nil)!
     let url = NSURL(fileURLWithPath: path)
     
     do {
@@ -69,6 +68,28 @@ class CHUIElements: NSObject {
     return nil
   }
   
+  func initAndSetUpDatePicker(interval:Int) -> UIDatePicker {
+    let picker = UIDatePicker()
+    picker.datePickerMode = UIDatePickerMode.Time
+    picker.backgroundColor = UIColor.lightGrayColor()
+    picker.tintColor = CHUIElements().APPColors["navigationBar"]
+    picker.minuteInterval = interval
+    
+    return picker
+  }
+  
+  func setUpDailyReminderCredentials(var status:Bool, var switcher:UISwitch, picker:UIView, label:UILabel) {
+    if CHSession().CurrentUser.objectForKey("isHiddenDN") != nil {
+      status = CHSession().CurrentUser.boolForKey("isHiddenDN")
+    } else {
+      status = true
+      CHSession().CurrentUser.setBool(true, forKey: "isHiddenDN")
+    }
+    
+    switcher.on = status
+    picker.hidden  = !status
+    label.hidden = status
+  }
 }
 
 
@@ -102,7 +123,7 @@ extension String {
   
   
   func isDayNumber() -> Bool {
-//    ^[0-9]{1,3}$
+    //    ^[0-9]{1,3}$
     let regex = try! NSRegularExpression(pattern: "^[0-9]{1,3}$",
                                          options: [.CaseInsensitive])
     
@@ -111,7 +132,7 @@ extension String {
   }
   
   func isValidChallengeName() -> Bool {
-//  [^,.'-]+
+    //  [^,.'-]+
     let regex = try! NSRegularExpression(pattern: "^[^,.'-]+", options: [.CaseInsensitive])
     
     return regex.firstMatchInString(self.lowercaseString, options:[],
@@ -119,7 +140,7 @@ extension String {
   }
   
   func isValidConditions() -> Bool {
-//    ^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$
+    //    ^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$
     let regex = try! NSRegularExpression(pattern: "^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$",
                                          options: [.CaseInsensitive])
     

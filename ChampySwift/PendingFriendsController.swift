@@ -9,34 +9,27 @@
 import UIKit
 import SwiftyJSON
 import Async
-import SwipyCell
-class PendingFriendsController: UITableViewController, SwipyCellDelegate {
+
+
+class PendingFriendsController: UITableViewController {
+  
+  @IBOutlet weak var refreshTableView: UIRefreshControl!
   
   let center = NSNotificationCenter.defaultCenter()
-  
   var selectedRow:Int         = -1
   var selectedSection:Int = -1
-  
   var tap:Bool = true
-  
-  
   var heights:[CGFloat]       = []
-  
   var incoming:[JSON] = []
   var incomingfriendsContent:[UIView] = []
   var outgoing:[JSON] = []
   var outgoingfriendsContent:[UIView] = []
-  
   var incomingidentifiers:[String]    = []
-  
   var outgoingidentifiers:[String]    = []
-  
   var pendingFriends:[JSON] = []
+  let closedHeight:CGFloat = 66.0
+  let openedHeight:CGFloat = 220.0
   
-  func clearArrays() {
-    //    friendsContent.removeAll()
-    heights.removeAll()
-  }
   
   override func viewDidDisappear(animated: Bool) {
     center.removeObserver(self, name: "pendingReload", object: nil)
@@ -46,303 +39,187 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
     center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: "pendingReload", object: nil)
     
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.fillArray()
     self.refreshTableViewAction(self.refreshTableView)
-    //    self.tableView.backgroundView = self.view
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
-  // MARK: - Table view data source
-  
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    
     if pendingFriends.count <= 0 {
       return 1
     }
-    // #warning Incomplete implementation, return the number of sections
+    
     return 2
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    if pendingFriends.count <= 0 {
+    
+    guard pendingFriends.count != 0 else {
       return 1
     }
-    if section == 0 {
-      if incomingfriendsContent.count == 0 {
+    
+    switch section {
+    case 0:
+      guard incomingfriendsContent.count != 0 else {
         return 1
-      } else {
-        return incomingfriendsContent.count
       }
-    } else {
-      if outgoingfriendsContent.count == 0 {
+      return incomingfriendsContent.count
+    case 1:
+      guard outgoingfriendsContent.count != 0 else {
         return 1
-      } else {
-        return outgoingfriendsContent.count
       }
-      
+      return outgoingfriendsContent.count
+    default:
+      return 0
     }
-  
-    return 0
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    if pendingFriends.count <= 0 {
-      return 200
+    guard pendingFriends.count != 0 else {
+      return openedHeight
     }
     
-    if indexPath.section == 0 {
-      if indexPath.row == self.selectedRow && selectedSection == indexPath.section {
-        heights.append(220.0)
-        return 220
-      } else {
-        if incomingfriendsContent.count > 0 {
-          let content = incomingfriendsContent[indexPath.row] as! FriendCell
-          content.close()
-          heights.append(66)
-          return 66
-        } else {
-          return 66
-        }
-        
-      }
-    } else {
+    switch indexPath.section {
+    case 0:
+      return getHeightByIndexPath(indexPath, andArray: self.incomingfriendsContent)
       
-      if indexPath.row == self.selectedRow && selectedSection == indexPath.section {
-        heights.append(220.0)
-        return 220
-      } else {
-        if outgoingfriendsContent.count > 0 {
-          let content = outgoingfriendsContent[indexPath.row] as! FriendCell
-          content.close()
-          heights.append(66)
-          return 66
-        } else {
-          return 66
-        }
-        
-        return 66
-      }
+    case 1:
+      return getHeightByIndexPath(indexPath, andArray: self.outgoingfriendsContent)
+      
+    default:
+      return closedHeight
     }
-    
-    
-    
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    var isIpad = false
-    if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-      isIpad = true
-    }
-    var cell:SwipyCell! = nil
-    
-    if pendingFriends.count <= 0 {
-      
-      cell = tableView.dequeueReusableCellWithIdentifier("CELL-nofriends") as! SwipyCell?
-      let content = NoPendingRequests(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
-//      cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL-nofriends")
-      cell                 = SwipyCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL-nofriends")
-      cell.accessoryType  = .None
-      cell.selectionStyle = UITableViewCellSelectionStyle.None
-      cell.addSubview(content)
-      cell.backgroundColor = UIColor.clearColor()
-      return cell
+    guard pendingFriends.count != 0 else {
+      return self.getEmptyCell()
     }
     
-    if indexPath.section == 0 {
-      var identifier = ""
-      if incomingfriendsContent.count == 0 {
-        identifier = "emptyinc"
-      } else {
-        identifier = self.incomingidentifiers[indexPath.row]
+    
+    switch indexPath.section {
+    case 0:
+      guard incomingfriendsContent.count != 0 else {
+        return getEmptySubCell()
       }
-      cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
-      cell = nil
-      autoreleasepool {
-        if cell == nil {
-//          cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
-          cell                 = SwipyCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
-          cell?.accessoryType  = .None
-          cell?.selectionStyle = UITableViewCellSelectionStyle.None
-          
-          if incomingfriendsContent.count == 0 {
-            cell.addSubview(getEmpty("No Incoming Requests"))
-            cell!.backgroundColor = UIColor.clearColor()
-          } else {
-            
-            let content = incomingfriendsContent[indexPath.row] as! FriendCell
-            
-            cell?.addSubview(content)
-            cell!.backgroundColor = UIColor.clearColor()
-          }
-          
-          
-        }
+      return self.setUpCellWithIdentifier(self.incomingidentifiers[indexPath.row], andContent: incomingfriendsContent[indexPath.row] as! FriendCell, index: indexPath.row, type: "Incoming", friendsNumber: incomingfriendsContent.count)
+    case 1:
+      guard outgoingfriendsContent.count != 0 else {
+        return getEmptySubCell()
       }
-      
-    } else {
-      var identifier = ""
-      if outgoingfriendsContent.count == 0 {
-        identifier = "emptyout"
-      } else {
-        identifier = self.outgoingidentifiers[indexPath.row]
-      }
-      cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
-      cell = nil
-      autoreleasepool {
-        if cell == nil {
-//          cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
-          cell                 = SwipyCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
-          cell?.accessoryType  = .None
-          cell?.selectionStyle = UITableViewCellSelectionStyle.None
-          cell!.contentView.backgroundColor = UIColor.clearColor()
-          
-          if outgoingfriendsContent.count == 0 {
-            cell.addSubview(getEmpty("No Incoming Requests"))
-            cell!.backgroundColor = UIColor.clearColor()
-          } else {
-            
-            let content = outgoingfriendsContent[indexPath.row] as! FriendCell
-            
-            cell?.addSubview(content)
-            cell!.backgroundColor = UIColor.clearColor()
-          }
-          
-          
-        }
-      }
+      return self.setUpCellWithIdentifier(self.outgoingidentifiers[indexPath.row], andContent: self.outgoingfriendsContent[indexPath.row], index: indexPath.row, type: "Outgoing", friendsNumber: outgoingfriendsContent.count)
+    default:
+      return getEmptySubCell()
     }
     
-    //    cell = nil
-    
-    return cell!
   }
   
-  
-  
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.beginUpdates()
-    
-    if tap {
-      if indexPath.section == 0 {
-        if incomingfriendsContent.count > 0 {
-          if indexPath.row == selectedRow  {
-            let content = incomingfriendsContent[indexPath.row] as! FriendCell
-            content.close()
-//            tableView.scrollEnabled = true
-            selectedRow = -1
-            selectedSection = -1
-          } else {
-            let content = incomingfriendsContent[indexPath.row] as! FriendCell
-            content.open()
-            self.setTimeout(1.0, block: {
-//              tableView.scrollEnabled = false
-            })
-            
-            selectedSection = indexPath.section
-            self.selectedRow = indexPath.row
-          }
-        }
-      } else {
-        if outgoingfriendsContent.count > 0 {
-          if indexPath.row == selectedRow  {
-            let content = outgoingfriendsContent[indexPath.row] as! FriendCell
-            content.close()
-//            tableView.scrollEnabled = true
-            selectedRow = -1
-            selectedSection = -1
-          } else {
-            let content = outgoingfriendsContent[indexPath.row] as! FriendCell
-            content.open()
-            self.setTimeout(1.0, block: {
-//              tableView.scrollEnabled = false
-            })
-            
-            selectedSection = indexPath.section
-            self.selectedRow = indexPath.row
-          }
-        }
-        
-      }
-      disableTapForASec()
-    
+    guard tap else {
+      return
     }
     
+    self.tableView.beginUpdates()
     
+    switch indexPath.section {
+    case 0:
+      guard incomingfriendsContent.count > 0 else {
+        return
+      }
+      self.triggerContent(incomingfriendsContent[indexPath.row] as! FriendCell, andIndexPath: indexPath)
+      break
+      
+    case 1:
+      guard outgoingfriendsContent.count > 0 else {
+        return
+      }
+      self.triggerContent(outgoingfriendsContent[indexPath.row] as! FriendCell, andIndexPath: indexPath)
+      break
+    default: break
+      
+    }
     
-    clearArrays()
-    //    tableView.reloadData()
-    tableView.endUpdates()
+    self.disableTapForASec()
+    heights.removeAll()
+    self.tableView.endUpdates()
+  }
+  
+  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+    let content = HeaderViewForPendingFriendsCells(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
+    
+    switch section {
+    case 0:
+      return modfiedTableHeader(content, text: "Incoming")
+      
+    case 1:
+      return modfiedTableHeader(content, text: "Outgoing")
+      
+    default:
+      break
+    }
+    return content
+  }
+  
+  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    switch section {
+    case 0:
+      if self.incomingfriendsContent.count == 0 && self.outgoingfriendsContent.count == 0 {
+        return 0
+      } else {
+        return 30
+      }
+      
+    case 1:
+      if self.incomingfriendsContent.count == 0 && self.outgoingfriendsContent.count == 0 {
+        return 0
+      } else {
+        return 30
+      }
+      
+    default:
+      return 30
+    }
+    
+  }
+  
+  func triggerContent(content: FriendCell, andIndexPath indexPath:NSIndexPath) {
+    if indexPath.row == selectedRow  {
+      content.close()
+      selectedRow = -1
+      selectedSection = -1
+    } else {
+      content.open()
+      selectedSection = indexPath.section
+      self.selectedRow = indexPath.row
+    }
+  }
+  
+  func modfiedTableHeader(content:HeaderViewForPendingFriendsCells, text:String) -> UIView {
+    guard self.pendingFriends.count == 0 else {
+      content.setUp(text)
+      content.hidden = false
+      return content
+    }
+    
+    return content
   }
   
   func disableTapForASec() {
     tap = false
-    self.setTimeout(1.0) {
+    CHBanners().setTimeout(1.0) {
       self.tap = true
     }
   }
   
-  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
-    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
-  }
-  
-  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    var title:String = ""
-    
-//    if section == 0 && self.pendingFriends.count > 0 {
-//      title = "Incoming"
-//    }
-//    if section == 1 && self.pendingFriends.count > 0 {
-//      title = "Outgoing"
-//    }
-
-    let container = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
-    let topSeparator = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 1))
-    let bottomSeparator = UIView(frame: CGRect(x: 0, y:29, width: self.view.frame.size.width, height: 1))
-    bottomSeparator.backgroundColor = CHUIElements().APPColors["Info"]
-    topSeparator.backgroundColor = CHUIElements().APPColors["Info"]
-
-    let innercontainer = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
-    let label = UILabel(frame: CGRect(x: 15, y:0, width: self.view.frame.size.width - 15, height: 30))
-    label.textColor = CHUIElements().APPColors["Info"]
-    label.font = CHUIElements().font16
-    
-    if section == 0 && self.pendingFriends.count > 0 {
-      title = "Incoming"
-      label.text = title
-      container.addSubview(topSeparator)
-      container.addSubview(innercontainer)
-      container.addSubview(bottomSeparator)
-      container.addSubview(label)
-      return container
-    }
-    if section == 1 && self.pendingFriends.count > 0 {
-      title = "Outgoing"
-      label.text = title
-      container.addSubview(topSeparator)
-      container.addSubview(innercontainer)
-      container.addSubview(bottomSeparator)
-      container.addSubview(label)
-      return container
-    }
-    
-    return container
-  }
-  
-  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 30
-  }
   func destroyAll() {
     for item in self.outgoingfriendsContent {
       item.removeFromSuperview()
@@ -359,36 +236,39 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
   func fillArray() {
     self.selectedRow = -1
     self.destroyAll()
+    
     self.outgoingfriendsContent.removeAll()
     self.outgoingidentifiers.removeAll()
     self.outgoing.removeAll()
     
+    self.incomingfriendsContent.removeAll()
     self.incomingidentifiers.removeAll()
     self.incoming.removeAll()
-    self.incomingfriendsContent.removeAll()
     
     self.pendingFriends = CHUsers().getPendingFriend(CHSession().currentUserId)
+    
     for friend in pendingFriends {
-      if friend["friend"]["_id"].stringValue == CHSession().currentUserId {
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      
+      switch CHSession().currentUserId {
+      case friend["friend"]["_id"].stringValue:
         outgoingidentifiers.append("\(friend["owner"]["_id"].stringValue)")
         self.outgoing.append(friend)
-        let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
         content.status = "Outgoing"
         content.setUp(friend["owner"])
         self.outgoingfriendsContent.append(content)
-      }
-      
-      if friend["owner"]["_id"].stringValue == CHSession().currentUserId {
+        break
+        
+      case friend["owner"]["_id"].stringValue:
         incomingidentifiers.append("\(friend["friend"]["_id"].stringValue)")
         self.incoming.append(friend)
-        let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
         content.status = "Incoming"
         content.setUp(friend["friend"])
         self.incomingfriendsContent.append(content)
+        break
+      default:
+        continue
       }
-      
-      
-      
     }
   }
   
@@ -412,7 +292,49 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
     return container
   }
   
-  @IBOutlet weak var refreshTableView: UIRefreshControl!
+  func setUpCellForUsage(cell:UITableViewCell) {
+    cell.accessoryType  = .None
+    cell.selectionStyle = UITableViewCellSelectionStyle.None
+    cell.backgroundColor = UIColor.clearColor()
+  }
+  
+  func getEmptyCell() -> UITableViewCell {
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL-nofriends")
+    self.setUpCellForUsage(cell)
+    cell.addSubview(NoPendingRequests(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200)))
+    return cell
+  }
+  
+  func getEmptySubCell() -> UITableViewCell {
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL-empty")
+    self.setUpCellForUsage(cell)
+    cell.addSubview(self.getEmpty("There are no Requests"))
+    return cell
+  }
+  
+  func getHeightByIndexPath(indexPath: NSIndexPath, andArray array:[UIView]) -> CGFloat {
+    if indexPath.row == self.selectedRow && selectedSection == indexPath.section {
+      heights.append(openedHeight)
+      return openedHeight
+    }
+    
+    if array.count > 0 {
+      let content = array[indexPath.row] as! FriendCell
+      content.close()
+      heights.append(closedHeight)
+      return closedHeight
+    } else {
+      return closedHeight
+    }
+  }
+  
+  func setUpCellWithIdentifier(identifier:String, andContent:UIView?, index:Int, type:String, friendsNumber:Int) -> UITableViewCell {
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
+    self.setUpCellForUsage(cell)
+    
+    cell?.addSubview(andContent!)
+    return cell
+  }
   
   @IBAction func refreshTableViewAction(sender: AnyObject) {
     guard IJReachability.isConnectedToNetwork() else {
@@ -431,91 +353,5 @@ class PendingFriendsController: UITableViewController, SwipyCellDelegate {
     })
     
   }
-  
-  func viewWithImageName(imageName: String) -> UIView {
-    let image = UIImage(named: imageName)
-    let imageView = UIImageView(image: image)
-    imageView.contentMode = .Center
-    return imageView
-  }
-  
-  func viewWithLabel(text: String) -> UIView {
-    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
-    label.text = text
-    label.font = CHUIElements().font16
-    label.numberOfLines = 3
-    label.lineBreakMode = .ByWordWrapping
-    label.textColor = CHUIElements().APPColors["Info"]
-    return label
-  }
-  func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user ends swiping the cell this method is called
-  func swipeableTableViewCellDidEndSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user is dragging, this method is called with the percentage from the border
-  func swipeableTableViewCell(cell: SwipyCell, didSwipeWithPercentage percentage: CGFloat) {
-    
-  }
-  
-  
-  /*
-   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-   let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-   
-   // Configure the cell...
-   
-   return cell
-   }
-   */
-  
-  /*
-   // Override to support conditional editing of the table view.
-   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-   // Return false if you do not want the specified item to be editable.
-   return true
-   }
-   */
-  
-  /*
-   // Override to support editing the table view.
-   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-   if editingStyle == .Delete {
-   // Delete the row from the data source
-   tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-   } else if editingStyle == .Insert {
-   // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   }
-   }
-   */
-  
-  /*
-   // Override to support rearranging the table view.
-   override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-   
-   }
-   */
-  
-  /*
-   // Override to support conditional rearranging of the table view.
-   override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-   // Return false if you do not want the item to be re-orderable.
-   return true
-   }
-   */
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
   
 }

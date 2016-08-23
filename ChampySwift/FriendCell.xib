@@ -266,13 +266,6 @@
                                 <action selector="minusAction:" destination="-1" eventType="touchUpInside" id="I4f-Eb-0Wr"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQl-hK-mBS">
-                            <rect key="frame" x="434" y="8" width="62" height="62"/>
-                            <state key="normal" image="plusicon"/>
-                            <connections>
-                                <action selector="addAction:" destination="-1" eventType="touchUpInside" id="tol-gI-Egn"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsD-DS-8PZ">
                             <rect key="frame" x="0.0" y="357" width="432" height="1"/>
                             <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="0.96542440880000002" colorSpace="calibratedRGB"/>
@@ -353,6 +346,13 @@
                                 <constraint firstItem="Y4P-YF-HjJ" firstAttribute="leading" secondItem="HQD-nr-J6c" secondAttribute="trailing" constant="1" id="yxN-yp-wMF"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQl-hK-mBS">
+                            <rect key="frame" x="432" y="9" width="62" height="62"/>
+                            <state key="normal" image="plusicon"/>
+                            <connections>
+                                <action selector="addAction:" destination="-1" eventType="touchUpInside" id="tol-gI-Egn"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>

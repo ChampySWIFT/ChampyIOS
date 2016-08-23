@@ -30,40 +30,18 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   @IBOutlet weak var acceptedYourChallenge: UISwitch!
   @IBOutlet weak var challengeEnd: UISwitch!
   @IBOutlet weak var friendRequest: UISwitch!
+  @IBOutlet weak var dailyLabel: UILabel!
+  @IBOutlet weak var pickerView: UIView!
+  @IBOutlet weak var dailyNOtificatorButton: UISwitch!
+  @IBOutlet var timePickerView: UIDatePicker!
+  @IBOutlet weak var inputFieldsForTime: UITextField!
   
   var isHidden = true
   var datePicker:UIDatePicker! = nil
   
-  @IBAction func switchedSwitcher(sender: UISwitch!) {
-    
-    if !IJReachability.isConnectedToNetwork() {
-      sender.on = !sender.on
-    }
-    
-    let params = [
-      "friendRequests": "\(self.friendRequest.on)",
-      "challengeEnd": "\(self.challengeEnd.on)",
-      "acceptedYourChallenge": "\(self.acceptedYourChallenge.on)",
-      "newChallengeRequests": "\(self.enwChallengeRequests.on)",
-      "pushNotifications": "\(self.pushNotifications.on)"
-    ]
-    
-    
-    print(params)
-    
-    CHRequests().updateUserProfileOptions(CHSession().currentUserId, params: params) { (result, json) in
-      if result {}
-    }
-  }
-  
-  
-  @IBOutlet var timePickerView: UIDatePicker!
-  @IBOutlet weak var inputFieldsForTime: UITextField!
-  
-  
+  // MARK: - Override lifecycle methods
   override func viewDidLoad() {
     super.viewDidLoad()
-//    self.inputFieldsForTime.inputAccessoryView = self.timePickerView
     let userObject:JSON            = CHSession().currentUserObject
     userAvatar.layer.masksToBounds = true
     userAvatar.layer.cornerRadius  = 50.0
@@ -76,25 +54,10 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.pushNotifications.on     = userObject["profileOptions"]["pushNotifications"].boolValue
     CHImages().setUpAvatar(userAvatar)
     
-    if CHSession().CurrentUser.objectForKey("isHiddenDN") != nil {
-      self.isHidden = CHSession().CurrentUser.boolForKey("isHiddenDN")
-    } else {
-      self.isHidden = true
-      CHSession().CurrentUser.setBool(true, forKey: "isHiddenDN")
-    }
     
-    dailyNOtificatorButton.on = self.isHidden
-    self.pickerView.hidden  = !self.isHidden
+    CHUIElements().setUpDailyReminderCredentials(self.isHidden, switcher: self.dailyNOtificatorButton, picker: self.pickerView, label: self.dailyLabel)
+    datePicker = CHUIElements().initAndSetUpDatePicker(30)
     
-    self.dailyLabel.hidden = self.isHidden
-  
-    
-    
-    datePicker = UIDatePicker() // Although you probably have an IBOutlet
-    datePicker.datePickerMode = UIDatePickerMode.Time
-    datePicker.backgroundColor = UIColor.lightGrayColor()
-    datePicker.tintColor = CHUIElements().APPColors["navigationBar"]
-    datePicker.minuteInterval = 30
     
     let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
     
@@ -103,35 +66,19 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     let barButtonDone                       = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(SettingsTableViewController.valueChangedInDateField))
     barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
     toolBar.items                           = [spaceButton, barButtonDone]
+    
     self.inputFieldsForTime.inputAccessoryView = toolBar;
     self.inputFieldsForTime.inputView = datePicker;
     self.inputFieldsForTime.delegate  = self
-    
-    if CHSession().CurrentUser.objectForKey("hoursDN") != nil {
-      self.inputFieldsForTime.text = "\(CHSession().CurrentUser.stringForKey("hoursDN")!):\(CHSession().CurrentUser.stringForKey("minsDN")!)"
+    var minuteString = ""
+    let minutes:Int = CHSession().getIntByKey("minsDN")
+    print(minutes)
+    if minutes == 0 {
+      self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):00"
+    } else {
+      self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):\(minutes)"
     }
     
-  }
-  
-  func valueChangedInDateField() {
-    let dateFormatter = NSDateFormatter()
-    
-    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-    dateFormatter.dateFormat = "HH:mm"
-    let strDate = dateFormatter.stringFromDate(datePicker.date)
-    
-    let calendar = NSCalendar.currentCalendar()
-    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: datePicker.date)
-    let hour = comp.hour
-    let minute = comp.minute
-    
-    self.inputFieldsForTime.text = strDate
-    
-    inputFieldsForTime.resignFirstResponder()
-    
-    CHSession().CurrentUser.setInteger(hour, forKey: "hoursDN")
-    CHSession().CurrentUser.setInteger(minute, forKey: "minsDN")
-
   }
   
   override func didReceiveMemoryWarning() {
@@ -139,7 +86,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     // Dispose of any resources that can be recreated.
   }
   
-  
+  // MARK: - IBACtion methods
   @IBAction func changeName(sender: AnyObject) {
     
     let forgot = UIAlertController(title: "Would you like to change your name?", message: "Please enter your name", preferredStyle: UIAlertControllerStyle.Alert)
@@ -210,18 +157,15 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
-  
   @IBAction func acceptLogOutAction(sender: AnyObject) {
     self.logOutButton.hidden = false
     self.confirmationLogOutContainer.hidden = true
     
-    Async.main {
-      CHPush().unSubscribeUserFrom(CHSession().currentUserId)
-      CHSession().clearSession()
-      let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-      let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-      self.presentViewController(roleControlViewController, type: .push, animated: false)
-    }
+    //    CHPush().unSubscribeUserFrom(CHSession().currentUserId)
+    CHSession().clearSession()
+    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+    self.presentViewController(roleControlViewController, type: .push, animated: false)
     
   }
   
@@ -230,7 +174,6 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.confirmationLogOutContainer.hidden = true
     
   }
-  
   
   @IBAction func deleteAccountAction(sender: AnyObject) {
     self.deleteButton.hidden = true
@@ -249,24 +192,86 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
-  
-  
+  @IBAction func switchedSwitcher(sender: UISwitch!) {
+    
+    if !IJReachability.isConnectedToNetwork() {
+      sender.on = !sender.on
+    }
+    
+    let params = [
+      "friendRequests": "\(self.friendRequest.on)",
+      "challengeEnd": "\(self.challengeEnd.on)",
+      "acceptedYourChallenge": "\(self.acceptedYourChallenge.on)",
+      "newChallengeRequests": "\(self.enwChallengeRequests.on)",
+      "pushNotifications": "\(self.pushNotifications.on)"
+    ]
+    
+    CHRequests().updateUserProfileOptions(CHSession().currentUserId, params: params) { (result, json) in if result {} }
+  }
   
   @IBAction func acceptDeleteAccount(sender: AnyObject) {
     self.deleteButton.hidden = false
     self.confirmDeleteAccountContainer.hidden = true
-    CHRequests().deleteAccount(CHSession().currentUserId) { (result, json) in
+    CHRequests().surrenderAll(CHSession().currentUserId) { (result, json) in
       if result {
-        Async.main {
-          CHSession().clearSession()
-          let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-          self.presentViewController(roleControlViewController, type: .push, animated: false)
+        
+        CHRequests().deleteAccount(CHSession().currentUserId) { (result, json) in
+          if result {
+            Async.main {
+              CHSession().clearSession()
+              let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+              self.presentViewController(roleControlViewController, type: .push, animated: false)
+            }
+          }
         }
+        
       }
+    }
+    
+    
+  }
+  
+  @IBAction func triggerDailyNtificator(sender: AnyObject) {
+    
+    isHidden = dailyNOtificatorButton.on
+    
+    self.pickerView.hidden = !isHidden
+    self.dailyLabel.hidden = isHidden
+    CHSession().CurrentUser.setBool(isHidden, forKey: "isHiddenDN")
+    
+  }
+  
+  @IBAction func upoadPhotoAction(sender: AnyObject) {
+    guard IJReachability.isConnectedToNetwork() else {
+      CHPush().alertPush("No internet connection", type: "Warning")
+      return
+    }
+    let fusuma = FusumaViewController()
+    fusuma.delegate = self
+    self.presentViewController(fusuma, animated: true, completion: nil)
+    
+  }
+  
+  @IBAction func aboutPage(sender: AnyObject) {
+    if let requestUrl = NSURL(string: "http://champyapp.com") {
+      UIApplication.sharedApplication().openURL(requestUrl)
     }
   }
   
+  @IBAction func privacyPolicAction(sender: AnyObject) {
+    if let requestUrl = NSURL(string: "http://champyapp.com/privacy.html") {
+      UIApplication.sharedApplication().openURL(requestUrl)
+    }
+  }
+  
+  @IBAction func enUserAgreementAction(sender: AnyObject) {
+    if let requestUrl = NSURL(string: "http://champyapp.com/Terms.html") {
+      UIApplication.sharedApplication().openURL(requestUrl)
+    }
+  }
+  
+  // MARK: - Other functions methods
   func fusumaImageSelected(image: UIImage) {
     if IJReachability.isConnectedToNetwork() == false {
       return
@@ -295,64 +300,36 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
         }
       })
     }
-  
-  }
-  
-  
-  @IBOutlet weak var dailyLabel: UILabel!
-  @IBOutlet weak var pickerView: UIView!
-  
-  @IBOutlet weak var dailyNOtificatorButton: UISwitch!
-
-  @IBAction func triggerDailyNtificator(sender: AnyObject) {
-    
-    isHidden = dailyNOtificatorButton.on
-    
-    self.pickerView.hidden = !isHidden
-    self.dailyLabel.hidden = isHidden
-    CHSession().CurrentUser.setBool(isHidden, forKey: "isHiddenDN")
     
   }
-  // Return the image but called after is dismissed.
+  
   func fusumaDismissedWithImage(image: UIImage) {
     
-//    print("Called just after FusumaViewController is dismissed.")
   }
   
-  // When camera roll is not authorized, this method is called.
   func fusumaCameraRollUnauthorized() {
     
-//    print("Camera  roll unauthorized")
   }
   
-  @IBAction func upoadPhotoAction(sender: AnyObject) {
-    guard IJReachability.isConnectedToNetwork() else {
-      CHPush().alertPush("No internet connection", type: "Warning")
-      return
-    }
-    let fusuma = FusumaViewController()
-    fusuma.delegate = self
-    self.presentViewController(fusuma, animated: true, completion: nil)
-
-  }
-  
-  
-  @IBAction func aboutPage(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com") {
-      UIApplication.sharedApplication().openURL(requestUrl)
-    }
-  }
-  
-  @IBAction func privacyPolicAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com/privacy.html") {
-      UIApplication.sharedApplication().openURL(requestUrl)
-    }
-  }
-  
-  @IBAction func enUserAgreementAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com/Terms.html") {
-      UIApplication.sharedApplication().openURL(requestUrl)
-    }
+  func valueChangedInDateField() {
+    let dateFormatter = NSDateFormatter()
+    
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter.dateFormat = "HH:mm"
+    let strDate = dateFormatter.stringFromDate(datePicker.date)
+    
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: datePicker.date)
+    let hour = comp.hour
+    let minute = comp.minute
+    
+    self.inputFieldsForTime.text = strDate
+    
+    inputFieldsForTime.resignFirstResponder()
+    
+    CHSession().CurrentUser.setInteger(hour, forKey: "hoursDN")
+    CHSession().CurrentUser.setInteger(minute, forKey: "minsDN")
+    
   }
   
   

@@ -39,6 +39,7 @@
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
@@ -231,10 +232,10 @@
                                                     <constraint firstAttribute="height" constant="223" id="djO-4i-i5U"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="45"/>
-                                                <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="0.88216594829999995" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WakeUpColor" translatesAutoresizingMaskIntoConstraints="NO" id="57p-h0-935">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WakeUp" translatesAutoresizingMaskIntoConstraints="NO" id="57p-h0-935">
                                                 <rect key="frame" x="137" y="194" width="100" height="100"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -273,7 +274,6 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-bm-wgx">
                                         <rect key="frame" x="145" y="590" width="85" height="85"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64514073579999998" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="2ov-Vp-8xi"/>
                                             <constraint firstAttribute="height" constant="85" id="LJ4-Nn-qBC"/>
@@ -318,7 +318,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtA-rE-6px" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.5" y="-409.5"/>
+            <point key="canvasLocation" x="1376.5" y="-409.5"/>
+        </scene>
+        <!--Facebook Auth View Controller-->
+        <scene sceneID="Q6x-qV-btc">
+            <objects>
+                <viewController id="9uJ-qs-hQI" customClass="FacebookAuthViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HY1-Wf-7St"/>
+                        <viewControllerLayoutGuide type="bottom" id="9JE-yT-X8S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cIP-xM-JI6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="19g-1a-bkK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting to Facebook..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-Ce-l6e">
+                                <rect key="frame" x="16" y="323" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="hnY-RM-6np"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hFn-S9-HUv">
+                                <rect key="frame" x="169" y="359" width="37" height="37"/>
+                                <color key="color" red="0.96078431369999995" green="0.72156862749999995" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9JE-yT-X8S" firstAttribute="top" secondItem="19g-1a-bkK" secondAttribute="bottom" id="1fl-hP-pqO"/>
+                            <constraint firstItem="hFn-S9-HUv" firstAttribute="centerX" secondItem="cIP-xM-JI6" secondAttribute="centerX" id="2b5-rF-k2r"/>
+                            <constraint firstItem="cVE-Ce-l6e" firstAttribute="centerX" secondItem="cIP-xM-JI6" secondAttribute="centerX" id="CkP-Zr-fdy"/>
+                            <constraint firstItem="cVE-Ce-l6e" firstAttribute="trailing" secondItem="cIP-xM-JI6" secondAttribute="trailingMargin" id="IFB-YD-1Hx"/>
+                            <constraint firstItem="hFn-S9-HUv" firstAttribute="top" secondItem="cVE-Ce-l6e" secondAttribute="bottom" constant="15" id="WGy-eF-ifr"/>
+                            <constraint firstItem="cVE-Ce-l6e" firstAttribute="centerY" secondItem="cIP-xM-JI6" secondAttribute="centerY" id="XBP-ML-hGJ"/>
+                            <constraint firstItem="cVE-Ce-l6e" firstAttribute="leading" secondItem="cIP-xM-JI6" secondAttribute="leadingMargin" id="ZIF-g4-I2r"/>
+                            <constraint firstItem="19g-1a-bkK" firstAttribute="top" secondItem="cIP-xM-JI6" secondAttribute="top" id="bio-rA-o5d"/>
+                            <constraint firstAttribute="trailing" secondItem="19g-1a-bkK" secondAttribute="trailing" id="gOs-ZC-OLp"/>
+                            <constraint firstItem="19g-1a-bkK" firstAttribute="leading" secondItem="cIP-xM-JI6" secondAttribute="leading" id="hns-i8-5ja"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCX-Zn-HWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1821.5" y="-409.5"/>
         </scene>
         <!--Welcome at Champy-->
         <scene sceneID="gZ2-uW-zfc">
@@ -359,6 +408,7 @@
                                         </state>
                                         <connections>
                                             <action selector="authWithFacebook:" destination="xjQ-ad-gAJ" eventType="touchUpInside" id="TDL-a0-E1M"/>
+                                            <segue destination="9uJ-qs-hQI" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="m5q-za-vcF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1374,12 +1424,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-zq-rUh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI8-xQ-VcQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Zay-9G-GqL" id="PYX-tB-lUQ"/>
-                                </connections>
-                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgb-fb-Bjz">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -1440,6 +1484,12 @@
                                     <constraint firstAttribute="height" constant="27" id="ahh-5l-SgG"/>
                                 </constraints>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI8-xQ-VcQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Zay-9G-GqL" id="PYX-tB-lUQ"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2238,7 +2288,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-ay-6Ld">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93a-5R-eG9">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93a-5R-eG9">
                                                             <rect key="frame" x="15" y="19" width="272" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="vcU-xx-RD7"/>
@@ -2280,12 +2330,12 @@
                                                             <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="30"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick the most suitable time for your daily reminders" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ss8-S5-LQB">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily reminder" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ss8-S5-LQB">
                                                             <rect key="frame" x="15" y="8" width="142" height="43"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="142" id="C5s-o1-6LI"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="default">
@@ -2827,16 +2877,16 @@
         <scene sceneID="gRV-3f-0YB">
             <objects>
                 <tableViewController storyboardIdentifier="PendingFriendsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RGO-Cq-jTZ" customClass="PendingFriendsController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gJH-Ir-gqw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="gJH-Ir-gqw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="0.0" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dxA-y2-ZZa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxA-y2-ZZa" id="eWZ-np-VZg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3422,7 +3472,7 @@
         <image name="SelfImprovement" width="100" height="100"/>
         <image name="SettingsActive" width="44" height="44"/>
         <image name="Wake-up" width="100" height="100"/>
-        <image name="WakeUpColor" width="75" height="75"/>
+        <image name="WakeUp" width="96" height="96"/>
         <image name="addIcon" width="117" height="117"/>
         <image name="back" width="25" height="45"/>
         <image name="center" width="565" height="565"/>
@@ -3438,11 +3488,11 @@
         <image name="wins" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KWy-Sq-UFz"/>
-        <segue reference="ro3-oA-3EM"/>
-        <segue reference="xgf-yx-vXc"/>
+        <segue reference="f0k-g1-DxH"/>
         <segue reference="Bpc-Yg-btr"/>
-        <segue reference="DSc-Xv-fDL"/>
-        <segue reference="lcB-oY-rVi"/>
+        <segue reference="cn2-vs-G6j"/>
+        <segue reference="KWy-Sq-UFz"/>
+        <segue reference="xgf-yx-vXc"/>
+        <segue reference="CJu-Sm-jAY"/>
     </inferredMetricsTieBreakers>
 </document>

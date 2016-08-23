@@ -47,6 +47,35 @@ class CHUsers: NSObject {
     CHSession().createSessionForTheUserWithFacebookId(facebookId, name: name, andObjectId: objectId, userObject: userObject )
   }
   
+  
+  /**
+   check the selected user is valid
+   
+   @return users json array
+   */
+  func isValidUser(item:JSON) -> Bool {
+    guard item["_id"].stringValue != CHSession().currentUserId else {
+      return false
+    }
+    
+    guard item["photo"] != nil else {
+      return false
+    }
+    
+    guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
+      return false
+    }
+    
+    guard item["name"].stringValue != "sadassecondFacebookIdasda" else {
+      return false
+    }
+    
+    //    guard getStatus(item) == "Other" else {
+    //      return false
+    //    }
+    return true
+  }
+  
   /**
    Get users from local database
    
@@ -55,19 +84,11 @@ class CHUsers: NSObject {
   func getUsers() -> [JSON] {
     var friends:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
-      guard item["_id"].stringValue != CHSession().currentUserId else {
-        continue
-      }
-
-      guard item["photo"] != nil else {
-        continue
+      if isValidUser(item) {
+        friends.append(item)
       }
       
-      guard getStatus(item) == "Other" else {
-        continue
-      }
       
-      friends.append(item)
     }
     return friends
   }
@@ -76,7 +97,7 @@ class CHUsers: NSObject {
    Get one user from local database
    
    @param userId user's object id
-  
+   
    @return user json object
    */
   func getUserById(userId:String) -> JSON {
@@ -150,7 +171,7 @@ class CHUsers: NSObject {
    */
   func getStatus(jsonItem:JSON) -> String {
     let userId: String = jsonItem["_id"].stringValue
-    
+    var result = "Other"
     for (_, item): (String, JSON) in CHSession().getJSONByKey("friendsList(\(CHSession().currentUserId))") {
       guard item["owner"] != nil else {
         continue
@@ -160,30 +181,32 @@ class CHUsers: NSObject {
         continue
       }
       
-      guard !item["status"].boolValue else  {
-        guard item["owner"]["_id"].stringValue != userId else {
-          return "Outgoing"
+      if item["owner"]["_id"].stringValue == userId || item["friend"]["_id"].stringValue == userId {
+        if !item["status"].boolValue  {
+          if item["owner"]["_id"].stringValue == userId {
+            result =  "Outgoing"
+            break
+          }
+          
+          if item["friend"]["_id"].stringValue == userId {
+            result =  "Incoming"
+            break
+          }
+          
+          result =  "Other"
+          break
+        } else {
+          result =  "Friends"
+          break
         }
-        
-        guard item["friend"]["_id"].stringValue != userId else {
-          return "Incoming"
-        }
-        
-        return "Other"
       }
       
-      guard item["owner"]["_id"].stringValue != userId else {
-        return "Friends"
-      }
       
-      guard item["friend"]["_id"].stringValue != userId else {
-        return "Friends"
-      }
     }
     
-    return "Other"
+    return result
   }
   
   
-
+  
 }

@@ -36,13 +36,7 @@ class CHPush: NSObject {
       try  push.sendPush()
     } catch  {
       
-    } catch  {
-      
     }
-    
-    
-    
-    //    push.sendPushInBackground()
   }
   
   /*
@@ -79,15 +73,12 @@ class CHPush: NSObject {
    user_'spotId'      : user or business in host mode
    */
   
-  
-  
   func unSubscribeUserFrom(channelIdentifier:String){
     let currentInstallation = PFInstallation.currentInstallation()
     currentInstallation.removeObject("user_\(channelIdentifier)", forKey: "channels")
     currentInstallation.saveInBackground()
     
   }
-  
   
   /*
    clear badge number
@@ -99,7 +90,6 @@ class CHPush: NSObject {
     currentInstallation.saveEventually()
     
   }
-  
   
   func updateImageOnSettings(image:UIImage) {
     let name:String = "updateImage"
@@ -120,7 +110,6 @@ class CHPush: NSObject {
       "type": type,
       "message": message
     ]
-    
     
     center.postNotificationName("alert", object: nil, userInfo: object)
   }

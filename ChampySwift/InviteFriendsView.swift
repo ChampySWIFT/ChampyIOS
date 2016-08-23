@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InviteFriendsView: UIView {
+@IBDesignable class InviteFriendsView: UIView {
 
   var view: UIView!
   

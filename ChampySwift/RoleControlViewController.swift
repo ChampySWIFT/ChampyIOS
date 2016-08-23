@@ -17,25 +17,29 @@ class RoleControlViewController: UIViewController {
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   override func viewDidLoad() {
-//    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
+    //    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
     self.navigationController?.setNavigationBarHidden(true, animated: false)
     super.viewDidLoad()
+    let value = UIInterfaceOrientation.Portrait.rawValue
+    UIDevice.currentDevice().setValue(value, forKey: "orientation")
     let center = NSNotificationCenter.defaultCenter()
-    
+    //    setUpBehavior
     center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: "alert", object: nil)
     center.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: "toMainView", object: nil)
+    center.addObserver(self, selector: #selector(RoleControlViewController.setUpBehavior), name: "setUpBehavior", object: nil)
     self.navigationItem.leftBarButtonItem = nil
     
     navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
     let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
     let authViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AuthViewController")
-    
-    let value = UIInterfaceOrientation.Portrait.rawValue
-    UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    authViewController.modalPresentationStyle = .OverCurrentContext
     
     if !CHSession().logined {
-      self.presentViewController(authViewController, type: .push, animated: false)
-    } else {
+      self.presentViewController(authViewController, animated: true, completion: {
+        
+      })
+    }
+    else {
       self.socket.connect()
       self.handleSocketActions()
       self.toMainView()
@@ -45,6 +49,12 @@ class RoleControlViewController: UIViewController {
     
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.hidesBackButton = true
+  }
+  
+  func setUpBehavior() {
+    toMainView()
+    self.socket.connect()
+    self.handleSocketActions()
   }
   
   func toMainView() {

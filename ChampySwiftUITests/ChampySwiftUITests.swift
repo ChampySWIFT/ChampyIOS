@@ -7,10 +7,14 @@
 //
 
 import XCTest
+import SwiftyJSON
+import UIKit
+
+@testable import ChampySwift
 
 class ChampySwiftUITests: XCTestCase {
   
-  let iterationCount:Int = 30
+  let iterationCount:Int = 1
   
   override func setUp() {
     super.setUp()
@@ -28,9 +32,36 @@ class ChampySwiftUITests: XCTestCase {
     super.tearDown()
   }
   
-  func testExample() {
-    // Use recording to get started writing UI tests.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+  // MARK: - other tests
+  
+  func testSelfImprovementWinDoneAndFail() {
+    
+    
+    let app = XCUIApplication()
+    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.buttons["SelfImprovement"].tap()
+    app.buttons["addIcon"].tap()
+    app.buttons["YES"].tap()
+    
+    let challengesElementsQuery = app.otherElements.containingType(.NavigationBar, identifier:"Challenges")
+    challengesElementsQuery.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
+    challengesElementsQuery.childrenMatchingType(.Other).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
+    
+    
+  }
+  
+  func testSelfImprovementWinFail() {
+    
+    
+    let app = XCUIApplication()
+    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.buttons["SelfImprovement"].tap()
+    app.buttons["addIcon"].tap()
+    app.buttons["YES"].tap()
+    app.otherElements.containingType(.NavigationBar, identifier:"Challenges").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
+    
+    
+    
   }
   
   func testToHistory() {
@@ -43,14 +74,147 @@ class ChampySwiftUITests: XCTestCase {
     }
   }
   
-  func testToFrinds() {
+  func testTriggeringCell() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["friends"].tap()
+    app.navigationBars["ChampySwift.FriendsView"].buttons["Other"].tap()
+    //    Plus Button
+    let cells = app.tables.cells
+    sleep(1)
+    cells.elementBoundByIndex(0).forceTapElement()
+    sleep(2)
+    cells.elementBoundByIndex(0).forceTapElement()
+  }
+  
+  func testOpenCloseView() {
+    
+    let button = XCUIApplication().toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2)
+    button.tap()
+    button.tap()
+    
+  }
+  
+  func testSelfImprovement() {
+    
+  }
+  
+  func testRedirects() {
+    
     let toolbarsQuery = XCUIApplication().toolbars
     
     for var i:Int in 0...iterationCount {
+      toolbarsQuery.buttons["clock"].tap()
       toolbarsQuery.buttons["friends"].tap()
+      toolbarsQuery.buttons["settings"].tap()
       toolbarsQuery.buttons["Challenge"].tap()
       
     }
+    
+  }
+  
+  func testCreateChallenge() {
+    
+    let app = XCUIApplication()
+    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.buttons["SelfImprovement"].tap()
+    app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).tap()
+    app.buttons["addIcon"].tap()
+    app.buttons["YES"].tap()
+    
+    let toolbarsQuery = app.toolbars
+    toolbarsQuery.buttons["clock"].tap()
+    toolbarsQuery.buttons["Challenge"].tap()
+    
+  }
+  
+  func testCreateWakeUp() {
+    
+    let app = XCUIApplication()
+    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.buttons["Wake up"].tap()
+    app.buttons["addIcon"].tap()
+    app.buttons["YES"].tap()
+    app.buttons["ExitIcon"].tap()
+    
+  }
+  
+  func testAdd10Challenges() {
+    let app = XCUIApplication()
+    for var i:Int in 0...iterationCount {
+      app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+      app.buttons["SelfImprovement"].tap()
+      app.buttons["addIcon"].tap()
+      app.buttons["YES"].tap()
+    }
+  }
+  
+  // MARK: - Settings tests
+  
+  func testSettingsOptions() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["settings"].tap()
+    
+    let tablesQuery = app.tables
+    let table = tablesQuery.element
+    table.swipeUp()
+    
+    let friendRequestsSwitch = tablesQuery.switches["Friend Requests"]
+    friendRequestsSwitch.tap()
+    friendRequestsSwitch.tap()
+    
+    let challengeEndSwitch = tablesQuery.switches["Challenge End"]
+    challengeEndSwitch.tap()
+    challengeEndSwitch.tap()
+    
+    let acceptedYourChallengeSwitch = tablesQuery.switches["Accepted Your Challenge"]
+    acceptedYourChallengeSwitch.tap()
+    acceptedYourChallengeSwitch.tap()
+    
+  }
+  
+  func testEndUserAgreement() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["settings"].tap()
+    
+    let tablesQuery = app.tables
+    let table = tablesQuery.element
+    table.swipeUp()
+    tablesQuery.buttons["End User Agreement"].tap()
+    //    XCUIApplication().statusBars.buttons["Back to ChampySwift"].tap()
+    //    XCUIDevice.sharedDevice().orientation = .Portrait
+    
+    
+  }
+  
+  func testPrivacy() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["settings"].tap()
+    
+    let tablesQuery = app.tables
+    let table = tablesQuery.element
+    table.swipeUp()
+    tablesQuery.buttons["Privacy Policy"].tap()
+    //    let backToChampyswiftButton = app.statusBars.buttons["Back to ChampySwift"]
+    //    backToChampyswiftButton.tap()
+    
+  }
+  
+  func testAbout() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["settings"].tap()
+    
+    let tablesQuery = app.tables
+    let table = tablesQuery.element
+    table.swipeUp()
+    //    let backToChampyswiftButton = app.statusBars.buttons["Back to ChampySwift"]
+    tablesQuery.buttons["About"].tap()
+    //    backToChampyswiftButton.tap()
+    
   }
   
   func testToSettings() {
@@ -58,6 +222,30 @@ class ChampySwiftUITests: XCTestCase {
     
     for var i:Int in 0...iterationCount {
       toolbarsQuery.buttons["settings"].tap()
+      toolbarsQuery.buttons["Challenge"].tap()
+      
+    }
+  }
+  
+  func testChangeName() {
+    
+    let app = XCUIApplication()
+    app.toolbars.buttons["settings"].tap()
+    app.tables.buttons["Name"].tap()
+    app.alerts["Would you like to change your name?"].collectionViews.textFields["Enter your name"]
+    
+    
+    
+  }
+  
+  
+  // MARK: - Friends tests
+  
+  func testToFrinds() {
+    let toolbarsQuery = XCUIApplication().toolbars
+    
+    for var i:Int in 0...iterationCount {
+      toolbarsQuery.buttons["friends"].tap()
       toolbarsQuery.buttons["Challenge"].tap()
       
     }
@@ -75,6 +263,9 @@ class ChampySwiftUITests: XCTestCase {
     
     let otherButton = champyswiftFriendsviewNavigationBar.buttons["Other"]
     otherButton.tap()
+    
+    //    app.tables.cells.
+    
     pendingButton.tap()
     champyswiftFriendsviewNavigationBar.buttons["Friends"].tap()
     pendingButton.tap()
@@ -83,6 +274,39 @@ class ChampySwiftUITests: XCTestCase {
     
   }
   
+  func testaddFriend() {
+    let app = XCUIApplication()
+    app.toolbars.buttons["friends"].tap()
+    app.navigationBars["ChampySwift.FriendsView"].buttons["Other"].tap()
+    let cells = app.tables.cells
+    cells.elementBoundByIndex(0).forceTapElement()
+    sleep(2)
+    cells.elementBoundByIndex(0).forceTapElement()
+    sleep(2)
+    //    let button = app.buttons["plusicon"]
+    
+    //    button.forceTapElement()
+  }
+  
+  func testrefreshFriendsView() {
+    let app = XCUIApplication()
+    app.toolbars.buttons["friends"].tap()
+    let table = app.scrollViews.childrenMatchingType(.Table).element
+    
+    
+    
+    let champyswiftFriendsviewNavigationBar = app.navigationBars["ChampySwift.FriendsView"]
+    champyswiftFriendsviewNavigationBar.buttons["Pending"].tap()
+    table.swipeDown()
+    champyswiftFriendsviewNavigationBar.buttons["Other"].tap()
+    table.swipeDown()
+    champyswiftFriendsviewNavigationBar.buttons["Friends"].tap()
+    table.swipeDown()
+    
+  }
+  
+  
+  // MARK: - History tests
   
   func testHistoryScreenSwitcing() {
     
@@ -104,14 +328,6 @@ class ChampySwiftUITests: XCTestCase {
     
   }
   
-  func testOpenCloseView() {
-    
-    let button = XCUIApplication().toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2)
-    button.tap()
-    button.tap()
-    
-  }
-  
   func testrefreshHistoryView() {
     
     let app = XCUIApplication()
@@ -128,110 +344,21 @@ class ChampySwiftUITests: XCTestCase {
     
   }
   
-  func testrefreshFriendsView() {
-    let app = XCUIApplication()
-    app.toolbars.buttons["friends"].tap()
-    let table = app.scrollViews.childrenMatchingType(.Table).element
-    
-    
-    
-    let champyswiftFriendsviewNavigationBar = app.navigationBars["ChampySwift.FriendsView"]
-    champyswiftFriendsviewNavigationBar.buttons["Pending"].tap()
-    table.swipeDown()
-    champyswiftFriendsviewNavigationBar.buttons["Other"].tap()
-    table.swipeDown()
-    champyswiftFriendsviewNavigationBar.buttons["Friends"].tap()
-    table.swipeDown()
+  func testLogOutLogIn() {
     
   }
   
+}
+
+extension XCUIElement {
   
-  func testSelfImprovement() {
-    
-  }
-  
-  func testRedirects() {
-    
-    let toolbarsQuery = XCUIApplication().toolbars
-    
-    for var i:Int in 0...iterationCount {
-      toolbarsQuery.buttons["clock"].tap()
-      toolbarsQuery.buttons["friends"].tap()
-      toolbarsQuery.buttons["settings"].tap()
-      toolbarsQuery.buttons["Challenge"].tap()
-      
+  func forceTapElement() {
+    if self.hittable {
+      self.tap()
     }
-    
-  }
-  
-  func testLogInLogOut() {
-    
-   
-    
-  }
-  
-  func testCreateChallenge() {
-    
-    let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
-    app.buttons["SelfImprovement"].tap()
-    app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).tap()
-    app.buttons["addIcon"].tap()
-    app.buttons["YES"].tap()
-    
-    let toolbarsQuery = app.toolbars
-    toolbarsQuery.buttons["clock"].tap()
-    toolbarsQuery.buttons["Challenge"].tap()
-    
-  }
-  
-  
-  func testCreateWakeUp() {
-    
-    let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
-    app.buttons["Wake up"].tap()
-    
-    let minusiconButton = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Button).matchingIdentifier("minusicon").elementBoundByIndex(1)
-    minusiconButton.tap()
-    minusiconButton.tap()
-    app.buttons["addIcon"].tap()
-    app.buttons["YES"].tap()
-    
-    let toolbarsQuery = app.toolbars
-    toolbarsQuery.buttons["clock"].tap()
-    toolbarsQuery.buttons["Challenge"].tap()
-    
-  }
-  
-  func testChangeName() {
-    
-    let app = XCUIApplication()
-    app.toolbars.buttons["settings"].tap()
-    
-    let nameButton = app.tables.buttons["Name"]
-    nameButton.tap()
-    
-    let collectionViewsQuery = app.alerts["Would you like to change your name?"].collectionViews
-    collectionViewsQuery.textFields["Enter your name"].tap()
-    collectionViewsQuery.textFields["Enter your name"]
-    collectionViewsQuery.buttons["Change"].tap()
-    nameButton.tap()
-    collectionViewsQuery.textFields["Enter your name"]
-    
-  }
-  
-  func testAdd10Challenges() {
-    let app = XCUIApplication()
-    for var i:Int in 0...iterationCount {
-      app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
-      app.buttons["SelfImprovement"].tap()
-      app.buttons["addIcon"].tap()
-      app.buttons["YES"].tap()
+    else {
+      let coordinate: XCUICoordinate = self.coordinateWithNormalizedOffset(CGVectorMake(0.0, 0.0))
+      coordinate.tap()
     }
   }
-  
-  
-  
-  
 }

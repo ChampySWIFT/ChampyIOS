@@ -35,7 +35,7 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//    return 80
+    //    return 80
     if indexPath.row == self.selectedRow {
       heights.append(170)
       return 170
@@ -45,7 +45,7 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
       heights.append(80)
       return 80
     }
-  
+    
   }
   
   // MARK: - Table view data source
@@ -73,7 +73,7 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   func swipeableTableViewCell(cell: SwipyCell, didSwipeWithPercentage percentage: CGFloat) {
     
   }
-
+  
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
@@ -125,19 +125,21 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    disableTapForASec()
-    tableView.beginUpdates()
-    if indexPath.row == selectedRow {
-      let content = historyItems[indexPath.row] as! HistoryCell
-      content.close()
-      selectedRow = -1
-    } else {
-      let content = historyItems[indexPath.row] as! HistoryCell
-      content.open()
-      self.selectedRow = indexPath.row
+    if tap {
+      disableTapForASec()
+      tableView.beginUpdates()
+      if indexPath.row == selectedRow {
+        let content = historyItems[indexPath.row] as! HistoryCell
+        content.close()
+        selectedRow = -1
+      } else {
+        let content = historyItems[indexPath.row] as! HistoryCell
+        content.open()
+        self.selectedRow = indexPath.row
+      }
+      
+      tableView.endUpdates()
     }
-    
-    tableView.endUpdates()
   }
   
   func fillArray() {

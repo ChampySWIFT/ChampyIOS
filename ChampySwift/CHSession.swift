@@ -13,7 +13,6 @@ import SwiftyJSON
 class CHSession: NSObject {
   
   let CurrentUser = NSUserDefaults.standardUserDefaults()
-  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   var currentUserObject:JSON! = nil
   var currentUserId:String         = ""
@@ -59,10 +58,11 @@ class CHSession: NSObject {
   }
   
   func clearSession() {
+    let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     self.CurrentUser.setObject(nil, forKey: "facebookId")
     self.CurrentUser.setObject(nil, forKey: "userName")
     self.CurrentUser.setObject(nil, forKey: "userId")
-//    self.CurrentUser.setObject(nil, forKey: "userObject")
     self.logined = false
     appDelegate.subscribed = false
     
@@ -90,65 +90,50 @@ class CHSession: NSObject {
   }
   
   func getStringByKey(key:String) -> String {
-    if CurrentUser.objectForKey(key) != nil {
-      return CurrentUser.stringForKey(key)!
+    guard CurrentUser.objectForKey(key) != nil else {
+      return ""
     }
-    return ""
+    return CurrentUser.stringForKey(key)!
   }
   
-  
   func getIntByKey(key:String) -> Int {
-    if CurrentUser.objectForKey(key) != nil {
-      return CurrentUser.integerForKey(key)
+    guard CurrentUser.objectForKey(key) != nil else {
+      return 0
     }
-    return 0
+    return CurrentUser.integerForKey(key)
   }
   
   func getBoolByKey(key:String) -> Bool {
-    if CurrentUser.objectForKey(key) != nil {
-      return CurrentUser.boolForKey(key)
+    
+    guard CurrentUser.objectForKey(key) != nil else {
+      return false
     }
-    return false
+    return CurrentUser.boolForKey(key)
   }
   
   func getJSONByKey(key:String) -> JSON {
-    if CurrentUser.objectForKey(key) != nil {
-      let string = CurrentUser.stringForKey(key)!
-      return CHUIElements().stringToJSON(string)
-    }
-    
-    return nil
+    return CHUIElements().stringToJSON(self.getStringByKey(key))
   }
   
   func getToken() -> String {
-    var token = ""
-    let user = NSUserDefaults.standardUserDefaults()
-    if user.objectForKey("facebookId") != nil {
-      let ios = [
-        "token": currentUserFacebookId,
-        "timeZone": "2"
-      ]
-      token = JWT.encode(.HS256("secret")) { builder in
-        builder["facebookId"] = self.currentUserFacebookId
-        builder["IOS"]        = ios
-      }
-      
-    }
-    
-    return token
+    return createToken(self.currentUserFacebookId)
   }
   
   func getTokenWithFaceBookId(facebookId:String) -> String {
-    var token = ""
+    return createToken(facebookId)
+  }
+  
+  func createToken(facebookId:String) -> String {
     let ios = [
       "token": facebookId,
       "timeZone": "2"
     ]
-    token = JWT.encode(.HS256("secret")) { builder in
+    return JWT.encode(.HS256("secret")) { builder in
       builder["facebookId"] = facebookId
       builder["IOS"]        = ios
     }
-    return token
+    
   }
+  
 }
 

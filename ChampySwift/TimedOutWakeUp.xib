@@ -114,7 +114,7 @@
                         <constraint firstAttribute="height" constant="42" id="g9y-pN-ygh"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="41"/>
-                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

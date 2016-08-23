@@ -1,5 +1,5 @@
 //
-//      } FriendsTableViewController.swift
+//   FriendsTableViewController.swift
 //  ChampySwift
 //
 //  Created by Molnar Kristian on 5/7/16.
@@ -16,10 +16,9 @@
 import UIKit
 import SwiftyJSON
 import Async
-import SwipyCell
 
 
-class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
+class FriendsTableViewController: UITableViewController {
   
   var identifiers:[String]    = []
   var tap:Bool = true
@@ -31,11 +30,6 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
   var userCount:Int = 0
   
   
-  func clearArrays() {
-    //    friendsContent.removeAll()
-    heights.removeAll()
-  }
-  
   override func viewDidDisappear(animated: Bool) {
     center.removeObserver(self, name: "friendsReload", object: nil)
     center.removeObserver(self, name: "openDuelView", object: nil)
@@ -45,8 +39,9 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
   override func viewDidAppear(animated: Bool) {
     center.addObserver(self, selector: #selector(FriendsTableViewController.refreshTableViewAction(_:)), name: "friendsReload", object: nil)
     center.addObserver(self, selector: #selector(FriendsTableViewController.openDuelView), name: "openDuelView", object: nil)
-    
+    self.refreshTableViewAction(self.refreshTableView)
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -57,8 +52,6 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  // MARK: - Table view data source
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     // #warning Incomplete implementation, return the number of sections
@@ -96,13 +89,13 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
     if friendsContent.count > 0 {
       identifier = self.identifiers[indexPath.row]
     }
-//    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
-    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
     
-        cell = nil
+    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)")
+    
+    cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = SwipyCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
+        cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         
@@ -112,6 +105,14 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
           cell?.addSubview(inviteFriendsContent)
           cell!.backgroundColor = UIColor.clearColor()
         } else {
+          //          let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+          //          let friend = CHUsers().getFriends(CHSession().currentUserId)[indexPath.row]
+          //          var object = friend["owner"]
+          //          if friend["owner"]["_id"].stringValue == CHSession().currentUserId {
+          //            object = friend["friend"]
+          //          }
+          //          content.setUp(object)
+          //          print(indexPath.row)
           let content = friendsContent[indexPath.row] as! FriendCell
           cell?.addSubview(content)
           cell!.backgroundColor = UIColor.clearColor()
@@ -119,10 +120,6 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
       }
     }
     return cell!
-  }
-  
-  func openDuelView() {
-     self.navigationController?.performSegueWithIdentifier("showDuelViewController", sender: self)
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -145,6 +142,10 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
       //    tableView.reloadData()
       tableView.endUpdates()
     }
+  }
+  
+  func openDuelView() {
+    self.navigationController?.performSegueWithIdentifier("showDuelViewController", sender: self)
   }
   
   func disableTapForASec() {
@@ -199,6 +200,28 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
     
   }
   
+  func viewWithImageName(imageName: String) -> UIView {
+    let image = UIImage(named: imageName)
+    let imageView = UIImageView(image: image)
+    imageView.contentMode = .Center
+    return imageView
+  }
+  
+  func viewWithLabel(text: String) -> UIView {
+    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
+    label.text = text
+    label.font = CHUIElements().font16
+    label.numberOfLines = 3
+    label.lineBreakMode = .ByWordWrapping
+    label.textColor = CHUIElements().APPColors["Info"]
+    return label
+  }
+  
+  func clearArrays() {
+    //    friendsContent.removeAll()
+    heights.removeAll()
+  }
+  
   @IBOutlet weak var refreshTableView: UIRefreshControl!
   
   @IBAction func refreshTableViewAction(sender: AnyObject) {
@@ -226,92 +249,7 @@ class FriendsTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   
-  func viewWithImageName(imageName: String) -> UIView {
-    let image = UIImage(named: imageName)
-    let imageView = UIImageView(image: image)
-    imageView.contentMode = .Center
-    return imageView
-  }
   
-  func viewWithLabel(text: String) -> UIView {
-    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
-    label.text = text
-    label.font = CHUIElements().font16
-    label.numberOfLines = 3
-    label.lineBreakMode = .ByWordWrapping
-    label.textColor = CHUIElements().APPColors["Info"]
-    return label
-  }
-  
-  func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user ends swiping the cell this method is called
-  func swipeableTableViewCellDidEndSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user is dragging, this method is called with the percentage from the border
-  func swipeableTableViewCell(cell: SwipyCell, didSwipeWithPercentage percentage: CGFloat) {
-    
-  }
-  
-  
-  /*
-   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-   let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-   
-   // Configure the cell...
-   
-   return cell
-   }
-   */
-  
-  /*
-   // Override to support conditional editing of the table view.
-   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-   // Return false if you do not want the specified item to be editable.
-   return true
-   }
-   */
-  
-  /*
-   // Override to support editing the table view.
-   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-   if editingStyle == .Delete {
-   // Delete the row from the data source
-   tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-   } else if editingStyle == .Insert {
-   // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   }
-   }
-   */
-  
-  /*
-   // Override to support rearranging the table view.
-   override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-   
-   }
-   */
-  
-  /*
-   // Override to support conditional rearranging of the table view.
-   override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-   // Return false if you do not want the item to be re-orderable.
-   return true
-   }
-   */
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
   
 }
 

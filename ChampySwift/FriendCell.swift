@@ -71,7 +71,7 @@ import Async
         self.firstScoreLabel.method   = UILabelCountingMethodLinear
         self.firstScoreLabel.format   = "%d";
         self.firstMiniIcon.hidden = false
-//        self.firstScoreLabel.animationDuration = 0.5
+        //        self.firstScoreLabel.animationDuration = 0.5
         self.firstScoreLabel.countFrom(0, to: Float(self.inProgressChallenges), withDuration: 0.5)
         
       }
@@ -89,7 +89,7 @@ import Async
         self.secondScoreLabel.format   = "%d";
         self.secondMiniIcon.hidden = false
         self.secondScoreLabel.countFrom(0, to: Float(self.wins), withDuration: 0.5)
-//        self.secondScoreLabel.countFrom(0, to: Float(self.wins))
+        //        self.secondScoreLabel.countFrom(0, to: Float(self.wins))
       }
     }
     
@@ -178,7 +178,7 @@ import Async
     
     self.initialPlusFrame  = self.plusButton.frame
     self.initialPlusFrame.origin.x = self.width
-   
+    
     self.plusButton.frame = self.initialPlusFrame
     
     self.initialMinusFrame = self.minusButton.frame
@@ -333,7 +333,7 @@ import Async
     
     UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
       self.userAvatar.frame        = frame
-//      self.userAvatar.transform    = CGAffineTransformMakeScale(1.0, 1.0)
+      //      self.userAvatar.transform    = CGAffineTransformMakeScale(1.0, 1.0)
       self.username.layer.opacity = 0.0
       self.userLevel.layer.opacity = 0.0
       
@@ -377,7 +377,9 @@ import Async
             
         })
         CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
+          print(json)
           if result {
+            print(json)
             Async.main {
               self.tapped = false
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "New Friend Request From \(CHSession().currentUserName)", options: "")
@@ -429,7 +431,6 @@ import Async
     
   }
   
-  
   @IBAction func minusAction(sender: AnyObject) {
     
     if !tapped {
@@ -455,7 +456,7 @@ import Async
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has cancelled his friend request", options: "")
             }
           } else {
-             self.tapped = false
+            self.tapped = false
             CHPush().alertPush("Couldn't decline now", type: "Warning")
           }
         })
@@ -474,11 +475,11 @@ import Async
         CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             Async.main {
-               self.tapped = false
+              self.tapped = false
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has Declined your friend request", options: "")
             }
           } else {
-             self.tapped = false
+            self.tapped = false
             CHPush().alertPush("Couldn't decline now", type: "Warning")
           }
         })
@@ -499,17 +500,17 @@ import Async
         CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             Async.main {
-               self.tapped = false
-                CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has deleted you from his friends", options: "")
+              self.tapped = false
+              CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has deleted you from his friends", options: "")
             }
           } else {
-             self.tapped = false
+            self.tapped = false
             CHPush().alertPush("Couldn't decline now", type: "Warning")
           }
         })
         break
       default:
-         self.tapped = false
+        self.tapped = false
         self.minusButton.hidden = true
         self.plusButton.hidden = true
         

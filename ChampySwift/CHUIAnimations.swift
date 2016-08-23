@@ -11,15 +11,7 @@ import UIKit
 class CHUIAnimations: NSObject {
   
   
-  
-  func rotateElement(view:UIView, withDuration:Double) {
-    
-  }
 }
-
-
-
-
 
 extension UIView {
   func rotateView(withDuration:Double) {
@@ -32,7 +24,6 @@ extension UIView {
   func rotateScoreViewToZero(){
     
   }
-  
   
   func fillScoreBorder(withDuration:Double) {
     
@@ -58,7 +49,6 @@ extension UIView {
     let oval2Path = UIBezierPath(ovalInRect: CGRectMake(0, 0, 2, 2))
     return oval2Path
   }
-  
   
 }
 

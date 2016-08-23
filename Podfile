@@ -18,9 +18,13 @@ target 'ChampySwift' do
   pod 'ALCameraViewController'
   pod 'DynamicBlurView'
   pod 'SwipyCell', '~> 1.0.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 end
 
-target 'ChampySwiftTests' do
+target 'ChampySwiftUITests' do
+  pod 'Fusuma'
+  pod 'Socket.IO-Client-Swift', '~> 3.1.4'
   pod 'PresenterKit', :git => 'https://github.com/jessesquires/PresenterKit.git', :branch => 'develop'
   pod 'Alamofire', '~> 2.0'
   pod 'Socket.IO-Client-Swift', '~> 3.1.4'
@@ -28,14 +32,31 @@ target 'ChampySwiftTests' do
   pod 'SwiftyJSON'
   pod 'SwiftHTTP'
   pod 'AsyncSwift'
- pod 'Kingfisher', '~> 2.0'
+  pod 'Parse'
+  pod 'Kingfisher', '~> 2.0'
   pod 'ALCameraViewController'
   pod 'DynamicBlurView'
+  pod 'SwipyCell', '~> 1.0.0'
 end
 
-target 'ChampySwiftUITests' do
-  
+target 'ChampySwiftTests' do
+  pod 'Fusuma'
+  pod 'Socket.IO-Client-Swift', '~> 3.1.4'
+  pod 'PresenterKit', :git => 'https://github.com/jessesquires/PresenterKit.git', :branch => 'develop'
+  pod 'Alamofire', '~> 2.0'
+  pod 'Socket.IO-Client-Swift', '~> 3.1.4'
+  pod 'JSONWebToken'
+  pod 'SwiftyJSON'
+  pod 'SwiftHTTP'
+  pod 'AsyncSwift'
+  pod 'Parse'
+  pod 'Kingfisher', '~> 2.0'
+  pod 'ALCameraViewController'
+  pod 'DynamicBlurView'
+  pod 'SwipyCell', '~> 1.0.0'
 end
+
+
 
 post_install do |installer|
   installer.pods_project.targets.each do

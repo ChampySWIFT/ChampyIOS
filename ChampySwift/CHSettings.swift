@@ -12,6 +12,7 @@ class CHSettings: NSObject {
   let duelsId: String  = "567d51c48322f85870fd931b"
   let wakeUpIds: String  = "567d51c48322f85870fd931c"
   let selfImprovementsId: String = "567d51c48322f85870fd931a"
+  
   let dateFormatter = NSDateFormatter()
   
   func clearViewArray(array:[UIView]) {
@@ -32,19 +33,11 @@ class CHSettings: NSObject {
     return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
   }
   
-  func timeStringFromUnixTime(unixTime: Double) -> String {
-    let date = NSDate(timeIntervalSince1970: unixTime)
-    
-    // Returns date formatted as 12 hour time.
-    dateFormatter.dateFormat = "hh:mm a"
-    return dateFormatter.stringFromDate(date)
-  }
-  
-  func dayStringFromTime(unixTime: Double) -> String {
-    let date = NSDate(timeIntervalSince1970: unixTime)
-    dateFormatter.locale = NSLocale(localeIdentifier: NSLocale.currentLocale().localeIdentifier)
-    dateFormatter.dateFormat = "EEEE"
-    return dateFormatter.stringFromDate(date)
+  func stringToArray(stringObject:String)->[String]{
+    var str = stringObject
+    str = str.substringWithRange(Range<String.Index>(start: str.startIndex.advancedBy(0), end: str.endIndex.advancedBy(0)))
+    let resultArray = str.componentsSeparatedByString(", ")
+    return resultArray
   }
   
 }
