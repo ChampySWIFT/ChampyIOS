@@ -57,10 +57,10 @@
     func printFonts() {
       let fontFamilyNames = UIFont.familyNames()
       for familyName in fontFamilyNames {
-        print("------------------------------")
-        print("Font Family Name = [\(familyName)]")
+        //print("------------------------------")
+        //print("Font Family Name = [\(familyName)]")
         let names = UIFont.fontNamesForFamilyName(familyName )
-        print("Font Names = [\(names)]")
+        //print("Font Names = [\(names)]")
       }
     }
     

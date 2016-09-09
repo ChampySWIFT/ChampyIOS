@@ -227,7 +227,7 @@ public class HTTP: NSOperation {
 			willChangeValueForKey("state")
 			stateLock.withCriticalScope { Void -> Void in
 				guard _state != .Finished else {
-					print("Invalid! - Attempted to back out of Finished State")
+					//print("Invalid! - Attempted to back out of Finished State")
 					return
 				}
 				assert(_state.canTransitionToState(newState), "Performing invalid state transition.")

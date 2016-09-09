@@ -66,7 +66,7 @@ class CHPush: NSObject {
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
       if result {
-        ////print("success")
+        //////print("success")
       }
     }
   }

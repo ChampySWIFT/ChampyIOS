@@ -181,9 +181,9 @@ class RoleControlViewController: UIViewController {
       })
     }
     
-    self.socket.onAny {
-      print("Got event: \($0.event)")
-    }
+//    self.socket.onAny {
+////      print("Got event: \($0.event)")
+//    }
     
   }
   

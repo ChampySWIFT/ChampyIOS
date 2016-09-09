@@ -66,7 +66,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -97,7 +97,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -129,7 +129,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -165,7 +165,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -220,7 +220,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -275,7 +275,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -330,7 +330,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -376,7 +376,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
     
@@ -410,7 +410,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -444,7 +444,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -478,7 +478,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -511,7 +511,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -543,7 +543,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -577,7 +577,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -611,7 +611,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -645,7 +645,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -679,7 +679,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -749,7 +749,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -786,7 +786,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(20) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -823,7 +823,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(20) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -834,7 +834,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -845,7 +845,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -858,7 +858,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -869,7 +869,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -880,7 +880,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -891,7 +891,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -902,7 +902,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -913,7 +913,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -951,7 +951,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -982,7 +982,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1014,7 +1014,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1050,7 +1050,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1105,7 +1105,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1160,7 +1160,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1215,7 +1215,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1261,7 +1261,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
     
@@ -1295,7 +1295,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1329,7 +1329,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1363,7 +1363,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1396,7 +1396,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1428,7 +1428,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1462,7 +1462,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1496,7 +1496,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1530,7 +1530,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1564,7 +1564,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1633,7 +1633,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(10) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
@@ -1671,7 +1671,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectationsWithTimeout(20) { error in
       if let error = error {
-        print("Error: \(error.localizedDescription)")
+        //print("Error: \(error.localizedDescription)")
       }
     }
   }
