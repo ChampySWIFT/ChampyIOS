@@ -58,9 +58,9 @@ class CHUsers: NSObject {
       return false
     }
     
-    guard item["photo"] != nil else {
-      return false
-    }
+//    guard item["photo"] != nil else {
+//      return false
+//    }
     
     guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
       return false
@@ -84,11 +84,11 @@ class CHUsers: NSObject {
   func getUsers() -> [JSON] {
     var friends:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
-      if isValidUser(item) {
-        friends.append(item)
+      if self.isFacebookFriend(item["facebookId"].stringValue) {
+        if isValidUser(item) {
+          friends.append(item)
+        }
       }
-      
-      
     }
     return friends
   }
@@ -139,6 +139,34 @@ class CHUsers: NSObject {
     }
     return friends
   }
+  
+  
+  /**
+ 
+ */
+  
+  func isFacebookFriend(facebookId:String) -> Bool {
+    let facebookFriends = CHSession().getFacebookFriends()
+    if facebookFriends.rangeOfString(facebookId) != nil {
+      return true
+    }
+    
+    return false
+  }
+  
+  func getFacebookFriendsQueryPart() -> String {
+    let array:[String] = CHSettings().facebookFriendsStringToArray(CHSession().getFacebookFriends())
+    var i = 0
+    var queryString = ""
+    for item in array {
+      queryString = queryString + "&facebookFriends[\(i)]=\(item)"
+      i=i+1
+    }
+   
+    return queryString
+  }
+  
+  
   
   /**
    Get pending friends

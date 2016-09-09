@@ -34,10 +34,15 @@ class SettingsViewController: UIViewController {
           if !status {
             CHPush().alertPush(json.stringValue, type: "Warning")
             Async.main {
-              CHSession().clearSession()
-              let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-              self.presentViewController(roleControlViewController, type: .push, animated: false)
+              CHSession().clearSession({ (result) in
+                if result {
+                  Async.main {
+                    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+                    self.presentViewController(roleControlViewController, type: .push, animated: false)
+                  }
+                }
+              })
             }
           }
         }

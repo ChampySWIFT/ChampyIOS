@@ -28,7 +28,8 @@ class FacebookAuthViewController: UIViewController {
       self.tapped = true
       let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
       fbLoginManager.logOut()
-      fbLoginManager.logInWithReadPermissions(["email"],  handler: { (result, error) -> Void in
+      let facebookReadPermissions = ["public_profile", "email", "user_friends"]
+      fbLoginManager.logInWithReadPermissions(facebookReadPermissions,  handler: { (result, error) -> Void in
         
         guard error == nil else {
           CHPush().alertPush("Error with facebook...", type: "Warning")
@@ -77,15 +78,48 @@ class FacebookAuthViewController: UIViewController {
             "email": email
           ]
           
+          
+//          FBReq
           CHRequests().createUser(params, completitionHandler: { (json, status) in
+            print(json)
             self.tapped = false
             if status {
               Async.main {
-                self.dismissViewControllerAnimated(true, completion: { 
-                  self.tapped = false
-                  CHPush().alertPush("Succesfully authorized", type: "Success")
-                  CHPush().localPush("authorized", object: [])
-                })
+                let faceParams = ["fields": "id"]
+                let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: faceParams)
+                
+                request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+                  
+                  if error != nil {
+                    let errorMessage = error.localizedDescription
+                    print(errorMessage)
+                    self.dismissViewControllerAnimated(true, completion: {
+                      self.tapped = false
+                      CHPush().alertPush("Can't get friends from facebook", type: "Warning")
+                      CHPush().localPush("authorized", object: [])
+                    })
+                    /* Handle error */
+                  }
+                  else if result.isKindOfClass(NSDictionary){
+                    Async.main {
+                      
+                      let array = result["data"] as! [[String:String]]
+                      var friendsIdArray:[String] = []
+                      for item in array {
+                        friendsIdArray.append(item["id"]!)
+                      }
+                      CHPush().subscribeForNotifications()
+                      CHSession().saveFacebookFriends("\(friendsIdArray)")
+                      self.dismissViewControllerAnimated(true, completion: {
+                        self.tapped = false
+                        CHPush().alertPush("Succesfully authorized", type: "Success")
+                        CHPush().localPush("authorized", object: [])
+                      })
+                    }
+                    
+                  }
+                }
+                
               }
             }
           })
@@ -96,6 +130,16 @@ class FacebookAuthViewController: UIViewController {
       
     }
     // Do any additional setup after loading the view.
+  }
+  
+  func saveFacebookFriends() {
+    
+  }
+  
+  @IBAction func backToLoginAction(sender: AnyObject) {
+    self.dismissViewControllerAnimated(true) { 
+      
+    }
   }
   
   func goback() {

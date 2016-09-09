@@ -162,10 +162,15 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.confirmationLogOutContainer.hidden = true
     
     //    CHPush().unSubscribeUserFrom(CHSession().currentUserId)
-    CHSession().clearSession()
-    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-    self.presentViewController(roleControlViewController, type: .push, animated: false)
+    CHSession().clearSession({ (result) in
+      if result {
+        Async.main {
+          let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+          self.presentViewController(roleControlViewController, type: .push, animated: false)
+        }
+      }
+    })
     
   }
   
@@ -217,12 +222,15 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
         
         CHRequests().deleteAccount(CHSession().currentUserId) { (result, json) in
           if result {
-            Async.main {
-              CHSession().clearSession()
-              let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-              let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-              self.presentViewController(roleControlViewController, type: .push, animated: false)
-            }
+            CHSession().clearSession({ (result) in
+              if result {
+                Async.main {
+                  let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
+                  self.presentViewController(roleControlViewController, type: .push, animated: false)
+                }
+              }
+            })
           }
         }
         
@@ -260,13 +268,13 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   @IBAction func privacyPolicAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com/privacy.html") {
+    if let requestUrl = NSURL(string: CHRequests().privacyUrl) {
       UIApplication.sharedApplication().openURL(requestUrl)
     }
   }
   
   @IBAction func enUserAgreementAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com/Terms.html") {
+    if let requestUrl = NSURL(string: CHRequests().termsUrl) {
       UIApplication.sharedApplication().openURL(requestUrl)
     }
   }

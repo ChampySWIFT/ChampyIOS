@@ -20,7 +20,7 @@ class CHBanners: NSObject {
   
   var bannerLabel:UILabel! = nil
   
-  let bannerHeight:CGFloat = 44.0
+  let bannerHeight:CGFloat = 10.0
   var visibilityDuration:Double = 2.0
   
   var vibrating:Bool = false
@@ -109,11 +109,11 @@ class CHBanners: NSObject {
   }
   
   func createBanner(message:String) -> UIView {
-    self.banner                 = UIView(frame: CGRectMake(0, 0, self.target.frame.size.width, self.bannerHeight + 20))
+    self.banner                 = UIView(frame: CGRectMake(0, 64, self.target.frame.size.width, self.bannerHeight + 20))
     self.banner.backgroundColor = self.backgroundColor
     self.banner.layer.opacity   = 0
     
-    self.bannerLabel                           = UILabel(frame: CGRectMake(0, 20, self.target.frame.size.width, self.bannerHeight))
+    self.bannerLabel                           = UILabel(frame: CGRectMake(0, 10, self.target.frame.size.width, self.bannerHeight))
     self.bannerLabel.font = CHUIElements().font12
     self.bannerLabel.text                      = self.bannerText
     self.bannerLabel.textColor                 = self.textColor

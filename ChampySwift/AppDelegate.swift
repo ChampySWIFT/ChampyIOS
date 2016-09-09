@@ -133,6 +133,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   // [END connect_to_fcm]
   
+  
+  
   func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
     let formatedDeviceToken:String = self.getSimpleDeviceToken("\(deviceToken)")
     CurrentUser.setObject(deviceToken, forKey: "deviceToken")
@@ -144,33 +146,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       CHPush().subscribeUserTo(formatedDeviceToken)
     }
     
+    CHPush().subscribeForNotifications()
     
-    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
-    
-    guard let contents = FIRInstanceID.instanceID().token()
-      else {
-        return
-    }
-    
-    let firtoken = FIRInstanceID.instanceID().token()!
-    print(firtoken)
-    let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
-    var token = ""
-    print(token)
-    for i in 0..<deviceToken.length {
-      token += String(format: "%02.2hhx", arguments: [tokenChars[i]])
-    }
-    
-    print(token)
-    let params = [
-      "APNIdentifier" : firtoken //deviceToken.description as String
-    ]
-    
-    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-      if result {
-        print("success")
-      }
-    }
     
     
   }

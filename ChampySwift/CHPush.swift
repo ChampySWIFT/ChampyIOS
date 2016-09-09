@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Firebase
 class CHPush: NSObject {
   let center = NSNotificationCenter.defaultCenter()
   var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -36,6 +37,37 @@ class CHPush: NSObject {
       try  push.sendPush()
     } catch  {
       
+    }
+  }
+  
+  
+  func subscribeForNotifications() {
+    let deviceToken:NSData = CurrentUser.dataForKey("deviceToken")!
+    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
+    
+    guard let contents = FIRInstanceID.instanceID().token()
+      else {
+        return
+    }
+    
+    let firtoken = FIRInstanceID.instanceID().token()!
+    //////print(firtoken)
+    let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+    var token = ""
+    ////print(token)
+    for i in 0..<deviceToken.length {
+      token += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+    }
+    
+    ////print(token)
+    let params = [
+      "APNIdentifier" : firtoken //deviceToken.description as String
+    ]
+    
+    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
+      if result {
+        ////print("success")
+      }
     }
   }
   

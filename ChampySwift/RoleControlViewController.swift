@@ -171,6 +171,16 @@ class RoleControlViewController: UIViewController {
         }
       })
     }
+    
+    self.socket.on("InProgress:finish") { (data, act) in
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("You Won", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: [])
+        }
+      })
+    }
+    
     self.socket.onAny {
       print("Got event: \($0.event)")
     }

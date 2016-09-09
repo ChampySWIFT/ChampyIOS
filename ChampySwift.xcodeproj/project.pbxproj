@@ -398,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				577D5FA01CCE5A540002F0E0 /* Storyboards */,
+				577D5F901CCE27D80002F0E0 /* Helpers */,
 				577D5F911CCE27E50002F0E0 /* Views */,
 				577D5F8F1CCE27CE0002F0E0 /* Models */,
 				577D5F8E1CCE27C70002F0E0 /* Controllers */,
@@ -487,7 +488,6 @@
 				57D29E891D00754F0016CBF5 /* HistoryCell.xib */,
 				5730E6EB1D083FA500D1EEA4 /* InviteFriendsView.xib */,
 				5784FF8E1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib */,
-				577D5F901CCE27D80002F0E0 /* Helpers */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1253,7 +1253,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f636b94-19d2-4727-ba08-3f988e862da1";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1280,7 +1280,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f636b94-19d2-4727-ba08-3f988e862da1";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

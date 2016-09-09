@@ -16,9 +16,10 @@ class CHRequests: NSObject {
   
   var APIurl:String = "http://46.101.213.24:3007/v1"
   var SocketUrl:String = "http://46.101.213.24:3007"
-  
-//  var APIurl:String = "http://192.168.88.67:3007/v1"
-//  var SocketUrl:String = "http://192.168.88.67:3007"
+  var privacyUrl:String = "http://46.101.213.24:3007/privacy"
+  var termsUrl:String = "http://46.101.213.24:3007/terms"
+//  var APIurl:String = "http://192.168.88.101:3007/v1"
+//  var SocketUrl:String = "http://192.168.88.101:3007"
   
   var token:String    = ""
   var canPerform:Bool = true
@@ -33,7 +34,7 @@ class CHRequests: NSObject {
       return
     }
     self.token = CHSession().getToken()
-    //print(token)
+    print(token)
   }
   
   func getTokenForTests() {
@@ -288,7 +289,8 @@ class CHRequests: NSObject {
       completitionHandler(result: false, json: nil)
       return
     }
-    let url = "\(self.APIurl)/users?token=\(self.token)"
+//    let url = "\(self.APIurl)/users?token=\(self.token)"
+    let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
     let operationQueue = NSOperationQueue()
     do {
       let opt = try HTTP.GET(url)
@@ -413,6 +415,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -443,7 +446,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //        json)
+        print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return

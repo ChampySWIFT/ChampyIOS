@@ -40,4 +40,16 @@ class CHSettings: NSObject {
     return resultArray
   }
   
+  func facebookFriendsStringToArray(stringObject:String)->[String]{
+    var fullName: String = stringObject
+    fullName = fullName.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    fullName = fullName.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    fullName = fullName.stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    let fullNameArr = fullName.componentsSeparatedByString(", ")
+    return fullNameArr
+    
+//    let str = str.substringWithRange(Range<String.Index>(start: str.startIndex.advancedBy(0), end: str.endIndex.advancedBy(0)))
+//    let resultArray = str.componentsSeparatedByString(", ")
+//    return resultArray
+  }
 }

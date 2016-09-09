@@ -208,7 +208,7 @@ class AllFriendsTableViewController: UITableViewController {
     heights.removeAll()
     self.userArray.removeAll()
     //     = CHUsers().getUsers()
-    
+//    print(CHUsers().getFacebookFriendsQueryPart());
     for friend in CHUsers().getUsers()  {
       heights.append(66)
       //      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
