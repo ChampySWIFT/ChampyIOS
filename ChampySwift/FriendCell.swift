@@ -239,7 +239,7 @@ import Async
   
   
   func open() {
-    print(self.userObject)
+    //print(self.userObject)
     self.tapped = true
     self.setTimeout(1.0) { 
       self.tapped = false
@@ -300,7 +300,7 @@ import Async
     })
     self.cleareScoreborder()
     self.animateScoreBorders()
-    //print("open")
+    ////print("open")
   }
   
   func close() {
@@ -355,7 +355,7 @@ import Async
     
     
     
-    //print("close")
+    ////print("close")
   }
   
   func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
@@ -377,9 +377,9 @@ import Async
             
         })
         CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
-          print(json)
+          //print(json)
           if result {
-            print(json)
+            //print(json)
             Async.main {
               self.tapped = false
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "New Friend Request From \(CHSession().currentUserName)", options: "")

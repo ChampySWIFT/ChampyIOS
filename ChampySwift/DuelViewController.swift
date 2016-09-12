@@ -47,7 +47,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     self.myAvatar.layer.masksToBounds = true
     self.friendsAvatar.layer.masksToBounds = true
     self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
-    print(userObject)
+    //print(userObject)
     toLabel.text = "DUEL WITH \(self.userObject["name"].stringValue)"
     self.myAvatar.layer.opacity = 0.5
     self.friendsAvatar.layer.opacity = 0.5

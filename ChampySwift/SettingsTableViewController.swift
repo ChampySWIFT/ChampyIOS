@@ -72,7 +72,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.inputFieldsForTime.delegate  = self
     var minuteString = ""
     let minutes:Int = CHSession().getIntByKey("minsDN")
-    print(minutes)
+    //print(minutes)
     if minutes == 0 {
       self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):00"
     } else {

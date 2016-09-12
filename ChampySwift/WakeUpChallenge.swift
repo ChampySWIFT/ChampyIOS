@@ -67,7 +67,7 @@ import SwiftyJSON
       self.wakeUpDesc.text = "\(json["challenge"]["name"].stringValue) every day during \(CHSettings().secToDays(json["challenge"]["duration"].intValue)) days"
       let remainedDays = CHSettings().secToDays(json["challenge"]["duration"].intValue) - json["senderProgress"].count
       
-      print(remainedDays)
+      //print(remainedDays)
       
       var day:String = "days"
       if remainedDays == 1 {

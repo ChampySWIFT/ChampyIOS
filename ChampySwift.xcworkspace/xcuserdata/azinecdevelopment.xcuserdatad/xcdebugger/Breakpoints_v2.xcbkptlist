@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "acceptFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "acceptFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "removeFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
             landmarkName = "removeFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "removeFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "removeFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/CHRequests.swift"
-            timestampString = "495032235.443946"
+            timestampString = "495366957.461353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
             landmarkName = "removeFriendRequest(_:friendId:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,12 +394,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/AppDelegate.swift"
-            timestampString = "495029838.21609"
+            timestampString = "495367336.087726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChampySwift/CHRequests.swift"
+            timestampString = "495366957.461353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "cleareBadgeNumber(_:completitionHandler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChampySwift/CHRequests.swift"
+            timestampString = "495366930.205601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "cleareBadgeNumber(_:completitionHandler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChampySwift/CHRequests.swift"
+            timestampString = "495366930.433473"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "cleareBadgeNumber(_:completitionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

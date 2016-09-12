@@ -1253,7 +1253,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1f636b94-19d2-4727-ba08-3f988e862da1";
+				PROVISIONING_PROFILE = "a7de912e-f5c2-4f13-815f-659f300cccbd";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1280,7 +1280,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1f636b94-19d2-4727-ba08-3f988e862da1";
+				PROVISIONING_PROFILE = "a7de912e-f5c2-4f13-815f-659f300cccbd";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

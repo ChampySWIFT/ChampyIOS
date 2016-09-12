@@ -51,22 +51,22 @@ class CHPush: NSObject {
     }
     
     let firtoken = FIRInstanceID.instanceID().token()!
-    //////print(firtoken)
+    ////////print(firtoken)
     let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
     var token = ""
-    ////print(token)
+    //////print(token)
     for i in 0..<deviceToken.length {
       token += String(format: "%02.2hhx", arguments: [tokenChars[i]])
     }
     
-    ////print(token)
+    //////print(token)
     let params = [
       "APNIdentifier" : firtoken //deviceToken.description as String
     ]
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
       if result {
-        //////print("success")
+        ////////print("success")
       }
     }
   }
@@ -117,10 +117,9 @@ class CHPush: NSObject {
    */
   
   func clearBadgeNumber(){
-    let currentInstallation = PFInstallation.currentInstallation()
-    currentInstallation.badge = 0;
-    currentInstallation.saveEventually()
-    
+    CHRequests().cleareBadgeNumber(CHSession().currentUserId) { (json, status) in
+      
+    }
   }
   
   func updateImageOnSettings(image:UIImage) {

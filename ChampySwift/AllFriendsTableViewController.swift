@@ -208,7 +208,7 @@ class AllFriendsTableViewController: UITableViewController {
     heights.removeAll()
     self.userArray.removeAll()
     //     = CHUsers().getUsers()
-//    print(CHUsers().getFacebookFriendsQueryPart());
+//    //print(CHUsers().getFacebookFriendsQueryPart());
     for friend in CHUsers().getUsers()  {
       heights.append(66)
       //      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
@@ -216,19 +216,19 @@ class AllFriendsTableViewController: UITableViewController {
       //      content.status = status
       //      content.setUp(friend)
       let status = CHUsers().getStatus(friend)
-      print(status)
+      //print(status)
       if CHUsers().getStatus(friend) == "Other" {
         self.friendsContent.append(FriendCell())
         identifiers.append("\(friend["_id"].stringValue)")
         self.userArray.append(friend)
       } else {
-        print(friend["name"].stringValue)
+        //print(friend["name"].stringValue)
       }
     }
     
     
     
-    //    print(userArray)
+    //    //print(userArray)
     self.userCount = self.friendsContent.count
   }
   

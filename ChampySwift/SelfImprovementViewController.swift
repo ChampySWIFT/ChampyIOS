@@ -35,7 +35,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     super.viewDidLoad()
     
     self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
-    print(userObject)
+    //print(userObject)
     
     challengeView.delegate   = self
     challengeView.dataSource = self
@@ -115,7 +115,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       let params:[String:String] = [
         "challenge": self.challenges[challengeView.currentItemIndex]["_id"].stringValue
       ]
-      print(self.challenges[challengeView.currentItemIndex]["_id"].stringValue)
+      //print(self.challenges[challengeView.currentItemIndex]["_id"].stringValue)
       CHRequests().createSingleInProgressChallenge(params, completitionHandler: { (result, json) in
         self.finisher(result)
       })
@@ -139,7 +139,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       var dayNumber:String = view.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
       dayNumber = dayNumber.stringByReplacingOccurrencesOfString(" Day", withString: "")
       
-      print(dayNumber)
+      //print(dayNumber)
       guard conditions.isValidConditions() else {
 //        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
         self.alertWithMessage("Invalid Challenge Name", type: .Warning)

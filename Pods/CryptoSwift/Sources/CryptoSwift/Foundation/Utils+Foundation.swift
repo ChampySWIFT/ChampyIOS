@@ -16,5 +16,5 @@ func perf(text: String, closure: () -> ()) {
     let measurementStop = NSDate();
     let executionTime = measurementStop.timeIntervalSinceDate(measurementStart)
     
-    //print("\(text) \(executionTime)");
+    ////print("\(text) \(executionTime)");
 }
