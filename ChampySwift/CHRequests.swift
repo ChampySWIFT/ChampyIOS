@@ -1,3 +1,4 @@
+
 //
 //  CHRequests.swift
 //  ChampySwift
@@ -605,6 +606,56 @@ class CHRequests: NSObject {
     }
   }
   
+  
+  func retrieveWins(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    if !canPerform {
+      completitionHandler(result: false, json: nil)
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/history/wins/0?token=\(self.token)"
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.GET(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "wins\(userId)")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
+  
+  func retrieveFails(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+    if !canPerform {
+      completitionHandler(result: false, json: nil)
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)/history/fails/0?token=\(self.token)"
+    let operationQueue = NSOperationQueue()
+    do {
+      let opt = try HTTP.GET(url)
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+        print(json)
+        if let _ = response.error {
+          completitionHandler(result: false, json: json)
+          return
+        }
+        NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "fails\(userId)")
+        completitionHandler(result: true, json: json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(result: true, json: nil)
+    }
+  }
+  
   func joinToChallenge(challengeId:String, completitionHandler:(result:Bool, json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
@@ -803,7 +854,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return

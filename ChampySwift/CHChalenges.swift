@@ -161,8 +161,8 @@ class CHChalenges: NSObject {
    
    @return array of win challenges
    */
-  func getWinChallenges(userId:String) -> [JSON] {
-    return self.getChalengeArrayByKyValueCombination(userId, value: true)
+  func getWinChallenges(userId:String) -> JSON {
+    return CHSession().getJSONByKey("wins\(userId)")
   }
   
   /**
@@ -172,8 +172,8 @@ class CHChalenges: NSObject {
    
    @return array of failed challenges
    */
-  func getFailedChallenges(userId:String) -> [JSON] {
-    return self.getChalengeArrayByKyValueCombination(userId, value: false)
+  func getFailedChallenges(userId:String) -> JSON {
+    return CHSession().getJSONByKey("fails\(userId)")
   }
   
   /**

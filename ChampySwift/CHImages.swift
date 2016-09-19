@@ -46,7 +46,7 @@ class CHImages: NSObject {
     }
     let myCache = ImageCache(name: cachename)
 
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "NoFriendsIcon"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "noImageIcon"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
     }) { (image, error, cacheType, imageURL) in }
   }
   

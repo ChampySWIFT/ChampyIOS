@@ -15,7 +15,7 @@ class FacebookAuthViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    CHBanners().setTimeout(3) { 
+    CHBanners().setTimeout(3) {
       guard IJReachability.isConnectedToNetwork() else {
         CHPush().alertPush("No Internet Connection", type: "Warning")
         return
@@ -79,7 +79,7 @@ class FacebookAuthViewController: UIViewController {
           ]
           
           
-//          FBReq
+          //          FBReq
           CHRequests().createUser(params, completitionHandler: { (json, status) in
             //print(json)
             self.tapped = false

@@ -125,6 +125,7 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    return
     if tap {
       disableTapForASec()
       tableView.beginUpdates()

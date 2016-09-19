@@ -300,7 +300,7 @@ import Async
     })
     self.cleareScoreborder()
     self.animateScoreBorders()
-    ////print("open")
+    //////print("open")
   }
   
   func close() {
@@ -355,7 +355,7 @@ import Async
     
     
     
-    ////print("close")
+    //////print("close")
   }
   
   func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {

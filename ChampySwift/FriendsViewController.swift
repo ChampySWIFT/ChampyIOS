@@ -61,6 +61,22 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
   }
   
   
+  @IBAction func shareAction(sender: AnyObject) {
+//    let shareContent = FBSDKShareLinkContent()
+    //Hey! I’ve just started using Champy. Join me so we can improve our lives together.
+    let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
+    if let myWebsite = NSURL(string: "https://itunes.apple.com/app/id1110777364") {
+      
+      let objectsToShare = [textToShare, myWebsite]
+      let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+      
+      activityVC.popoverPresentationController?.sourceView = sender as? UIView
+      self.presentViewController(activityVC, animated: true, completion: {
+        
+      })
+      
+    }
+  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

@@ -68,46 +68,38 @@ class CHSession: NSObject {
     ]
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-      if result {
-        let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        self.CurrentUser.setObject(nil, forKey: "facebookId")
-        self.CurrentUser.setObject(nil, forKey: "userName")
-        self.CurrentUser.setObject(nil, forKey: "userId")
-        self.CurrentUser.setObject(nil, forKey: "facebookfriends")
-        self.logined = false
-        appDelegate.subscribed = false
-        
-        
-        
-        Async.main {
-          if appDelegate.table1 != nil {
-            appDelegate.table1.removeFromParentViewController()
-            appDelegate.table2.removeFromParentViewController()
-            appDelegate.table3.removeFromParentViewController()
-          }
-          
-          appDelegate.table1 = nil
-          appDelegate.table2 = nil
-          appDelegate.table3 = nil
-          appDelegate.historyTable1 = nil
-          appDelegate.historyTable2 = nil
-          appDelegate.historyTable3 = nil
-          let array = appDelegate.mainViewCard as [String:UIView]
-          for (kind, item) in array {
-            item.removeFromSuperview()
-          }
-        }
-        
-        
-        NSURLCache.sharedURLCache().removeAllCachedResponses()
-        FBSDKLoginManager().logOut()
-        completitionHandler(result: true)
-      } else {
-        completitionHandler(result: false)
-      }
     }
     
+    let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    self.CurrentUser.setObject(nil, forKey: "facebookId")
+    self.CurrentUser.setObject(nil, forKey: "userName")
+    self.CurrentUser.setObject(nil, forKey: "userId")
+    self.CurrentUser.setObject(nil, forKey: "facebookfriends")
+    self.logined = false
+    appDelegate.subscribed = false
+    
+    
+    
+    if appDelegate.table1 != nil {
+      appDelegate.table1.removeFromParentViewController()
+      appDelegate.table2.removeFromParentViewController()
+      appDelegate.table3.removeFromParentViewController()
+    }
+    
+    appDelegate.table1 = nil
+    appDelegate.table2 = nil
+    appDelegate.table3 = nil
+    appDelegate.historyTable1 = nil
+    appDelegate.historyTable2 = nil
+    appDelegate.historyTable3 = nil
+    let array = appDelegate.mainViewCard as [String:UIView]
+    for (kind, item) in array {
+      item.removeFromSuperview()
+    }
+    NSURLCache.sharedURLCache().removeAllCachedResponses()
+    FBSDKLoginManager().logOut()
+    completitionHandler(result: true)
   }
   
   func getFacebookFriends() -> String {
@@ -137,6 +129,7 @@ class CHSession: NSObject {
   }
   
   func getJSONByKey(key:String) -> JSON {
+//    print(self.getStringByKey(key))
     return CHUIElements().stringToJSON(self.getStringByKey(key))
   }
   

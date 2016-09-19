@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A9856642FC95E49EC2C5E320A72B33A"
+               BlueprintIdentifier = "B1FBE5431D02EA2A63372864FF387062"
                BuildableName = "Pods_ChampySwift.framework"
                BlueprintName = "Pods-ChampySwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A9856642FC95E49EC2C5E320A72B33A"
+            BlueprintIdentifier = "B1FBE5431D02EA2A63372864FF387062"
             BuildableName = "Pods_ChampySwift.framework"
             BlueprintName = "Pods-ChampySwift"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A9856642FC95E49EC2C5E320A72B33A"
-            BuildableName = "Pods_ChampySwift.framework"
-            BlueprintName = "Pods-ChampySwift"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

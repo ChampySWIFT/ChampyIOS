@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Parse
 import Firebase
 
 @UIApplicationMain
@@ -46,10 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // TODO: Handle data of notification
     
     // Print message ID.
-    ////print("Message ID: \(userInfo["gcm.message_id"]!)")
+    //////print("Message ID: \(userInfo["gcm.message_id"]!)")
     
     // Print full message.
-    ////print("%@", userInfo)
+    //////print("%@", userInfo)
   }
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -70,37 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    // Add observer for InstanceID token refresh callback.
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
+     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
                                                      name: kFIRInstanceIDTokenRefreshNotification, object: nil)
-    //    FIRApp.configure()
-    //    if application.applicationState != UIApplicationState.Background {
-    //      
-    //      let preBackgroundPush  = !application.respondsToSelector("backgroundRefreshStatus")
-    //      let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
-    //      var pushPayload        = false
-    //      if let options         = launchOptions {
-    //        pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
-    //      }
-    //      if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
-    //        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-    //      }
-    //    }
-    //    if application.respondsToSelector("registerUserNotificationSettings:") {
-    //      
-    //      
-    //      let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Badge, UIUserNotificationType.Alert, UIUserNotificationType.Sound]
-    //      let settings              = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-    //      application.registerUserNotificationSettings(settings)
-    //      application.registerForRemoteNotifications()
-    //    } else {
-    //      let types: UIRemoteNotificationType = [.Badge, .Alert, .Sound]
-    //      application.registerForRemoteNotificationTypes(types)
-    //    }
     
-    
-    //    Parse.setApplicationId("aSCb7zJ3X1UAItiXYuse6SPjdTKVbviyjUT6fuLp", clientKey: "JlK8LZH3ctKr8weIZ5JCf5is0oaqHK0UdgmMPdEt")
-        CHPush().clearBadgeNumber()
+    CHPush().clearBadgeNumber()
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   
@@ -110,14 +82,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func tokenRefreshNotification(notification: NSNotification) {
     if let refreshedToken = FIRInstanceID.instanceID().token() {
-      ////print("InstanceID token: \(refreshedToken)")
+      //////print("InstanceID token: \(refreshedToken)")
       let params = [
         "APNIdentifier" : refreshedToken //deviceToken.description as String
       ]
       
       CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
         if result {
-          ////print("success")
+          //////print("success")
         }
       }
     }
@@ -130,9 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func connectToFcm() {
     FIRMessaging.messaging().connectWithCompletion { (error) in
       if (error != nil) {
-        ////print("Unable to connect with FCM. \(error)")
+        //////print("Unable to connect with FCM. \(error)")
       } else {
-        ////print("Connected to FCM.")
+        //////print("Connected to FCM.")
       }
     }
   }
@@ -187,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   //    
   //    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
   //      if result {
-  //        ////print("success")
+  //        //////print("success")
   //      }
   //    }
   //  }
@@ -215,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationDidEnterBackground(application: UIApplication) {
     FIRMessaging.messaging().disconnect()
-    ////print("Disconnected from FCM.")
+    //////print("Disconnected from FCM.")
     CHWakeUpper().setUpWakeUp()
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

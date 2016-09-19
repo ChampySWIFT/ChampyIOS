@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 import Firebase
 class CHPush: NSObject {
   let center = NSNotificationCenter.defaultCenter()
@@ -25,23 +24,14 @@ class CHPush: NSObject {
       
     ]
     
-    let info:[String:String] = [
-      "type":type
-    ]
     
-    let push = PFPush()
-    push.setChannels(["user_\(userId)"])
-    push.setData(data)
-    
-    do {
-      try  push.sendPush()
-    } catch  {
-      
-    }
   }
   
   
   func subscribeForNotifications() {
+    #if (arch(i386) || arch(x86_64)) && (os(iOS) || os(watchOS) || os(tvOS))
+      return
+    #endif
     let deviceToken:NSData = CurrentUser.dataForKey("deviceToken")!
     FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
     
@@ -66,7 +56,7 @@ class CHPush: NSObject {
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
       if result {
-        ////////print("success")
+        //////////print("success")
       }
     }
   }
@@ -82,17 +72,7 @@ class CHPush: NSObject {
    */
   
   func subscribeUserTo(channelIdentifier:String){
-    let installation = PFInstallation.currentInstallation()
-    var deviceToken:NSData = NSData()
-    if CurrentUser.objectForKey("deviceToken") != nil{
-      deviceToken = CurrentUser.dataForKey("deviceToken")!
-    } else {
-      deviceToken = "valamicsoda".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-    }
     
-    installation.setDeviceTokenFromData(deviceToken)
-    installation.addUniqueObject("user_\(channelIdentifier)", forKey: "channels")
-    installation.saveInBackground()
   }
   
   /*
@@ -106,9 +86,6 @@ class CHPush: NSObject {
    */
   
   func unSubscribeUserFrom(channelIdentifier:String){
-    let currentInstallation = PFInstallation.currentInstallation()
-    currentInstallation.removeObject("user_\(channelIdentifier)", forKey: "channels")
-    currentInstallation.saveInBackground()
     
   }
   

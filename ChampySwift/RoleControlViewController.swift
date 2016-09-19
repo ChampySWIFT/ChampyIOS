@@ -153,6 +153,28 @@ class RoleControlViewController: UIViewController {
       })
     }
     
+    self.socket.on("InProgressChallenge:recipient:checked") { (data, act) in
+      if data[0]["recipientSuccess"] as! Int == 0 || data[0]["senderSuccess"] as! Int == 0 {
+        CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+          if result {
+            CHPush().alertPush("Challenge Checked", type: "Success")
+            CHPush().localPush("refreshIcarousel", object: [])
+          }
+        })
+      }
+    }
+    
+    self.socket.on("InProgressChallenge:sender:checked") { (data, act) in
+      if data[0]["recipientSuccess"] as! Int == 0 || data[0]["senderSuccess"] as! Int == 0 {
+        CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+          if result {
+            CHPush().alertPush("Challenge Checked", type: "Success")
+            CHPush().localPush("refreshIcarousel", object: [])
+          }
+        })
+      } 
+    }
+    
     
     self.socket.on("InProgressChallenge:updated") {(data, act) -> Void in
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
@@ -181,9 +203,9 @@ class RoleControlViewController: UIViewController {
       })
     }
     
-//    self.socket.onAny {
-////      //print("Got event: \($0.event)")
-//    }
+    self.socket.onAny {_ in 
+      //print("Got event: \($0.event)")
+    }
     
   }
   

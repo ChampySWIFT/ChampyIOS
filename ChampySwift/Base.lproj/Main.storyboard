@@ -1604,7 +1604,7 @@
                                     </barButtonItem>
                                     <barButtonItem width="90" id="Zsq-sY-JEA">
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="Kgt-qr-4f0"/>
+                                            <action selector="shareAction:" destination="5Wc-bI-oaW" id="E7u-kN-XIL"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem image="FriendsActive" id="hH2-fL-Nb7">

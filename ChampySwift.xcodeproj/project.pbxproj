@@ -752,12 +752,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwift" */;
 			buildPhases = (
-				99A4546EDF1335B970AE583A /* 📦 Check Pods Manifest.lock */,
+				99A4546EDF1335B970AE583A /* [CP] Check Pods Manifest.lock */,
 				579C18521CCB595700D6EEA9 /* Sources */,
 				579C18531CCB595700D6EEA9 /* Frameworks */,
 				579C18541CCB595700D6EEA9 /* Resources */,
-				70EB94B740BD42A334A9F764 /* 📦 Embed Pods Frameworks */,
-				B2C6F00EEA3781B8286252D8 /* 📦 Copy Pods Resources */,
+				70EB94B740BD42A334A9F764 /* [CP] Embed Pods Frameworks */,
+				B2C6F00EEA3781B8286252D8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -772,11 +772,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 579C18871CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwiftUITests" */;
 			buildPhases = (
-				79811992F5AC99F0AE96D7E1 /* 📦 Check Pods Manifest.lock */,
+				79811992F5AC99F0AE96D7E1 /* [CP] Check Pods Manifest.lock */,
 				579C18741CCB595800D6EEA9 /* Sources */,
 				579C18751CCB595800D6EEA9 /* Frameworks */,
 				579C18761CCB595800D6EEA9 /* Resources */,
-				740052FCA1DF35D355DB83C6 /* 📦 Copy Pods Resources */,
+				740052FCA1DF35D355DB83C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -792,12 +792,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57DBA4B21D366E7D00DD0035 /* Build configuration list for PBXNativeTarget "ChampySwiftTests" */;
 			buildPhases = (
-				0201F9E488266F3711FA81F9 /* 📦 Check Pods Manifest.lock */,
+				0201F9E488266F3711FA81F9 /* [CP] Check Pods Manifest.lock */,
 				57DBA4A71D366E7D00DD0035 /* Sources */,
 				57DBA4A81D366E7D00DD0035 /* Frameworks */,
 				57DBA4A91D366E7D00DD0035 /* Resources */,
-				6D957FB06FEB20D2B840A4CA /* 📦 Embed Pods Frameworks */,
-				FF1B59DDAA9B6822DB0A116C /* 📦 Copy Pods Resources */,
+				6D957FB06FEB20D2B840A4CA /* [CP] Embed Pods Frameworks */,
+				FF1B59DDAA9B6822DB0A116C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -914,14 +914,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0201F9E488266F3711FA81F9 /* 📦 Check Pods Manifest.lock */ = {
+		0201F9E488266F3711FA81F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,14 +929,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6D957FB06FEB20D2B840A4CA /* 📦 Embed Pods Frameworks */ = {
+		6D957FB06FEB20D2B840A4CA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -944,14 +944,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwiftTests/Pods-ChampySwiftTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		70EB94B740BD42A334A9F764 /* 📦 Embed Pods Frameworks */ = {
+		70EB94B740BD42A334A9F764 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -959,14 +959,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		740052FCA1DF35D355DB83C6 /* 📦 Copy Pods Resources */ = {
+		740052FCA1DF35D355DB83C6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -974,14 +974,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		79811992F5AC99F0AE96D7E1 /* 📦 Check Pods Manifest.lock */ = {
+		79811992F5AC99F0AE96D7E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -989,14 +989,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		99A4546EDF1335B970AE583A /* 📦 Check Pods Manifest.lock */ = {
+		99A4546EDF1335B970AE583A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1004,14 +1004,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B2C6F00EEA3781B8286252D8 /* 📦 Copy Pods Resources */ = {
+		B2C6F00EEA3781B8286252D8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,14 +1019,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF1B59DDAA9B6822DB0A116C /* 📦 Copy Pods Resources */ = {
+		FF1B59DDAA9B6822DB0A116C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1253,9 +1253,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7de912e-f5c2-4f13-815f-659f300cccbd";
+				PROVISIONING_PROFILE = "91197199-c0a2-454c-85ee-4489a0971594";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1280,8 +1281,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7de912e-f5c2-4f13-815f-659f300cccbd";
+				PROVISIONING_PROFILE = "91197199-c0a2-454c-85ee-4489a0971594";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
