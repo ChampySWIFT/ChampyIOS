@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9B3D34A1341729508EB1D68DF411EB17'
+               BlueprintIdentifier = 'D4813C0ED9DDD43B5E53DD2D04E9932E'
                BlueprintName = 'PresenterKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'PresenterKit.framework'>

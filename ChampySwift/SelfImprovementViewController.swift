@@ -33,39 +33,38 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
-    //print(userObject)
-    
     challengeView.delegate   = self
     challengeView.dataSource = self
     challengeView.type       = .Linear
     challengeView.decelerationRate = 0.0
-    //      self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
     
-    CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
-      self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
-      self.challenges.insert(nil, atIndex: 0)
-      Async.main {
-        var i:Int = 0
-        self.viewObjects.removeAll()
-        for item in self.challenges {
-          let cardheight = self.view.frame.size.height - 272
-          
-          let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.4, height: cardheight/*self.view.frame.size.height / 2.0*/)
-          let itemView = NewChallenge(frame:frame)
-          if item != nil {
-            itemView.setUp(item, empty: false)
-          } else {
-            itemView.setUp(item, empty: true)
-          }
-          self.viewObjects.append(itemView)
-          i = i + 1
+    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
+    self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
+    
+    self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
+    self.challenges.insert(nil, atIndex: 0)
+    Async.main {
+      var i:Int = 0
+      self.viewObjects.removeAll()
+      for item in self.challenges {
+        let cardheight = self.view.frame.size.height - 272
+        
+        let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.4, height: cardheight/*self.view.frame.size.height / 2.0*/)
+        let itemView = NewChallenge(frame:frame)
+        if item != nil {
+          itemView.setUp(item, empty: false)
+        } else {
+          itemView.setUp(item, empty: true)
         }
-        self.challengeView.reloadData()
-        self.challengeView.scrollToItemAtIndex(1, animated: false)
+        self.viewObjects.append(itemView)
+        i = i + 1
       }
+      self.challengeView.reloadData()
+      self.challengeView.scrollToItemAtIndex(1, animated: false)
     }
+    self.view.bringSubviewToFront(self.challengeView)
+    
+    
     // Do any additional setup after loading the view.
   }
   
@@ -115,7 +114,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       let params:[String:String] = [
         "challenge": self.challenges[challengeView.currentItemIndex]["_id"].stringValue
       ]
-      //print(self.challenges[challengeView.currentItemIndex]["_id"].stringValue)
+      ////print(self.challenges[challengeView.currentItemIndex]["_id"].stringValue)
       CHRequests().createSingleInProgressChallenge(params, completitionHandler: { (result, json) in
         self.finisher(result)
       })
@@ -139,7 +138,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       var dayNumber:String = view.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
       dayNumber = dayNumber.stringByReplacingOccurrencesOfString(" Day", withString: "")
       
-      //print(dayNumber)
+      ////print(dayNumber)
       guard conditions.isValidConditions() else {
 //        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
         self.alertWithMessage("Invalid Challenge Name", type: .Warning)

@@ -10,7 +10,7 @@ import UIKit
 import AudioToolbox
 import AVFoundation
 import SwiftyJSON
-
+import Async
 
 class CHUIElements: NSObject {
   
@@ -41,16 +41,20 @@ class CHUIElements: NSObject {
   
   
   func playAudio() {
-    let path = NSBundle.mainBundle().pathForResource("out.wav", ofType:nil)!
-    let url = NSURL(fileURLWithPath: path)
+    Async.main{
+      let coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("out", ofType: "wav")!)
+      do{
+        let audioPlayer = try AVAudioPlayer(contentsOfURL:coinSound)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+      }catch {
+        print("Error getting the audio file")
+      }
+      
     
-    do {
-      let sound = try AVAudioPlayer(contentsOfURL: url)
-      bombSoundEffect = sound
-      sound.play()
-    } catch {
-      // couldn't load file :(
     }
+    
+    
   }
   
   func stringToJSON(jsonString:String) -> JSON {

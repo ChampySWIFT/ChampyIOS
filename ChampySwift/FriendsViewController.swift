@@ -8,7 +8,8 @@
 
 import UIKit
 import Async
-class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
+
+class FriendsViewController: UIViewController {
   let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
   
   var table3 = AllFriendsTableViewController()
@@ -57,13 +58,11 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
       }
       
     }
-    // Do any additional setup after loading the view.
+    
   }
   
   
   @IBAction func shareAction(sender: AnyObject) {
-//    let shareContent = FBSDKShareLinkContent()
-    //Hey! I’ve just started using Champy. Join me so we can improve our lives together.
     let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
     if let myWebsite = NSURL(string: "https://itunes.apple.com/app/id1110777364") {
       
@@ -105,39 +104,12 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     }
   }
   
-  @IBAction func inviteFriend(sender: AnyObject) {
-    
-    var inviteDialog:FBSDKAppInviteDialog = FBSDKAppInviteDialog()
-    if(inviteDialog.canShow()){
-      let appLinkUrl:NSURL = NSURL(string: "http://champyapp.com/")!
-      
-      let inviteContent:FBSDKAppInviteContent = FBSDKAppInviteContent()
-      inviteContent.appLinkURL = appLinkUrl
-      
-      inviteDialog.content = inviteContent
-      inviteDialog.delegate = self
-      inviteDialog.show()
-    }
-
-    
-  
-  }
   
   
-  //function of FBSDKAppInviteDialogDelegate
-  func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: NSError!){
-    // my code here
-  }
   
-  func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [NSObject : AnyObject]!) {
-    
-  }
   
   
   func scrollViewDidScroll(scrollView: UIScrollView!) {
-    // Load the pages that are now on screen
-//    let point = CGPointMake(scrollView.contentOffset.x, 0)
-//    scrollView.setContentOffset(point, animated: false)
     loadVisiblePages()
   }
   
@@ -188,7 +160,7 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     loadVisiblePages()
     contentScrollView.setContentOffset(CGPointMake(0, 0), animated: false)
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.inviteFriend(_:)), name: "inviteFriend", object: nil)
+    
   }
   
   override func viewDidDisappear(animated: Bool) {
@@ -208,7 +180,7 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     firstFrame.size.height = self.contentScrollView.frame.size.height
     table1.tableView.frame = firstFrame
     
-    //    privateUserSecondScreen                 = mainStoryboard.instantiateViewControllerWithIdentifier("PrivateProfileSecondScreenTableViewController") as! PrivateProfileSecondScreenTableViewController
+    
     var secondFrame:CGRect  = table2.tableView.frame
     secondFrame.origin.x    = self.contentScrollView.frame.size.width
     secondFrame.origin.y    = 0
@@ -252,14 +224,6 @@ class FriendsViewController: UIViewController, FBSDKAppInviteDialogDelegate {
     }
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  
   
 }

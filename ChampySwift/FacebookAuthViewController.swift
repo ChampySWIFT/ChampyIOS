@@ -9,7 +9,7 @@
 import UIKit
 import Async
 import PresenterKit
-
+import Firebase
 class FacebookAuthViewController: UIViewController {
   var tapped:Bool = false
   
@@ -78,10 +78,15 @@ class FacebookAuthViewController: UIViewController {
             "email": email
           ]
           
+          let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+          FIRAuth.auth()?.signInWithCredential(credential, completion: { (user, error) in
+            
+          })
+          
           
           //          FBReq
           CHRequests().createUser(params, completitionHandler: { (json, status) in
-            //print(json)
+            ////print(json)
             self.tapped = false
             if status {
               Async.main {
@@ -92,7 +97,7 @@ class FacebookAuthViewController: UIViewController {
                   
                   if error != nil {
                     let errorMessage = error.localizedDescription
-                    //print(errorMessage)
+                    ////print(errorMessage)
                     self.dismissViewControllerAnimated(true, completion: {
                       self.tapped = false
                       CHPush().alertPush("Can't get friends from facebook", type: "Warning")
@@ -110,7 +115,7 @@ class FacebookAuthViewController: UIViewController {
                       }
                       CHPush().subscribeForNotifications()
                       CHSession().saveFacebookFriends("\(friendsIdArray)")
-                      self.dismissViewControllerAnimated(true, completion: {
+                      self.dismissViewControllerAnimated(false, completion: {
                         self.tapped = false
                         CHPush().alertPush("Succesfully authorized", type: "Success")
                         CHPush().localPush("authorized", object: [])

@@ -109,7 +109,7 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
       return
     }
     
-    CHRequests().retrieveFails(CHSession().currentUserId) { (result, json) in
+    CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
       if result && json != nil {
         Async.main {
           self.fillArray()
@@ -126,7 +126,7 @@ class FailedTableViewController: UITableViewController, SwipyCellDelegate {
     CHSettings().clearViewArray(historyItems)
     self.historyItems.removeAll()
     self.identifiers.removeAll()
-    for (_, item): (String, JSON) in CHChalenges().getFailedChallenges(CHSession().currentUserId)  {
+    for item in CHChalenges().getFailedChallenges(CHSession().currentUserId)  {
       self.identifiers.append(item["_id"].stringValue)
       let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       content.setUp(item)

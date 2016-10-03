@@ -35,11 +35,10 @@ class RoleControlViewController: UIViewController {
     authViewController.modalPresentationStyle = .OverCurrentContext
     
     if !CHSession().logined {
-      self.presentViewController(authViewController, animated: true, completion: {
+      self.presentViewController(authViewController, animated: false, completion: {
         
       })
-    }
-    else {
+    } else {
       self.socket.connect()
       self.handleSocketActions()
       self.toMainView()
@@ -204,7 +203,7 @@ class RoleControlViewController: UIViewController {
     }
     
     self.socket.onAny {_ in 
-      //print("Got event: \($0.event)")
+      ////print("Got event: \($0.event)")
     }
     
   }

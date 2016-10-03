@@ -57,10 +57,10 @@
     func printFonts() {
       let fontFamilyNames = UIFont.familyNames()
       for familyName in fontFamilyNames {
-        //////print("------------------------------")
-        //////print("Font Family Name = [\(familyName)]")
+        
+        
         let names = UIFont.fontNamesForFamilyName(familyName )
-        //////print("Font Names = [\(names)]")
+        
       }
     }
     
@@ -201,7 +201,9 @@
     }
     
     override func viewDidLoad(){
-      
+      CHUsers().getUsersFirebase { (result) in
+        
+      }
       self.navigationController?.setNavigationBarHidden(false, animated: false)
       super.viewDidLoad()
       center.addObserver(self, selector: #selector(MainViewController.setUpBehavior), name: "setUpBehavior", object: nil)

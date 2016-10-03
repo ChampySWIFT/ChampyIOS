@@ -35,6 +35,7 @@ import Async
     
     
     if !empty {
+      print(object)
       pointsLabel.text = object["points"].stringValue
       pointsLabel.adjustsFontSizeToFitWidth = true
       
@@ -57,6 +58,7 @@ import Async
       
       ConditionsTextField.placeholder = "Type Your Challenge Name"
       ConditionsTextField.adjustsFontSizeToFitWidth = true
+      ConditionsTextField.userInteractionEnabled = true
       rewardLabel.text = "Reward +10 points"
       
     }
@@ -138,23 +140,24 @@ import Async
   
   
   func textFieldDidBeginEditing(textField: UITextField) {
-    if textField == self.daysTextField || textField == self.ConditionsTextField {
-      var frame = self.view.frame
-      frame.origin.y = frame.origin.y - 150
+    if textField == self.ConditionsTextField {
+      self.view.bringSubviewToFront(self.ConditionsTextField)
+      var frame = self.view.superview?.superview!.superview!.superview!.frame
+      frame!.origin.y = frame!.origin.y - 150
       
       UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-        self.view.frame = frame
+        self.view.superview?.superview!.superview!.superview!.frame = frame!
         }, completion: { finished in
       })
     }
   }
   
   func textFieldDidEndEditing(textField: UITextField) {
-    if textField == self.daysTextField || textField == self.ConditionsTextField {
-      var frame = self.view.frame
-      frame.origin.y = frame.origin.y + 150
+    if textField == self.ConditionsTextField {
+      var frame = self.view.superview?.superview!.superview!.superview!.frame
+      frame!.origin.y = frame!.origin.y + 150
       UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-        self.view.frame = frame
+        self.view.superview?.superview!.superview!.superview!.frame = frame!
         }, completion: { finished in
       })
     }

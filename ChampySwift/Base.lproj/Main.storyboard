@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2DD-P6-39Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2DD-P6-39Q">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -144,7 +144,7 @@
                         <segue destination="QNZ-yS-rxy" kind="show" id="h8x-8O-Ltp"/>
                         <segue destination="Zay-9G-GqL" kind="show" identifier="toHistory" id="5VX-P1-k0d"/>
                         <segue destination="kwx-da-bOR" kind="relationship" relationship="rootViewController" id="Rqd-IU-rgD"/>
-                        <segue destination="xjQ-ad-gAJ" kind="show" id="KAd-dJ-arU"/>
+                        <segue destination="xjQ-ad-gAJ" kind="show" animates="NO" id="KAd-dJ-arU"/>
                         <segue destination="GoI-sF-xHM" kind="modal" identifier="showDuelViewController" modalPresentationStyle="pageSheet" id="Wk8-K2-Mbm"/>
                         <segue destination="iBM-OT-xok" kind="show" id="LdF-ez-JyE"/>
                         <segue destination="K4u-HI-wb9" kind="show" id="TyF-sl-2H6"/>
@@ -349,7 +349,7 @@
                                 <rect key="frame" x="169" y="359" width="37" height="37"/>
                                 <color key="color" red="0.96078431369999995" green="0.72156862749999995" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUC-OA-FWc">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUC-OA-FWc">
                                 <rect key="frame" x="126" y="617" width="123" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="asJ-F3-rWI"/>
@@ -425,7 +425,7 @@
                                         </state>
                                         <connections>
                                             <action selector="authWithFacebook:" destination="xjQ-ad-gAJ" eventType="touchUpInside" id="TDL-a0-E1M"/>
-                                            <segue destination="9uJ-qs-hQI" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="m5q-za-vcF"/>
+                                            <segue destination="9uJ-qs-hQI" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="m5q-za-vcF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -472,10 +472,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tAl-US-TeY">
-                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-Wx-oCu">
-                                <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kR7-Iw-Ag4">
                                         <rect key="frame" x="0.0" y="10" width="375" height="29"/>
@@ -704,11 +704,13 @@
                                                     <segue destination="Zay-9G-GqL" kind="show" animates="NO" id="Bpc-Yg-btr"/>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="aYg-Mn-8Ds"/>
                                             <barButtonItem width="90" id="9fN-3P-JI4">
                                                 <connections>
                                                     <action selector="centerTappedAction:" destination="BYZ-38-t0r" id="Cfo-21-gDx"/>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="DSp-PP-Fld"/>
                                             <barButtonItem image="friends" id="lsM-wK-Ygd">
                                                 <color key="tintColor" red="0.98431372549019602" green="0.81176470588235294" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
@@ -1441,6 +1443,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-zq-rUh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI8-xQ-VcQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Zay-9G-GqL" id="PYX-tB-lUQ"/>
+                                </connections>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgb-fb-Bjz">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -1461,11 +1469,13 @@
                                             <action selector="toHistory:" destination="BYZ-38-t0r" id="hfp-Pf-Rul"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="90" id="MHe-vf-186">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="lAg-J3-7oS"/>
+                                    <barButtonItem width="89" id="MHe-vf-186">
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="cn2-vs-G6j"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="AmG-sO-UN0"/>
                                     <barButtonItem image="friends" id="tcn-Xn-DVH">
                                         <color key="tintColor" red="0.98431372549999996" green="0.81176470590000005" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -1501,12 +1511,6 @@
                                     <constraint firstAttribute="height" constant="27" id="ahh-5l-SgG"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI8-xQ-VcQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Zay-9G-GqL" id="PYX-tB-lUQ"/>
-                                </connections>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1581,6 +1585,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dum-y2-jSU">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFx-NW-bZb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5Wc-bI-oaW" id="ncP-Zl-cDR"/>
+                                </connections>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pC-p8-Fp6">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -1602,11 +1612,13 @@
                                             <segue destination="Zay-9G-GqL" kind="show" animates="NO" id="9iV-cc-okd"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="OOf-6o-PwW"/>
                                     <barButtonItem width="90" id="Zsq-sY-JEA">
                                         <connections>
                                             <action selector="shareAction:" destination="5Wc-bI-oaW" id="E7u-kN-XIL"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qdm-nd-Nlz"/>
                                     <barButtonItem image="FriendsActive" id="hH2-fL-Nb7">
                                         <color key="tintColor" red="0.98431372549999996" green="0.81176470590000005" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -1625,12 +1637,6 @@
                                 </items>
                                 <color key="barTintColor" red="0.1215686275" green="0.51372549020000002" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFx-NW-bZb">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <connections>
-                                    <outlet property="delegate" destination="5Wc-bI-oaW" id="ncP-Zl-cDR"/>
-                                </connections>
-                            </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="center" translatesAutoresizingMaskIntoConstraints="NO" id="aCQ-zT-3Ik">
                                 <rect key="frame" x="152" y="610" width="70" height="70"/>
                                 <gestureRecognizers/>
@@ -1747,6 +1753,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="5w9-8N-zHd">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lq1-8g-gZG">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETt-4C-g7J">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                        <connections>
+                                            <segue destination="Yig-3N-Dws" kind="embed" id="kja-ND-3qi"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ETt-4C-g7J" secondAttribute="trailing" id="EE2-uy-0rS"/>
+                                    <constraint firstItem="ETt-4C-g7J" firstAttribute="leading" secondItem="lq1-8g-gZG" secondAttribute="leading" id="Eq3-Mq-1Fd"/>
+                                    <constraint firstItem="ETt-4C-g7J" firstAttribute="top" secondItem="lq1-8g-gZG" secondAttribute="top" id="kH9-Vb-tBv"/>
+                                    <constraint firstAttribute="bottom" secondItem="ETt-4C-g7J" secondAttribute="bottom" id="sSn-Zk-1mV"/>
+                                </constraints>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-d4-WLR">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -1768,11 +1792,13 @@
                                             <segue destination="Zay-9G-GqL" kind="show" animates="NO" id="p06-q1-w6x"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kXQ-L5-ckk"/>
                                     <barButtonItem width="90" id="b4U-DT-GH4">
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="ggH-dX-57V"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kwT-Jf-qQw"/>
                                     <barButtonItem image="friends" id="b3N-8J-Sp8">
                                         <color key="tintColor" red="0.98431372549999996" green="0.81176470590000005" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -1791,24 +1817,6 @@
                                 </items>
                                 <color key="barTintColor" red="0.1215686275" green="0.51372549020000002" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lq1-8g-gZG">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETt-4C-g7J">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
-                                        <connections>
-                                            <segue destination="Yig-3N-Dws" kind="embed" id="kja-ND-3qi"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ETt-4C-g7J" secondAttribute="trailing" id="EE2-uy-0rS"/>
-                                    <constraint firstItem="ETt-4C-g7J" firstAttribute="leading" secondItem="lq1-8g-gZG" secondAttribute="leading" id="Eq3-Mq-1Fd"/>
-                                    <constraint firstItem="ETt-4C-g7J" firstAttribute="top" secondItem="lq1-8g-gZG" secondAttribute="top" id="kH9-Vb-tBv"/>
-                                    <constraint firstAttribute="bottom" secondItem="ETt-4C-g7J" secondAttribute="bottom" id="sSn-Zk-1mV"/>
-                                </constraints>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="center" translatesAutoresizingMaskIntoConstraints="NO" id="MO0-qW-Gxn">
                                 <rect key="frame" x="152" y="610" width="70" height="70"/>
                                 <gestureRecognizers/>
@@ -3505,11 +3513,11 @@
         <image name="wins" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f0k-g1-DxH"/>
-        <segue reference="Bpc-Yg-btr"/>
-        <segue reference="cn2-vs-G6j"/>
-        <segue reference="KWy-Sq-UFz"/>
+        <segue reference="T8E-n2-M3L"/>
         <segue reference="xgf-yx-vXc"/>
-        <segue reference="CJu-Sm-jAY"/>
+        <segue reference="KWy-Sq-UFz"/>
+        <segue reference="DSc-Xv-fDL"/>
+        <segue reference="Bpc-Yg-btr"/>
+        <segue reference="lcB-oY-rVi"/>
     </inferredMetricsTieBreakers>
 </document>

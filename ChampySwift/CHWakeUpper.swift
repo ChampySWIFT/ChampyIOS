@@ -59,7 +59,7 @@ class CHWakeUpper: NSObject {
   
   func setUpScheduledLocalNotification(alertAction:String, alertBody:String, timeInterval:Double, type:String, wakeUpId:String = "") {
     let localNotification:UILocalNotification = UILocalNotification()
-    localNotification.alertAction = alertAction
+    localNotification.alertAction = alertAction 
     localNotification.alertBody   = alertBody
     localNotification.userInfo    = [
       "type": type,

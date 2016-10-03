@@ -8,8 +8,16 @@
 
 import UIKit
 import SwiftyJSON
+import Firebase
+
+//extension FDataSnapshot {
+//  var json : JSON {
+//    return JSON(self.value)
+//  }
+//}
 
 class CHUsers: NSObject {
+  let ref = FIRDatabase.database().reference()
   
   /**
    Return's photo url of the selected user
@@ -93,6 +101,25 @@ class CHUsers: NSObject {
     return friends
   }
   
+  func getUsersFirebase(completitionHandler:(result:[JSON])->()) {
+    
+    
+    
+    ref.child("users/userList").observeEventType(.Value, withBlock: { (snapshot) in
+      var friends:[JSON] = []
+      let json = JSON(snapshot.value!)
+      for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
+        if self.isFacebookFriend(item["facebookId"].stringValue) {
+          if self.isValidUser(item) {
+            friends.append(item)
+          }
+        }
+      }
+      completitionHandler(result: friends)
+    })
+    
+  }
+  
   /**
    Get one user from local database
    
@@ -109,6 +136,8 @@ class CHUsers: NSObject {
     }
     return nil
   }
+
+  
   
   /**
    Get friends by status
@@ -238,3 +267,9 @@ class CHUsers: NSObject {
   
   
 }
+
+//extension FDataSnapshot {
+//  var json : JSON {
+//    return JSON(self.value)
+//  }
+//}

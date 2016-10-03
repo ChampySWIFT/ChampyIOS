@@ -436,22 +436,42 @@ import SwiftyJSON
   func setUpDuel() {
     self.challengeIcon.image = UIImage(named: "DuelColor")
     self.myName.text = CHSession().currentUserName
+    
     if self.generalItem["sender"]["_id"].stringValue == CHSession().currentUserId {
-      self.historyTitle.text = "Duel with \(self.generalItem["recipient"]["name"].stringValue)"
-      self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+      if self.generalItem["recipient"] != nil {
+        self.historyTitle.text = "Duel with \(self.generalItem["recipient"]["name"].stringValue)"
+        self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+        
+        CHImages().setImageForFriend(self.generalItem["recipient"]["_id"].stringValue, imageView: self.avatar)
+        self.partnerName.text = self.generalItem["recipient"]["name"].stringValue
+        return
+      } else {
+        self.historyTitle.text = "Duel with Unknown User"
+        self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+        self.avatar.image = UIImage(named: "noImageIcon")
+        self.partnerName.text = "Unknown User"
+        return
+      }
       
-      CHImages().setImageForFriend(self.generalItem["recipient"]["_id"].stringValue, imageView: self.avatar)
-      self.partnerName.text = self.generalItem["recipient"]["name"].stringValue
-      return
     }
     
     if self.generalItem["recipient"]["_id"].stringValue == CHSession().currentUserId {
-      self.historyTitle.text = "Duel with \(self.generalItem["sender"]["name"].stringValue)"
-      self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+      if self.generalItem["recipient"] != nil {
+        self.historyTitle.text = "Duel with \(self.generalItem["sender"]["name"].stringValue)"
+        self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+        
+        CHImages().setImageForFriend(self.generalItem["sender"]["_id"].stringValue, imageView: self.avatar)
+        self.partnerName.text = self.generalItem["sender"]["name"].stringValue
+        return
+      } else {
+        self.historyTitle.text = "Duel with Unknown User"
+        self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
+        self.avatar.image = UIImage(named: "noImageIcon")
+        self.partnerName.text = "Unknown User"
+        return
+      }
       
-     CHImages().setImageForFriend(self.generalItem["sender"]["_id"].stringValue, imageView: self.avatar)
-      self.partnerName.text = self.generalItem["sender"]["name"].stringValue
-      return
+      
     }
     
   }

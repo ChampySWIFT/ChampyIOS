@@ -112,7 +112,7 @@ class FriendsTableViewController: UITableViewController {
           //            object = friend["friend"]
           //          }
           //          content.setUp(object)
-          //          //print(indexPath.row)
+          //          ////print(indexPath.row)
           let content = friendsContent[indexPath.row] as! FriendCell
           cell?.addSubview(content)
           cell!.backgroundColor = UIColor.clearColor()

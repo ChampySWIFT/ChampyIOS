@@ -166,16 +166,16 @@ public enum FusumaModeOrder {
         
         UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
         let context = UIGraphicsGetCurrentContext()
-        CGContextTranslateCTM(context, -albumView.imageCropView.contentOffset.x, -albumView.imageCropView.contentOffset.y)
+        CGContextTranslateCTM(context!, -albumView.imageCropView.contentOffset.x, -albumView.imageCropView.contentOffset.y)
         view.layer.renderInContext(context!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        delegate?.fusumaImageSelected(image)
+        delegate?.fusumaImageSelected(image!)
         
         self.dismissViewControllerAnimated(true, completion: {
             
-            self.delegate?.fusumaDismissedWithImage?(image)
+            self.delegate?.fusumaDismissedWithImage?(image!)
         })
     }
     

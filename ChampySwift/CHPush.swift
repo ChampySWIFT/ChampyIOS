@@ -41,53 +41,25 @@ class CHPush: NSObject {
     }
     
     let firtoken = FIRInstanceID.instanceID().token()!
-    ////////print(firtoken)
+    
     let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
     var token = ""
-    //////print(token)
+    
     for i in 0..<deviceToken.length {
       token += String(format: "%02.2hhx", arguments: [tokenChars[i]])
     }
     
-    //////print(token)
+    
     let params = [
-      "APNIdentifier" : firtoken //deviceToken.description as String
+      "APNIdentifier" : firtoken 
     ]
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-      if result {
-        //////////print("success")
-      }
+      
     }
   }
   
-  /*
-   Subscribe User to channel
-   
-   types of channels:
-   
-   user_'deviceToken' : unknown user,
-   user_'objectId'    : logined and registered user
-   user_'spotId'      : user or business in host mode
-   */
   
-  func subscribeUserTo(channelIdentifier:String){
-    
-  }
-  
-  /*
-   Unsubscribe User to channel
-   
-   types of channels:
-   
-   user_'deviceToken' : unknown user,
-   user_'objectId'    : logined and registered user
-   user_'spotId'      : user or business in host mode
-   */
-  
-  func unSubscribeUserFrom(channelIdentifier:String){
-    
-  }
   
   /*
    clear badge number

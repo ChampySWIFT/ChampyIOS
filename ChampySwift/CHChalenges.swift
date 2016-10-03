@@ -8,8 +8,10 @@
 
 import UIKit
 import SwiftyJSON
+import Firebase
+
 class CHChalenges: NSObject {
-  
+  let ref = FIRDatabase.database().reference()
   enum CHChallengeSubType: String {
     case unconfirmedDuelRecipient    = "unconfirmedDuelRecipient"
     case unconfirmedDuelSender = "unconfirmedDuelSender"
@@ -54,6 +56,14 @@ class CHChalenges: NSObject {
     }
     
     return result
+  }
+  
+  func getAllChallenges(userId:String, completitionHandler:(result:JSON)->()) {
+    ref.child("users/userList/\(userId)").observeEventType(.Value, withBlock: { (snapshot) in
+      let json = JSON(snapshot.value!)
+      
+      completitionHandler(result: json)
+    })
   }
   
   /**
@@ -119,6 +129,37 @@ class CHChalenges: NSObject {
     return result
   }
   
+  
+  
+  func surrenderAllInProgressChallengesWithThisFriend(userId:String) {
+    for item in self.getInProgressChallenges(CHSession().currentUserId) {
+      if item["sender"]["_id"].stringValue == userId || item["recipient"]["_id"].stringValue == userId {
+          CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+            
+          })
+      }
+    }
+  }
+  
+  func surrenderAllInProgressChallenges(completitionHandler:(end:Bool) -> ()) {
+    for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(CHSession().currentUserId)") {
+      
+      CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+        
+      })
+      
+    }
+    
+    completitionHandler(end: true)
+  }
+  
+  func isThereStartedChallengesWith() -> Bool {
+    
+    
+    
+    return true
+  }
+  
   /**
    get Win Challenges
    
@@ -133,17 +174,17 @@ class CHChalenges: NSObject {
       
       switch userId {
       case item["sender"]["_id"].stringValue:
-        guard item["senderSuccess"].boolValue == value else {
+        if item["senderSuccess"].boolValue == value {
+          result.append(item)
           continue
         }
-        result.append(item)
         break
         
       case item["recipient"]["_id"].stringValue:
-        guard item["recipientSuccess"].boolValue == value else {
+        if item["recipientSuccess"].boolValue == value {
+          result.append(item)
           continue
         }
-        result.append(item)
         break
       default: break
         
@@ -161,8 +202,8 @@ class CHChalenges: NSObject {
    
    @return array of win challenges
    */
-  func getWinChallenges(userId:String) -> JSON {
-    return CHSession().getJSONByKey("wins\(userId)")
+  func getWinChallenges(userId:String) -> [JSON] {
+    return getChalengeArrayByKyValueCombination(userId, value: true)
   }
   
   /**
@@ -172,31 +213,11 @@ class CHChalenges: NSObject {
    
    @return array of failed challenges
    */
-  func getFailedChallenges(userId:String) -> JSON {
-    return CHSession().getJSONByKey("fails\(userId)")
+  func getFailedChallenges(userId:String) -> [JSON] {
+    return getChalengeArrayByKyValueCombination(userId, value: false)
   }
   
-  /**
-   check Duel By Owner Key
-   
-   @param item JSON object of the selected in progress challenge
-   @param key String true or false
-   
-   @return CHChallengeSubType of the Duel
-   */
-  func checkDuelByOwnerKey(item:JSON, key:String) -> CHChallengeSubType {
-    
-    guard item[key].count > 0 else {
-      return .startedDuel
-    }
-    
-    guard CHUIElements().getCurretnTime() - item[key][item[key].count - 1]["at"].intValue <= 86400 else {
-      return .startedDuel
-    }
-    
-    return .checkedForToday
-    
-  }
+  
   
   /**
    check Status Of the Started Duel
@@ -228,14 +249,17 @@ class CHChalenges: NSObject {
    */
   func getSelfImprovementStatus(item:JSON) -> CHChallengeSubType {
     let currentDate = CHUIElements().getCurretnTime()
+    let surrenderTime = CHSettings().daysToSec(2)
     let borderTime = CHSettings().daysToSec(1)
-    
+    var checkMidnight = 0
     guard item["status"].stringValue == "started" else {
       return .startedSelfImprovement
     }
     
     guard item["senderProgress"].count > 0 else {
-      if currentDate - item["created"].intValue > borderTime {
+      checkMidnight = CHSettings().getMidnightOfTheDay(item["created"].intValue)
+      
+      if currentDate - item["created"].intValue > surrenderTime {
         CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
           
         })
@@ -243,13 +267,14 @@ class CHChalenges: NSObject {
       return .startedSelfImprovement
     }
     
-    let checkedDate = item["senderProgress"][item["senderProgress"].count - 1]["at"].intValue
+    checkMidnight = CHSettings().getMidnightOfTheDay(item["senderProgress"][item["senderProgress"].count - 1]["at"].intValue)
     
-    if currentDate - checkedDate <= borderTime {
+    
+    if currentDate - checkMidnight <= borderTime {
       return .confirmedSelfImprovement
     }
     
-    if currentDate - checkedDate > borderTime {
+    if currentDate - checkMidnight > borderTime {
       CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
         
       })
@@ -258,6 +283,47 @@ class CHChalenges: NSObject {
     
     
     return .startedSelfImprovement
+  }
+  
+  /**
+   check Duel By Owner Key
+   
+   @param item JSON object of the selected in progress challenge
+   @param key String true or false
+   
+   @return CHChallengeSubType of the Duel
+   */
+  func checkDuelByOwnerKey(item:JSON, key:String) -> CHChallengeSubType {
+    let currentDate = CHUIElements().getCurretnTime()
+    let surrenderTime = CHSettings().daysToSec(2)
+    let borderTime = CHSettings().daysToSec(1)
+    var checkMidnight = 0
+    
+    guard item[key].count > 0 else {
+      checkMidnight = CHSettings().getMidnightOfTheDay(item["created"].intValue)
+      
+      if currentDate - item["created"].intValue > surrenderTime {
+        CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+          
+        })
+      }
+      return .startedDuel
+    }
+    
+    checkMidnight = CHSettings().getMidnightOfTheDay(item[key][item[key].count - 1]["at"].intValue)
+    
+    if currentDate - checkMidnight > surrenderTime {
+      CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+        
+      })
+    }
+    
+    if (currentDate - checkMidnight < surrenderTime) && (currentDate - checkMidnight > borderTime) {
+      return .startedDuel
+    }
+    
+    return .checkedForToday
+    
   }
   
   /**

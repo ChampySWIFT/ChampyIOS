@@ -1,4 +1,3 @@
-
 //
 //  ImageCache.swift
 //  Kingfisher

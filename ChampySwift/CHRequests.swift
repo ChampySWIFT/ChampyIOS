@@ -10,11 +10,11 @@
 import UIKit
 import SwiftHTTP
 import SwiftyJSON
-
+import Firebase
 
 class CHRequests: NSObject {
   
-  
+  var ref = FIRDatabase.database().reference()
   var APIurl:String = "http://46.101.213.24:3007/v1"
   var SocketUrl:String = "http://46.101.213.24:3007"
   
@@ -48,20 +48,20 @@ class CHRequests: NSObject {
     self.token = CHSession().getToken()
   }
   
-  func checkUser(ownerId:String, completitionHandler:(json:JSON, status:Bool) -> ()) {
+  func checkUser(ownerId:String, completitionHandler:(_ json:JSON, status:Bool) -> ()) {
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
     }
     let url = "\(self.APIurl)/users/\(ownerId)?token=\(self.token)"
     let operationQueue = NSOperationQueue()
-    ////print(url)
+    //////print(url)
     do {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(json: json["description"], status: false)
           return
@@ -74,7 +74,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createUser(params:[String:String], completitionHandler:(json:JSON, status:Bool) -> ()){
+  func createUser(params:[String:String], completitionHandler:(_ json:JSON, status:Bool) -> ()){
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -137,7 +137,7 @@ class CHRequests: NSObject {
           "challenge" : json["data"]["_id"].stringValue
         ]
         
-        ////print(params1)
+        //////print(params1)
         
         self.createDuelInProgressChallenge(params1, completitionHandler: { (secresult, secjson) in
           completitionHandler(json: secjson, status: secresult)
@@ -162,7 +162,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
+        //print(json)
         if let _ = response.error {
           completitionHandler(json: json, status: false)
           return
@@ -214,7 +214,7 @@ class CHRequests: NSObject {
       opt.onFinish = { response in
         let json = JSON(data: response.data)
         
-        ////print(json)
+        //////print(json)
         if response.error != nil {
           completitionHandler(result: false, json: json)
           return
@@ -290,13 +290,13 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(self.APIurl)/users/\(userId)?token=\(self.token)"
-    ////print(url)
+    //////print(url)
     let operationQueue = NSOperationQueue()
     do {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -327,6 +327,8 @@ class CHRequests: NSObject {
           completitionHandler(result: false, json: json)
           return
         }
+        self.ref.child("users/userList").setValue(json.dictionaryObject!)
+        
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "userList")
         completitionHandler(result: true, json: json)
       }
@@ -359,6 +361,8 @@ class CHRequests: NSObject {
           completitionHandler(result: false, json: json)
           return
         }
+        self.ref.child("users/\(userId)/friendsList").setValue(json.dictionaryObject!)
+        
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
         completitionHandler(result: true, json: json)
       }
@@ -385,6 +389,7 @@ class CHRequests: NSObject {
           completitionHandler(result: false, json: json)
           return
         }
+        self.ref.child("users/challenges").setValue(json.dictionaryObject!)
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "challenges")
         completitionHandler(result: true, json: json)
       }
@@ -405,8 +410,8 @@ class CHRequests: NSObject {
     ]
     let operationQueue = NSOperationQueue()
     
-    ////print(params)
-    ////print(url)
+    //////print(params)
+    //////print(url)
     do {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
@@ -442,7 +447,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //print(json)
+        ////print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -450,6 +455,8 @@ class CHRequests: NSObject {
         //        json)
         CHPush().localPush("friendsReload", object: [])
         CHPush().localPush("allReload", object: [])
+        self.ref.child("users/\(userId)/friendsList").setValue(json.dictionaryObject!)
+        
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
         completitionHandler(result: true, json: json)
       }
@@ -473,7 +480,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //print(json)
+        ////print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -482,6 +489,7 @@ class CHRequests: NSObject {
         CHPush().localPush("friendsReload", object: [])
         CHPush().localPush("allReload", object: [])
         CHPush().localPush("pendingReload", object: [])
+        self.ref.child("users/\(userId)/friendsList").setValue(json.dictionaryObject!)
         
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "friendsList(\(userId))")
         completitionHandler(result: true, json: json)
@@ -597,6 +605,8 @@ class CHRequests: NSObject {
           completitionHandler(result: false, json: json)
           return
         }
+        
+        self.ref.child("users/\(userId)/inProgressChallenges").setValue(json.dictionaryObject!)
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "inProgressChallenges\(userId)")
         completitionHandler(result: true, json: json)
       }
@@ -622,6 +632,7 @@ class CHRequests: NSObject {
           completitionHandler(result: false, json: json)
           return
         }
+        self.ref.child("users/\(userId)/wins").setValue(json.dictionaryObject!)
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "wins\(userId)")
         completitionHandler(result: true, json: json)
       }
@@ -642,11 +653,12 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
+        //print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
         }
+        self.ref.child("users/\(userId)/fails").setValue(json.dictionaryObject!)
         NSUserDefaults.standardUserDefaults().setObject("\(json["data"])", forKey: "fails\(userId)")
         completitionHandler(result: true, json: json)
       }
@@ -800,7 +812,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -827,7 +839,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -854,7 +866,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
+        //print(json)
         if let _ = response.error {
           completitionHandler(result: false, json: json)
           return
@@ -870,6 +882,16 @@ class CHRequests: NSObject {
   }
   
   
-  
+  func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+    var res: [String:AnyObject]?
+    if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+      do {
+        res = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+      } catch _ {
+        
+      }
+    }
+    return res
+  }
   
 }

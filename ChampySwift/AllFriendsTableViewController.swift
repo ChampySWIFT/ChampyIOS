@@ -28,13 +28,13 @@ class AllFriendsTableViewController: UITableViewController {
   override func viewDidAppear(animated: Bool) {
     center.addObserver(self, selector: #selector(AllFriendsTableViewController.refreshTableViewAction(_:)), name: "allReload", object: nil)
     self.refreshTableViewAction(self.refreshTableView)
-    //    self.fillArray()
+   
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //    self.fillArray()
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -149,19 +149,23 @@ class AllFriendsTableViewController: UITableViewController {
       CHPush().alertPush("No Internet Connection", type: "Warning")
       return
     }
-    CHRequests().getAllUsers { (result, json) in
-      CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
-        if result {
-          Async.main {
-            
-            self.fillArray()
-            self.tableView.reloadData()
-            self.refreshTableView.endRefreshing()
+    CHPush().alertPush("Updating Friends List", type: "Success")
+    Async.background{
+      CHRequests().getAllUsers { (result, json) in
+        CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
+          if result {
+            Async.main {
+              
+              self.fillArray()
+              self.tableView.reloadData()
+              self.refreshTableView.endRefreshing()
+            }
           }
-        }
-      })
-      
+        })
+        
+      }
     }
+    
     
   }
   
@@ -207,28 +211,60 @@ class AllFriendsTableViewController: UITableViewController {
     self.identifiers.removeAll()
     heights.removeAll()
     self.userArray.removeAll()
-    //     = CHUsers().getUsers()
-//    //print(CHUsers().getFacebookFriendsQueryPart());
+    var i = 0;
     for friend in CHUsers().getUsers()  {
-      heights.append(66)
-      //      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
-      //      let status = CHUsers().getStatus(friend) //"Other"
-      //      content.status = status
-      //      content.setUp(friend)
+      
       let status = CHUsers().getStatus(friend)
-      //print(status)
+      
       if CHUsers().getStatus(friend) == "Other" {
+        heights.append(66)
         self.friendsContent.append(FriendCell())
         identifiers.append("\(friend["_id"].stringValue)")
         self.userArray.append(friend)
+        
+        
+        // fantom friends
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) asd\(i)")
+//        self.userArray.append(friend)
+//        
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) adasd\(i)")
+//        self.userArray.append(friend)
+//        
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) asdasd\(i)")
+//        self.userArray.append(friend)
+//        
+//        // fantom friends
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) asd\(i)")
+//        self.userArray.append(friend)
+//        
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) adasd\(i)")
+//        self.userArray.append(friend)
+//        
+//        heights.append(66)
+//        self.friendsContent.append(FriendCell())
+//        identifiers.append("\(friend["_id"].stringValue) asdasd\(i)")
+//        self.userArray.append(friend)
+//        
+        
+        i = i + 1
       } else {
-        //print(friend["name"].stringValue)
+        
       }
     }
     
     
     
-    //    //print(userArray)
+    //    ////print(userArray)
     self.userCount = self.friendsContent.count
   }
   

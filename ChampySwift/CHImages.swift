@@ -16,38 +16,41 @@ class CHImages: NSObject {
   func setUpAvatar(imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
     
     let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
-    let userObject:JSON = CHUsers().getUserById(CHSession().currentUserId)
-    
+    let user = CHUsers().getUserById(CHSession().currentUserId)
     var cachename = "initialCache"
-    if userObject["lastPhotoUpdated"].intValue != 0 {
-      cachename = userObject["lastPhotoUpdated"].stringValue
+    if user["lastPhotoUpdated"].intValue != 0 {
+      cachename = user["lastPhotoUpdated"].stringValue
     }
     let myCache = ImageCache(name: cachename)
     
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-
+      
     }) { (image, error, cacheType, imageURL) in
     }
+    
+    
   }
   
   func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
     let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
-    var userObject:JSON! = nil
-    
+    var user:JSON! = nil
     if userId == CHSession().currentUserId {
-      userObject = CHSession().currentUserObject
+      user = CHSession().currentUserObject
     } else {
-      userObject = CHUsers().getUserById(userId)
+      user = CHUsers().getUserById(userId)
     }
+      
     
     var cachename = "initialCache"
-    if userObject["lastPhotoUpdated"].intValue != 0 {
-      cachename = userObject["lastPhotoUpdated"].stringValue
+    if user["lastPhotoUpdated"].intValue != 0 {
+      cachename = user["lastPhotoUpdated"].stringValue
     }
     let myCache = ImageCache(name: cachename)
-
+    
     imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "noImageIcon"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
     }) { (image, error, cacheType, imageURL) in }
+    
+    
   }
   
   func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {

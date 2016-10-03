@@ -73,7 +73,7 @@ class SettingsViewController: UIViewController {
   }
   
   override func viewDidAppear(animated: Bool) {
-    //    CHImages().setUpBackground(background)
+    
     center.addObserver(self, selector: #selector(SettingsViewController.setUpBackroundNotif(_:)), name: "updateImage", object: nil)
   }
   

@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
   var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()
   
   var window: UIWindow?
@@ -40,33 +41,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if UIApplication.sharedApplication().applicationState == .Active {
       CHPush().clearBadgeNumber()
     }
-    // If you are receiving a notification message while your app is in the background,
-    // this callback will not be fired till the user taps on the notification launching the application.
-    // TODO: Handle data of notification
-    
-    // Print message ID.
-    //////print("Message ID: \(userInfo["gcm.message_id"]!)")
-    
-    // Print full message.
-    //////print("%@", userInfo)
   }
+  
+  override init() {
+    // Firebase Init
+    FIRApp.configure()
+    FIRDatabase.database().persistenceEnabled = true
+  }
+  
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
     // Override point for customization after application launch.
-    FIRApp.configure()
-    if #available(iOS 8.0, *) {
-      // [START register_for_notifications]
-      let settings: UIUserNotificationSettings =
-        UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-      application.registerUserNotificationSettings(settings)
-      application.registerForRemoteNotifications()
-      // [END register_for_notifications]
-    } else {
-      // Fallback
-      let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
-      application.registerForRemoteNotificationTypes(types)
-    }
+//    FIRApp.configure()
+//    if #available(iOS 8.0, *) {
+//      // [START register_for_notifications]
+//      let settings: UIUserNotificationSettings =
+//        UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+//      application.registerUserNotificationSettings(settings)
+//      application.registerForRemoteNotifications()
+//      // [END register_for_notifications]
+//    } else {
+//      // Fallback
+//      let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
+//      application.registerForRemoteNotificationTypes(types)
+//    }
+//    UNUserNotificationCenter.current().reques
+    
+    registerForPushNotifications(application)
+
     
     
      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
@@ -82,30 +85,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func tokenRefreshNotification(notification: NSNotification) {
     if let refreshedToken = FIRInstanceID.instanceID().token() {
-      //////print("InstanceID token: \(refreshedToken)")
+      
       let params = [
         "APNIdentifier" : refreshedToken //deviceToken.description as String
       ]
       
       CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
         if result {
-          //////print("success")
+        
         }
       }
     }
     
-    // Connect to FCM since connection may have failed when attempted before having a token.
+    
     connectToFcm()
+  }
+  
+  func registerForPushNotifications(application: UIApplication) {
+    
+    if #available(iOS 10.0, *){
+      UNUserNotificationCenter.currentNotificationCenter().delegate = self
+      UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions([.Badge, .Sound, .Alert], completionHandler: {(granted, error) in
+        if (granted)
+        {
+          UIApplication.sharedApplication().registerForRemoteNotifications()
+        }
+        else{
+          //Do stuff if unsuccessful...
+        }
+      })
+    }
+      
+    else{ //If user is not on iOS 10 use the old methods we've been using
+      let notificationSettings = UIUserNotificationSettings(
+        forTypes: [.Badge, .Sound, .Alert], categories: nil)
+      application.registerUserNotificationSettings(notificationSettings)
+      
+    }
+    
   }
   
   // [START connect_to_fcm]
   func connectToFcm() {
     FIRMessaging.messaging().connectWithCompletion { (error) in
-      if (error != nil) {
-        //////print("Unable to connect with FCM. \(error)")
-      } else {
-        //////print("Connected to FCM.")
-      }
+      
     }
   }
   // [END connect_to_fcm]
@@ -117,16 +140,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     CurrentUser.setObject(deviceToken, forKey: "deviceToken")
     CurrentUser.setObject(formatedDeviceToken, forKey: "deviceTokenString")
     
-    if CHSession().logined {
-      CHPush().subscribeUserTo(CHSession().currentUserId)
-    } else {
-      CHPush().subscribeUserTo(formatedDeviceToken)
-    }
     
     CHPush().subscribeForNotifications()
     
     
     
+  }
+  
+  @available(iOS 10.0, *)
+  func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+    //Handle the notification
+  }
+  
+  @available(iOS 10.0, *)
+  func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+    //Handle the notification
   }
   
   func getSimpleDeviceToken(deviceToken:String)->String{
@@ -138,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-    //print(error)
+    ////print(error)
   }
   
   //  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -159,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   //    
   //    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
   //      if result {
-  //        //////print("success")
+  //        ////////print("success")
   //      }
   //    }
   //  }
@@ -187,7 +215,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationDidEnterBackground(application: UIApplication) {
     FIRMessaging.messaging().disconnect()
-    //////print("Disconnected from FCM.")
+    ////////print("Disconnected from FCM.")
     CHWakeUpper().setUpWakeUp()
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

@@ -129,7 +129,7 @@ class CHSession: NSObject {
   }
   
   func getJSONByKey(key:String) -> JSON {
-//    print(self.getStringByKey(key))
+//    //print(self.getStringByKey(key))
     return CHUIElements().stringToJSON(self.getStringByKey(key))
   }
   

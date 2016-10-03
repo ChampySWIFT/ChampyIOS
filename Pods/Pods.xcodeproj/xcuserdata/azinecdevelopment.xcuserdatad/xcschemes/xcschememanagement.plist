@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ALCameraViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -20,11 +15,6 @@
 			<false/>
 		</dict>
 		<key>CryptoSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>DynamicBlurView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,15 +69,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwipyCell.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03986035B05D1C564D91AA910E316353</key>
+		<key>05665D1E54910D32095E7EBFA763D4E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,17 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A1352AFAAF9065C403904A18EB79CAF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4B2F30D90D85A544E9EFE2A49D392C25</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5820D79B154BAFD748E05073D01B0C5C</key>
+		<key>720D9F162B185D5E7DF33ECDEACCC2FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,22 +92,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B3D34A1341729508EB1D68DF411EB17</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1FBE5431D02EA2A63372864FF387062</key>
+		<key>8AA36F3440DE2330FECAD132264536F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA2DBB7AC8E1BD3A57212505C2F8797A</key>
+		<key>AD0C3DE07A3BBAB271B30FC3D609C9E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C9B9B51F6E186D0D8D8DDB06689A26F4</key>
+		<key>C66E728BF615A122E4296C675472F714</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,17 +117,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3FF2D2A04AA8D709A1277A813D1DF81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DAEFE5845A9A47287B43BE713DFD4B08</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB28039CA00E863AB136E28CDA6DD0D0</key>
+		<key>D4813C0ED9DDD43B5E53DD2D04E9932E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -163,6 +128,11 @@
 			<true/>
 		</dict>
 		<key>E96E13C4D3B5B5FC0651440734C2BF4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F06B67D962EA4F0778F68F0AB062A670</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -72,7 +72,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.inputFieldsForTime.delegate  = self
     var minuteString = ""
     let minutes:Int = CHSession().getIntByKey("minsDN")
-    //print(minutes)
+    ////print(minutes)
     if minutes == 0 {
       self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):00"
     } else {
@@ -217,9 +217,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   @IBAction func acceptDeleteAccount(sender: AnyObject) {
     self.deleteButton.hidden = false
     self.confirmDeleteAccountContainer.hidden = true
-    CHRequests().surrenderAll(CHSession().currentUserId) { (result, json) in
-      if result {
-        
+    CHChalenges().surrenderAllInProgressChallenges { (end) in
+      if end {
         CHRequests().deleteAccount(CHSession().currentUserId) { (result, json) in
           if result {
             CHSession().clearSession({ (result) in
@@ -233,9 +232,9 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
             })
           }
         }
-        
       }
     }
+    
     
     
   }

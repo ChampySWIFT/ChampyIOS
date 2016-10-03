@@ -43,21 +43,19 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     
     CHImages().setImageForFriend(CHSession().selectedFriendId, imageView: self.friendsAvatar)
     CHImages().setUpAvatar(self.myAvatar)
-    
-    self.myAvatar.layer.masksToBounds = true
-    self.friendsAvatar.layer.masksToBounds = true
-    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
-    //print(userObject)
-    toLabel.text = "DUEL WITH \(self.userObject["name"].stringValue)"
     self.myAvatar.layer.opacity = 0.5
     self.friendsAvatar.layer.opacity = 0.5
     
-    challengeView.delegate   = self
-    challengeView.dataSource = self
-    challengeView.type       = .Linear
+    self.challengeView.delegate   = self
+    self.challengeView.dataSource = self
+    self.challengeView.type       = .Linear
     
+    self.myAvatar.layer.masksToBounds = true
+    self.friendsAvatar.layer.masksToBounds = true
     
-    //      self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
+    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
+    
+    self.toLabel.text = "DUEL WITH \(self.userObject["name"].stringValue)"
     
     CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
       self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
@@ -82,6 +80,8 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         self.challengeView.scrollToItemAtIndex(1, animated: false)
       }
     }
+    
+    
     
   }
   

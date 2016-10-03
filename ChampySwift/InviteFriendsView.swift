@@ -43,10 +43,6 @@ import UIKit
     
   }
   
-  @IBAction func inviteFriendsAction(sender: AnyObject) {
-    CHPush().localPush("inviteFriend", object: [])
-  }
-  
   
   required init?(coder aDecoder: NSCoder) {
     // 1. setup any properties here

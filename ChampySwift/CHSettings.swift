@@ -40,6 +40,25 @@ class CHSettings: NSObject {
     return resultArray
   }
   
+  func getMidnightOfTheDay(dateInSec:Int) -> Int {
+    let date = NSDate(timeIntervalSince1970: Double(dateInSec))
+    let dateFormatter = NSDateFormatter()
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+    let hour = comp.hour
+    let minute = comp.minute
+    let sec = comp.second
+    
+    print(dateInSec)
+    print(hour)
+    print(minute)
+    print(sec)
+    
+    
+    
+    return dateInSec - Int(hour * 60 * 60) - Int(minute * 60) - sec
+  }
+  
   func facebookFriendsStringToArray(stringObject:String)->[String]{
     var fullName: String = stringObject
     fullName = fullName.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
