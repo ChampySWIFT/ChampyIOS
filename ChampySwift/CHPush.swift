@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+
 class CHPush: NSObject {
   let center = NSNotificationCenter.defaultCenter()
   var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()

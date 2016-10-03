@@ -8,8 +8,7 @@
 
 import UIKit
 import Async
-import PresenterKit
-import Firebase
+
 class FacebookAuthViewController: UIViewController {
   var tapped:Bool = false
   

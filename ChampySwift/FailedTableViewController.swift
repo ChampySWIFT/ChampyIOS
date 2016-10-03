@@ -11,8 +11,6 @@
 import UIKit
 import Async
 import SwiftyJSON
-import SwipyCell
-
 
 class FailedTableViewController: UITableViewController, SwipyCellDelegate {
   

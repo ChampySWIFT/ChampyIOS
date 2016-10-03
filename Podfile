@@ -4,41 +4,36 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'ChampySwift' do
-  pod 'Fusuma'
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2'
-  pod 'PresenterKit', :git => 'https://github.com/jessesquires/PresenterKit.git', :branch => 'develop'
-  pod 'Alamofire', '~> 4.0'
-  pod 'JSONWebToken'
-  pod 'SwiftyJSON'
-  pod 'SwiftHTTP', '~> 2.0.0'
-  pod 'AsyncSwift'
-  pod 'Kingfisher', '~> 2.0'
-  
+  pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
+  pod 'Alamofire', '~> 4.0' # swift 3
+  pod 'SwiftyJSON' # swift 3
+  pod 'SwiftHTTP', '~> 2.0.0' # swift 3
+  pod 'AsyncSwift' # swift 3
+  pod 'JSONWebToken' # swift 3
+  pod 'Kingfisher', '~> 3.0' # swift 3
+  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
 end
 
 target 'ChampySwiftUITests' do
-  pod 'Fusuma'
   pod 'Socket.IO-Client-Swift', '~> 8.0.2'
-  pod 'PresenterKit', :git => 'https://github.com/jessesquires/PresenterKit.git', :branch => 'develop'
   pod 'Alamofire', '~> 4.0'
-  pod 'JSONWebToken'
   pod 'SwiftyJSON'
   pod 'SwiftHTTP', '~> 2.0.0'
   pod 'AsyncSwift'
-  pod 'Kingfisher', '~> 2.0'
-  
+  pod 'JSONWebToken'
+  pod 'Kingfisher', '~> 3.0'
+  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
 end
 
 target 'ChampySwiftTests' do
-  pod 'Fusuma'
   pod 'Socket.IO-Client-Swift', '~> 8.0.2'
-  pod 'PresenterKit', :git => 'https://github.com/jessesquires/PresenterKit.git', :branch => 'develop'
   pod 'Alamofire', '~> 4.0'
-  pod 'JSONWebToken'
   pod 'SwiftyJSON'
   pod 'SwiftHTTP', '~> 2.0.0'
   pod 'AsyncSwift'
-  pod 'Kingfisher', '~> 2.0'
+  pod 'JSONWebToken'
+  pod 'Kingfisher', '~> 3.0'
+  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
   
  end
 
@@ -55,7 +50,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |configuration|
-      configuration.build_settings['SWIFT_VERSION'] = "2.3"
+      configuration.build_settings['SWIFT_VERSION'] = "3.0"
     end
   end
 end

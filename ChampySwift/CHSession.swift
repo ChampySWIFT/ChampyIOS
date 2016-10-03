@@ -62,7 +62,7 @@ class CHSession: NSObject {
     self.CurrentUser.setObject(friends, forKey: "facebookfriends")
   }
   
-  func clearSession(completitionHandler:(result:Bool)->()) {
+  func clearSession(completitionHandler:(_ result:Bool)->()) {
     let params = [
       "APNIdentifier" : "none" //deviceToken.description as String
     ]

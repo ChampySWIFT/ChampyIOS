@@ -8,7 +8,6 @@
 
 import UIKit
 import Kingfisher
-import DynamicBlurView
 import SwiftyJSON
 
 class CHImages: NSObject {

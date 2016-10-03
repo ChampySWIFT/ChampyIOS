@@ -8,7 +8,7 @@
 
 import UIKit
 import Async
-import Socket_IO_Client_Swift
+import SocketIO
 
 class RoleControlViewController: UIViewController {
   //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://192.168.1.104:3007")

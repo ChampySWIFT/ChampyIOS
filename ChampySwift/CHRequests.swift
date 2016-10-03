@@ -10,7 +10,6 @@
 import UIKit
 import SwiftHTTP
 import SwiftyJSON
-import Firebase
 
 class CHRequests: NSObject {
   
@@ -48,7 +47,7 @@ class CHRequests: NSObject {
     self.token = CHSession().getToken()
   }
   
-  func checkUser(ownerId:String, completitionHandler:(_ json:JSON, status:Bool) -> ()) {
+  func checkUser(ownerId:String, completitionHandler:(_ json:JSON, _ status:Bool) -> ()) {
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -74,7 +73,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createUser(params:[String:String], completitionHandler:(_ json:JSON, status:Bool) -> ()){
+  func createUser(params:[String:String], completitionHandler:(_ json:JSON, _ status:Bool) -> ()){
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -115,7 +114,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createChallengeAndSendIt(recipientId:String, params:[String:String], completitionHandler:(json:JSON, status:Bool) -> ()){
+  func createChallengeAndSendIt(recipientId:String, params:[String:String], completitionHandler:(_ json:JSON, _ status:Bool) -> ()){
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -150,7 +149,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func cleareBadgeNumber(userId:String, completitionHandler:(json:JSON, status:Bool) -> ()){
+  func cleareBadgeNumber(userId:String, completitionHandler:(_ json:JSON, _ status:Bool) -> ()){
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -175,7 +174,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func reloginUser(facebookId:String, completitionHandler:(responseJSON:JSON, status:Bool) -> ()) {
+  func reloginUser(facebookId:String, completitionHandler:(_ responseJSON:JSON, _ status:Bool) -> ()) {
     if !canPerform {
       completitionHandler(responseJSON: nil, status: false)
       return
@@ -202,7 +201,7 @@ class CHRequests: NSObject {
     
   }
   
-  func uploadUsersPhoto(userId:String, image:UIImage, completitionHandler:(result:Bool, json:JSON)->()){
+  func uploadUsersPhoto(userId:String, image:UIImage, completitionHandler:(_ result:Bool, _ json:JSON)->()){
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -231,7 +230,7 @@ class CHRequests: NSObject {
     
   }
   
-  func updateUserProfile(userId:String, params:[String:String], completitionHandler:(result:Bool, json:JSON)->()) {
+  func updateUserProfile(userId:String, params:[String:String], completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -257,7 +256,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func updateUserProfileOptions(userId:String, params:[String:String], completitionHandler:(result:Bool, json:JSON)->()) {
+  func updateUserProfileOptions(userId:String, params:[String:String], completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -284,7 +283,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func deleteAccount(userId:String, completitionHandler:(result:Bool, json:JSON)->()){
+  func deleteAccount(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()){
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -311,7 +310,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func getAllUsers(completitionHandler:(result:Bool, json:JSON)->()) {
+  func getAllUsers(completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -346,7 +345,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func getFriends(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func getFriends(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -372,7 +371,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func getChallenges(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func getChallenges(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -399,7 +398,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func sendFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func sendFriendRequest(userId:String, friendId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -433,7 +432,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func acceptFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func acceptFriendRequest(userId:String, friendId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     //users/:owner/friends/:friend?token=:token
     
     if !canPerform {
@@ -466,7 +465,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func removeFriendRequest(userId:String, friendId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func removeFriendRequest(userId:String, friendId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     //users/:owner/friends/:friend?token=:token
     
     if !canPerform {
@@ -500,7 +499,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createDuelInProgressChallenge(params:[String:String], completitionHandler:(result:Bool, json:JSON)->()) {
+  func createDuelInProgressChallenge(params:[String:String], completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     //users/:owner/friends/:friend?token=:token
     
     if !canPerform {
@@ -533,7 +532,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createSingleInProgressChallenge(params:[String:String], completitionHandler:(result:Bool, json:JSON)->()) {
+  func createSingleInProgressChallenge(params:[String:String], completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -558,7 +557,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func createSelfImprovementChallengeAndSendIt(params:[String:String], completitionHandler:(json:JSON, status:Bool) -> ()){
+  func createSelfImprovementChallengeAndSendIt(params:[String:String], completitionHandler:(_ json:JSON, _ status:Bool) -> ()){
     if !canPerform {
       completitionHandler(json: nil, status: false)
       return
@@ -590,7 +589,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func retrieveAllInProgressChallenges(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func retrieveAllInProgressChallenges(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -617,7 +616,7 @@ class CHRequests: NSObject {
   }
   
   
-  func retrieveWins(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func retrieveWins(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -642,7 +641,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func retrieveFails(userId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func retrieveFails(userId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -668,7 +667,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func joinToChallenge(challengeId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func joinToChallenge(challengeId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -695,7 +694,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func rejectInvite(challengeId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func rejectInvite(challengeId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -721,7 +720,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func surrender(challengeId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func surrender(challengeId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -748,7 +747,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func checkChallenge(challengeId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func checkChallenge(challengeId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -801,7 +800,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func updateUserFromRemote(completitionHandler:(result:Bool, json:JSON)->()) {
+  func updateUserFromRemote(completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -828,7 +827,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func logout(ownerId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func logout(ownerId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return
@@ -855,7 +854,7 @@ class CHRequests: NSObject {
     }
   }
   
-  func surrenderAll(ownerId:String, completitionHandler:(result:Bool, json:JSON)->()) {
+  func surrenderAll(ownerId:String, completitionHandler:(_ result:Bool, _ json:JSON)->()) {
     if !canPerform {
       completitionHandler(result: false, json: nil)
       return

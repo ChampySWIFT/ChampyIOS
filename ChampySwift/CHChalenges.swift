@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import Firebase
 
 class CHChalenges: NSObject {
   let ref = FIRDatabase.database().reference()
@@ -58,7 +57,7 @@ class CHChalenges: NSObject {
     return result
   }
   
-  func getAllChallenges(userId:String, completitionHandler:(result:JSON)->()) {
+  func getAllChallenges(userId:String, completitionHandler:(_ result:JSON)->()) {
     ref.child("users/userList/\(userId)").observeEventType(.Value, withBlock: { (snapshot) in
       let json = JSON(snapshot.value!)
       
@@ -141,7 +140,7 @@ class CHChalenges: NSObject {
     }
   }
   
-  func surrenderAllInProgressChallenges(completitionHandler:(end:Bool) -> ()) {
+  func surrenderAllInProgressChallenges(completitionHandler:(_ end:Bool) -> ()) {
     for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(CHSession().currentUserId)") {
       
       CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in

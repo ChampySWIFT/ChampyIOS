@@ -8,13 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import Firebase
-
-//extension FDataSnapshot {
-//  var json : JSON {
-//    return JSON(self.value)
-//  }
-//}
 
 class CHUsers: NSObject {
   let ref = FIRDatabase.database().reference()
@@ -101,7 +94,7 @@ class CHUsers: NSObject {
     return friends
   }
   
-  func getUsersFirebase(completitionHandler:(result:[JSON])->()) {
+  func getUsersFirebase(completitionHandler:(_ result:[JSON])->()) {
     
     
     

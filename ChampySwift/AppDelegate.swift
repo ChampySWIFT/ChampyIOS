@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Firebase
 import UserNotifications
 
 @UIApplicationMain
@@ -46,34 +45,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   override init() {
     // Firebase Init
     FIRApp.configure()
-    FIRDatabase.database().persistenceEnabled = true
+    
   }
   
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
-    // Override point for customization after application launch.
-//    FIRApp.configure()
-//    if #available(iOS 8.0, *) {
-//      // [START register_for_notifications]
-//      let settings: UIUserNotificationSettings =
-//        UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-//      application.registerUserNotificationSettings(settings)
-//      application.registerForRemoteNotifications()
-//      // [END register_for_notifications]
-//    } else {
-//      // Fallback
-//      let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
-//      application.registerForRemoteNotificationTypes(types)
-//    }
-//    UNUserNotificationCenter.current().reques
-    
     registerForPushNotifications(application)
 
-    
-    
-     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
-                                                     name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),  name: kFIRInstanceIDTokenRefreshNotification, object: nil)
     
     CHPush().clearBadgeNumber()
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

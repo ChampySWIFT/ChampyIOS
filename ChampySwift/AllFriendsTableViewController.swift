@@ -9,7 +9,6 @@
 import UIKit
 import SwiftyJSON
 import Async
-import SwipyCell
 
 class AllFriendsTableViewController: UITableViewController {
   
@@ -91,7 +90,7 @@ class AllFriendsTableViewController: UITableViewController {
     cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = SwipyCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
+        cell                 = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         cell!.contentView.backgroundColor = UIColor.clearColor()

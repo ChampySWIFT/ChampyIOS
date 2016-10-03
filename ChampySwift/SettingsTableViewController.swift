@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import PresenterKit
-import ALCameraViewController
 import Async
 import SwiftyJSON
 import Fusuma

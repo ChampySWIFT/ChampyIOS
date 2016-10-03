@@ -77,7 +77,7 @@ import Async
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: self.dynamicType)
+    let bundle = NSBundle(forClass: type(of: self))
     let nib    = UINib(nibName: "NewChallenge", bundle: bundle)
     let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0

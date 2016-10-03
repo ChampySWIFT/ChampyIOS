@@ -60,7 +60,7 @@ import SwiftyJSON
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: self.dynamicType)
+    let bundle = NSBundle(forClass: type(of: self))
     let nib    = UINib(nibName: "HistoryCell", bundle: bundle)
     let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
@@ -314,7 +314,7 @@ import SwiftyJSON
   }
   
   
-  func movePhotoToRightFromCenter(image:UIImageView, completitionHandler:(status:Bool) -> ()) {
+  func movePhotoToRightFromCenter(image:UIImageView, completitionHandler:(_ status:Bool) -> ()) {
     
     UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
       self.avatar.frame  = self.initialAvaFrame
@@ -324,7 +324,7 @@ import SwiftyJSON
     })
   }
   
-  func movePhotoToCenterFromLeft(image:UIImageView, completitionHandler:(status:Bool) -> ()) {
+  func movePhotoToCenterFromLeft(image:UIImageView, completitionHandler:(_ status:Bool) -> ()) {
     
     var frame = self.challengeIcon.frame
     frame.origin.y =  60
@@ -350,7 +350,7 @@ import SwiftyJSON
   }
   
   
-  func changeMotherHeight(height:CGFloat, completitionHandler:(status:Bool) -> ()) {
+  func changeMotherHeight(height:CGFloat, completitionHandler:(_ status:Bool) -> ()) {
     var frame = self.view.frame
     frame.size.height = height
     
@@ -364,7 +364,7 @@ import SwiftyJSON
   
   }
   
-  func animateDuel(height:CGFloat, completitionHandler:(status:Bool) -> ()) {
+  func animateDuel(height:CGFloat, completitionHandler:(_ status:Bool) -> ()) {
     var frame = self.view.frame
     frame.size.height = height
     

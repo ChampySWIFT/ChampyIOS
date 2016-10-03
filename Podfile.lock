@@ -1,49 +1,46 @@
 PODS:
   - Alamofire (4.0.0)
-  - AsyncSwift (1.7.2)
-  - CryptoSwift (0.4.1)
-  - Fusuma (0.4.1)
-  - JSONWebToken (1.5.0):
-    - CryptoSwift (~> 0.4.0)
-  - Kingfisher (2.4.1)
-  - PresenterKit (1.0.0)
+  - AsyncSwift (2.0.0)
+  - CryptoSwift (0.6.0)
+  - Fusuma (0.5.3)
+  - JSONWebToken (2.0.1):
+    - CryptoSwift (~> 0.6.0)
+  - Kingfisher (3.1.1)
   - Socket.IO-Client-Swift (8.0.2)
   - SwiftHTTP (2.0.1)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AsyncSwift
-  - Fusuma
+  - Fusuma (from `https://github.com/pruthvikar/Fusuma.git`, commit `503865a`)
   - JSONWebToken
-  - Kingfisher (~> 2.0)
-  - PresenterKit (from `https://github.com/jessesquires/PresenterKit.git`, branch `develop`)
+  - Kingfisher (~> 3.0)
   - Socket.IO-Client-Swift (~> 8.0.2)
   - SwiftHTTP (~> 2.0.0)
   - SwiftyJSON
 
 EXTERNAL SOURCES:
-  PresenterKit:
-    :branch: develop
-    :git: https://github.com/jessesquires/PresenterKit.git
+  Fusuma:
+    :commit: 503865a
+    :git: https://github.com/pruthvikar/Fusuma.git
 
 CHECKOUT OPTIONS:
-  PresenterKit:
-    :commit: a5cfd712c2fd879350ce0878f96d2310de198836
-    :git: https://github.com/jessesquires/PresenterKit.git
+  Fusuma:
+    :commit: 503865a
+    :git: https://github.com/pruthvikar/Fusuma.git
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
-  AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
-  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
-  Fusuma: 4dbaa05a2a20ab11a41f8dedbe650c904ea99625
-  JSONWebToken: 6c8968ace6b60b2e6156a7bbe5019fd9b5ff9b5a
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
-  PresenterKit: 11041ccd803d10623f4791eb8c2ed98a2cbc428d
+  AsyncSwift: 6ba6ed9ecb51344458063f7c86fe447ab824e313
+  CryptoSwift: 4a599b7241b8d3b857d6e2c28867d0bd5d1aae24
+  Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
+  JSONWebToken: 37f3666c459ed1a1554663a2741ac7655d488b1f
+  Kingfisher: 12b755ae697cc9f0fd3e550db8417fa1233e09ab
   Socket.IO-Client-Swift: 136598e4a81a42b0e6855e7f94a0e5a6efdc5ff8
   SwiftHTTP: 6d57b54ee84d9ad9cf81b6bc1c4cae593e3f6329
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: 41e738cfb3e8a62b2cded261a4779cf47b1dc1d5
+PODFILE CHECKSUM: 95b0e3e9690ae5cdecedc797ef024970d4aa7762
 
 COCOAPODS: 1.0.1

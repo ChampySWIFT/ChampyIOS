@@ -9,9 +9,8 @@
 import UIKit
 import Async
 import SwiftyJSON
-import SwipyCell
 
-class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
+class InProgressTableViewController: UITableViewController {
   let center = NSNotificationCenter.defaultCenter()
   var historyItems:[UIView] = []
   var identifiers:[String] = []
@@ -79,12 +78,12 @@ class InProgressTableViewController: UITableViewController, SwipyCellDelegate {
     
     let identifier = self.identifiers[indexPath.row]
     //    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
-    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
+    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! UITableViewCell?
     
     cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = SwipyCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
+        cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         

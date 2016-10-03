@@ -8,7 +8,6 @@
 
 import UIKit
 import Async
-import PresenterKit
 
 class AuthViewController: UIViewController {
   
@@ -35,9 +34,7 @@ class AuthViewController: UIViewController {
   
   
   func authorized() {
-    //    let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-    //    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-    //    self.presentViewController(roleControlViewController, type: .push, animated: false)
+    
     CHPush().localPush("setUpBehavior", object: [])
     self.dismissViewControllerAnimated(false) {
       

@@ -9,9 +9,8 @@
 import UIKit
 import Async
 import SwiftyJSON
-import SwipyCell
 
-class WinsTableViewController: UITableViewController, SwipyCellDelegate {
+class WinsTableViewController: UITableViewController {
   
   let center = NSNotificationCenter.defaultCenter()
   var historyItems:[UIView] = []
@@ -77,31 +76,18 @@ class WinsTableViewController: UITableViewController, SwipyCellDelegate {
     }
   }
   
-  func swipeableTableViewCellDidStartSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user ends swiping the cell this method is called
-  func swipeableTableViewCellDidEndSwiping(cell: SwipyCell) {
-    
-  }
-  
-  // When the user is dragging, this method is called with the percentage from the border
-  func swipeableTableViewCell(cell: SwipyCell, didSwipeWithPercentage percentage: CGFloat) {
-    
-  }
   
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let identifier = self.identifiers[indexPath.row]
     //    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
-    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! SwipyCell?
+    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as! UITableViewCell?
     
     cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = SwipyCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
+        cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
         cell?.accessoryType  = .None
         cell?.selectionStyle = UITableViewCellSelectionStyle.None
         
