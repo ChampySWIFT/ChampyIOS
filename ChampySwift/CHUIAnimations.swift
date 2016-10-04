@@ -14,10 +14,10 @@ class CHUIAnimations: NSObject {
 }
 
 extension UIView {
-  func rotateView(withDuration:Double) {
-    self.transform = CGAffineTransformMakeRotation((0 * CGFloat(M_PI)) / 180.0)
-    UIView.animateWithDuration(withDuration, animations: {
-      self.transform = CGAffineTransformMakeRotation((180 * CGFloat(M_PI)) / 180.0)
+  func rotateView(_ withDuration:Double) {
+    self.transform = CGAffineTransform(rotationAngle: (0 * CGFloat(M_PI)) / 180.0)
+    UIView.animate(withDuration: withDuration, animations: {
+      self.transform = CGAffineTransform(rotationAngle: (180 * CGFloat(M_PI)) / 180.0)
     })
   }
   
@@ -25,35 +25,35 @@ extension UIView {
     
   }
   
-  func fillScoreBorder(withDuration:Double) {
+  func fillScoreBorder(_ withDuration:Double) {
     
     let view    = self as! ScoreBorder
     let newView = UIView(frame: view.frame)
     
-    newView.frame              = CGRectMake(newView.frame.origin.x + 3, newView.frame.origin.y + 2, newView.frame.width, newView.frame.height)
-    newView.backgroundColor    = UIColor.whiteColor()
+    newView.frame              = CGRect(x: newView.frame.origin.x + 3, y: newView.frame.origin.y + 2, width: newView.frame.width, height: newView.frame.height)
+    newView.backgroundColor    = UIColor.white
     newView.layer.cornerRadius = view.frame.width / 2
     newView.layer.opacity      = 0.50
     newView.layer.setValue("inner", forKey: "type")
-    newView.transform = CGAffineTransformMakeScale(0.001, 0.001)
+    newView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
     self.superview!.addSubview(newView)
-    self.superview?.sendSubviewToBack(newView)
-    UIView.animateWithDuration(withDuration , animations: {
-      newView.transform = CGAffineTransformMakeScale(0.782, 0.782)
+    self.superview?.sendSubview(toBack: newView)
+    UIView.animate(withDuration: withDuration , animations: {
+      newView.transform = CGAffineTransform(scaleX: 0.782, y: 0.782)
     })
     
     
   }
   
   func oval2Path() -> UIBezierPath {
-    let oval2Path = UIBezierPath(ovalInRect: CGRectMake(0, 0, 2, 2))
+    let oval2Path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 2, height: 2))
     return oval2Path
   }
   
 }
 
 extension UILabel {
-  func countdownFrom(from:Int, to:Int) {
+  func countdownFrom(_ from:Int, to:Int) {
     
   }
   

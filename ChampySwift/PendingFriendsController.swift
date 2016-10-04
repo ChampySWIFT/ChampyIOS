@@ -15,7 +15,7 @@ class PendingFriendsController: UITableViewController {
   
   @IBOutlet weak var refreshTableView: UIRefreshControl!
   
-  let center = NSNotificationCenter.defaultCenter()
+  let center = NotificationCenter.default
   var selectedRow:Int         = -1
   var selectedSection:Int = -1
   var tap:Bool = true
@@ -31,12 +31,12 @@ class PendingFriendsController: UITableViewController {
   let openedHeight:CGFloat = 220.0
   
   
-  override func viewDidDisappear(animated: Bool) {
-    center.removeObserver(self, name: "pendingReload", object: nil)
+  override func viewDidDisappear(_ animated: Bool) {
+    center.removeObserver(self, name: NSNotification.Name(rawValue: "pendingReload"), object: nil)
   }
   
-  override func viewDidAppear(animated: Bool) {
-    center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: "pendingReload", object: nil)
+  override func viewDidAppear(_ animated: Bool) {
+    center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: NSNotification.Name(rawValue: "pendingReload"), object: nil)
     
   }
   
@@ -51,7 +51,7 @@ class PendingFriendsController: UITableViewController {
     super.didReceiveMemoryWarning()
   }
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     
     if pendingFriends.count <= 0 {
       return 1
@@ -60,7 +60,7 @@ class PendingFriendsController: UITableViewController {
     return 2
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     guard pendingFriends.count != 0 else {
       return 1
@@ -82,12 +82,12 @@ class PendingFriendsController: UITableViewController {
     }
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     guard pendingFriends.count != 0 else {
       return openedHeight
     }
     
-    switch indexPath.section {
+    switch (indexPath as NSIndexPath).section {
     case 0:
       return getHeightByIndexPath(indexPath, andArray: self.incomingfriendsContent)
       
@@ -99,49 +99,49 @@ class PendingFriendsController: UITableViewController {
     }
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard pendingFriends.count != 0 else {
       return self.getEmptyCell()
     }
     
     
-    switch indexPath.section {
+    switch (indexPath as NSIndexPath).section {
     case 0:
       guard incomingfriendsContent.count != 0 else {
         return getEmptySubCell()
       }
-      return self.setUpCellWithIdentifier(self.incomingidentifiers[indexPath.row], andContent: incomingfriendsContent[indexPath.row] as! FriendCell, index: indexPath.row, type: "Incoming", friendsNumber: incomingfriendsContent.count)
+      return self.setUpCellWithIdentifier(self.incomingidentifiers[(indexPath as NSIndexPath).row], andContent: incomingfriendsContent[(indexPath as NSIndexPath).row] as! FriendCell, index: (indexPath as NSIndexPath).row, type: "Incoming", friendsNumber: incomingfriendsContent.count)
     case 1:
       guard outgoingfriendsContent.count != 0 else {
         return getEmptySubCell()
       }
-      return self.setUpCellWithIdentifier(self.outgoingidentifiers[indexPath.row], andContent: self.outgoingfriendsContent[indexPath.row], index: indexPath.row, type: "Outgoing", friendsNumber: outgoingfriendsContent.count)
+      return self.setUpCellWithIdentifier(self.outgoingidentifiers[(indexPath as NSIndexPath).row], andContent: self.outgoingfriendsContent[(indexPath as NSIndexPath).row], index: (indexPath as NSIndexPath).row, type: "Outgoing", friendsNumber: outgoingfriendsContent.count)
     default:
       return getEmptySubCell()
     }
     
   }
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard tap else {
       return
     }
     
     self.tableView.beginUpdates()
     
-    switch indexPath.section {
+    switch (indexPath as NSIndexPath).section {
     case 0:
       guard incomingfriendsContent.count > 0 else {
         return
       }
-      self.triggerContent(incomingfriendsContent[indexPath.row] as! FriendCell, andIndexPath: indexPath)
+      self.triggerContent(incomingfriendsContent[(indexPath as NSIndexPath).row] as! FriendCell, andIndexPath: indexPath)
       break
       
     case 1:
       guard outgoingfriendsContent.count > 0 else {
         return
       }
-      self.triggerContent(outgoingfriendsContent[indexPath.row] as! FriendCell, andIndexPath: indexPath)
+      self.triggerContent(outgoingfriendsContent[(indexPath as NSIndexPath).row] as! FriendCell, andIndexPath: indexPath)
       break
     default: break
       
@@ -152,7 +152,7 @@ class PendingFriendsController: UITableViewController {
     self.tableView.endUpdates()
   }
   
-  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     
     let content = HeaderViewForPendingFriendsCells(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 30))
     
@@ -169,7 +169,7 @@ class PendingFriendsController: UITableViewController {
     return content
   }
   
-  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     switch section {
     case 0:
       if self.incomingfriendsContent.count == 0 && self.outgoingfriendsContent.count == 0 {
@@ -191,22 +191,22 @@ class PendingFriendsController: UITableViewController {
     
   }
   
-  func triggerContent(content: FriendCell, andIndexPath indexPath:NSIndexPath) {
-    if indexPath.row == selectedRow  {
+  func triggerContent(_ content: FriendCell, andIndexPath indexPath:IndexPath) {
+    if (indexPath as NSIndexPath).row == selectedRow  {
       content.close()
       selectedRow = -1
       selectedSection = -1
     } else {
       content.open()
-      selectedSection = indexPath.section
-      self.selectedRow = indexPath.row
+      selectedSection = (indexPath as NSIndexPath).section
+      self.selectedRow = (indexPath as NSIndexPath).row
     }
   }
   
-  func modfiedTableHeader(content:HeaderViewForPendingFriendsCells, text:String) -> UIView {
+  func modfiedTableHeader(_ content:HeaderViewForPendingFriendsCells, text:String) -> UIView {
     guard self.pendingFriends.count == 0 else {
       content.setUp(text)
-      content.hidden = false
+      content.isHidden = false
       return content
     }
     
@@ -255,7 +255,7 @@ class PendingFriendsController: UITableViewController {
         outgoingidentifiers.append("\(friend["owner"]["_id"].stringValue)")
         self.outgoing.append(friend)
         content.status = "Outgoing"
-        content.setUp(friend["owner"])
+        content.setUp(json: friend["owner"])
         self.outgoingfriendsContent.append(content)
         break
         
@@ -263,7 +263,7 @@ class PendingFriendsController: UITableViewController {
         incomingidentifiers.append("\(friend["friend"]["_id"].stringValue)")
         self.incoming.append(friend)
         content.status = "Incoming"
-        content.setUp(friend["friend"])
+        content.setUp(json: friend["friend"])
         self.incomingfriendsContent.append(content)
         break
       default:
@@ -272,19 +272,19 @@ class PendingFriendsController: UITableViewController {
     }
   }
   
-  func getEmpty(text:String) ->UIView {
+  func getEmpty(_ text:String) ->UIView {
     let container = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
     let innercontainer = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
     let label = UILabel(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
     
-    container.backgroundColor = UIColor.clearColor()
-    innercontainer.backgroundColor = UIColor.clearColor()
-    label.backgroundColor = UIColor.clearColor()
+    container.backgroundColor = UIColor.clear
+    innercontainer.backgroundColor = UIColor.clear
+    label.backgroundColor = UIColor.clear
     
     label.text = text
     label.textColor = CHUIElements().APPColors["Info"]
     label.font = CHUIElements().font16
-    label.textAlignment = .Center
+    label.textAlignment = .center
     
     container.addSubview(innercontainer)
     container.addSubview(label)
@@ -292,34 +292,34 @@ class PendingFriendsController: UITableViewController {
     return container
   }
   
-  func setUpCellForUsage(cell:UITableViewCell) {
-    cell.accessoryType  = .None
-    cell.selectionStyle = UITableViewCellSelectionStyle.None
-    cell.backgroundColor = UIColor.clearColor()
+  func setUpCellForUsage(_ cell:UITableViewCell) {
+    cell.accessoryType  = .none
+    cell.selectionStyle = UITableViewCellSelectionStyle.none
+    cell.backgroundColor = UIColor.clear
   }
   
   func getEmptyCell() -> UITableViewCell {
-    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL-nofriends")
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL-nofriends")
     self.setUpCellForUsage(cell)
     cell.addSubview(NoPendingRequests(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200)))
     return cell
   }
   
   func getEmptySubCell() -> UITableViewCell {
-    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL-empty")
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL-empty")
     self.setUpCellForUsage(cell)
     cell.addSubview(self.getEmpty("There are no Requests"))
     return cell
   }
   
-  func getHeightByIndexPath(indexPath: NSIndexPath, andArray array:[UIView]) -> CGFloat {
-    if indexPath.row == self.selectedRow && selectedSection == indexPath.section {
+  func getHeightByIndexPath(_ indexPath: IndexPath, andArray array:[UIView]) -> CGFloat {
+    if (indexPath as NSIndexPath).row == self.selectedRow && selectedSection == (indexPath as NSIndexPath).section {
       heights.append(openedHeight)
       return openedHeight
     }
     
     if array.count > 0 {
-      let content = array[indexPath.row] as! FriendCell
+      let content = array[(indexPath as NSIndexPath).row] as! FriendCell
       content.close()
       heights.append(closedHeight)
       return closedHeight
@@ -328,15 +328,15 @@ class PendingFriendsController: UITableViewController {
     }
   }
   
-  func setUpCellWithIdentifier(identifier:String, andContent:UIView?, index:Int, type:String, friendsNumber:Int) -> UITableViewCell {
-    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "CELL\(identifier)")
+  func setUpCellWithIdentifier(_ identifier:String, andContent:UIView?, index:Int, type:String, friendsNumber:Int) -> UITableViewCell {
+    let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
     self.setUpCellForUsage(cell)
     
     cell?.addSubview(andContent!)
     return cell
   }
   
-  @IBAction func refreshTableViewAction(sender: AnyObject) {
+  @IBAction func refreshTableViewAction(_ sender: AnyObject) {
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")

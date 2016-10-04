@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class CHSession: NSObject {
   
-  let CurrentUser = NSUserDefaults.standardUserDefaults()
+  let CurrentUser = UserDefaults.standard
   
   var currentUserObject:JSON! = nil
   var currentUserId:String         = ""
@@ -22,47 +22,48 @@ class CHSession: NSObject {
   var logined:Bool                 = false
   
   var selectedFriendId:String {
-    if NSUserDefaults.standardUserDefaults().objectForKey("selectedFriendId") != nil {
-      return NSUserDefaults.standardUserDefaults().stringForKey("selectedFriendId")!
+    if self.CurrentUser.object(forKey: "selectedFriendId") != nil {
+      return self.CurrentUser.string(forKey: "selectedFriendId")!
     }
     return ""
   }
   
   
   override init() {
-    let user = NSUserDefaults.standardUserDefaults()
-    if user.objectForKey("facebookId") != nil && user.objectForKey("userName") != nil && user.objectForKey("userId") != nil && user.objectForKey("userObject") != nil {
-      self.currentUserId         = self.CurrentUser.stringForKey("userId")!
-      self.currentUserName       = self.CurrentUser.stringForKey("userName")!
-      self.currentUserFacebookId = self.CurrentUser.stringForKey("facebookId")!
-      self.currentUserObject     = CHUIElements().stringToJSON(self.CurrentUser.stringForKey("userObject")!)
+    
+    
+    if UserDefaults.standard.bool(forKey: "loggedIn") {
+      self.currentUserId         = UserDefaults.standard.string(forKey: "userId")!
+      self.currentUserName       = UserDefaults.standard.string(forKey: "userName")!
+      self.currentUserFacebookId = UserDefaults.standard.string(forKey: "facebookId")!
+      self.currentUserObject     = CHUIElements().stringToJSON(UserDefaults.standard.string(forKey: "userObject")!)
       self.logined               = true
     }
   }
   
-  func updateUserObject(userObject:JSON) {
+  func updateUserObject(_ userObject:JSON) {
     self.currentUserObject     = userObject
-    self.CurrentUser.setObject("\(userObject)", forKey: "userObject")
+    self.CurrentUser.set("\(userObject)", forKey: "userObject")
   }
   
-  func createSessionForTheUserWithFacebookId(facebookId:String, name:String, andObjectId objectId: String, userObject:JSON) {
+  func createSessionForTheUserWithFacebookId(_ facebookId:String, name:String, andObjectId objectId: String, userObject:JSON) {
+    self.CurrentUser.set(true, forKey: "loggedIn")
+    self.CurrentUser.set(facebookId, forKey: "facebookId")
+    self.CurrentUser.set(name, forKey: "userName")
+    self.CurrentUser.set(objectId, forKey: "userId")
+    self.CurrentUser.set("\(userObject)", forKey: "userObject")
     
-    self.CurrentUser.setObject(facebookId, forKey: "facebookId")
-    self.CurrentUser.setObject(name, forKey: "userName")
-    self.CurrentUser.setObject(objectId, forKey: "userId")
-    self.CurrentUser.setObject("\(userObject)", forKey: "userObject")
-    
   }
   
-  func setSelectedFriend(userId:String) {
-    NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "selectedFriendId")
+  func setSelectedFriend(_ userId:String) {
+    UserDefaults.standard.set(userId, forKey: "selectedFriendId")
   }
   
-  func saveFacebookFriends(friends:String) {
-    self.CurrentUser.setObject(friends, forKey: "facebookfriends")
+  func saveFacebookFriends(_ friends:String) {
+    self.CurrentUser.set(friends, forKey: "facebookfriends")
   }
   
-  func clearSession(completitionHandler:(_ result:Bool)->()) {
+  func clearSession(_ completitionHandler:(_ result:Bool)->()) {
     let params = [
       "APNIdentifier" : "none" //deviceToken.description as String
     ]
@@ -70,12 +71,13 @@ class CHSession: NSObject {
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
     }
     
-    let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate     = UIApplication.shared.delegate as! AppDelegate
     
-    self.CurrentUser.setObject(nil, forKey: "facebookId")
-    self.CurrentUser.setObject(nil, forKey: "userName")
-    self.CurrentUser.setObject(nil, forKey: "userId")
-    self.CurrentUser.setObject(nil, forKey: "facebookfriends")
+    self.CurrentUser.set(nil, forKey: "facebookId")
+    self.CurrentUser.set(nil, forKey: "userName")
+    self.CurrentUser.set(nil, forKey: "userId")
+    self.CurrentUser.set(nil, forKey: "facebookfriends")
+    self.CurrentUser.set(false, forKey: "loggedIn")
     self.logined = false
     appDelegate.subscribed = false
     
@@ -97,38 +99,38 @@ class CHSession: NSObject {
     for (kind, item) in array {
       item.removeFromSuperview()
     }
-    NSURLCache.sharedURLCache().removeAllCachedResponses()
+    URLCache.shared.removeAllCachedResponses()
     FBSDKLoginManager().logOut()
-    completitionHandler(result: true)
+    completitionHandler(true)
   }
   
   func getFacebookFriends() -> String {
     return self.getStringByKey("facebookfriends")
   }
   
-  func getStringByKey(key:String) -> String {
-    guard CurrentUser.objectForKey(key) != nil else {
+  func getStringByKey(_ key:String) -> String {
+    guard CurrentUser.object(forKey: key) != nil else {
       return ""
     }
-    return CurrentUser.stringForKey(key)!
+    return CurrentUser.string(forKey: key)!
   }
   
-  func getIntByKey(key:String) -> Int {
-    guard CurrentUser.objectForKey(key) != nil else {
+  func getIntByKey(_ key:String) -> Int {
+    guard CurrentUser.object(forKey: key) != nil else {
       return 0
     }
-    return CurrentUser.integerForKey(key)
+    return CurrentUser.integer(forKey: key)
   }
   
-  func getBoolByKey(key:String) -> Bool {
+  func getBoolByKey(_ key:String) -> Bool {
     
-    guard CurrentUser.objectForKey(key) != nil else {
+    guard CurrentUser.object(forKey: key) != nil else {
       return false
     }
-    return CurrentUser.boolForKey(key)
+    return CurrentUser.bool(forKey: key)
   }
   
-  func getJSONByKey(key:String) -> JSON {
+  func getJSONByKey(_ key:String) -> JSON {
 //    //print(self.getStringByKey(key))
     return CHUIElements().stringToJSON(self.getStringByKey(key))
   }
@@ -137,20 +139,22 @@ class CHSession: NSObject {
     return createToken(self.currentUserFacebookId)
   }
   
-  func getTokenWithFaceBookId(facebookId:String) -> String {
+  func getTokenWithFaceBookId(_ facebookId:String) -> String {
     return createToken(facebookId)
   }
   
-  func createToken(facebookId:String) -> String {
+  func createToken(_ facebookId:String) -> String {
     let ios = [
       "token": facebookId,
       "timeZone": "2"
     ]
-    return JWT.encode(.HS256("secret")) { builder in
+    let data = "secret".data(using: .utf8)
+    
+    
+    return JWT.encode(.hs256(data!)) { (builder) in
       builder["facebookId"] = facebookId
       builder["IOS"]        = ios
     }
-    
   }
   
 }

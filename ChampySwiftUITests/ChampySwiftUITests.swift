@@ -38,14 +38,14 @@ class ChampySwiftUITests: XCTestCase {
     
     
     let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2).tap()
     app.buttons["SelfImprovement"].tap()
     app.buttons["addIcon"].tap()
     app.buttons["YES"].tap()
     
-    let challengesElementsQuery = app.otherElements.containingType(.NavigationBar, identifier:"Challenges")
-    challengesElementsQuery.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
-    challengesElementsQuery.childrenMatchingType(.Other).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
+    let challengesElementsQuery = app.otherElements.containing(.navigationBar, identifier:"Challenges")
+    challengesElementsQuery.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 2).tap()
+    challengesElementsQuery.children(matching: .other).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 2).tap()
     
     
   }
@@ -54,11 +54,11 @@ class ChampySwiftUITests: XCTestCase {
     
     
     let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2).tap()
     app.buttons["SelfImprovement"].tap()
     app.buttons["addIcon"].tap()
     app.buttons["YES"].tap()
-    app.otherElements.containingType(.NavigationBar, identifier:"Challenges").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).elementBoundByIndex(2).tap()
+    app.otherElements.containing(.navigationBar, identifier:"Challenges").children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 2).tap()
     
     
     
@@ -82,14 +82,14 @@ class ChampySwiftUITests: XCTestCase {
     //    Plus Button
     let cells = app.tables.cells
     sleep(1)
-    cells.elementBoundByIndex(0).forceTapElement()
+    cells.element(boundBy: 0).forceTapElement()
     sleep(2)
-    cells.elementBoundByIndex(0).forceTapElement()
+    cells.element(boundBy: 0).forceTapElement()
   }
   
   func testOpenCloseView() {
     
-    let button = XCUIApplication().toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2)
+    let button = XCUIApplication().toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2)
     button.tap()
     button.tap()
     
@@ -116,9 +116,9 @@ class ChampySwiftUITests: XCTestCase {
   func testCreateChallenge() {
     
     let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2).tap()
     app.buttons["SelfImprovement"].tap()
-    app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).tap()
+    app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).tap()
     app.buttons["addIcon"].tap()
     app.buttons["YES"].tap()
     
@@ -131,7 +131,7 @@ class ChampySwiftUITests: XCTestCase {
   func testCreateWakeUp() {
     
     let app = XCUIApplication()
-    app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+    app.toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2).tap()
     app.buttons["Wake up"].tap()
     app.buttons["addIcon"].tap()
     app.buttons["YES"].tap()
@@ -142,7 +142,7 @@ class ChampySwiftUITests: XCTestCase {
   func testAdd10Challenges() {
     let app = XCUIApplication()
     for var i:Int in 0...iterationCount {
-      app.toolbars.containingType(.Button, identifier:"ChallengeActive").childrenMatchingType(.Button).elementBoundByIndex(2).tap()
+      app.toolbars.containing(.button, identifier:"ChallengeActive").children(matching: .button).element(boundBy: 2).tap()
       app.buttons["SelfImprovement"].tap()
       app.buttons["addIcon"].tap()
       app.buttons["YES"].tap()
@@ -279,9 +279,9 @@ class ChampySwiftUITests: XCTestCase {
     app.toolbars.buttons["friends"].tap()
     app.navigationBars["ChampySwift.FriendsView"].buttons["Other"].tap()
     let cells = app.tables.cells
-    cells.elementBoundByIndex(0).forceTapElement()
+    cells.element(boundBy: 0).forceTapElement()
     sleep(2)
-    cells.elementBoundByIndex(0).forceTapElement()
+    cells.element(boundBy: 0).forceTapElement()
     sleep(2)
     //    let button = app.buttons["plusicon"]
     
@@ -291,7 +291,7 @@ class ChampySwiftUITests: XCTestCase {
   func testrefreshFriendsView() {
     let app = XCUIApplication()
     app.toolbars.buttons["friends"].tap()
-    let table = app.scrollViews.childrenMatchingType(.Table).element
+    let table = app.scrollViews.children(matching: .table).element
     
     
     
@@ -333,7 +333,7 @@ class ChampySwiftUITests: XCTestCase {
     let app = XCUIApplication()
     app.toolbars.buttons["clock"].tap()
     
-    let table = app.scrollViews.childrenMatchingType(.Table).element
+    let table = app.scrollViews.children(matching: .table).element
     table.swipeDown()
     
     let champyswiftHistoryviewNavigationBar = app.navigationBars["ChampySwift.HistoryView"]
@@ -353,11 +353,11 @@ class ChampySwiftUITests: XCTestCase {
 extension XCUIElement {
   
   func forceTapElement() {
-    if self.hittable {
+    if self.isHittable {
       self.tap()
     }
     else {
-      let coordinate: XCUICoordinate = self.coordinateWithNormalizedOffset(CGVectorMake(0.0, 0.0))
+      let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
       coordinate.tap()
     }
   }

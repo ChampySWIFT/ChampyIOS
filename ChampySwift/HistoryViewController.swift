@@ -10,7 +10,7 @@ import UIKit
 import Async
 
 class HistoryViewController: UIViewController {
-  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   @IBOutlet weak var segmentControl: UISegmentedControl!
   @IBOutlet weak var contentScrollView: UIScrollView!
@@ -31,8 +31,8 @@ class HistoryViewController: UIViewController {
       appDelegate.historyViewController = self
     }
     CHImages().setUpBackground(background, frame: self.view.frame)
-    let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName)
-    segmentControl.setTitleTextAttributes(attr as [NSObject : AnyObject] , forState: .Normal)
+    let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
+    segmentControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
     
     
     Async.background{
@@ -46,8 +46,11 @@ class HistoryViewController: UIViewController {
                 if result {
                   Async.main {
                     let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-                    self.presentViewController(roleControlViewController, type: .push, animated: false)
+                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+                    
+                    self.present(roleControlViewController, animated: false, completion: {
+                      
+                    })
                   }
                 }
               })
@@ -66,7 +69,7 @@ class HistoryViewController: UIViewController {
   }
   
   
-  @IBAction func changedSegmentControl(sender: AnyObject) {
+  @IBAction func changedSegmentControl(_ sender: AnyObject) {
     switch segmentControl.selectedSegmentIndex {
     case 1:
       let p =  CGPoint(x:self.view.frame.size.width,y:0)
@@ -91,16 +94,16 @@ class HistoryViewController: UIViewController {
   
   
   //function of FBSDKAppInviteDialogDelegate
-  func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: NSError!){
+  func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: NSError!){
     // my code here
   }
   
-  func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+  func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [AnyHashable: Any]!) {
     
   }
   
   
-  func scrollViewDidScroll(scrollView: UIScrollView!) {
+  func scrollViewDidScroll(_ scrollView: UIScrollView!) {
     // Load the pages that are now on screen
     //    let point = CGPointMake(scrollView.contentOffset.x, 0)
     //    scrollView.setContentOffset(point, animated: false)
@@ -108,7 +111,7 @@ class HistoryViewController: UIViewController {
   }
   
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
@@ -116,21 +119,21 @@ class HistoryViewController: UIViewController {
     if appDelegate.historyTable1 != nil {
       table1 = appDelegate.historyTable1
     } else {
-      appDelegate.historyTable1 = mainStoryboard.instantiateViewControllerWithIdentifier("InProgressTableViewController") as! InProgressTableViewController
+      appDelegate.historyTable1 = mainStoryboard.instantiateViewController(withIdentifier: "InProgressTableViewController") as! InProgressTableViewController
       table1 = appDelegate.historyTable1
     }
     
     if appDelegate.historyTable2 != nil {
       table2 = appDelegate.historyTable2
     } else {
-      appDelegate.historyTable2 = mainStoryboard.instantiateViewControllerWithIdentifier("WinsTableViewController") as! WinsTableViewController
+      appDelegate.historyTable2 = mainStoryboard.instantiateViewController(withIdentifier: "WinsTableViewController") as! WinsTableViewController
       table2 = appDelegate.historyTable2
     }
     
     if appDelegate.historyTable3 != nil {
       table3 = appDelegate.historyTable3
     } else {
-      appDelegate.historyTable3 = mainStoryboard.instantiateViewControllerWithIdentifier("FailedTableViewController") as! FailedTableViewController
+      appDelegate.historyTable3 = mainStoryboard.instantiateViewController(withIdentifier: "FailedTableViewController") as! FailedTableViewController
       table3 = appDelegate.historyTable3
     }
     
@@ -142,9 +145,9 @@ class HistoryViewController: UIViewController {
     self.addChildViewController(table1)
     self.addChildViewController(table2)
     self.addChildViewController(table3)
-    table1.didMoveToParentViewController(self)
-    table2.didMoveToParentViewController(self)
-    table3.didMoveToParentViewController(self)
+    table1.didMove(toParentViewController: self)
+    table2.didMove(toParentViewController: self)
+    table3.didMove(toParentViewController: self)
     contentScrollView.addSubview(table1.tableView)
     contentScrollView.addSubview(table2.tableView)
     contentScrollView.addSubview(table3.tableView)
@@ -152,7 +155,7 @@ class HistoryViewController: UIViewController {
     
     
     loadVisiblePages()
-    contentScrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+    contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
   }
   
   
@@ -160,7 +163,7 @@ class HistoryViewController: UIViewController {
     
     
     let pagesScrollViewSize = contentScrollView.frame.size
-    contentScrollView.contentSize  = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height )
+    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height )
     contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     
     var firstFrame:CGRect  = table1.tableView.frame

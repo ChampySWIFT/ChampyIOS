@@ -5,11 +5,11 @@
 
 import UIKit
 
-public class APCustomBlurView: UIVisualEffectView {
+open class APCustomBlurView: UIVisualEffectView {
   
-  private let blurEffect: UIBlurEffect
-  public var blurRadius: CGFloat {
-    return blurEffect.valueForKeyPath("blurRadius") as! CGFloat
+  fileprivate let blurEffect: UIBlurEffect
+  open var blurRadius: CGFloat {
+    return blurEffect.value(forKeyPath: "blurRadius") as! CGFloat
   }
   
   public convenience init() {
@@ -29,7 +29,7 @@ public class APCustomBlurView: UIVisualEffectView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public func setBlurRadius(radius: CGFloat) {
+  open func setBlurRadius(_ radius: CGFloat) {
     guard radius != blurRadius else {
       return
     }

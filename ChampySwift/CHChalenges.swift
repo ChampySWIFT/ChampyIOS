@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class CHChalenges: NSObject {
-  let ref = FIRDatabase.database().reference()
+ 
   enum CHChallengeSubType: String {
     case unconfirmedDuelRecipient    = "unconfirmedDuelRecipient"
     case unconfirmedDuelSender = "unconfirmedDuelSender"
@@ -34,7 +34,7 @@ class CHChalenges: NSObject {
    
    @return array of challenges
    */
-  func getAllChallenges(userId:String) -> [JSON] {
+  func getAllChallenges(_ userId:String) -> [JSON] {
     var result:[JSON] = []
     
     
@@ -57,13 +57,7 @@ class CHChalenges: NSObject {
     return result
   }
   
-  func getAllChallenges(userId:String, completitionHandler:(_ result:JSON)->()) {
-    ref.child("users/userList/\(userId)").observeEventType(.Value, withBlock: { (snapshot) in
-      let json = JSON(snapshot.value!)
-      
-      completitionHandler(result: json)
-    })
-  }
+  
   
   /**
    get All Self Improvement Challenges
@@ -72,7 +66,7 @@ class CHChalenges: NSObject {
    
    @return array of self improvement challenges
    */
-  func getAllSelfImprovementChallenges(userId:String) -> [JSON] {
+  func getAllSelfImprovementChallenges(_ userId:String) -> [JSON] {
     var result:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("challenges") {
       guard item["type"]["_id"].stringValue == CHSettings().selfImprovementsId else {
@@ -99,7 +93,7 @@ class CHChalenges: NSObject {
    
    @return array of in progregress challenges
    */
-  func getInProgressChallenges(userId:String) -> [JSON] {
+  func getInProgressChallenges(_ userId:String) -> [JSON] {
     var result:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(userId)") {
       guard item["status"].stringValue != "finished" else {
@@ -130,7 +124,7 @@ class CHChalenges: NSObject {
   
   
   
-  func surrenderAllInProgressChallengesWithThisFriend(userId:String) {
+  func surrenderAllInProgressChallengesWithThisFriend(_ userId:String) {
     for item in self.getInProgressChallenges(CHSession().currentUserId) {
       if item["sender"]["_id"].stringValue == userId || item["recipient"]["_id"].stringValue == userId {
           CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
@@ -140,7 +134,7 @@ class CHChalenges: NSObject {
     }
   }
   
-  func surrenderAllInProgressChallenges(completitionHandler:(_ end:Bool) -> ()) {
+  func surrenderAllInProgressChallenges(_ completitionHandler:(_ end:Bool) -> ()) {
     for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(CHSession().currentUserId)") {
       
       CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
@@ -149,7 +143,7 @@ class CHChalenges: NSObject {
       
     }
     
-    completitionHandler(end: true)
+    completitionHandler(true)
   }
   
   func isThereStartedChallengesWith() -> Bool {
@@ -167,7 +161,7 @@ class CHChalenges: NSObject {
    
    @return array of win challenges
    */
-  func getChalengeArrayByKyValueCombination(userId:String, value:Bool) -> [JSON] {
+  func getChalengeArrayByKyValueCombination(_ userId:String, value:Bool) -> [JSON] {
     var result:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(userId)") {
       
@@ -201,7 +195,7 @@ class CHChalenges: NSObject {
    
    @return array of win challenges
    */
-  func getWinChallenges(userId:String) -> [JSON] {
+  func getWinChallenges(_ userId:String) -> [JSON] {
     return getChalengeArrayByKyValueCombination(userId, value: true)
   }
   
@@ -212,7 +206,7 @@ class CHChalenges: NSObject {
    
    @return array of failed challenges
    */
-  func getFailedChallenges(userId:String) -> [JSON] {
+  func getFailedChallenges(_ userId:String) -> [JSON] {
     return getChalengeArrayByKyValueCombination(userId, value: false)
   }
   
@@ -225,7 +219,7 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType of the Started Duel
    */
-  func checkStatusOftheStartedDuel(item:JSON) -> CHChallengeSubType {
+  func checkStatusOftheStartedDuel(_ item:JSON) -> CHChallengeSubType {
     
     switch CHSession().currentUserId {
     case item["recipient"]["_id"].stringValue:
@@ -246,7 +240,7 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType of Self Improvement
    */
-  func getSelfImprovementStatus(item:JSON) -> CHChallengeSubType {
+  func getSelfImprovementStatus(_ item:JSON) -> CHChallengeSubType {
     let currentDate = CHUIElements().getCurretnTime()
     let surrenderTime = CHSettings().daysToSec(2)
     let borderTime = CHSettings().daysToSec(1)
@@ -292,7 +286,7 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType of the Duel
    */
-  func checkDuelByOwnerKey(item:JSON, key:String) -> CHChallengeSubType {
+  func checkDuelByOwnerKey(_ item:JSON, key:String) -> CHChallengeSubType {
     let currentDate = CHUIElements().getCurretnTime()
     let surrenderTime = CHSettings().daysToSec(2)
     let borderTime = CHSettings().daysToSec(1)
@@ -332,13 +326,13 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType of Wake Up
    */
-  func getWakeUpType(item:JSON) -> CHChallengeSubType {
+  func getWakeUpType(_ item:JSON) -> CHChallengeSubType {
     
     if item["status"].stringValue == "started" {
       let endTimeBorder = CHUIElements().getCurretnTime()
       let beginTimeBorder = endTimeBorder - 30
       let challenge = item["challenge"]
-      let array = CHSettings().stringToArray(challenge["details"].stringValue.stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: ""))
+      let array = CHSettings().stringToArray(challenge["details"].stringValue.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "[", with: ""))
       let time:Int = Int(array[item["senderProgress"].count])!
       
       
@@ -349,7 +343,7 @@ class CHChalenges: NSObject {
       if endTimeBorder - time > 0 && endTimeBorder - time < 30 {
         CHRequests().checkChallenge(item["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
-            CHPush().localPush("refreshIcarousel", object: [])
+            CHPush().localPush("refreshIcarousel", object: self)
             CHUIElements().playAudio()
             CHPush().alertPush("wake up challenge completed for today", type: "Success")
           }
@@ -361,7 +355,7 @@ class CHChalenges: NSObject {
         CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             CHPush().alertPush("failed a wake up challenge", type: "Success")
-            CHPush().localPush("refreshIcarousel", object: [])
+            CHPush().localPush("refreshIcarousel", object: self)
           }
           
         })
@@ -382,7 +376,7 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType of sender or recipient
    */
-  func getSenderOrRecipiendDuelStatus(item:JSON) -> CHChallengeSubType {
+  func getSenderOrRecipiendDuelStatus(_ item:JSON) -> CHChallengeSubType {
     switch CHSession().currentUserId {
     case item["sender"]["_id"].stringValue:
       return .unconfirmedDuelSender
@@ -400,7 +394,7 @@ class CHChalenges: NSObject {
    
    @return CHChallengeSubType
    */
-  func getChallengeType(item:JSON) -> CHChallengeSubType {
+  func getChallengeType(_ item:JSON) -> CHChallengeSubType {
     
     switch item["challenge"]["type"].stringValue {
     case CHSettings().duelsId:
@@ -428,7 +422,7 @@ class CHChalenges: NSObject {
    
    @return array of wakeupchallenges
    */
-  func getAllActiveWakeUpChallenges(userId:String) -> [JSON] {
+  func getAllActiveWakeUpChallenges(_ userId:String) -> [JSON] {
     var result:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("inProgressChallenges\(userId)")  {
       guard item["challenge"]["type"].stringValue == CHSettings().wakeUpIds else {

@@ -15,7 +15,7 @@ class CHBanners: NSObject {
   var target:UIView!           = nil
   var tableTarget:UITableView! = nil
   var backgroundColor:UIColor! = nil
-  var textColor:UIColor!       = UIColor.whiteColor()
+  var textColor:UIColor!       = UIColor.white
   var bannerText:String        = ""
   
   var bannerLabel:UILabel! = nil
@@ -51,14 +51,14 @@ class CHBanners: NSObject {
     self.backgroundColor = CHUIElements().APPColors[type.rawValue]
   }
   
-  func showBannerForViewControllerAnimated(animated:Bool, message:String) {
+  func showBannerForViewControllerAnimated(_ animated:Bool, message:String) {
     if message == "" {
       return
     }
     self.bannerText = message
     self.createBanner(message)
     self.target.addSubview(self.banner)
-    self.target.bringSubviewToFront(self.banner)
+    self.target.bringSubview(toFront: self.banner)
     
     animated ? self.animateView(): setUpOpacity()
     
@@ -73,17 +73,17 @@ class CHBanners: NSObject {
   }
   
   
-  func showBannerForViewControllerAnimatedWithReturning(animated:Bool, message:String) -> CHBanners {
+  func showBannerForViewControllerAnimatedWithReturning(_ animated:Bool, message:String) -> CHBanners {
     self.bannerText = message
     self.createBanner(message)
     self.target.addSubview(self.banner)
-    self.target.bringSubviewToFront(self.banner)
+    self.target.bringSubview(toFront: self.banner)
     animated ? self.animateView(): setUpOpacity()
         
     return self
   }
   
-  func showBannerForTableViewControllerAnimated(animated:Bool, message:String) {
+  func showBannerForTableViewControllerAnimated(_ animated:Bool, message:String) {
     self.bannerText = message
     self.tableTarget.addSubview(self.createBanner(message))
     animated ? self.animateView(): setUpOpacity()
@@ -95,31 +95,31 @@ class CHBanners: NSObject {
     })
   }
   
-  func changeText(text:String) {
-    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+  func changeText(_ text:String) {
+    DispatchQueue.main.async { () -> Void in
       self.bannerLabel.text = text
     }
   }
   
-  func changeType(type:CHBannerTypes) {
+  func changeType(_ type:CHBannerTypes) {
     self.backgroundColor = CHUIElements().APPColors[type.rawValue]
     if self.banner != nil {
       self.banner.backgroundColor = self.backgroundColor
     }
   }
   
-  func createBanner(message:String) -> UIView {
-    self.banner                 = UIView(frame: CGRectMake(0, 64, self.target.frame.size.width, self.bannerHeight + 20))
+  func createBanner(_ message:String) -> UIView {
+    self.banner                 = UIView(frame: CGRect(x: 0, y: 64, width: self.target.frame.size.width, height: self.bannerHeight + 20))
     self.banner.backgroundColor = self.backgroundColor
     self.banner.layer.opacity   = 0
     
-    self.bannerLabel                           = UILabel(frame: CGRectMake(0, 10, self.target.frame.size.width, self.bannerHeight))
+    self.bannerLabel                           = UILabel(frame: CGRect(x: 0, y: 10, width: self.target.frame.size.width, height: self.bannerHeight))
     self.bannerLabel.font = CHUIElements().font12
     self.bannerLabel.text                      = self.bannerText
     self.bannerLabel.textColor                 = self.textColor
-    self.bannerLabel.textAlignment             = .Center
+    self.bannerLabel.textAlignment             = .center
     //    self.bannerLabel.adjustsFontSizeToFitWidth = true
-    self.bannerLabel.lineBreakMode = .ByWordWrapping
+    self.bannerLabel.lineBreakMode = .byWordWrapping
     self.bannerLabel.numberOfLines = 3
     
     
@@ -127,13 +127,13 @@ class CHBanners: NSObject {
     return banner
   }
   
-  func changeBannerTopmargin(margin:CGFloat) {
-    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-      self.banner.frame = CGRectMake(0, margin, self.target.frame.size.width, self.bannerHeight)
+  func changeBannerTopmargin(_ margin:CGFloat) {
+    DispatchQueue.main.async { () -> Void in
+      self.banner.frame = CGRect(x: 0, y: margin, width: self.target.frame.size.width, height: self.bannerHeight)
     }
   }
   
-  func dismissView(withTimeOut:Bool = false) {
+  func dismissView(_ withTimeOut:Bool = false) {
     if banner != nil {
     var frame = banner.frame
     var time:Double = 0.0
@@ -141,7 +141,7 @@ class CHBanners: NSObject {
       time = 2.0
     }
     
-    UIView.animateWithDuration(1.0, delay: time, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 1.0, delay: time, options: .curveEaseOut, animations: {
       self.banner.layer.opacity = 0
       }, completion: { finished in
         self.banner.removeFromSuperview()
@@ -150,7 +150,7 @@ class CHBanners: NSObject {
   }
   
   func forceDismiss(){
-    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    DispatchQueue.main.async { () -> Void in
       self.banner.layer.opacity = 0
       self.banner.removeFromSuperview()
     }
@@ -163,7 +163,7 @@ class CHBanners: NSObject {
     frame.origin.x = -1 * frame.size.width
     self.banner.layer.opacity = 0
     
-    UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
       self.banner.layer.opacity = 1
       }, completion: { finished in
         
@@ -174,7 +174,7 @@ class CHBanners: NSObject {
     self.banner.layer.opacity = 1
   }
   
-  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
-    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: #selector(NSOperation.main), userInfo: nil, repeats: false)
+  func setTimeout(_ delay:TimeInterval, block:@escaping ()->Void) -> Timer {
+    return Timer.scheduledTimer(timeInterval: delay, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
   }
 }

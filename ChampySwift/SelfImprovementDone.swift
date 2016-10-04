@@ -25,15 +25,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "SelfImprovementDone", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -46,15 +46,15 @@ import SwiftyJSON
     xibSetup()
   }
   
-  func setUp(object:JSON = nil){
+  func setUp(_ object:JSON = nil){
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]//Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
-    self.topBarBackground.bringSubviewToFront(selfImprovementUpIcon)
-    self.topBarBackground.bringSubviewToFront(selfImprovementLabel)
+    self.bringSubview(toFront: self.topBarBackground)
+    self.topBarBackground.bringSubview(toFront: selfImprovementUpIcon)
+    self.topBarBackground.bringSubview(toFront: selfImprovementLabel)
     if object != nil {
       self.objectChallenge = object
       self.challenge.text = object["challenge"]["name"].stringValue
@@ -79,23 +79,23 @@ import SwiftyJSON
     xibSetup()
   }
   
-  @IBAction func shareAction(sender: AnyObject) {
+  @IBAction func shareAction(_ sender: AnyObject) {
     let textToShare = "Constantly improving myself with Champy. Self-Improvement challenge “\(self.objectChallenge["challenge"]["name"].stringValue)”"
     if let topController = UIApplication.topViewController() {
-      if let myWebsite = NSURL(string: "http://champyapp.com") {
+      if let myWebsite = URL(string: "http://champyapp.com") {
         self.tapped = false
-        let objectsToShare = [textToShare, myWebsite]
+        let objectsToShare = [textToShare, myWebsite] as [Any]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
-        topController.presentViewController(activityVC, animated: true, completion: nil)
+        topController.present(activityVC, animated: true, completion: nil)
       }
     }
     
   }
   
   
-  @IBAction func surrenderAction(sender: AnyObject) {
+  @IBAction func surrenderAction(_ sender: AnyObject) {
     
     guard !tapped else {
       return
@@ -104,18 +104,18 @@ import SwiftyJSON
     let button = sender as! UIButton
     
     tapped = true
-    button.hidden = tapped
+    button.isHidden = tapped
     
     
     CHRequests().surrender(self.objectChallenge["_id"].stringValue) { (result, json) in
       if result {
         self.tapped = false
 //        button.hidden = self.tapped
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
 //        CHPush().alertPush("You are a looser", type: "Success")
       } else {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       }
     }

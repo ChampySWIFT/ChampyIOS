@@ -34,15 +34,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "UnConfirmedDuel", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -58,7 +58,7 @@ import SwiftyJSON
     
   }
   
-  func setUp(json:JSON = nil){
+  func setUp(_ json:JSON = nil){
     
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()
@@ -69,10 +69,10 @@ import SwiftyJSON
     gradient.opacity = 0.8
     //Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
+    self.bringSubview(toFront: self.topBarBackground)
     self.recipientImage.layer.masksToBounds = true
-    self.topBarBackground.bringSubviewToFront(duelIcon)
-    self.topBarBackground.bringSubviewToFront(duelLabel)
+    self.topBarBackground.bringSubview(toFront: duelIcon)
+    self.topBarBackground.bringSubview(toFront: duelLabel)
     
     challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
     statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
@@ -116,19 +116,19 @@ import SwiftyJSON
     xibSetup()
   }
 
-  @IBAction func historyAction(sender: AnyObject) {
+  @IBAction func historyAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
     
     tapped = true
     
-    UIApplication.topViewController()!.navigationController?.performSegueWithIdentifier("toHistory", sender: self)
+    UIApplication.topViewController()!.navigationController?.performSegue(withIdentifier: "toHistory", sender: self)
     tapped = false
   }
   
   
-  @IBAction func acceptAction(sender: AnyObject) {
+  @IBAction func acceptAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
@@ -136,23 +136,23 @@ import SwiftyJSON
     let button = sender as! UIButton
     
     tapped = true
-    button.hidden = self.tapped
+    button.isHidden = self.tapped
     
     CHRequests().joinToChallenge(self.challengeObject["_id"].stringValue) { (result, json) in
       if result {
         self.tapped = false
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
         CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has joined your challenge", options: "")
 //        CHPush().alertPush("Accepted", type: "Success")
       } else {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       } 
     }
     
   }
-  @IBAction func declineAction(sender: AnyObject) {
+  @IBAction func declineAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
@@ -160,17 +160,17 @@ import SwiftyJSON
     let button = sender as! UIButton
     
     tapped = true
-    button.hidden = self.tapped
+    button.isHidden = self.tapped
     
     CHRequests().rejectInvite(self.challengeObject["_id"].stringValue) { (result, json) in
       if result {
         self.tapped = false
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
         CHPush().sendPushToUser(self.opponentId, message: "\(CHSession().currentUserName) has declined your challenge", options: "")
 //        CHPush().alertPush("Rejected", type: "Success")
       } else {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       }
     }

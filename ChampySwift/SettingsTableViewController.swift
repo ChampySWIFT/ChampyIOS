@@ -12,6 +12,10 @@ import SwiftyJSON
 import Fusuma
 
 class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPickerViewDelegate, UITextFieldDelegate   {
+  public func fusumaVideoCompleted(withFileURL fileURL: URL) {
+    
+  }
+
   
   @IBOutlet weak var userAvatar: UIImageView!
   @IBOutlet weak var userName: UILabel!
@@ -45,11 +49,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     userAvatar.layer.cornerRadius  = 50.0
     userName.text                  = CHSession().currentUserName
     
-    self.friendRequest.on         = userObject["profileOptions"]["friendRequests"].boolValue
-    self.challengeEnd.on          = userObject["profileOptions"]["challengeEnd"].boolValue
-    self.acceptedYourChallenge.on = userObject["profileOptions"]["acceptedYourChallenge"].boolValue
-    self.enwChallengeRequests.on  = userObject["profileOptions"]["newChallengeRequests"].boolValue
-    self.pushNotifications.on     = userObject["profileOptions"]["pushNotifications"].boolValue
+    self.friendRequest.isOn         = userObject["profileOptions"]["friendRequests"].boolValue
+    self.challengeEnd.isOn          = userObject["profileOptions"]["challengeEnd"].boolValue
+    self.acceptedYourChallenge.isOn = userObject["profileOptions"]["acceptedYourChallenge"].boolValue
+    self.enwChallengeRequests.isOn  = userObject["profileOptions"]["newChallengeRequests"].boolValue
+    self.pushNotifications.isOn     = userObject["profileOptions"]["pushNotifications"].boolValue
     CHImages().setUpAvatar(userAvatar)
     
     
@@ -57,11 +61,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     datePicker = CHUIElements().initAndSetUpDatePicker(30)
     
     
-    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
     
-    let toolBar                             = UIToolbar(frame: CGRectMake(0,0,self.view.frame.size.width,44))
-    toolBar.barStyle                        = UIBarStyle.Default
-    let barButtonDone                       = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(SettingsTableViewController.valueChangedInDateField))
+    let toolBar                             = UIToolbar(frame: CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: 44))
+    toolBar.barStyle                        = UIBarStyle.default
+    let barButtonDone                       = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(SettingsTableViewController.valueChangedInDateField))
     barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
     toolBar.items                           = [spaceButton, barButtonDone]
     
@@ -85,23 +89,23 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   // MARK: - IBACtion methods
-  @IBAction func changeName(sender: AnyObject) {
+  @IBAction func changeName(_ sender: AnyObject) {
     
-    let forgot = UIAlertController(title: "Would you like to change your name?", message: "Please enter your name", preferredStyle: UIAlertControllerStyle.Alert)
+    let forgot = UIAlertController(title: "Would you like to change your name?", message: "Please enter your name", preferredStyle: UIAlertControllerStyle.alert)
     
-    forgot.addTextFieldWithConfigurationHandler(
-      {(textField: UITextField!) in
+    forgot.addTextField(
+      configurationHandler: {(textField: UITextField!) in
         textField.placeholder = "Enter your name"
     })
     
-    let action = UIAlertAction(title: "Change", style: UIAlertActionStyle.Default, handler: {[weak self]  (paramAction:UIAlertAction!) in
+    let action = UIAlertAction(title: "Change", style: UIAlertActionStyle.default, handler: {[weak self]  (paramAction:UIAlertAction!) in
       self!.view.endEditing(true)
       if let textFields      = forgot.textFields{
         let theTextFields      = textFields as [UITextField]
         var enteredText:String = theTextFields[0].text!
         enteredText = enteredText.condenseWhitespace()
-        enteredText = enteredText.stringByTrimmingCharactersInSet(
-          NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        enteredText = enteredText.trimmingCharacters(
+          in: CharacterSet.whitespacesAndNewlines
         )
         guard enteredText != "" else {
           CHPush().alertPush("Name should not be blank", type: "Warning")
@@ -135,86 +139,89 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
       
       })
     
-    let Cancle = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+    let Cancle = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil)
     forgot.addAction(Cancle)
     forgot.addAction(action)
     
-    presentViewController(forgot, animated: true, completion: nil)
+    present(forgot, animated: true, completion: nil)
   }
   
-  @IBAction func logOutAction(sender: AnyObject) {
+  @IBAction func logOutAction(_ sender: AnyObject) {
     if !IJReachability.isConnectedToNetwork()  {
       let a = CHRequests()
       return
     }
-    self.logOutButton.hidden = true
-    self.confirmationLogOutContainer.hidden = false
+    self.logOutButton.isHidden = true
+    self.confirmationLogOutContainer.isHidden = false
     
-    self.deleteButton.hidden = false
-    self.confirmDeleteAccountContainer.hidden = true
+    self.deleteButton.isHidden = false
+    self.confirmDeleteAccountContainer.isHidden = true
     
   }
   
-  @IBAction func acceptLogOutAction(sender: AnyObject) {
-    self.logOutButton.hidden = false
-    self.confirmationLogOutContainer.hidden = true
+  @IBAction func acceptLogOutAction(_ sender: AnyObject) {
+    self.logOutButton.isHidden = false
+    self.confirmationLogOutContainer.isHidden = true
     
     //    CHPush().unSubscribeUserFrom(CHSession().currentUserId)
     CHSession().clearSession({ (result) in
       if result {
         Async.main {
           let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-          self.presentViewController(roleControlViewController, type: .push, animated: false)
+          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+          
+          self.present(roleControlViewController, animated: false, completion: {
+            
+          })
         }
       }
     })
     
   }
   
-  @IBAction func declineLogOutAction(sender: AnyObject) {
-    self.logOutButton.hidden = false
-    self.confirmationLogOutContainer.hidden = true
+  @IBAction func declineLogOutAction(_ sender: AnyObject) {
+    self.logOutButton.isHidden = false
+    self.confirmationLogOutContainer.isHidden = true
     
   }
   
-  @IBAction func deleteAccountAction(sender: AnyObject) {
-    self.deleteButton.hidden = true
-    self.confirmDeleteAccountContainer.hidden = false
+  @IBAction func deleteAccountAction(_ sender: AnyObject) {
+    self.deleteButton.isHidden = true
+    self.confirmDeleteAccountContainer.isHidden = false
     
-    self.logOutButton.hidden = false
-    self.confirmationLogOutContainer.hidden = true
-    
-  }
-  
-  @IBAction func dismissDeleteAccount(sender: AnyObject) {
-    self.deleteButton.hidden = false
-    self.confirmDeleteAccountContainer.hidden = true
-    
-    
+    self.logOutButton.isHidden = false
+    self.confirmationLogOutContainer.isHidden = true
     
   }
   
-  @IBAction func switchedSwitcher(sender: UISwitch!) {
+  @IBAction func dismissDeleteAccount(_ sender: AnyObject) {
+    self.deleteButton.isHidden = false
+    self.confirmDeleteAccountContainer.isHidden = true
+    
+    
+    
+  }
+  
+  @IBAction func switchedSwitcher(_ sender: UISwitch!) {
     
     if !IJReachability.isConnectedToNetwork() {
-      sender.on = !sender.on
+      sender.isOn = !sender.isOn
     }
     
     let params = [
-      "friendRequests": "\(self.friendRequest.on)",
-      "challengeEnd": "\(self.challengeEnd.on)",
-      "acceptedYourChallenge": "\(self.acceptedYourChallenge.on)",
-      "newChallengeRequests": "\(self.enwChallengeRequests.on)",
-      "pushNotifications": "\(self.pushNotifications.on)"
+      "friendRequests": "\(self.friendRequest.isOn)",
+      "challengeEnd": "\(self.challengeEnd.isOn)",
+      "acceptedYourChallenge": "\(self.acceptedYourChallenge.isOn)",
+      "newChallengeRequests": "\(self.enwChallengeRequests.isOn)",
+      "pushNotifications": "\(self.pushNotifications.isOn)"
     ]
     
     CHRequests().updateUserProfileOptions(CHSession().currentUserId, params: params) { (result, json) in if result {} }
   }
   
-  @IBAction func acceptDeleteAccount(sender: AnyObject) {
-    self.deleteButton.hidden = false
-    self.confirmDeleteAccountContainer.hidden = true
+  @IBAction func acceptDeleteAccount(_ sender: AnyObject) {
+    self.deleteButton.isHidden = false
+    self.confirmDeleteAccountContainer.isHidden = true
     CHChalenges().surrenderAllInProgressChallenges { (end) in
       if end {
         CHRequests().deleteAccount(CHSession().currentUserId) { (result, json) in
@@ -223,8 +230,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
               if result {
                 Async.main {
                   let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-                  self.presentViewController(roleControlViewController, type: .push, animated: false)
+                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+                  
+                  self.present(roleControlViewController, animated: false, completion: {
+                    
+                  })
                 }
               }
             })
@@ -237,47 +247,47 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
-  @IBAction func triggerDailyNtificator(sender: AnyObject) {
+  @IBAction func triggerDailyNtificator(_ sender: AnyObject) {
     
-    isHidden = dailyNOtificatorButton.on
+    isHidden = dailyNOtificatorButton.isOn
     
-    self.pickerView.hidden = !isHidden
-    self.dailyLabel.hidden = isHidden
-    CHSession().CurrentUser.setBool(isHidden, forKey: "isHiddenDN")
+    self.pickerView.isHidden = !isHidden
+    self.dailyLabel.isHidden = isHidden
+    CHSession().CurrentUser.set(isHidden, forKey: "isHiddenDN")
     
   }
   
-  @IBAction func upoadPhotoAction(sender: AnyObject) {
+  @IBAction func upoadPhotoAction(_ sender: AnyObject) {
     guard IJReachability.isConnectedToNetwork() else {
       CHPush().alertPush("No internet connection", type: "Warning")
       return
     }
     let fusuma = FusumaViewController()
     fusuma.delegate = self
-    self.presentViewController(fusuma, animated: true, completion: nil)
+    self.present(fusuma, animated: true, completion: nil)
     
   }
   
-  @IBAction func aboutPage(sender: AnyObject) {
-    if let requestUrl = NSURL(string: "http://champyapp.com") {
-      UIApplication.sharedApplication().openURL(requestUrl)
+  @IBAction func aboutPage(_ sender: AnyObject) {
+    if let requestUrl = URL(string: "http://champyapp.com") {
+      UIApplication.shared.openURL(requestUrl)
     }
   }
   
-  @IBAction func privacyPolicAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: CHRequests().privacyUrl) {
-      UIApplication.sharedApplication().openURL(requestUrl)
+  @IBAction func privacyPolicAction(_ sender: AnyObject) {
+    if let requestUrl = URL(string: CHRequests().privacyUrl) {
+      UIApplication.shared.openURL(requestUrl)
     }
   }
   
-  @IBAction func enUserAgreementAction(sender: AnyObject) {
-    if let requestUrl = NSURL(string: CHRequests().termsUrl) {
-      UIApplication.sharedApplication().openURL(requestUrl)
+  @IBAction func enUserAgreementAction(_ sender: AnyObject) {
+    if let requestUrl = URL(string: CHRequests().termsUrl) {
+      UIApplication.shared.openURL(requestUrl)
     }
   }
   
   // MARK: - Other functions methods
-  func fusumaImageSelected(image: UIImage) {
+  func fusumaImageSelected(_ image: UIImage) {
     if IJReachability.isConnectedToNetwork() == false {
       return
     } else {
@@ -308,7 +318,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
-  func fusumaDismissedWithImage(image: UIImage) {
+  func fusumaDismissedWithImage(_ image: UIImage) {
     
   }
   
@@ -317,14 +327,14 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   func valueChangedInDateField() {
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
-    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter.timeStyle = DateFormatter.Style.short
     dateFormatter.dateFormat = "HH:mm"
-    let strDate = dateFormatter.stringFromDate(datePicker.date)
+    let strDate = dateFormatter.string(from: datePicker.date)
     
-    let calendar = NSCalendar.currentCalendar()
-    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: datePicker.date)
+    let calendar = Calendar.current
+    let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: datePicker.date)
     let hour = comp.hour
     let minute = comp.minute
     
@@ -332,8 +342,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
     inputFieldsForTime.resignFirstResponder()
     
-    CHSession().CurrentUser.setInteger(hour, forKey: "hoursDN")
-    CHSession().CurrentUser.setInteger(minute, forKey: "minsDN")
+    CHSession().CurrentUser.set(hour, forKey: "hoursDN")
+    CHSession().CurrentUser.set(minute, forKey: "minsDN")
     
   }
   

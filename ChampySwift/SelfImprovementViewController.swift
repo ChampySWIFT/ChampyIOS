@@ -26,23 +26,23 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   var viewObjects:[NewChallenge]! = []
   var userObject:JSON! = nil
   
-  @IBAction func closeView(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true) { 
-      CHPush().localPush("refreshIcarousel", object: [])
+  @IBAction func closeView(_ sender: AnyObject) {
+    self.dismiss(animated: true) { 
+      CHPush().localPush("refreshIcarousel", object: self)
     }
   }
   override func viewDidLoad() {
     super.viewDidLoad()
     challengeView.delegate   = self
     challengeView.dataSource = self
-    challengeView.type       = .Linear
+    challengeView.type       = .linear
     challengeView.decelerationRate = 0.0
     
     self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
     self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
     
     self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
-    self.challenges.insert(nil, atIndex: 0)
+    self.challenges.insert(nil, at: 0)
     Async.main {
       var i:Int = 0
       self.viewObjects.removeAll()
@@ -60,9 +60,9 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
         i = i + 1
       }
       self.challengeView.reloadData()
-      self.challengeView.scrollToItemAtIndex(1, animated: false)
+      self.challengeView.scrollToItem(at: 1, animated: false)
     }
-    self.view.bringSubviewToFront(self.challengeView)
+    self.view.bringSubview(toFront: self.challengeView)
     
     
     // Do any additional setup after loading the view.
@@ -74,24 +74,24 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   }
   
   
-  func numberOfItemsInCarousel(carousel: iCarousel) -> Int {
+  func numberOfItems(in carousel: iCarousel) -> Int {
     return self.challenges.count
   }
   
   
-  func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
+  func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
     return self.viewObjects[index]
   }
   
-  func carouselDidScroll(carousel: iCarousel) {
+  func carouselDidScroll(_ carousel: iCarousel) {
     close()
   }
   
-  func carousel(carousel: iCarousel, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+  func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
     switch option {
-    case .Spacing:
+    case .spacing:
       return value * 1.1
-    case .Wrap:
+    case .wrap:
       return 0.0
     default:
       return value
@@ -123,8 +123,8 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       
       var enteredText:String = view.ConditionsTextField.text!
       enteredText = enteredText.condenseWhitespace()
-      enteredText = enteredText.stringByTrimmingCharactersInSet(
-        NSCharacterSet.whitespaceAndNewlineCharacterSet()
+      enteredText = enteredText.trimmingCharacters(
+        in: CharacterSet.whitespacesAndNewlines
       )
       
       
@@ -135,8 +135,8 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       
       let conditions:String = enteredText
       
-      var dayNumber:String = view.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
-      dayNumber = dayNumber.stringByReplacingOccurrencesOfString(" Day", withString: "")
+      var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+      dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
       
       ////print(dayNumber)
       guard conditions.isValidConditions() else {
@@ -178,15 +178,15 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   func backtoMain() {
     Async.main{
 //      self.performSegueWithIdentifier("backtoMain", sender: nil)
-      self.dismissViewControllerAnimated(true, completion: {
-        CHPush().localPush("refreshIcarousel", object: [])
+      self.dismiss(animated: true, completion: {
+        CHPush().localPush("refreshIcarousel", object: self)
         
       })
     }
   }
   
   
-  func finisher(result:Bool) {
+  func finisher(_ result:Bool) {
     if result {
 //      CHPush().alertPush("Challenge Created", type: "Success")
       self.backtoMain()
@@ -196,36 +196,36 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     }
   }
   
-  @IBAction func sendtoFriendAction(sender:AnyObject) {
+  @IBAction func sendtoFriendAction(_ sender:AnyObject) {
     open()
     
   }
   
-  @IBAction func confirm(sender:AnyObject) {
+  @IBAction func confirm(_ sender:AnyObject) {
     sendAction()
     close()
   }
   
-  @IBAction func decline(sender:AnyObject) {
+  @IBAction func decline(_ sender:AnyObject) {
     
     close()
   }
   
   func open() {
-    self.addButton.hidden = true
-    self.descView.hidden = false
+    self.addButton.isHidden = true
+    self.descView.isHidden = false
   }
   
   func close() {
-    self.addButton.hidden = false
-    self.descView.hidden = true
+    self.addButton.isHidden = false
+    self.descView.isHidden = true
     
     if self.viewObjects.count > 0 {
       self.viewObjects[0].view.endEditing(true)
     }
   }
   
-  func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
     Async.main {
       let banner = CHBanners(withTarget: self.view, andType: type)
       banner.showBannerForViewControllerAnimated(true, message: message)

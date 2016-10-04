@@ -11,8 +11,8 @@ import Async
 
 import AVFoundation
 class SettingsViewController: UIViewController {
-  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
-  let center = NSNotificationCenter.defaultCenter()
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
+  let center = NotificationCenter.default
   
   @IBOutlet weak var background: UIImageView!
   override func viewDidLoad() {
@@ -38,8 +38,10 @@ class SettingsViewController: UIViewController {
                 if result {
                   Async.main {
                     let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-                    self.presentViewController(roleControlViewController, type: .push, animated: false)
+                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+                    self.present(roleControlViewController, animated: false, completion: { 
+                      
+                    })
                   }
                 }
               })
@@ -56,8 +58,8 @@ class SettingsViewController: UIViewController {
     
   }
   
-  override func viewDidDisappear(animated: Bool) {
-    center.removeObserver(self, name: "updateImage", object: nil)
+  override func viewDidDisappear(_ animated: Bool) {
+    center.removeObserver(self, name: NSNotification.Name(rawValue: "updateImage"), object: nil)
   }
   
   
@@ -67,14 +69,14 @@ class SettingsViewController: UIViewController {
     }
   }
   
-  func setUpBackroundNotif(notification:NSNotification) {
-    let data = notification.userInfo as! [String:UIImage]
+  func setUpBackroundNotif(_ notification:Notification) {
+    let data = (notification as NSNotification).userInfo as! [String:UIImage]
     self.background.image = data["image"]
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     
-    center.addObserver(self, selector: #selector(SettingsViewController.setUpBackroundNotif(_:)), name: "updateImage", object: nil)
+    center.addObserver(self, selector: #selector(SettingsViewController.setUpBackroundNotif(_:)), name: NSNotification.Name(rawValue: "updateImage"), object: nil)
   }
   
   override func didReceiveMemoryWarning() {

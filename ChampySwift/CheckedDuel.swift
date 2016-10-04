@@ -32,15 +32,15 @@ import Async
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "CheckedDuel", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -56,7 +56,7 @@ import Async
     
   }
   
-  func setUp(json:JSON = nil){
+  func setUp(_ json:JSON = nil){
     
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()
@@ -67,14 +67,14 @@ import Async
     gradient.opacity = 0.8
     //Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
+    self.bringSubview(toFront: self.topBarBackground)
     //    recipientImage
     //    self.recipientImage.layer.opacity = 0.5
     self.sendertImage.layer.masksToBounds = true
     self.recipientImage.layer.masksToBounds = true
     //    self.topBarBackground.bringSubviewToFront(recipientImage)
-    self.topBarBackground.bringSubviewToFront(duelIcon)
-    self.topBarBackground.bringSubviewToFront(duelLabel)
+    self.topBarBackground.bringSubview(toFront: duelIcon)
+    self.topBarBackground.bringSubview(toFront: duelLabel)
     
     challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
     statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "

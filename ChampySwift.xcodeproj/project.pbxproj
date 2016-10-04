@@ -67,17 +67,12 @@
 		579C18671CCB595700D6EEA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579C18651CCB595700D6EEA9 /* LaunchScreen.storyboard */; };
 		579C187D1CCB595800D6EEA9 /* ChampySwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C187C1CCB595800D6EEA9 /* ChampySwiftUITests.swift */; };
 		579F35C21D06B38F00C4A77B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665AE1CDB829600FD57C9 /* Alamofire.framework */; };
-		579F35C31D06B38F00C4A77B /* ALCameraViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665AF1CDB829600FD57C9 /* ALCameraViewController.framework */; };
 		579F35C41D06B38F00C4A77B /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B01CDB829600FD57C9 /* Async.framework */; };
 		579F35C51D06B38F00C4A77B /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B11CDB829600FD57C9 /* CryptoSwift.framework */; };
-		579F35C61D06B38F00C4A77B /* DynamicBlurView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B21CDB829600FD57C9 /* DynamicBlurView.framework */; };
 		579F35C71D06B38F00C4A77B /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B31CDB829600FD57C9 /* JWT.framework */; };
 		579F35C81D06B38F00C4A77B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B41CDB829600FD57C9 /* Kingfisher.framework */; };
-		579F35C91D06B38F00C4A77B /* PresenterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B51CDB829600FD57C9 /* PresenterKit.framework */; };
-		579F35CB1D06B38F00C4A77B /* Socket_IO_Client_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B71CDB829600FD57C9 /* Socket_IO_Client_Swift.framework */; };
 		579F35CC1D06B38F00C4A77B /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B81CDB829600FD57C9 /* SwiftHTTP.framework */; };
 		579F35CD1D06B38F00C4A77B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665B91CDB829600FD57C9 /* SwiftyJSON.framework */; };
-		579F35D11D06B38F00C4A77B /* SwipyCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F35CF1D06B38F00C4A77B /* SwipyCell.framework */; };
 		57A3C6D41CDB7C2200997E41 /* privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 57A3C6D31CDB7C2200997E41 /* privacy.html */; };
 		57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */; };
 		57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */; };
@@ -159,6 +154,7 @@
 /* Begin PBXFileReference section */
 		0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChampySwift.entitlements; sourceTree = "<group>"; };
 		1BC8E7847E0C24063DB5706C /* Pods-ChampySwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,7 +256,7 @@
 		57D29E891D00754F0016CBF5 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		57D29E8B1D0076FF0016CBF5 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		57D363611CFDD3E100152258 /* TimedOutWakeUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedOutWakeUp.swift; sourceTree = "<group>"; };
-		57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuelViewController.swift; sourceTree = "<group>"; };
+		57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DuelViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		57DA51C51D006A7800AAA2B8 /* InProgressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InProgressTableViewController.swift; sourceTree = "<group>"; };
 		57DA51C71D006A8700AAA2B8 /* WinsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinsTableViewController.swift; sourceTree = "<group>"; };
 		57DA51C91D006A9A00AAA2B8 /* FailedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedTableViewController.swift; sourceTree = "<group>"; };
@@ -311,19 +307,14 @@
 				5704A30C1D4246F6007CAAA4 /* AVFoundation.framework in Frameworks */,
 				5704A30D1D4246F6007CAAA4 /* CoreFoundation.framework in Frameworks */,
 				5704A30E1D4246F6007CAAA4 /* Foundation.framework in Frameworks */,
-				579F35D11D06B38F00C4A77B /* SwipyCell.framework in Frameworks */,
 				579F35C21D06B38F00C4A77B /* Alamofire.framework in Frameworks */,
 				57DBA4941D36677300DD0035 /* FBSDKShareKit.framework in Frameworks */,
 				57DBA4901D36677300DD0035 /* FBSDKLoginKit.framework in Frameworks */,
-				579F35C31D06B38F00C4A77B /* ALCameraViewController.framework in Frameworks */,
 				57DBA4921D36677300DD0035 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				579F35C41D06B38F00C4A77B /* Async.framework in Frameworks */,
 				579F35C51D06B38F00C4A77B /* CryptoSwift.framework in Frameworks */,
-				579F35C61D06B38F00C4A77B /* DynamicBlurView.framework in Frameworks */,
 				579F35C71D06B38F00C4A77B /* JWT.framework in Frameworks */,
 				579F35C81D06B38F00C4A77B /* Kingfisher.framework in Frameworks */,
-				579F35C91D06B38F00C4A77B /* PresenterKit.framework in Frameworks */,
-				579F35CB1D06B38F00C4A77B /* Socket_IO_Client_Swift.framework in Frameworks */,
 				579F35CC1D06B38F00C4A77B /* SwiftHTTP.framework in Frameworks */,
 				57DBA48E1D36677300DD0035 /* FBSDKCoreKit.framework in Frameworks */,
 				579F35CD1D06B38F00C4A77B /* SwiftyJSON.framework in Frameworks */,
@@ -529,6 +520,7 @@
 		579C18581CCB595700D6EEA9 /* ChampySwift */ = {
 			isa = PBXGroup;
 			children = (
+				0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */,
 				577D5F8D1CCE27BE0002F0E0 /* app */,
 				577D5F8C1CCE22A50002F0E0 /* Supporting Files */,
 				579C18601CCB595700D6EEA9 /* ChampySwift.xcdatamodeld */,
@@ -830,6 +822,7 @@
 					579C18551CCB595700D6EEA9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = EWU83H92V3;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -841,10 +834,12 @@
 					};
 					579C18771CCB595800D6EEA9 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = 579C18551CCB595700D6EEA9;
 					};
 					57DBA4AA1D366E7D00DD0035 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 579C18551CCB595700D6EEA9;
 					};
 				};
@@ -1249,6 +1244,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1277,6 +1273,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1311,6 +1308,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ChampySwift;
 			};
 			name = Debug;
@@ -1328,6 +1326,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ChampySwift;
 			};
 			name = Release;
@@ -1345,6 +1344,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AzinecLLC.ChampySwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChampySwift.app/ChampySwift";
 			};
 			name = Debug;
@@ -1362,6 +1362,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AzinecLLC.ChampySwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChampySwift.app/ChampySwift";
 			};
 			name = Release;

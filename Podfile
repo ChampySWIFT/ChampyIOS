@@ -12,6 +12,11 @@ target 'ChampySwift' do
   pod 'JSONWebToken' # swift 3
   pod 'Kingfisher', '~> 3.0' # swift 3
   pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  #pod 'FacebookCore'
+  #pod 'FacebookLogin'
+  #pod 'FacebookShare'
 end
 
 target 'ChampySwiftUITests' do

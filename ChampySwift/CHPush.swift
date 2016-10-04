@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
+import Firebase
 class CHPush: NSObject {
-  let center = NSNotificationCenter.defaultCenter()
-  var CurrentUser:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+  let center = NotificationCenter.default
+  var CurrentUser:UserDefaults = UserDefaults.standard
   
   //openImagePicker - open image picker from main view
   
-  func sendPushToUser(userId:String, message:String, options:String, type:String = "usual", requestId:String = "nill")  {
+  func sendPushToUser(_ userId:String, message:String, options:String, type:String = "usual", requestId:String = "nill")  {
     let data = [
       "alert" : message,
       "badge" : "Increment",
@@ -32,8 +32,8 @@ class CHPush: NSObject {
     #if (arch(i386) || arch(x86_64)) && (os(iOS) || os(watchOS) || os(tvOS))
       return
     #endif
-    let deviceToken:NSData = CurrentUser.dataForKey("deviceToken")!
-    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
+    let deviceToken:Data = CurrentUser.data(forKey: "deviceToken")!
+    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
     
     guard let contents = FIRInstanceID.instanceID().token()
       else {
@@ -42,10 +42,10 @@ class CHPush: NSObject {
     
     let firtoken = FIRInstanceID.instanceID().token()!
     
-    let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+    let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
     var token = ""
     
-    for i in 0..<deviceToken.length {
+    for i in 0..<deviceToken.count {
       token += String(format: "%02.2hhx", arguments: [tokenChars[i]])
     }
     
@@ -71,27 +71,27 @@ class CHPush: NSObject {
     }
   }
   
-  func updateImageOnSettings(image:UIImage) {
+  func updateImageOnSettings(_ image:UIImage) {
     let name:String = "updateImage"
     let userObject = [
       "image": image
     ]
     
-    center.postNotificationName(name, object: nil, userInfo: userObject)
+    center.post(name: Notification.Name(rawValue: name), object: nil, userInfo: userObject)
     
   }
   
-  func localPush(name:String, object:AnyObject) {
-    center.postNotificationName(name, object: object)
+  func localPush(_ name:String, object:AnyObject) {
+    center.post(name: Notification.Name(rawValue: name), object: object)
   }
   
-  func alertPush(message:String, type:String) {
+  func alertPush(_ message:String, type:String) {
     let object:[String:String] = [
       "type": type,
       "message": message
     ]
     
-    center.postNotificationName("alert", object: nil, userInfo: object)
+    center.post(name: Notification.Name(rawValue: "alert"), object: nil, userInfo: object)
   }
   
 }

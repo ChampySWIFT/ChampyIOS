@@ -23,8 +23,8 @@ class WakeUpInfoViewController: UIViewController {
     
   @IBOutlet weak var dismissViewController: UIButton!
 
-  @IBAction func dismissAction(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: nil)
+  @IBAction func dismissAction(_ sender: AnyObject) {
+    self.dismiss(animated: true, completion: nil)
   }
     /*
     // MARK: - Navigation

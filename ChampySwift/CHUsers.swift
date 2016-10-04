@@ -10,7 +10,6 @@ import UIKit
 import SwiftyJSON
 
 class CHUsers: NSObject {
-  let ref = FIRDatabase.database().reference()
   
   /**
    Return's photo url of the selected user
@@ -19,7 +18,7 @@ class CHUsers: NSObject {
    
    @return photo url of some user
    */
-  func getPhotoUrlString(userId:String) -> String {
+  func getPhotoUrlString(_ userId:String) -> String {
     return "http://46.101.213.24:3007/photos/users/\(userId)/medium.png"
   }
   
@@ -30,7 +29,7 @@ class CHUsers: NSObject {
    
    @return photo url of some user
    */
-  func getPhotoUrlStringForBackgroung(userId:String) -> String {
+  func getPhotoUrlStringForBackgroung(_ userId:String) -> String {
     return "http://46.101.213.24:3007/photos/users/\(userId)/small.png"
   }
   
@@ -44,7 +43,7 @@ class CHUsers: NSObject {
    
    @return null
    */
-  func localCreateUser(facebookId:String, objectId:String, name:String, userObject:JSON) {
+  func localCreateUser(_ facebookId:String, objectId:String, name:String, userObject:JSON) {
     CHSession().createSessionForTheUserWithFacebookId(facebookId, name: name, andObjectId: objectId, userObject: userObject )
   }
   
@@ -54,7 +53,7 @@ class CHUsers: NSObject {
    
    @return users json array
    */
-  func isValidUser(item:JSON) -> Bool {
+  func isValidUser(_ item:JSON) -> Bool {
     guard item["_id"].stringValue != CHSession().currentUserId else {
       return false
     }
@@ -94,24 +93,7 @@ class CHUsers: NSObject {
     return friends
   }
   
-  func getUsersFirebase(completitionHandler:(_ result:[JSON])->()) {
-    
-    
-    
-    ref.child("users/userList").observeEventType(.Value, withBlock: { (snapshot) in
-      var friends:[JSON] = []
-      let json = JSON(snapshot.value!)
-      for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
-        if self.isFacebookFriend(item["facebookId"].stringValue) {
-          if self.isValidUser(item) {
-            friends.append(item)
-          }
-        }
-      }
-      completitionHandler(result: friends)
-    })
-    
-  }
+ 
   
   /**
    Get one user from local database
@@ -120,7 +102,7 @@ class CHUsers: NSObject {
    
    @return user json object
    */
-  func getUserById(userId:String) -> JSON {
+  func getUserById(_ userId:String) -> JSON {
     for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
       guard item["_id"].stringValue == userId else {
         continue
@@ -140,7 +122,7 @@ class CHUsers: NSObject {
    
    @return array of friends
    */
-  func getFriendsByStatus(userId:String, status:Bool) -> [JSON] {
+  func getFriendsByStatus(_ userId:String, status:Bool) -> [JSON] {
     var friends:[JSON] = []
     
     for (_, item): (String, JSON) in CHSession().getJSONByKey("friendsList(\(userId))") {
@@ -167,9 +149,9 @@ class CHUsers: NSObject {
  
  */
   
-  func isFacebookFriend(facebookId:String) -> Bool {
+  func isFacebookFriend(_ facebookId:String) -> Bool {
     let facebookFriends = CHSession().getFacebookFriends()
-    if facebookFriends.rangeOfString(facebookId) != nil {
+    if facebookFriends.range(of: facebookId) != nil {
       return true
     }
     
@@ -197,7 +179,7 @@ class CHUsers: NSObject {
    
    @return array of pending friends
    */
-  func getPendingFriend(userId:String) -> [JSON] {
+  func getPendingFriend(_ userId:String) -> [JSON] {
     return getFriendsByStatus(userId, status: false)
   }
   
@@ -208,7 +190,7 @@ class CHUsers: NSObject {
    
    @return array of pending friends
    */
-  func getFriends(userId:String) -> [JSON] {
+  func getFriends(_ userId:String) -> [JSON] {
     return getFriendsByStatus(userId, status: true)
   }
   
@@ -219,7 +201,7 @@ class CHUsers: NSObject {
    
    @return the status of selected friendship [Outgoing, Incoming, Other, Friends]
    */
-  func getStatus(jsonItem:JSON) -> String {
+  func getStatus(_ jsonItem:JSON) -> String {
     let userId: String = jsonItem["_id"].stringValue
     var result = "Other"
     for (_, item): (String, JSON) in CHSession().getJSONByKey("friendsList(\(CHSession().currentUserId))") {

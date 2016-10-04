@@ -33,26 +33,28 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     super.viewDidLoad()
     
     datePicker = UIDatePicker() // Although you probably have an IBOutlet
-    datePicker.datePickerMode = UIDatePickerMode.Time
-    datePicker.backgroundColor = UIColor.lightGrayColor()
+    datePicker.datePickerMode = UIDatePickerMode.time
+    datePicker.backgroundColor = UIColor.lightGray
     datePicker.tintColor = CHUIElements().APPColors["navigationBar"]
     
     let curredntDateInSec = CHUIElements().getCurretnTime()
     
-    let calendar = NSCalendar.currentCalendar()
-    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: NSDate(timeIntervalSince1970: Double(curredntDateInSec)))
+    let calendar = Calendar.current
+    let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: Date(timeIntervalSince1970: Double(curredntDateInSec)))
     let hour = comp.hour
     let minute = comp.minute
     
-    let newTime = (curredntDateInSec - (hour * 60 * 60) - (minute * 60) - comp.second)  + (30 * 60 * 60)
+    let hoursInSec = (hour! * 60 * 60)
+    let minInSec = (minute! * 60)
+    let newTime = (curredntDateInSec - hoursInSec - minInSec - comp.second!)  + 108000 //30*60*60
     self.dateInt = newTime
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
-    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter.timeStyle = DateFormatter.Style.short
     dateFormatter.dateFormat = "hh:mm a"
     
-    let date = NSDate(timeIntervalSince1970: Double(newTime))
-    let strDate = dateFormatter.stringFromDate(date)
+    let date = Date(timeIntervalSince1970: Double(newTime))
+    let strDate = dateFormatter.string(from: date)
     
     
     self.timeField.text = strDate
@@ -63,11 +65,11 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
 //    datePicker.addTarget(self, action: #selector(WakeUpViewController.valueChangedInDateField(_:)), forControlEvents: .ValueChanged)
     
     
-    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
     
-    let toolBar                             = UIToolbar(frame: CGRectMake(0,0,self.view.frame.size.width,44))
-    toolBar.barStyle                        = UIBarStyle.Default
-    let barButtonDone                       = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(WakeUpViewController.valueChangedInDateField))
+    let toolBar                             = UIToolbar(frame: CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: 44))
+    toolBar.barStyle                        = UIBarStyle.default
+    let barButtonDone                       = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(WakeUpViewController.valueChangedInDateField))
     barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
     toolBar.items                           = [spaceButton, barButtonDone]
 //    self.timeField.inputAccessoryView = toolBar
@@ -81,22 +83,22 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     // Do any additional setup after loading the view.
   }
   
-  func valueChangedInDateField(sender:AnyObject) {
-    let dateFormatter = NSDateFormatter()
+  func valueChangedInDateField(_ sender:AnyObject) {
+    let dateFormatter = DateFormatter()
     
-    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter.timeStyle = DateFormatter.Style.short
     dateFormatter.dateFormat = "hh:mm a"
-    let strDate = dateFormatter.stringFromDate(datePicker.date)
+    let strDate = dateFormatter.string(from: datePicker.date)
     
-    let calendar = NSCalendar.currentCalendar()
-    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: datePicker.date)
+    let calendar = Calendar.current
+    let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: datePicker.date)
     let hour = comp.hour
     let minute = comp.minute
     
     self.timeField.text = strDate
     self.timeField.resignFirstResponder()
     
-    self.dateInt = Int(datePicker.date.timeIntervalSince1970) - comp.second
+    self.dateInt = Int(datePicker.date.timeIntervalSince1970) - comp.second!
     
     if dateInt <= CHUIElements().getCurretnTime() {
       dateInt = dateInt + CHSettings().daysToSec(1)
@@ -104,9 +106,9 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     
   }
   
-  @IBAction func closeView(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true) { 
-      CHPush().localPush("refreshIcarousel", object: [])
+  @IBAction func closeView(_ sender: AnyObject) {
+    self.dismiss(animated: true) { 
+      CHPush().localPush("refreshIcarousel", object: self)
     }
   }
   
@@ -116,9 +118,9 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   }
   
   
-  @IBAction func plusOneDayAction(sender: AnyObject) {
-    var days:String = (dayLabel.text?.stringByReplacingOccurrencesOfString(" Days", withString: ""))!
-    days = (days.stringByReplacingOccurrencesOfString(" Day", withString: ""))
+  @IBAction func plusOneDayAction(_ sender: AnyObject) {
+    var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
+    days = (days.replacingOccurrences(of: " Day", with: ""))
     
     let currentValue:Int = Int(days)!
     if currentValue == 100 {
@@ -136,9 +138,9 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
    dayLabel.adjustsFontSizeToFitWidth = true
   }
   
-  @IBAction func minusOneDayAction(sender: AnyObject) {
-    var days:String = (dayLabel.text?.stringByReplacingOccurrencesOfString(" Days", withString: ""))!
-    days = (days.stringByReplacingOccurrencesOfString(" Day", withString: ""))
+  @IBAction func minusOneDayAction(_ sender: AnyObject) {
+    var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
+    days = (days.replacingOccurrences(of: " Day", with: ""))
     
     let currentValue:Int = Int(days)!
     if currentValue == 1 {
@@ -156,10 +158,10 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     
   }
   
-  @IBAction func plusTimeAction(sender: AnyObject) {
+  @IBAction func plusTimeAction(_ sender: AnyObject) {
   }
   
-  @IBAction func minusTimeAction(sender: AnyObject) {
+  @IBAction func minusTimeAction(_ sender: AnyObject) {
     
   }
   
@@ -169,8 +171,8 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   
   
   func sendAction() {
-    var days:String = (dayLabel.text?.stringByReplacingOccurrencesOfString(" Days", withString: ""))!
-    days = (days.stringByReplacingOccurrencesOfString(" Day", withString: ""))
+    var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
+    days = (days.replacingOccurrences(of: " Day", with: ""))
     
     let currentValue:Int = Int(days)!
     
@@ -200,7 +202,7 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   }
   
   
-  func finisher(result:Bool) {
+  func finisher(_ result:Bool) {
     if result {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
@@ -216,27 +218,27 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     }
   }
   
-  @IBAction func sendtoFriendAction(sender:AnyObject) {
+  @IBAction func sendtoFriendAction(_ sender:AnyObject) {
     self.open()
   }
   
-  @IBAction func confirm(sender:AnyObject) {
+  @IBAction func confirm(_ sender:AnyObject) {
     self.sendAction()
     self.close()
   }
   
-  @IBAction func decline(sender:AnyObject) {
+  @IBAction func decline(_ sender:AnyObject) {
     self.close()
   }
   
   func open() {
-    self.addButton.hidden = true
-    self.descView.hidden = false
+    self.addButton.isHidden = true
+    self.descView.isHidden = false
   }
   
   func close() {
-    self.addButton.hidden = false
-    self.descView.hidden = true
+    self.addButton.isHidden = false
+    self.descView.isHidden = true
   }
   
   func backtoMain() {
@@ -244,9 +246,9 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
 //      self.performSegueWithIdentifier("backtoMain", sender: nil)
 //
 //      self.showModal()
-      self.dismissViewControllerAnimated(true) {
-        CHPush().localPush("wakeUpCreated", object: [])
-        CHPush().localPush("refreshIcarousel", object: [])
+      self.dismiss(animated: true) {
+        CHPush().localPush("wakeUpCreated", object: self)
+        CHPush().localPush("refreshIcarousel", object: self)
         
       }
     }
@@ -254,12 +256,12 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   
   func showModal() {
     let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-    let WakeUpInfoViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("WakeUpInfoViewController")
-    WakeUpInfoViewController.modalPresentationStyle = .OverCurrentContext
-    presentViewController(WakeUpInfoViewController, animated: true, completion: nil)
+    let WakeUpInfoViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "WakeUpInfoViewController")
+    WakeUpInfoViewController.modalPresentationStyle = .overCurrentContext
+    present(WakeUpInfoViewController, animated: true, completion: nil)
   }
   
-  func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
     Async.main {
       let banner = CHBanners(withTarget: self.view, andType: type)
       banner.showBannerForViewControllerAnimated(true, message: message)

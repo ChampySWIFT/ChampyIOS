@@ -25,20 +25,20 @@ class FriendsTableViewController: UITableViewController {
   var selectedRow:Int         = -1
   var friendsContent:[UIView] = []
   var heights:[CGFloat]       = []
-  let center = NSNotificationCenter.defaultCenter()
+  let center = NotificationCenter.default
   var inviteFriendsContent:InviteFriendsView! = nil
   var userCount:Int = 0
   
   
-  override func viewDidDisappear(animated: Bool) {
-    center.removeObserver(self, name: "friendsReload", object: nil)
-    center.removeObserver(self, name: "openDuelView", object: nil)
+  override func viewDidDisappear(_ animated: Bool) {
+    center.removeObserver(self, name: NSNotification.Name(rawValue: "friendsReload"), object: nil)
+    center.removeObserver(self, name: NSNotification.Name(rawValue: "openDuelView"), object: nil)
     
   }
   
-  override func viewDidAppear(animated: Bool) {
-    center.addObserver(self, selector: #selector(FriendsTableViewController.refreshTableViewAction(_:)), name: "friendsReload", object: nil)
-    center.addObserver(self, selector: #selector(FriendsTableViewController.openDuelView), name: "openDuelView", object: nil)
+  override func viewDidAppear(_ animated: Bool) {
+    center.addObserver(self, selector: #selector(FriendsTableViewController.refreshTableViewAction(_:)), name: NSNotification.Name(rawValue: "friendsReload"), object: nil)
+    center.addObserver(self, selector: #selector(FriendsTableViewController.openDuelView), name: NSNotification.Name(rawValue: "openDuelView"), object: nil)
     self.refreshTableViewAction(self.refreshTableView)
   }
   
@@ -53,12 +53,12 @@ class FriendsTableViewController: UITableViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     // #warning Incomplete implementation, return the number of sections
     return 1
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
     
     if friendsContent.count == 0 {
@@ -67,43 +67,43 @@ class FriendsTableViewController: UITableViewController {
     return friendsContent.count
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if friendsContent.count == 0 {
       return self.view.frame.size.height
     }
     
-    if indexPath.row == self.selectedRow {
+    if (indexPath as NSIndexPath).row == self.selectedRow {
       heights.append(220.0)
       return 220
     } else {
-      let content = friendsContent[indexPath.row] as! FriendCell
+      let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
       content.close()
       heights.append(66)
       return 66
     }
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var identifier = "first"
     
     if friendsContent.count > 0 {
-      identifier = self.identifiers[indexPath.row]
+      identifier = self.identifiers[(indexPath as NSIndexPath).row]
     }
     
-    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)")
+    var cell = tableView.dequeueReusableCell(withIdentifier: "CELL\(identifier)")
     
     cell = nil
     autoreleasepool {
       if cell == nil {
-        cell                 = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL\(identifier)")
-        cell?.accessoryType  = .None
-        cell?.selectionStyle = UITableViewCellSelectionStyle.None
+        cell                 = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "CELL\(identifier)")
+        cell?.accessoryType  = .none
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         
         
         if friendsContent.count == 0 {
           inviteFriendsContent.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
           cell?.addSubview(inviteFriendsContent)
-          cell!.backgroundColor = UIColor.clearColor()
+          cell!.backgroundColor = UIColor.clear
         } else {
           //          let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
           //          let friend = CHUsers().getFriends(CHSession().currentUserId)[indexPath.row]
@@ -113,30 +113,30 @@ class FriendsTableViewController: UITableViewController {
           //          }
           //          content.setUp(object)
           //          ////print(indexPath.row)
-          let content = friendsContent[indexPath.row] as! FriendCell
+          let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
           cell?.addSubview(content)
-          cell!.backgroundColor = UIColor.clearColor()
+          cell!.backgroundColor = UIColor.clear
         }
       }
     }
     return cell!
   }
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if self.friendsContent.count == 0 {
       return
     }
     if tap {
       disableTapForASec()
       tableView.beginUpdates()
-      if indexPath.row == selectedRow {
-        let content = friendsContent[indexPath.row] as! FriendCell
+      if (indexPath as NSIndexPath).row == selectedRow {
+        let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
         content.close()
         selectedRow = -1
       } else {
-        let content = friendsContent[indexPath.row] as! FriendCell
+        let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
         content.open()
-        self.selectedRow = indexPath.row
+        self.selectedRow = (indexPath as NSIndexPath).row
       }
       clearArrays()
       //    tableView.reloadData()
@@ -145,7 +145,7 @@ class FriendsTableViewController: UITableViewController {
   }
   
   func openDuelView() {
-    self.navigationController?.performSegueWithIdentifier("showDuelViewController", sender: self)
+    self.navigationController?.performSegue(withIdentifier: "showDuelViewController", sender: self)
   }
   
   func disableTapForASec() {
@@ -155,8 +155,8 @@ class FriendsTableViewController: UITableViewController {
     }
   }
   
-  func setTimeout(delay:NSTimeInterval, block:()->Void) -> NSTimer {
-    return NSTimer.scheduledTimerWithTimeInterval(delay, target: NSBlockOperation(block: block), selector: "main", userInfo: nil, repeats: false)
+  func setTimeout(_ delay:TimeInterval, block:@escaping ()->Void) -> Timer {
+    return Timer.scheduledTimer(timeInterval: delay, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
   }
   
   func destroyAll() {
@@ -180,7 +180,7 @@ class FriendsTableViewController: UITableViewController {
         object = friend["friend"]
       }
       
-      content.setUp(object)
+      content.setUp(json: object)
       self.friendsContent.append(content)
       identifiers.append("\(friend["_id"].stringValue)")
     }
@@ -188,7 +188,7 @@ class FriendsTableViewController: UITableViewController {
     
     if friendsContent.count == 0 {
       let content = InviteFriendsView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.tableView.frame.size.height))
-      content.backgroundColor = UIColor.clearColor()
+      content.backgroundColor = UIColor.clear
       self.inviteFriendsContent = content
     } else {
       if self.inviteFriendsContent != nil {
@@ -200,19 +200,19 @@ class FriendsTableViewController: UITableViewController {
     
   }
   
-  func viewWithImageName(imageName: String) -> UIView {
+  func viewWithImageName(_ imageName: String) -> UIView {
     let image = UIImage(named: imageName)
     let imageView = UIImageView(image: image)
-    imageView.contentMode = .Center
+    imageView.contentMode = .center
     return imageView
   }
   
-  func viewWithLabel(text: String) -> UIView {
+  func viewWithLabel(_ text: String) -> UIView {
     let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
     label.text = text
     label.font = CHUIElements().font16
     label.numberOfLines = 3
-    label.lineBreakMode = .ByWordWrapping
+    label.lineBreakMode = .byWordWrapping
     label.textColor = CHUIElements().APPColors["Info"]
     return label
   }
@@ -224,7 +224,7 @@ class FriendsTableViewController: UITableViewController {
   
   @IBOutlet weak var refreshTableView: UIRefreshControl!
   
-  @IBAction func refreshTableViewAction(sender: AnyObject) {
+  @IBAction func refreshTableViewAction(_ sender: AnyObject) {
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")

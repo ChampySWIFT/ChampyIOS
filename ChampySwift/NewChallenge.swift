@@ -22,11 +22,11 @@ import Async
   
   var selectedTitle:String = ""
   var selectedDayCount:Int = 21
-  let notifCenter = NSNotificationCenter.defaultCenter()
+  let notifCenter = NotificationCenter.default
   
   
-  func setUp(object:JSON, empty:Bool = false){
-    notifCenter.addObserver(self, selector: #selector(NewChallenge.dismissKeyboard), name: "dismissKeyboard", object: nil)
+  func setUp(_ object:JSON, empty:Bool = false){
+    notifCenter.addObserver(self, selector: #selector(NewChallenge.dismissKeyboard), name: NSNotification.Name(rawValue: "dismissKeyboard"), object: nil)
     self.ConditionsTextField.text = ""
     self.daysTextField.text = "21 Days"
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewChallenge.dismissKeyboard))
@@ -45,10 +45,10 @@ import Async
       rewardLabel.text = "Reward +\(object["points"].stringValue) points"
       
      
-      ConditionsTextField.userInteractionEnabled = false
+      ConditionsTextField.isUserInteractionEnabled = false
       
-      self.plusOneDay.hidden = true
-      self.minusOneDay.hidden = true
+      self.plusOneDay.isHidden = true
+      self.minusOneDay.isHidden = true
       
       self.daysTextField.text = "\(Int(CHSettings().secToDays(object["duration"].intValue))) Days"
       
@@ -58,7 +58,7 @@ import Async
       
       ConditionsTextField.placeholder = "Type Your Challenge Name"
       ConditionsTextField.adjustsFontSizeToFitWidth = true
-      ConditionsTextField.userInteractionEnabled = true
+      ConditionsTextField.isUserInteractionEnabled = true
       rewardLabel.text = "Reward +10 points"
       
     }
@@ -71,15 +71,15 @@ import Async
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "NewChallenge", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -96,9 +96,9 @@ import Async
   @IBOutlet weak var plusOneDay: UIButton!
   @IBOutlet weak var minusOneDay: UIButton!
   
-  @IBAction func plusOneDayAction(sender: AnyObject) {
-    var days:String = (daysTextField.text?.stringByReplacingOccurrencesOfString(" Days", withString: ""))!
-    days = (days.stringByReplacingOccurrencesOfString(" Day", withString: ""))
+  @IBAction func plusOneDayAction(_ sender: AnyObject) {
+    var days:String = (daysTextField.text?.replacingOccurrences(of: " Days", with: ""))!
+    days = (days.replacingOccurrences(of: " Day", with: ""))
 
     let currentValue:Int = Int(days)!
     if currentValue == 100 {
@@ -117,9 +117,9 @@ import Async
 
   }
   
-  @IBAction func minusOneDayAction(sender: AnyObject) {
-    var days:String = (daysTextField.text?.stringByReplacingOccurrencesOfString(" Days", withString: ""))!
-    days = (days.stringByReplacingOccurrencesOfString(" Day", withString: ""))
+  @IBAction func minusOneDayAction(_ sender: AnyObject) {
+    var days:String = (daysTextField.text?.replacingOccurrences(of: " Days", with: ""))!
+    days = (days.replacingOccurrences(of: " Day", with: ""))
 
     let currentValue:Int = Int(days)!
     if currentValue == 1 {
@@ -139,24 +139,24 @@ import Async
   }
   
   
-  func textFieldDidBeginEditing(textField: UITextField) {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
     if textField == self.ConditionsTextField {
-      self.view.bringSubviewToFront(self.ConditionsTextField)
+      self.view.bringSubview(toFront: self.ConditionsTextField)
       var frame = self.view.superview?.superview!.superview!.superview!.frame
       frame!.origin.y = frame!.origin.y - 150
       
-      UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+      UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
         self.view.superview?.superview!.superview!.superview!.frame = frame!
         }, completion: { finished in
       })
     }
   }
   
-  func textFieldDidEndEditing(textField: UITextField) {
+  func textFieldDidEndEditing(_ textField: UITextField) {
     if textField == self.ConditionsTextField {
       var frame = self.view.superview?.superview!.superview!.superview!.frame
       frame!.origin.y = frame!.origin.y + 150
-      UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+      UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
         self.view.superview?.superview!.superview!.superview!.frame = frame!
         }, completion: { finished in
       })
@@ -165,13 +165,13 @@ import Async
   }
   
   func setUpToolbar() {
-    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    let spaceButton     = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
     
-    let toolBar                             = UIToolbar(frame: CGRectMake(0,-44,320,44))
-    toolBar.barStyle                        = UIBarStyle.Default
-    let barButtonDone                       = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: #selector(NewChallenge.Save))
+    let toolBar                             = UIToolbar(frame: CGRect(x: 0,y: -44,width: 320,height: 44))
+    toolBar.barStyle                        = UIBarStyle.default
+    let barButtonDone                       = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(NewChallenge.Save))
     barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
-    let barButtonCancel                     = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(NewChallenge.dismissKeyboard))
+    let barButtonCancel                     = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(NewChallenge.dismissKeyboard))
     barButtonCancel.tintColor = CHUIElements().APPColors["navigationBar"]
     toolBar.items                           = [barButtonCancel, spaceButton, barButtonDone]
     self.ConditionsTextField.inputAccessoryView = toolBar
@@ -182,8 +182,8 @@ import Async
     
     var enteredText:String = ConditionsTextField.text!
     enteredText = enteredText.condenseWhitespace()
-    enteredText = enteredText.stringByTrimmingCharactersInSet(
-      NSCharacterSet.whitespaceAndNewlineCharacterSet()
+    enteredText = enteredText.trimmingCharacters(
+      in: CharacterSet.whitespacesAndNewlines
     )
     
     
@@ -217,11 +217,11 @@ import Async
 //      CHPush().alertPush("Wrong name format", type: "Warning")
     }
     
-    var days:String = self.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
-    days = days.stringByReplacingOccurrencesOfString(" Day", withString: "")
+    var days:String = self.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+    days = days.replacingOccurrences(of: " Day", with: "")
     
     
-    var num = Int(days)
+    let num = Int(days)
     if num != nil {
       self.selectedDayCount = Int(days)!
     } else {
@@ -238,7 +238,7 @@ import Async
     self.view.endEditing(true)
   }
   
-  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
     return true
   }
@@ -258,7 +258,7 @@ import Async
     xibSetup()
   }
   
-  func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
     Async.main {
       let banner = CHBanners(withTarget: self.view, andType: type)
       banner.showBannerForViewControllerAnimated(true, message: message)

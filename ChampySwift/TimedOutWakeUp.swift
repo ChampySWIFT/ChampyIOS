@@ -27,15 +27,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "TimedOutWakeUp", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -51,16 +51,16 @@ import SwiftyJSON
     
   }
   
-  func setUp(json:JSON = nil){
+  func setUp(_ json:JSON = nil){
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
     
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]//Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
-    self.topBarBackground.bringSubviewToFront(wakeUpIcon)
-    self.topBarBackground.bringSubviewToFront(wakeUpLabel)
+    self.bringSubview(toFront: self.topBarBackground)
+    self.topBarBackground.bringSubview(toFront: wakeUpIcon)
+    self.topBarBackground.bringSubview(toFront: wakeUpLabel)
     
     if json != nil {
       self.objectChallenge = json

@@ -10,13 +10,13 @@ import UIKit
 import Async
 
 class FriendsViewController: UIViewController {
-  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   var table3 = AllFriendsTableViewController()
   var table2 = PendingFriendsController()
   var table1 = FriendsTableViewController()
   
-  let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+  let delegate = UIApplication.shared.delegate as! AppDelegate
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
   
@@ -32,8 +32,8 @@ class FriendsViewController: UIViewController {
       appDelegate.friendsViewController = self
     }
     CHImages().setUpBackground(background, frame: self.view.frame)
-    let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName)
-    segmentControl.setTitleTextAttributes(attr as [NSObject : AnyObject] , forState: .Normal)
+    let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
+    segmentControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
     
     Async.background{
       if IJReachability.isConnectedToNetwork()  {
@@ -46,8 +46,10 @@ class FriendsViewController: UIViewController {
                 if result {
                   Async.main {
                     let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-                    self.presentViewController(roleControlViewController, type: .push, animated: false)
+                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+                    self.present(roleControlViewController, animated: false, completion: {
+                      
+                    })
                   }
                 }
               })
@@ -62,15 +64,15 @@ class FriendsViewController: UIViewController {
   }
   
   
-  @IBAction func shareAction(sender: AnyObject) {
+  @IBAction func shareAction(_ sender: AnyObject) {
     let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
-    if let myWebsite = NSURL(string: "https://itunes.apple.com/app/id1110777364") {
+    if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
       
-      let objectsToShare = [textToShare, myWebsite]
+      let objectsToShare = [textToShare, myWebsite] as [Any]
       let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
       
       activityVC.popoverPresentationController?.sourceView = sender as? UIView
-      self.presentViewController(activityVC, animated: true, completion: {
+      self.present(activityVC, animated: true, completion: {
         
       })
       
@@ -83,7 +85,7 @@ class FriendsViewController: UIViewController {
   }
   
   
-  @IBAction func changedSegmentControl(sender: AnyObject) {
+  @IBAction func changedSegmentControl(_ sender: AnyObject) {
     switch segmentControl.selectedSegmentIndex {
     case 1:
       let p =  CGPoint(x:self.view.frame.size.width,y:0)
@@ -109,12 +111,12 @@ class FriendsViewController: UIViewController {
   
   
   
-  func scrollViewDidScroll(scrollView: UIScrollView!) {
+  func scrollViewDidScroll(_ scrollView: UIScrollView!) {
     loadVisiblePages()
   }
   
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
@@ -122,21 +124,21 @@ class FriendsViewController: UIViewController {
     if appDelegate.table3 != nil {
       table3 = appDelegate.table3
     } else {
-      appDelegate.table3 = mainStoryboard.instantiateViewControllerWithIdentifier("AllFriendsTableViewController") as! AllFriendsTableViewController
+      appDelegate.table3 = mainStoryboard.instantiateViewController(withIdentifier: "AllFriendsTableViewController") as! AllFriendsTableViewController
       table3 = appDelegate.table3
     }
     
     if appDelegate.table2 != nil {
       table2 = appDelegate.table2
     } else {
-      appDelegate.table2 = mainStoryboard.instantiateViewControllerWithIdentifier("PendingFriendsController") as! PendingFriendsController
+      appDelegate.table2 = mainStoryboard.instantiateViewController(withIdentifier: "PendingFriendsController") as! PendingFriendsController
       table2 = appDelegate.table2
     }
     
     if appDelegate.table1 != nil {
       table1 = appDelegate.table1
     } else {
-      appDelegate.table1 = mainStoryboard.instantiateViewControllerWithIdentifier("FriendsTableViewController") as! FriendsTableViewController
+      appDelegate.table1 = mainStoryboard.instantiateViewController(withIdentifier: "FriendsTableViewController") as! FriendsTableViewController
       table1 = appDelegate.table1
     }
     
@@ -148,9 +150,9 @@ class FriendsViewController: UIViewController {
     self.addChildViewController(table1)
     self.addChildViewController(table2)
     self.addChildViewController(table3)
-    table1.didMoveToParentViewController(self)
-    table2.didMoveToParentViewController(self)
-    table3.didMoveToParentViewController(self)
+    table1.didMove(toParentViewController: self)
+    table2.didMove(toParentViewController: self)
+    table3.didMove(toParentViewController: self)
     contentScrollView.addSubview(table1.tableView)
     contentScrollView.addSubview(table2.tableView)
     contentScrollView.addSubview(table3.tableView)
@@ -158,20 +160,20 @@ class FriendsViewController: UIViewController {
     
     
     loadVisiblePages()
-    contentScrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+    contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     
     
   }
   
-  override func viewDidDisappear(animated: Bool) {
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: "inviteFriend", object: nil)
+  override func viewDidDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "inviteFriend"), object: nil)
   }
   
   func setUpFrames() {
 
     
     let pagesScrollViewSize = contentScrollView.frame.size
-    contentScrollView.contentSize  = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height - 88)
+    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height - 88)
     
     var firstFrame:CGRect  = table1.tableView.frame
     firstFrame.origin.x    = 0

@@ -12,9 +12,9 @@ import SwiftyJSON
 
 class CHImages: NSObject {
   
-  func setUpAvatar(imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
+  func setUpAvatar(_ imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
     
-    let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
+    let url = URL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
     let user = CHUsers().getUserById(CHSession().currentUserId)
     var cachename = "initialCache"
     if user["lastPhotoUpdated"].intValue != 0 {
@@ -22,16 +22,17 @@ class CHImages: NSObject {
     }
     let myCache = ImageCache(name: cachename)
     
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
       
-    }) { (image, error, cacheType, imageURL) in
+      }) { (image, error, cacheType, imageUrl) in
+        
     }
     
     
   }
   
-  func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
-    let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
+  func setImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
+    let url = URL(string: CHUsers().getPhotoUrlString(userId))
     var user:JSON! = nil
     if userId == CHSession().currentUserId {
       user = CHSession().currentUserObject
@@ -46,15 +47,18 @@ class CHImages: NSObject {
     }
     let myCache = ImageCache(name: cachename)
     
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "noImageIcon"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-    }) { (image, error, cacheType, imageURL) in }
     
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
+      
+    }
     
   }
   
-  func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
+  func setUpBackground(_ imageView:UIImageView, frame:CGRect = CGRect()) {
     imageView.layer.masksToBounds = true
-    let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
+    let url = URL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
     let userObject:JSON =  CHSession().currentUserObject
     
     var cachename = "initialCache"
@@ -64,16 +68,15 @@ class CHImages: NSObject {
     let myCache = ImageCache(name: cachename)
 
     
-    let optionInfo: KingfisherOptionsInfo = [
-      .TargetCache(myCache),
-      .DownloadPriority(1),
-      .Transition(ImageTransition.Fade(1))
-    ]
+//    let optionInfo: KingfisherOptionsInfo = [
+//      .targe(myCache),
+//      .DownloadPriority(1),
+//      .Transition(ImageTransition.Fade(1))
+//    ]
     
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: optionInfo, progressBlock: { (receivedSize, totalSize) in
-
-    }) { (image, error, cacheType, imageURL) in
-
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "MainBackground"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
       
     }
     
@@ -84,11 +87,11 @@ class CHImages: NSObject {
     gradient.opacity = 0.75
     
     
-    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
     let blurView = UIVisualEffectView(effect: blurEffect)
     blurView.frame   = frame
     blurView.frame = blurView.bounds
-    blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+    blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
     
     imageView.makeBlurImage(imageView)
     imageView.layer.addSublayer(gradient)
@@ -100,13 +103,13 @@ class CHImages: NSObject {
 
 extension UIImageView{
   
-  func makeBlurImage(targetImageView:UIImageView?) {
-    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+  func makeBlurImage(_ targetImageView:UIImageView?) {
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
     
     let blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.alpha = 0.7
     blurEffectView.frame = targetImageView!.bounds
-    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
     targetImageView?.addSubview(blurEffectView)
   }
   

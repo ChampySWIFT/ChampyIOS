@@ -13,58 +13,54 @@ class CHSettings: NSObject {
   let wakeUpIds: String  = "567d51c48322f85870fd931c"
   let selfImprovementsId: String = "567d51c48322f85870fd931a"
   
-  let dateFormatter = NSDateFormatter()
+  let dateFormatter = DateFormatter()
   
-  func clearViewArray(array:[UIView]) {
+  func clearViewArray(_ array:[UIView]) {
     for item in array {
       item.removeFromSuperview()
     }
   }
   
-  func daysToSec(days:Int) -> Int {
+  func daysToSec(_ days:Int) -> Int {
     return days * 24 * 60 * 60
   }
   
-  func secToDays(sec:Int) -> Int {
+  func secToDays(_ sec:Int) -> Int {
     return sec / 24 / 60 / 60
   }
   
-  func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+  func secondsToHoursMinutesSeconds (_ seconds : Int) -> (Int, Int, Int) {
     return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
   }
   
-  func stringToArray(stringObject:String)->[String]{
+  func stringToArray(_ stringObject:String)->[String]{
     var str = stringObject
-    str = str.substringWithRange(Range<String.Index>(start: str.startIndex.advancedBy(0), end: str.endIndex.advancedBy(0)))
-    let resultArray = str.componentsSeparatedByString(", ")
+    str = str.substring(with: (str.characters.index(str.startIndex, offsetBy: 0) ..< str.characters.index(str.endIndex, offsetBy: 0)))
+    let resultArray = str.components(separatedBy: ", ")
     return resultArray
   }
   
-  func getMidnightOfTheDay(dateInSec:Int) -> Int {
-    let date = NSDate(timeIntervalSince1970: Double(dateInSec))
-    let dateFormatter = NSDateFormatter()
-    let calendar = NSCalendar.currentCalendar()
-    let comp = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+  func getMidnightOfTheDay(_ dateInSec:Int) -> Int {
+    let date = Date(timeIntervalSince1970: Double(dateInSec))
+    let dateFormatter = DateFormatter()
+    let calendar = Calendar.current
+    let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: date)
     let hour = comp.hour
     let minute = comp.minute
     let sec = comp.second
     
-    print(dateInSec)
-    print(hour)
-    print(minute)
-    print(sec)
     
     
-    
-    return dateInSec - Int(hour * 60 * 60) - Int(minute * 60) - sec
+    let minuteMinSec = Int(minute! * 60) - sec!
+    return dateInSec - Int(hour! * 3600 ) - minuteMinSec
   }
   
-  func facebookFriendsStringToArray(stringObject:String)->[String]{
+  func facebookFriendsStringToArray(_ stringObject:String)->[String]{
     var fullName: String = stringObject
-    fullName = fullName.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-    fullName = fullName.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-    fullName = fullName.stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-    let fullNameArr = fullName.componentsSeparatedByString(", ")
+    fullName = fullName.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
+    fullName = fullName.replacingOccurrences(of: "[", with: "", options: NSString.CompareOptions.literal, range: nil)
+    fullName = fullName.replacingOccurrences(of: "]", with: "", options: NSString.CompareOptions.literal, range: nil)
+    let fullNameArr = fullName.components(separatedBy: ", ")
     return fullNameArr
     
 //    let str = str.substringWithRange(Range<String.Index>(start: str.startIndex.advancedBy(0), end: str.endIndex.advancedBy(0)))

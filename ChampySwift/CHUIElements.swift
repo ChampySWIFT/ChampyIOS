@@ -34,7 +34,7 @@ class CHUIElements: NSObject {
   }
   
   func getCurretnTime()->Int{
-    let dt:NSDate = NSDate()
+    let dt:Date = Date()
     return Int(dt.timeIntervalSince1970)
     
   }
@@ -42,9 +42,9 @@ class CHUIElements: NSObject {
   
   func playAudio() {
     Async.main{
-      let coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("out", ofType: "wav")!)
+      let coinSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "out", ofType: "wav")!)
       do{
-        let audioPlayer = try AVAudioPlayer(contentsOfURL:coinSound)
+        let audioPlayer = try AVAudioPlayer(contentsOf:coinSound as URL)
         audioPlayer.prepareToPlay()
         audioPlayer.play()
       }catch {
@@ -57,9 +57,9 @@ class CHUIElements: NSObject {
     
   }
   
-  func stringToJSON(jsonString:String) -> JSON {
+  func stringToJSON(_ jsonString:String) -> JSON {
     do {
-      if let data:NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false){
+      if let data:Data = jsonString.data(using: String.Encoding.utf8, allowLossyConversion: false){
         if jsonString != "error" {
           let jsonResult:JSON = JSON(data: data)
           return jsonResult
@@ -73,34 +73,35 @@ class CHUIElements: NSObject {
     return nil
   }
   
-  func initAndSetUpDatePicker(interval:Int) -> UIDatePicker {
+  func initAndSetUpDatePicker(_ interval:Int) -> UIDatePicker {
     let picker = UIDatePicker()
-    picker.datePickerMode = UIDatePickerMode.Time
-    picker.backgroundColor = UIColor.lightGrayColor()
+    picker.datePickerMode = UIDatePickerMode.time
+    picker.backgroundColor = UIColor.lightGray
     picker.tintColor = CHUIElements().APPColors["navigationBar"]
     picker.minuteInterval = interval
     
     return picker
   }
   
-  func setUpDailyReminderCredentials(var status:Bool, var switcher:UISwitch, picker:UIView, label:UILabel) {
-    if CHSession().CurrentUser.objectForKey("isHiddenDN") != nil {
-      status = CHSession().CurrentUser.boolForKey("isHiddenDN")
+  func setUpDailyReminderCredentials(_ status:Bool, switcher:UISwitch, picker:UIView, label:UILabel) {
+    var status = status, switcher = switcher
+    if CHSession().CurrentUser.object(forKey: "isHiddenDN") != nil {
+      status = CHSession().CurrentUser.bool(forKey: "isHiddenDN")
     } else {
       status = true
-      CHSession().CurrentUser.setBool(true, forKey: "isHiddenDN")
+      CHSession().CurrentUser.set(true, forKey: "isHiddenDN")
     }
     
-    switcher.on = status
-    picker.hidden  = !status
-    label.hidden = status
+    switcher.isOn = status
+    picker.isHidden  = !status
+    label.isHidden = status
   }
 }
 
 
 
 extension UIApplication {
-  class func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+  class func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
     if let nav = base as? UINavigationController {
       return topViewController(nav.visibleViewController)
     }
@@ -120,9 +121,9 @@ extension String {
   //  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
   func isName() -> Bool {
     let regex = try! NSRegularExpression(pattern: "[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
-                                         options: [.CaseInsensitive])
+                                         options: [.caseInsensitive])
     
-    return regex.firstMatchInString(self.lowercaseString, options:[],
+    return regex.firstMatch(in: self.lowercased(), options:[],
                                     range: NSMakeRange(0, utf16.count)) != nil
   }
   
@@ -130,32 +131,32 @@ extension String {
   func isDayNumber() -> Bool {
     //    ^[0-9]{1,3}$
     let regex = try! NSRegularExpression(pattern: "^[0-9]{1,3}$",
-                                         options: [.CaseInsensitive])
+                                         options: [.caseInsensitive])
     
-    return regex.firstMatchInString(self.lowercaseString, options:[],
+    return regex.firstMatch(in: self.lowercased(), options:[],
                                     range: NSMakeRange(0, utf16.count)) != nil
   }
   
   func isValidChallengeName() -> Bool {
     //  [^,.'-]+
-    let regex = try! NSRegularExpression(pattern: "^[^,.'-]+", options: [.CaseInsensitive])
+    let regex = try! NSRegularExpression(pattern: "^[^,.'-]+", options: [.caseInsensitive])
     
-    return regex.firstMatchInString(self.lowercaseString, options:[],
+    return regex.firstMatch(in: self.lowercased(), options:[],
                                     range: NSMakeRange(0, utf16.count)) != nil
   }
   
   func isValidConditions() -> Bool {
     //    ^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$
     let regex = try! NSRegularExpression(pattern: "^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$",
-                                         options: [.CaseInsensitive])
+                                         options: [.caseInsensitive])
     
-    return regex.firstMatchInString(self.lowercaseString, options:[],
+    return regex.firstMatch(in: self.lowercased(), options:[],
                                     range: NSMakeRange(0, utf16.count)) != nil
   }
   
   func condenseWhitespace() -> String {
-    let components = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    return components.filter { !$0.isEmpty }.joinWithSeparator(" ")
+    let components = self.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+    return components.filter { !$0.isEmpty }.joined(separator: " ")
   }
   
 }

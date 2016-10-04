@@ -54,15 +54,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "HistoryCell", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -78,7 +78,7 @@ import SwiftyJSON
     
   }
   
-  func setUp(json:JSON = nil){
+  func setUp(_ json:JSON = nil){
     if json != nil {
       wasOpened = false
       self.myName.adjustsFontSizeToFitWidth = true
@@ -206,7 +206,7 @@ import SwiftyJSON
   }
   
   func showNameForNonDuel() {
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.myNameNonDuel.layer.opacity = 1.0
       
       }, completion: { finished in
@@ -215,7 +215,7 @@ import SwiftyJSON
   }
   
   func hideNameForNonDuel() {
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.myNameNonDuel.layer.opacity = 0.0
       
       }, completion: { finished in
@@ -230,7 +230,7 @@ import SwiftyJSON
     frame.origin.y = 60.0
     
     
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.challengeIcon.frame = frame
       }, completion: { finished in
         
@@ -238,7 +238,7 @@ import SwiftyJSON
   }
   
   func moveAvatarFromAbsoluteCenterToInitialPosition() {
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.challengeIcon.frame = self.initialIcoFrame
       }, completion: { finished in
         
@@ -247,7 +247,7 @@ import SwiftyJSON
   
   
   func showNames() {
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.partnerName.layer.opacity = 1.0
       self.myName.layer.opacity = 1.0
       }, completion: { finished in
@@ -266,7 +266,7 @@ import SwiftyJSON
     var frame = self.vsLabel.frame
     frame.origin.y =  80
     
-    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
       self.vsLabel.frame = frame
       self.vsLabel.layer.opacity = 1.0
       }, completion: { finished in
@@ -274,7 +274,7 @@ import SwiftyJSON
         
     })
     
-    UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveEaseOut, animations: {
       self.scoreView.layer.opacity = 0.0
       }, completion: { finished in
         //        self.vsLabel.frame = frame
@@ -283,7 +283,7 @@ import SwiftyJSON
   }
   
   func animateVsLabelUp() {
-    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
       self.vsLabel.frame = self.initialVsFrame
       self.vsLabel.layer.opacity = 0.0
       }, completion: { finished in
@@ -291,20 +291,20 @@ import SwiftyJSON
     })
     
     
-    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
       self.scoreView.layer.opacity = 1.0
       }, completion: { finished in
         
     })
   }
   
-  func movePhotoToCenterFromRight(image:UIImageView) {
+  func movePhotoToCenterFromRight(_ image:UIImageView) {
     
     var frame = self.avatar.frame
     frame.origin.y =  60
     frame.origin.x = self.view.frame.size.width - 50 - self.avatar.frame.size.width
     
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.avatar.frame = frame
       }, completion: { finished in
         
@@ -314,62 +314,62 @@ import SwiftyJSON
   }
   
   
-  func movePhotoToRightFromCenter(image:UIImageView, completitionHandler:(_ status:Bool) -> ()) {
+  func movePhotoToRightFromCenter(_ image:UIImageView, completitionHandler:@escaping (_ status:Bool) -> ()) {
     
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.avatar.frame  = self.initialAvaFrame
       }, completion: { finished in
         
-        completitionHandler(status: true)
+        completitionHandler(true)
     })
   }
   
-  func movePhotoToCenterFromLeft(image:UIImageView, completitionHandler:(_ status:Bool) -> ()) {
+  func movePhotoToCenterFromLeft(_ image:UIImageView, completitionHandler:@escaping (_ status:Bool) -> ()) {
     
     var frame = self.challengeIcon.frame
     frame.origin.y =  60
     frame.origin.x =  50
    
     
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
       self.challengeIcon.frame = frame
       }, completion: { finished in
-        completitionHandler(status: true)
+        completitionHandler(true)
     })
   }
   
   
   
   
-  func movePhotoToLeftFromCenter(image:UIImageView) {
+  func movePhotoToLeftFromCenter(_ image:UIImageView) {
     
-    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
        image.frame = self.initialIcoFrame
       }, completion: { finished in
     })
   }
   
   
-  func changeMotherHeight(height:CGFloat, completitionHandler:(_ status:Bool) -> ()) {
+  func changeMotherHeight(_ height:CGFloat, completitionHandler:@escaping (_ status:Bool) -> ()) {
     var frame = self.view.frame
     frame.size.height = height
     
-    UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
       self.view.frame = frame
       }, completion: { finished in
-        completitionHandler(status: true)
+        completitionHandler(true)
     })
     
     
   
   }
   
-  func animateDuel(height:CGFloat, completitionHandler:(_ status:Bool) -> ()) {
+  func animateDuel(_ height:CGFloat, completitionHandler:@escaping (_ status:Bool) -> ()) {
     var frame = self.view.frame
     frame.size.height = height
     
     
-    UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
       self.view.frame = frame
       }, completion: { finished in
         var frame1 = self.challengeIcon.frame
@@ -381,15 +381,15 @@ import SwiftyJSON
         frame2.origin.x = self.view.frame.size.width - 50 - self.avatar.frame.size.width
         
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
           self.challengeIcon.frame = frame1
           }, completion: { finished in
         })
         
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
           self.avatar.frame = frame2
           }, completion: { finished in
-            completitionHandler(status: true)
+            completitionHandler(true)
         })
         
         self.showNames()
@@ -496,7 +496,7 @@ import SwiftyJSON
   }
   
   
-  func addScrollBorder(frame:CGRect) {
+  func addScrollBorder(_ frame:CGRect) {
     var borderFrame = frame
     borderFrame.origin.x = borderFrame.origin.x - 2
     borderFrame.origin.y = borderFrame.origin.y - 2

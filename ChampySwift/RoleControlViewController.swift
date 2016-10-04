@@ -13,29 +13,29 @@ import SocketIO
 class RoleControlViewController: UIViewController {
   //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://192.168.1.104:3007")
   //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://46.101.213.24:3007")
-  var socket:SocketIOClient = SocketIOClient(socketURL: CHRequests().SocketUrl)
-  let appDelegate     = UIApplication.sharedApplication().delegate as! AppDelegate
+  var socket:SocketIOClient = SocketIOClient(socketURL: URL(string: CHRequests().SocketUrl)!)
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
     //    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
     self.navigationController?.setNavigationBarHidden(true, animated: false)
     super.viewDidLoad()
-    let value = UIInterfaceOrientation.Portrait.rawValue
-    UIDevice.currentDevice().setValue(value, forKey: "orientation")
-    let center = NSNotificationCenter.defaultCenter()
+    let value = UIInterfaceOrientation.portrait.rawValue
+    UIDevice.current.setValue(value, forKey: "orientation")
+    let center = NotificationCenter.default
     //    setUpBehavior
-    center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: "alert", object: nil)
-    center.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: "toMainView", object: nil)
-    center.addObserver(self, selector: #selector(RoleControlViewController.setUpBehavior), name: "setUpBehavior", object: nil)
+    center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: NSNotification.Name(rawValue: "alert"), object: nil)
+    center.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: NSNotification.Name(rawValue: "toMainView"), object: nil)
+    center.addObserver(self, selector: #selector(RoleControlViewController.setUpBehavior), name: NSNotification.Name(rawValue: "setUpBehavior"), object: nil)
     self.navigationItem.leftBarButtonItem = nil
     
     navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
     let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-    let authViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AuthViewController")
-    authViewController.modalPresentationStyle = .OverCurrentContext
+    let authViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "AuthViewController")
+    authViewController.modalPresentationStyle = .overCurrentContext
     
     if !CHSession().logined {
-      self.presentViewController(authViewController, animated: false, completion: {
+      self.present(authViewController, animated: false, completion: {
         
       })
     } else {
@@ -59,10 +59,14 @@ class RoleControlViewController: UIViewController {
   func toMainView() {
     Async.main {
       let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-      let mainViewController : MainViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+      let mainViewController : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
       self.appDelegate.mainViewController = mainViewController
-      self.presentViewController(self.appDelegate.mainViewController, type: .push, animated: false)
       
+      self.performSegue(withIdentifier: "showChallenges", sender: self)
+      
+//      self.present(self.appDelegate.mainViewController, animated: false, completion: {
+      
+//      })
     }
     
   }
@@ -119,7 +123,7 @@ class RoleControlViewController: UIViewController {
     self.socket.on("InProgressChallenge:new") { (data, act) -> Void in
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         CHPush().alertPush("You got a new Challenge", type: "Success")
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
       })
     }
     
@@ -128,7 +132,7 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("Your Friend Accepted your request", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
         
       })
@@ -138,7 +142,7 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("Failed a challenge", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
       })
     }
@@ -147,28 +151,30 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("Challenge Checked", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
       })
     }
     
     self.socket.on("InProgressChallenge:recipient:checked") { (data, act) in
-      if data[0]["recipientSuccess"] as! Int == 0 || data[0]["senderSuccess"] as! Int == 0 {
+      let res = data as! [[String:AnyObject]]
+      if res[0]["recipientSuccess"] as! Int == 0 || res[0]["senderSuccess"] as! Int == 0 {
         CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
           if result {
             CHPush().alertPush("Challenge Checked", type: "Success")
-            CHPush().localPush("refreshIcarousel", object: [])
+            CHPush().localPush("refreshIcarousel", object: self)
           }
         })
       }
     }
     
     self.socket.on("InProgressChallenge:sender:checked") { (data, act) in
-      if data[0]["recipientSuccess"] as! Int == 0 || data[0]["senderSuccess"] as! Int == 0 {
+      let res = data as! [[String:AnyObject]]
+      if res[0]["recipientSuccess"] as! Int == 0 || res[0]["senderSuccess"] as! Int == 0 {
         CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
           if result {
             CHPush().alertPush("Challenge Checked", type: "Success")
-            CHPush().localPush("refreshIcarousel", object: [])
+            CHPush().localPush("refreshIcarousel", object: self)
           }
         })
       } 
@@ -179,7 +185,7 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("Challenge Updated", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
       })
     }
@@ -188,7 +194,7 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("You Won", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
       })
     }
@@ -197,7 +203,7 @@ class RoleControlViewController: UIViewController {
       CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
         if result {
           CHPush().alertPush("You Won", type: "Success")
-          CHPush().localPush("refreshIcarousel", object: [])
+          CHPush().localPush("refreshIcarousel", object: self)
         }
       })
     }
@@ -209,13 +215,13 @@ class RoleControlViewController: UIViewController {
   }
   
   func sendReloadNotiFriends() {
-    CHPush().localPush("pendingReload", object: [])
-    CHPush().localPush("friendsReload", object: [])
-    CHPush().localPush("allReload", object: [])
+    CHPush().localPush("pendingReload", object: self)
+    CHPush().localPush("friendsReload", object: self)
+    CHPush().localPush("allReload", object: self)
   }
   
-  func alert(notif:NSNotification) {
-    let object = notif.userInfo as! [String:String]
+  func alert(_ notif:Notification) {
+    let object = (notif as NSNotification).userInfo as! [String:String]
     var type:CHBanners.CHBannerTypes! = nil
     
     let remoteType:String = object["type"]!
@@ -236,15 +242,15 @@ class RoleControlViewController: UIViewController {
     self.alertWithMessage(message!, type:type)
   }
   
-  func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
     Async.main {
       let banner = CHBanners(withTarget: (self.navigationController?.view)!, andType: type)
       banner.showBannerForViewControllerAnimated(true, message: message)
     }
   }
   
-  override func shouldAutorotate() -> Bool {
-    if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
+  override var shouldAutorotate : Bool {
+    if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
       return true
     }
     return false

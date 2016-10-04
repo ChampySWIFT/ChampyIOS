@@ -27,15 +27,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "SelfImprovementInProgress", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -48,15 +48,15 @@ import SwiftyJSON
     xibSetup()
   }
   
-  func setUp(object:JSON = nil){
+  func setUp(_ object:JSON = nil){
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]//Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
-    self.topBarBackground.bringSubviewToFront(selfImprovementUpIcon)
-    self.topBarBackground.bringSubviewToFront(selfImprovementLabel)
+    self.bringSubview(toFront: self.topBarBackground)
+    self.topBarBackground.bringSubview(toFront: selfImprovementUpIcon)
+    self.topBarBackground.bringSubview(toFront: selfImprovementLabel)
     self.doneForToday.adjustsFontSizeToFitWidth = true
     if object != nil {
       self.objectChallenge = object
@@ -73,47 +73,47 @@ import SwiftyJSON
     xibSetup()
   }
 
-  @IBAction func acceptAction(sender: AnyObject) {
+  @IBAction func acceptAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
     let button = sender as! UIButton
     
     tapped = true
-    button.hidden = self.tapped
+    button.isHidden = self.tapped
     
     CHRequests().checkChallenge(self.objectChallenge["_id"].stringValue) { (result, json) in
       if result {
         self.tapped = false
 //        button.hidden = self.tapped
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
 //        CHPush().alertPush("Confirmed", type: "Success")
       } else {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       }
     }
   }
   
-  @IBAction func failAction(sender: AnyObject) {
+  @IBAction func failAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
     
     let button = sender as! UIButton
     tapped = true
-    button.hidden = self.tapped
+    button.isHidden = self.tapped
     
     CHRequests().surrender(self.objectChallenge["_id"].stringValue) { (result, json) in
       if result {
         self.tapped = false
 //        button.hidden = self.tapped
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
 //        CHPush().alertPush("You are a looser", type: "Success")
       } else {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       }
     }

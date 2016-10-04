@@ -27,15 +27,15 @@ import SwiftyJSON
     // use bounds not frame or it'll be offset
     view.frame            = bounds
     // Make the view stretch with containing view
-    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
   }
   
   func loadViewFromNib() -> UIView {
-    let bundle = NSBundle(forClass: type(of: self))
+    let bundle = Bundle(for: type(of: self))
     let nib    = UINib(nibName: "WakeUpChallenge", bundle: bundle)
-    let view   = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+    let view   = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
     view.layer.cornerRadius = 5.0
     return view
   }
@@ -51,16 +51,16 @@ import SwiftyJSON
     
   }
   
-  func setUp(json:JSON = nil){
+  func setUp(_ json:JSON = nil){
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
     
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]//Or any colors
     self.topBarBackground.layer.addSublayer(gradient)
-    self.bringSubviewToFront(self.topBarBackground)
-    self.topBarBackground.bringSubviewToFront(wakeUpIcon)
-    self.topBarBackground.bringSubviewToFront(wakeUpLabel)
+    self.bringSubview(toFront: self.topBarBackground)
+    self.topBarBackground.bringSubview(toFront: wakeUpIcon)
+    self.topBarBackground.bringSubview(toFront: wakeUpLabel)
     
     if json != nil {
       self.objectChallenge = json
@@ -91,7 +91,7 @@ import SwiftyJSON
     xibSetup()
   }
   
-  @IBAction func surrenderAction(sender: AnyObject) {
+  @IBAction func surrenderAction(_ sender: AnyObject) {
     
     guard !tapped else {
       return
@@ -100,22 +100,22 @@ import SwiftyJSON
     let button = sender as! UIButton
     
     tapped = true
-    button.hidden = self.tapped
+    button.isHidden = self.tapped
     
     CHRequests().surrender(self.objectChallenge["_id"].stringValue) { (result, json) in
       if !result {
         self.tapped = false
-        button.hidden = self.tapped
+        button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
       } else {
         self.tapped = false
         CHPush().alertPush("Failed a challenge", type: "Success")
-        CHPush().localPush("refreshIcarousel", object: [])
+        CHPush().localPush("refreshIcarousel", object: self)
       }
     }
   }
  
-  @IBAction func shareAction(sender: AnyObject) {
+  @IBAction func shareAction(_ sender: AnyObject) {
     guard !tapped else {
       return
     }
@@ -124,13 +124,13 @@ import SwiftyJSON
     
     let textToShare = "Constantly improving myself with Champy. Wake-Up challenge “\(self.objectChallenge["challenge"]["name"].stringValue)”"
     if let topController = UIApplication.topViewController() {
-      if let myWebsite = NSURL(string: "http://champyapp.com") {
+      if let myWebsite = URL(string: "http://champyapp.com") {
         self.tapped = false
-        let objectsToShare = [textToShare, myWebsite]
+        let objectsToShare = [textToShare, myWebsite] as [Any]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
-        topController.presentViewController(activityVC, animated: true, completion: nil)
+        topController.present(activityVC, animated: true, completion: nil)
       }
     }
   }

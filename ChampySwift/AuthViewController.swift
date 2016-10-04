@@ -19,7 +19,7 @@ class AuthViewController: UIViewController {
     
     self.navigationItem.hidesBackButton = true
     self.navigationItem.leftBarButtonItem = nil
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AuthViewController.authorized), name: "authorized", object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(AuthViewController.authorized), name: NSNotification.Name(rawValue: "authorized"), object: nil)
     // Do any additional setup after loading the view.
   }
   
@@ -27,7 +27,7 @@ class AuthViewController: UIViewController {
   
   
   
-  @IBAction func authWithFacebook(sender: AnyObject) {
+  @IBAction func authWithFacebook(_ sender: AnyObject) {
     
   }
   
@@ -35,8 +35,8 @@ class AuthViewController: UIViewController {
   
   func authorized() {
     
-    CHPush().localPush("setUpBehavior", object: [])
-    self.dismissViewControllerAnimated(false) {
+    CHPush().localPush("setUpBehavior", object: self)
+    self.dismiss(animated: false) {
       
     }
   }

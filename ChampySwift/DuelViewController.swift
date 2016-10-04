@@ -32,9 +32,9 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   var userObject:JSON! = nil
   
   
-  @IBAction func closeView(sender: AnyObject) {
+  @IBAction func closeView(_ sender: AnyObject) {
     //    self.performSegueWithIdentifier("backToMain", sender: self)
-    self.dismissViewControllerAnimated(true) {
+    self.dismiss(animated: true) {
       //      self.navigationController?.performSegueWithIdentifier("showFriends", sender: self)
     }
   }
@@ -48,7 +48,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     
     self.challengeView.delegate   = self
     self.challengeView.dataSource = self
-    self.challengeView.type       = .Linear
+    self.challengeView.type       = .linear
     
     self.myAvatar.layer.masksToBounds = true
     self.friendsAvatar.layer.masksToBounds = true
@@ -59,7 +59,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     
     CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
       self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
-      self.challenges.insert(nil, atIndex: 0)
+      self.challenges.insert(nil, at: 0)
       Async.main {
         var i:Int = 0
         self.viewObjects.removeAll()
@@ -77,7 +77,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
           i = i + 1
         }
         self.challengeView.reloadData()
-        self.challengeView.scrollToItemAtIndex(1, animated: false)
+        self.challengeView.scrollToItem(at: 1, animated: false)
       }
     }
     
@@ -92,59 +92,59 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   
   
-  @IBAction func addAction(sender: AnyObject) {
+  @IBAction func addAction(_ sender: AnyObject) {
     
   }
   
-  func numberOfItemsInCarousel(carousel: iCarousel) -> Int {
+  func numberOfItems(in carousel: iCarousel) -> Int {
     return self.challenges.count
   }
   
-  func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
+  func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
     
     
     return self.viewObjects[index]
   }
   
-  func carouselDidScroll(carousel: iCarousel) {
-    //    CHPush().localPush("dismissKeyboard", object: [])
+  func carouselDidScroll(_ carousel: iCarousel) {
+    //    CHPush().localPush("dismissKeyboard", object: self)
     close()
   }
   
-  func carousel(carousel: iCarousel, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+  func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
     switch option {
-    case .Spacing:
+    case .spacing:
       return value * 1.1
-    case .Wrap:
+    case .wrap:
       return 0.0
     default:
       return value
     }
   }
   
-  @IBAction func sendtoFriendAction(sender:AnyObject) {
+  @IBAction func sendtoFriendAction(_ sender:AnyObject) {
     open()
     
   }
   
-  @IBAction func confirm(sender:AnyObject) {
+  @IBAction func confirm(_ sender:AnyObject) {
     sendAction()
     close()
   }
   
-  @IBAction func decline(sender:AnyObject) {
+  @IBAction func decline(_ sender:AnyObject) {
     
     close()
   }
   
   func open() {
-    self.addButton.hidden = true
-    self.descView.hidden = false
+    self.addButton.isHidden = true
+    self.descView.isHidden = false
   }
   
   func close() {
-    self.addButton.hidden = false
-    self.descView.hidden = true
+    self.addButton.isHidden = false
+    self.descView.isHidden = true
     if self.viewObjects.count > 0 {
       self.viewObjects[0].view.endEditing(true)
     }
@@ -185,14 +185,14 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       
       var enteredText:String = view.ConditionsTextField.text!
       enteredText = enteredText.condenseWhitespace()
-      enteredText = enteredText.stringByTrimmingCharactersInSet(
-        NSCharacterSet.whitespaceAndNewlineCharacterSet()
+      enteredText = enteredText.trimmingCharacters(
+        in: CharacterSet.whitespacesAndNewlines
       )
       
       let conditions:String = enteredText
       
-      var dayNumber:String = view.daysTextField.text!.stringByReplacingOccurrencesOfString(" Days", withString: "")
-      dayNumber = dayNumber.stringByReplacingOccurrencesOfString(" Day", withString: "")
+      var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+      dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
       
       
       guard enteredText.isValidChallengeName() else{
@@ -239,14 +239,14 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   
   func backtoMain() {
     Async.main{
-      self.dismissViewControllerAnimated(true, completion: {
-        CHPush().localPush("toMainView", object: [])
+      self.dismiss(animated: true, completion: {
+        CHPush().localPush("toMainView", object: self)
       })
     }
   }
   
   
-  func alertWithMessage(message:String, type:CHBanners.CHBannerTypes) {
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
     Async.main {
       let banner = CHBanners(withTarget: self.view, andType: type)
       banner.showBannerForViewControllerAnimated(true, message: message)

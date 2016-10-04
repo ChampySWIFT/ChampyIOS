@@ -40,7 +40,7 @@ class ChampySwiftTests: XCTestCase {
   }
   //+++++
   func testlogout() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -64,7 +64,7 @@ class ChampySwiftTests: XCTestCase {
       })
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -73,7 +73,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testCreateUser() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -95,7 +95,7 @@ class ChampySwiftTests: XCTestCase {
       expectation.fulfill()
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -104,7 +104,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testupdateUser() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -127,7 +127,7 @@ class ChampySwiftTests: XCTestCase {
       expectation.fulfill()
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -137,7 +137,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testDeleteUser() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -163,7 +163,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -172,7 +172,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testAcceptFriendRequest() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -218,7 +218,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -227,7 +227,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testDeclineFriendRequest() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -273,7 +273,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -282,7 +282,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testCancleFriendRequest() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -328,7 +328,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -338,7 +338,7 @@ class ChampySwiftTests: XCTestCase {
   //+++++
   func testAddFriend() {
     
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -374,7 +374,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -384,7 +384,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testreloginUser() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -408,7 +408,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -417,7 +417,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testcheckUserTrue() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -442,7 +442,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -451,7 +451,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testcheckUserFalse() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -476,7 +476,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -485,7 +485,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetAllUsers() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -509,7 +509,7 @@ class ChampySwiftTests: XCTestCase {
       })
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -518,7 +518,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetFacebookImageById() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -541,7 +541,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -550,7 +550,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetFriends() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -575,7 +575,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -584,7 +584,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetChallenges() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -609,7 +609,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -618,7 +618,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testretrieveAllInProgressChallenges() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -643,7 +643,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -652,7 +652,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testupdateUserFromRemote() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -677,7 +677,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -688,7 +688,7 @@ class ChampySwiftTests: XCTestCase {
   //+++++
   
   func testcreateChallengeAndSendItToaStranger() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -747,7 +747,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -755,7 +755,7 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testuploadUsersPhoto() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -784,7 +784,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(20) { error in
+    waitForExpectations(timeout: 20) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -792,7 +792,7 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testupdateUserProfile() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -821,7 +821,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(20) { error in
+    waitForExpectations(timeout: 20) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -829,10 +829,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testupdateUserProfileOptions() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -840,10 +840,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testcreateDuelInProgressChallenge() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -851,12 +851,12 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testcreateSingleInProgressChallenge() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -864,10 +864,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testcreateSelfImprovementChallengeAndSendIt() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -875,10 +875,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testjoinToChallenge() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -886,10 +886,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testrejectInvite() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -897,10 +897,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testsurrender() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -908,10 +908,10 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testcheckChallenge() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     expectation.fulfill()
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -925,7 +925,7 @@ class ChampySwiftTests: XCTestCase {
   }
   //+++++
   func testlogoutUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -949,7 +949,7 @@ class ChampySwiftTests: XCTestCase {
       })
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -958,7 +958,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testCreateUserUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -980,7 +980,7 @@ class ChampySwiftTests: XCTestCase {
       expectation.fulfill()
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -989,7 +989,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testupdateUserUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1012,7 +1012,7 @@ class ChampySwiftTests: XCTestCase {
       expectation.fulfill()
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1022,7 +1022,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testDeleteUserUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1048,7 +1048,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1057,7 +1057,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testAcceptFriendRequestUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1103,7 +1103,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1112,7 +1112,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testDeclineFriendRequestUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1158,7 +1158,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1167,7 +1167,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testCancleFriendRequestUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1213,7 +1213,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1223,7 +1223,7 @@ class ChampySwiftTests: XCTestCase {
   //+++++
   func testAddFriendUA() {
     
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1259,7 +1259,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1269,7 +1269,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testreloginUserUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1293,7 +1293,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1302,7 +1302,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testcheckUserTrueUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1327,7 +1327,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1336,7 +1336,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testcheckUserFalseUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1361,7 +1361,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1370,7 +1370,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetAllUsersUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1394,7 +1394,7 @@ class ChampySwiftTests: XCTestCase {
       })
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1403,7 +1403,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetFacebookImageByIdUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1426,7 +1426,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1435,7 +1435,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetFriendsUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1460,7 +1460,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1469,7 +1469,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testgetChallengesUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1494,7 +1494,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1503,7 +1503,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testretrieveAllInProgressChallengesUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1528,7 +1528,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1537,7 +1537,7 @@ class ChampySwiftTests: XCTestCase {
   
   //+++++
   func testupdateUserFromRemoteUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1562,7 +1562,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1573,7 +1573,7 @@ class ChampySwiftTests: XCTestCase {
   //+++++
   
   func testcreateChallengeAndSendItToaStrangerUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1631,7 +1631,7 @@ class ChampySwiftTests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(10) { error in
+    waitForExpectations(timeout: 10) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
@@ -1639,7 +1639,7 @@ class ChampySwiftTests: XCTestCase {
   }
   
   func testuploadUsersPhotoUA() {
-    let expectation = expectationWithDescription("SendFriendRequest")
+    let expectation = self.expectation(description: "SendFriendRequest")
     
     let params1:[String:String] = [
       "facebookId": self.firstFacebookId,
@@ -1669,7 +1669,7 @@ class ChampySwiftTests: XCTestCase {
       
     }
     
-    waitForExpectationsWithTimeout(20) { error in
+    waitForExpectations(timeout: 20) { error in
       if let error = error {
         ////////print("Error: \(error.localizedDescription)")
       }
