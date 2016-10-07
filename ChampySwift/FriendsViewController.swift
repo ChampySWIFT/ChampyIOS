@@ -161,7 +161,8 @@ class FriendsViewController: UIViewController {
     
     loadVisiblePages()
     contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-    
+    CHPush().localPush("pendingReload", object: self)
+    CHPush().localPush("friendsReload", object: self)
     
   }
   

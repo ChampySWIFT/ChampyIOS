@@ -16,6 +16,17 @@ class RoleControlViewController: UIViewController {
   var socket:SocketIOClient = SocketIOClient(socketURL: URL(string: CHRequests().SocketUrl)!)
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
+  override func viewDidAppear(_ animated: Bool) {
+    NotificationCenter.default.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: NSNotification.Name(rawValue: "toMainView"), object: nil)
+    
+  }
+  
+  
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "toMainView"), object: nil)
+  }
+  
   override func viewDidLoad() {
     //    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
     self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -24,9 +35,10 @@ class RoleControlViewController: UIViewController {
     UIDevice.current.setValue(value, forKey: "orientation")
     let center = NotificationCenter.default
     //    setUpBehavior
+    //toFriends
     center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: NSNotification.Name(rawValue: "alert"), object: nil)
-    center.addObserver(self, selector: #selector(RoleControlViewController.toMainView), name: NSNotification.Name(rawValue: "toMainView"), object: nil)
     center.addObserver(self, selector: #selector(RoleControlViewController.setUpBehavior), name: NSNotification.Name(rawValue: "setUpBehavior"), object: nil)
+    center.addObserver(self, selector: #selector(RoleControlViewController.toFriends), name: NSNotification.Name(rawValue: "toFriends"), object: nil)
     self.navigationItem.leftBarButtonItem = nil
     
     navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
@@ -56,6 +68,15 @@ class RoleControlViewController: UIViewController {
     self.handleSocketActions()
   }
   
+  
+  func toFriends() {
+    Async.main {
+      self.navigationController?.performSegue(withIdentifier: "showFriends", sender: self)
+    }
+    
+  }
+
+  
   func toMainView() {
     Async.main {
       let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
@@ -70,6 +91,14 @@ class RoleControlViewController: UIViewController {
     }
     
   }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showFacebookView" {
+      NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "toMainView"), object: nil)
+    }
+  }
+  
+  
   
   func handleSocketActions(){
     

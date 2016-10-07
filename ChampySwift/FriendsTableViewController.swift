@@ -180,7 +180,7 @@ class FriendsTableViewController: UITableViewController {
         object = friend["friend"]
       }
       
-      content.setUp(json: object)
+      content.setUp(object)
       self.friendsContent.append(content)
       identifiers.append("\(friend["_id"].stringValue)")
     }

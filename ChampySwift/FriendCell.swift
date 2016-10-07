@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import Async
 @IBDesignable class FriendCell: UIView {
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   var view: UIView!
   var width:CGFloat = 0.0
@@ -42,6 +43,11 @@ import Async
   @IBOutlet weak var thirdScoreLabel: UICountingLabel!
   @IBOutlet weak var thirdScoreIcon: UIImageView!
   @IBOutlet weak var scoreContainer: UIView!
+  
+  
+  
+  var minusButtonState = false
+  var plusButtonState = false
   var initialNameLevel:CGRect! = nil
   var initialLevelFrame:CGRect! = nil
   var initialScoreFrame:CGRect! = nil
@@ -147,6 +153,9 @@ import Async
     view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
+    CHImages().setImageForMiniIconInProgress(imageView: self.firstMiniIcon)
+    CHImages().setImageForMiniIconWins(imageView: self.secondMiniIcon)
+    CHImages().setImageForMiniIconTotal(imageView: self.thirdScoreIcon)
   }
   
   func loadViewFromNib() -> UIView {
@@ -167,7 +176,7 @@ import Async
     
   }
   
-  func setUp(json:JSON) {
+  func setUp(_ json:JSON) {
     
     userAvatar.layer.masksToBounds = true
     userAvatar.layer.cornerRadius  = 25.0
@@ -210,33 +219,36 @@ import Async
     
     switch self.status {
     case "Other" :
-      self.minusButton.isHidden
-        = true
-      self.plusButton.isHidden = false
+      minusButtonState = true
+      plusButtonState = false
       break
       
     case "Incoming" :
-      self.minusButton.isHidden = false
-      self.plusButton.isHidden = false
+      minusButtonState = false
+      plusButtonState = false
       break
       
     case "Outgoing" :
-      self.minusButton.isHidden = false
-      self.plusButton.isHidden = true
+      minusButtonState = false
+      plusButtonState = true
       break
       
     case "Friends" :
-      self.minusButton.isHidden = false
-      self.plusButton.isHidden = false
+      minusButtonState = false
+      plusButtonState = false
       
       self.minusButton.setImage(#imageLiteral(resourceName: "deleteFriend"), for: .normal)
       self.plusButton.setImage(#imageLiteral(resourceName: "challengeFriend"), for: .normal)
       break
     default:
-      self.minusButton.isHidden = true
-      self.plusButton.isHidden = true
+      minusButtonState = true
+      plusButtonState = true
       
     }
+    
+    self.minusButton.isHidden = minusButtonState
+    self.plusButton.isHidden = plusButtonState
+    
     
   }
   
@@ -244,12 +256,13 @@ import Async
   func open() {
     ////print(self.userObject)
     self.tapped = true
-    self.setTimeout(delay: 1.0) { 
+    self.setTimeout(1.0) { 
       self.tapped = false
     }
     
     opened = !opened
     self.pointsContainer.isHidden = true
+    closeConfirmationWindow()
     cleareScoreborder()
     var viewFrame         = mainContent.frame
     viewFrame.size.height = 220
@@ -294,7 +307,7 @@ import Async
     frame1?.origin.y = (frame1?.origin.y)! - 112
     
     UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-//      self.scoreContainer.frame = frame1!
+      self.scoreContainer.frame = frame1!
       self.scoreContainer.isHidden = false
       self.minusButton.frame = minusButtonFrame
       self.plusButton.frame = plusButtonFrame
@@ -313,6 +326,7 @@ import Async
     
     opened = !opened
     self.pointsContainer.isHidden = false
+    closeConfirmationWindow()
     var viewFrame = mainContent.frame
     viewFrame.size.height = 66
     self.mainContent.frame = viewFrame
@@ -361,11 +375,11 @@ import Async
     ////////print("close")
   }
   
-  func setTimeout(delay:TimeInterval, block:@escaping ()->Void) -> Timer {
+  func setTimeout(_ delay:TimeInterval, block:@escaping ()->Void) -> Timer {
     return Timer.scheduledTimer(timeInterval: delay, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
   }
   
-  @IBAction func addAction(sender: AnyObject) {
+  @IBAction func addAction(_ sender: AnyObject) {
     
     if !tapped {
       
@@ -436,7 +450,7 @@ import Async
     
   }
   
-  @IBAction func minusAction(sender: AnyObject) {
+  @IBAction func minusAction(_ sender: AnyObject) {
     
     if !tapped {
       
@@ -447,20 +461,14 @@ import Async
         
         break
       case "Outgoing" :
-        self.confirmationVindow.isHidden = false
-        self.minusButton.isHidden = true
-        self.plusButton.isHidden = true
+        openConfirmationWindow()
         break
       case "Incoming" :
-        self.confirmationVindow.isHidden = false
-        self.minusButton.isHidden = true
-        self.plusButton.isHidden = true
+        openConfirmationWindow()
         break
         
       case "Friends" :
-        self.confirmationVindow.isHidden = false
-        self.minusButton.isHidden = true
-        self.plusButton.isHidden = true
+        openConfirmationWindow()
         break
       default:
         self.tapped = false
@@ -474,13 +482,33 @@ import Async
   }
   
   
-  @IBAction func declineDeleting(sender: AnyObject) {
-    self.confirmationVindow.isHidden = true
-    self.minusButton.isHidden = false
-    self.plusButton.isHidden = false
+  @IBAction func declineDeleting(_ sender: AnyObject) {
+    closeConfirmationWindow()
   }
   
-  @IBAction func acceptDeleting(sender: AnyObject) {
+  func closeConfirmationWindow() {
+    self.confirmationVindow.isHidden = true
+    self.minusButton.isHidden = minusButtonState
+    self.plusButton.isHidden = plusButtonState
+    self.scoreContainer.isHidden = false
+    self.tapped = false
+    self.userAvatar.isHidden = false
+    self.username.isHidden = false
+  }
+  
+  func openConfirmationWindow() {
+    
+    
+    self.confirmationVindow.isHidden = false
+    self.minusButton.isHidden = true
+    self.plusButton.isHidden = true
+    self.pointsCount.bringSubview(toFront: self.confirmationVindow)
+    self.scoreContainer.isHidden = true
+    self.userAvatar.isHidden = true
+    self.username.isHidden = true
+  }
+  
+  @IBAction func acceptDeleting(_ sender: AnyObject) {
     UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
       self.plusButton.frame = self.initialPlusFrame
       self.minusButton.frame = self.initialMinusFrame

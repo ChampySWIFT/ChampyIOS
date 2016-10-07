@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftyJSON
 
 class CHImages: NSObject {
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   func setUpAvatar(_ imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
     
@@ -22,7 +23,7 @@ class CHImages: NSObject {
     }
     let myCache = ImageCache(name: cachename)
     
-    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+    imageView.kf.setImage(with: url, placeholder:  appDelegate.prototypeNoImage, options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
       
       }) { (image, error, cacheType, imageUrl) in
         
@@ -55,6 +56,49 @@ class CHImages: NSObject {
     }
     
   }
+  
+  func setImageForMiniIconWins(imageView:UIImageView) {
+    
+    var cachename = "wins"
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: URL(string: ""), placeholder: appDelegate.winsPrototypeIcon, options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
+      
+    }
+    
+  }
+  
+  func setImageForMiniIconInProgress(imageView:UIImageView) {
+    
+    var cachename = "inProgress"
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: URL(string: ""), placeholder: appDelegate.inProgressPrototypeIcon, options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
+      
+    }
+    
+  }
+  
+  func setImageForMiniIconTotal(imageView:UIImageView) {
+    
+    var cachename = "total"
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: URL(string: ""), placeholder: appDelegate.totalPrototypeIcon, options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
+      
+    }
+    
+  }
+  
   
   func setUpBackground(_ imageView:UIImageView, frame:CGRect = CGRect()) {
     imageView.layer.masksToBounds = true

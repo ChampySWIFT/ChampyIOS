@@ -167,12 +167,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     CHSession().clearSession({ (result) in
       if result {
         Async.main {
-          let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-          let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
           
-          self.present(roleControlViewController, animated: false, completion: {
-            
-          })
+          self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
+//          self.present(roleControlViewController, animated: false, completion: {
+          
+//          })
         }
       }
     })
@@ -229,12 +228,13 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
             CHSession().clearSession({ (result) in
               if result {
                 Async.main {
-                  let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-                  
-                  self.present(roleControlViewController, animated: false, completion: {
-                    
-                  })
+                  self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
+//                  let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+//                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+//                  
+//                  self.present(roleControlViewController, animated: false, completion: {
+//                    
+//                  })
                 }
               }
             })

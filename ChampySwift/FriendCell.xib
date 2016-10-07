@@ -360,7 +360,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMm-qp-KOZ">
-                            <rect key="frame" x="0.0" y="286" width="432" height="72"/>
+                            <rect key="frame" x="0.0" y="0.0" width="432" height="72"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6q-cm-H5b">
                                     <rect key="frame" x="81" y="34" width="46" height="30"/>
@@ -400,14 +400,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.1647058824" green="0.51372549020000002" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.1647058824" green="0.51372549020000002" blue="0.49803921569999998" alpha="0.0" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Bew-zy-TyT" secondAttribute="trailing" constant="81" id="Jta-2c-QPA"/>
                                 <constraint firstItem="iEO-ke-OcM" firstAttribute="leading" secondItem="XMm-qp-KOZ" secondAttribute="leading" id="M8p-MV-uie"/>
                                 <constraint firstAttribute="trailing" secondItem="iEO-ke-OcM" secondAttribute="trailing" id="Wve-xJ-efR"/>
                                 <constraint firstItem="J6q-cm-H5b" firstAttribute="top" secondItem="iEO-ke-OcM" secondAttribute="bottom" constant="2" id="a3d-Pp-Avm"/>
                                 <constraint firstItem="J6q-cm-H5b" firstAttribute="leading" secondItem="XMm-qp-KOZ" secondAttribute="leading" constant="81" id="ayQ-Gc-Asx"/>
-                                <constraint firstAttribute="height" constant="72" id="deK-um-6FA"/>
+                                <constraint firstAttribute="height" constant="72" id="eod-hI-OJn"/>
                                 <constraint firstItem="iEO-ke-OcM" firstAttribute="top" secondItem="XMm-qp-KOZ" secondAttribute="top" id="h27-bk-HHP"/>
                                 <constraint firstItem="Bew-zy-TyT" firstAttribute="top" secondItem="iEO-ke-OcM" secondAttribute="bottom" constant="2" id="y4V-ag-tzH"/>
                             </constraints>
@@ -425,10 +425,12 @@
                         <constraint firstAttribute="trailing" secondItem="XMm-qp-KOZ" secondAttribute="trailing" id="XKd-XE-UA3"/>
                         <constraint firstAttribute="trailing" secondItem="sLl-6G-rBv" secondAttribute="trailing" constant="8" id="h0K-AM-bKV"/>
                         <constraint firstItem="nsD-DS-8PZ" firstAttribute="leading" secondItem="ddH-XJ-kae" secondAttribute="leading" id="kzV-si-TLd"/>
+                        <constraint firstItem="XMm-qp-KOZ" firstAttribute="top" secondItem="ddH-XJ-kae" secondAttribute="top" id="mzU-PK-0wT"/>
                         <constraint firstItem="XMm-qp-KOZ" firstAttribute="leading" secondItem="ddH-XJ-kae" secondAttribute="leading" id="vNg-Yp-944"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="Mju-Fv-ze6"/>
                             <exclude reference="h0K-AM-bKV"/>
                         </mask>
                     </variation>

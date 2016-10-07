@@ -37,7 +37,8 @@ class PendingFriendsController: UITableViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     center.addObserver(self, selector: #selector(PendingFriendsController.refreshTableViewAction(_:)), name: NSNotification.Name(rawValue: "pendingReload"), object: nil)
-    
+    self.fillArray()
+    self.refreshTableViewAction(self.refreshTableView)
   }
   
   override func viewDidLoad() {
@@ -255,7 +256,7 @@ class PendingFriendsController: UITableViewController {
         outgoingidentifiers.append("\(friend["owner"]["_id"].stringValue)")
         self.outgoing.append(friend)
         content.status = "Outgoing"
-        content.setUp(json: friend["owner"])
+        content.setUp(friend["owner"])
         self.outgoingfriendsContent.append(content)
         break
         
@@ -263,7 +264,7 @@ class PendingFriendsController: UITableViewController {
         incomingidentifiers.append("\(friend["friend"]["_id"].stringValue)")
         self.incoming.append(friend)
         content.status = "Incoming"
-        content.setUp(json: friend["friend"])
+        content.setUp(friend["friend"])
         self.incomingfriendsContent.append(content)
         break
       default:

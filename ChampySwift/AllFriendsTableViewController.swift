@@ -10,8 +10,14 @@ import UIKit
 import SwiftyJSON
 import Async
 
-class AllFriendsTableViewController: UITableViewController {
+class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefreshManagerClient {
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
+  func bottomPull(toRefreshTriggered manager: MNMBottomPullToRefreshManager) {
+    print("refreshed")
+  }
+  
+  var pulltorefreshManager:MNMBottomPullToRefreshManager!
   var tap:Bool = true
   var identifiers:[String]    = []
   var selectedRow:Int         = -1
@@ -20,65 +26,76 @@ class AllFriendsTableViewController: UITableViewController {
   var userCount:Int = 0
   let center = NotificationCenter.default
   var userArray:[JSON] = []
+  
+  var displayiedCells:Int = 0
   override func viewDidDisappear(_ animated: Bool) {
     center.removeObserver(self, name: NSNotification.Name(rawValue: "allReload"), object: nil)
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if (scrollView.contentOffset.y + scrollView.frame.size.height == scrollView.contentSize.height)
+    {
+     loadMoreFriends()
+    }
+    
+  }
+  
+    override func viewDidAppear(_ animated: Bool) {
     center.addObserver(self, selector: #selector(AllFriendsTableViewController.refreshTableViewAction(_:)), name: NSNotification.Name(rawValue: "allReload"), object: nil)
     self.refreshTableViewAction(self.refreshTableView)
-   
-  }
+    }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
+    self.tableView.delegate = self
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    
   }
   
   // MARK: - Table view data source
   
   override func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
+    
     return 1
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
+   
     return identifiers	.count
   }
   
   override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
-      let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-      if content.opened {
-        content.close()
+      weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
+      if (content?.opened)! {
+        content?.close()
         heights[(indexPath as NSIndexPath).row] = 66
         self.selectedRow = -1
       }
-      
-      content.removeFromSuperview()
-      self.friendsContent[(indexPath as NSIndexPath).row] = FriendCell()
+      if content?.userAvatar != nil {
+      content?.userAvatar.removeFromSuperview()
+      }
+      content?.userAvatar = nil
+      content?.removeFromSuperview()
+      content = nil
+      self.friendsContent[(indexPath as NSIndexPath).row] = appDelegate.prototypeFriendCell
     }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
     let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
     
     
     if (indexPath as NSIndexPath).row == self.selectedRow {
-      //      heights.append(220.0)
       heights[(indexPath as NSIndexPath).row] = 220.0
       return 220
     } else {
       content.close()
       heights[(indexPath as NSIndexPath).row] = 66
-      //      heights.append(66)
       return 66
     }
   }
@@ -88,32 +105,35 @@ class AllFriendsTableViewController: UITableViewController {
     let identifier = self.identifiers[(indexPath as NSIndexPath).row]
     var cell = tableView.dequeueReusableCell(withIdentifier: "CELL\(identifier)")
     cell = nil
-    autoreleasepool {
-      if cell == nil {
-        cell                 = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
-        cell?.accessoryType  = .none
-        cell?.selectionStyle = UITableViewCellSelectionStyle.none
-        cell!.contentView.backgroundColor = UIColor.clear
-        
-        //        let content = friendsContent[indexPath.row] as! FriendCell
-        let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
-        let friend = self.userArray[indexPath.row]
-        let status = CHUsers().getStatus(friend) //"Other"
-        content.status = status
-        
-        content.setUp(json: friend)
-        content.close()
-        self.friendsContent[(indexPath as NSIndexPath).row] = content
-        cell?.addSubview(content)
-        cell!.backgroundColor = UIColor.clear
-      }
+    if cell == nil {
+      cell                 = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
+      cell?.accessoryType  = .none
+      cell?.selectionStyle = UITableViewCellSelectionStyle.none
+      cell!.contentView.backgroundColor = UIColor.clear
+      
+      //        let content = friendsContent[indexPath.row] as! FriendCell
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      let friend = self.userArray[indexPath.row]
+      let status = CHUsers().getStatus(friend) //"Other"
+      content.status = status
+      
+      content.setUp(friend)
+      content.close()
+      self.friendsContent[(indexPath as NSIndexPath).row] = content
+      cell?.addSubview(content)
+      cell!.backgroundColor = UIColor.clear
+      displayiedCells += 1
     }
+    
+    
+    
+    
+    
     return cell!
   }
   
+  
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    
     if tap {
       disableTapForASec()
       tableView.beginUpdates()
@@ -136,7 +156,6 @@ class AllFriendsTableViewController: UITableViewController {
           tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         })
       }
-      //      clearArrays()
     }
   }
   
@@ -204,6 +223,7 @@ class AllFriendsTableViewController: UITableViewController {
   }
   
   func fillArray() {
+    displayiedCells = 0
     self.selectedRow = -1
     self.destroyAll()
     self.friendsContent.removeAll()
@@ -211,62 +231,69 @@ class AllFriendsTableViewController: UITableViewController {
     heights.removeAll()
     self.userArray.removeAll()
     var i = 0;
-    for friend in CHUsers().getUsers()  {
-      
-      let status = CHUsers().getStatus(friend)
-      
-      if CHUsers().getStatus(friend) == "Other" {
-        heights.append(66)
-        self.friendsContent.append(FriendCell())
-        identifiers.append("\(friend["_id"].stringValue)")
-        self.userArray.append(friend)
-        
-        
-        // fantom friends
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) asd\(i)")
-//        self.userArray.append(friend)
-//        
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) adasd\(i)")
-//        self.userArray.append(friend)
-//        
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) asdasd\(i)")
-//        self.userArray.append(friend)
-//        
-//        // fantom friends
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) asd\(i)")
-//        self.userArray.append(friend)
-//        
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) adasd\(i)")
-//        self.userArray.append(friend)
-//        
-//        heights.append(66)
-//        self.friendsContent.append(FriendCell())
-//        identifiers.append("\(friend["_id"].stringValue) asdasd\(i)")
-//        self.userArray.append(friend)
-//        
-        
-        i = i + 1
-      } else {
-        
-      }
+    
+    var toValue = 20
+    
+    if CHUsers().getUsersCount() < toValue {
+      toValue = CHUsers().getUsersCount() - 1
     }
     
-    
-    
-    //    ////print(userArray)
+//    for friend in CHUsers().getUsers()  {
+    for friend in CHUsers().getUsers(from: 0, to: toValue)  {
+      let status = CHUsers().getStatus(friend)
+      if status == "Other" {
+        heights.append(66)
+        self.friendsContent.append(appDelegate.prototypeFriendCell)
+        identifiers.append("\(friend["_id"].stringValue)")
+        self.userArray.append(friend)
+      }
+    }
     self.userCount = self.friendsContent.count
   }
   
   
   
+  
+  
+  
+  
+  
+  func appendArray(fromValue:Int, toValue:Int) {
+    CHPush().alertPush("Loading more friends", type: "Info")
+    let newArray = CHUsers().getUsers(from: fromValue, to: toValue)
+    
+    for friend in CHUsers().getUsers(from: fromValue, to: toValue)  {
+      let status = CHUsers().getStatus(friend)
+      if status == "Other" {
+        if !identifiers.contains("\(friend["_id"].stringValue)") {
+          heights.append(66)
+          self.friendsContent.append(appDelegate.prototypeFriendCell)
+          identifiers.append("\(friend["_id"].stringValue)")
+          self.userArray.append(friend)
+        }
+        
+      }
+    }
+    
+    self.userCount = self.friendsContent.count
+    self.tableView.reloadData()
+  }
+  
+  func loadMoreFriends() {
+    var toValue = 5
+    
+    if self.userCount == CHUsers().getUsersCount() {
+      return
+    }
+    
+    if self.userCount + toValue >= CHUsers().getUsersCount() {
+      toValue = CHUsers().getUsersCount() - self.userCount
+    }
+    
+    self.appendArray(fromValue: self.userCount - 1, toValue: self.userCount + toValue - 1)
+  }
+  
+  
+  
 }
+

@@ -61,18 +61,18 @@ class CHUsers: NSObject {
 //    guard item["photo"] != nil else {
 //      return false
 //    }
+//    
+//    guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
+//      return false
+//    }
+//    
+//    guard item["name"].stringValue != "sadassecondFacebookIdasda" else {
+//      return false
+//    }
     
-    guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
-      return false
-    }
-    
-    guard item["name"].stringValue != "sadassecondFacebookIdasda" else {
-      return false
-    }
-    
-    //    guard getStatus(item) == "Other" else {
-    //      return false
-    //    }
+//        guard getStatus(item) == "Other" else {
+//          return false
+//        }
     return true
   }
   
@@ -93,6 +93,22 @@ class CHUsers: NSObject {
     return friends
   }
   
+  func getUsersCount() -> Int {
+    return (CHSession().getJSONByKey("userList").arrayValue).count
+  }
+  
+  func getUsers(from:Int, to:Int) -> [JSON] {
+    var array = (CHSession().getJSONByKey("userList").arrayValue)
+    var friends:[JSON] = []
+    for i:Int in from...to {
+      if !self.isFacebookFriend(array[i]["facebookId"].stringValue) || !isValidUser(array[i]) {
+//        continue
+      }
+      friends.append(array[i])
+    }
+    
+    return friends
+  }
  
   
   /**

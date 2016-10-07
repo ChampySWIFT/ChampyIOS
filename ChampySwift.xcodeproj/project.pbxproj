@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0D1ADAA61DA25D220067EB51 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */; };
 		0D1ADAA71DA25D220067EB51 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */; };
+		0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */; };
+		0D959BA41DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */; };
+		0D959BA81DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */; };
+		0D959BA91DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */; };
+		0D959BAA1DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */; };
 		179C1BC104D7A03EFD193535 /* Pods_ChampySwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */; };
 		5704A30C1D4246F6007CAAA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A3091D4246F5007CAAA4 /* AVFoundation.framework */; };
 		5704A30D1D4246F6007CAAA4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A30A1D4246F5007CAAA4 /* CoreFoundation.framework */; };
@@ -155,6 +160,11 @@
 		0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChampySwift.entitlements; sourceTree = "<group>"; };
+		0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshManager.swift; sourceTree = "<group>"; };
+		0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshView.swift; sourceTree = "<group>"; };
+		0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MNMBottomPullToRefresh.strings; sourceTree = "<group>"; };
+		0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MNMBottomPullToRefreshArrow.png; sourceTree = "<group>"; };
+		0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		1BC8E7847E0C24063DB5706C /* Pods-ChampySwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -364,6 +374,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D62B1AC1DA561E1003BB2B1 /* BottomRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */,
+				0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */,
+				0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */,
+				0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */,
+				0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */,
+			);
+			name = BottomRefresh;
+			sourceTree = "<group>";
+		};
 		57336C161CD771EC00C5B6F1 /* Carts */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +454,7 @@
 		577D5F901CCE27D80002F0E0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0D62B1AC1DA561E1003BB2B1 /* BottomRefresh */,
 				57FBC97E1CD9F49900341A2D /* APCustomBlurView.swift */,
 				57BED09B1CD8AF6700D94A48 /* CHBanners.swift */,
 				577D5F941CCE30670002F0E0 /* CHUIAnimations.swift */,
@@ -823,6 +846,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = EWU83H92V3;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -875,12 +899,14 @@
 				57B391311CDBA9E700F58A15 /* FriendCell.xib in Resources */,
 				57A3C6D41CDB7C2200997E41 /* privacy.html in Resources */,
 				57336C211CD783D700C5B6F1 /* BebasNeue Light.otf in Resources */,
+				0D959BA81DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings in Resources */,
 				57336C221CD783D700C5B6F1 /* BebasNeue Regular.otf in Resources */,
 				57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */,
 				575FE3E31CFDD338007404BD /* TimedOutWakeUp.xib in Resources */,
 				5730E6EC1D083FA500D1EEA4 /* InviteFriendsView.xib in Resources */,
 				57336C231CD783D700C5B6F1 /* BebasNeue Thin.otf in Resources */,
 				57D29E8A1D00754F0016CBF5 /* HistoryCell.xib in Resources */,
+				0D959BA91DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png in Resources */,
 				57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */,
 				57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */,
 				575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */,
@@ -890,6 +916,7 @@
 				57DBF6291CEC6DF500659B79 /* Entitlements.plist in Resources */,
 				570722081CEB608100C0C17F /* UnConfirmedDuel.xib in Resources */,
 				577D5F971CCE33A50002F0E0 /* Images.xcassets in Resources */,
+				0D959BAA1DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png in Resources */,
 				575DC72B1CEDEC6E00CF92D3 /* CheckedDuel.xib in Resources */,
 				579C18671CCB595700D6EEA9 /* LaunchScreen.storyboard in Resources */,
 				5784FF8F1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib in Resources */,
@@ -1047,6 +1074,7 @@
 				57BED09F1CD8B63800D94A48 /* CHRequests.swift in Sources */,
 				576D7E741CEB093300AA7094 /* CHChalenges.swift in Sources */,
 				57BED0A11CD8B64700D94A48 /* CHSession.swift in Sources */,
+				0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */,
 				572626C71CD8F7F90022C389 /* CHPush.swift in Sources */,
 				5770CCF41CD9E99700D10E5A /* CHImages.swift in Sources */,
 				57B632C81CD78A35000D6868 /* SelfImprovementWin.swift in Sources */,
@@ -1078,6 +1106,7 @@
 				577D5F9C1CCE50F50002F0E0 /* iCarousel.m in Sources */,
 				57BED09C1CD8AF6700D94A48 /* CHBanners.swift in Sources */,
 				57ED480B1CD8BD3300E2CCFF /* RoleControlViewController.swift in Sources */,
+				0D959BA41DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift in Sources */,
 				57ED48091CD8BBDB00E2CCFF /* CHUsers.swift in Sources */,
 				570722061CEB5E6500C0C17F /* CHSettings.swift in Sources */,
 				5784FF911D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift in Sources */,
@@ -1247,6 +1276,7 @@
 				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EWU83H92V3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1255,11 +1285,12 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = ChampySwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "91197199-c0a2-454c-85ee-4489a0971594";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1276,6 +1307,7 @@
 				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EWU83H92V3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1284,11 +1316,12 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = ChampySwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "91197199-c0a2-454c-85ee-4489a0971594";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

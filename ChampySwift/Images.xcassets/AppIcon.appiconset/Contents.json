@@ -1,6 +1,16 @@
 {
   "images" : [
     {
+      "idiom" : "iphone",
+      "size" : "20x20",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "size" : "20x20",
+      "scale" : "3x"
+    },
+    {
       "size" : "29x29",
       "idiom" : "iphone",
       "filename" : "Icon-29.0@1x.png",
@@ -53,6 +63,16 @@
       "idiom" : "iphone",
       "filename" : "Icon-60.0@3x.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "20x20",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "20x20",
+      "scale" : "2x"
     },
     {
       "size" : "29x29",
@@ -124,17 +144,17 @@
       "size" : "24x24",
       "idiom" : "watch",
       "filename" : "Icon-24.0@2x.png",
-      "subtype" : "38mm",
+      "scale" : "2x",
       "role" : "notificationCenter",
-      "scale" : "2x"
+      "subtype" : "38mm"
     },
     {
       "size" : "27.5x27.5",
       "idiom" : "watch",
       "filename" : "Icon-27.5@2x.png",
-      "subtype" : "42mm",
+      "scale" : "2x",
       "role" : "notificationCenter",
-      "scale" : "2x"
+      "subtype" : "42mm"
     },
     {
       "size" : "29x29",
@@ -154,33 +174,33 @@
       "size" : "40x40",
       "idiom" : "watch",
       "filename" : "Icon-40.0@2x.png",
-      "subtype" : "38mm",
+      "scale" : "2x",
       "role" : "appLauncher",
-      "scale" : "2x"
+      "subtype" : "38mm"
     },
     {
       "size" : "44x44",
       "idiom" : "watch",
       "filename" : "Icon-44.0@2x.png",
-      "subtype" : "42mm",
+      "scale" : "2x",
       "role" : "longLook",
-      "scale" : "2x"
+      "subtype" : "42mm"
     },
     {
       "size" : "86x86",
       "idiom" : "watch",
       "filename" : "Icon-86.0@2x.png",
-      "subtype" : "38mm",
+      "scale" : "2x",
       "role" : "quickLook",
-      "scale" : "2x"
+      "subtype" : "38mm"
     },
     {
       "size" : "98x98",
       "idiom" : "watch",
       "filename" : "Icon-98.0@2x.png",
-      "subtype" : "42mm",
+      "scale" : "2x",
       "role" : "quickLook",
-      "scale" : "2x"
+      "subtype" : "42mm"
     },
     {
       "size" : "120x120",

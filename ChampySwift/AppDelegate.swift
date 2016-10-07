@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   var friendsViewController: FriendsViewController!   = nil
   var settingsViewController: SettingsViewController! = nil
   var mainViewController: MainViewController!         = nil
-  
+  var prototypeFriendCell:FriendCell!
   var table3:AllFriendsTableViewController! = nil
   var table2:PendingFriendsController! = nil
   var table1:FriendsTableViewController! = nil
@@ -34,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   var historyTable3:FailedTableViewController! = nil
   
   var mainViewCard:[String:UIView] = [:]
+  weak var prototypeNoImage = #imageLiteral(resourceName: "noImageIcon")
+  weak var winsPrototypeIcon = #imageLiteral(resourceName: "wins")
+  weak var totalPrototypeIcon = #imageLiteral(resourceName: "Total")
+  weak var inProgressPrototypeIcon = #imageLiteral(resourceName: "inProgressMiniImage")
+  
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -58,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification),  name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
     
     CHPush().clearBadgeNumber()
+    self.prototypeFriendCell = FriendCell()
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   
@@ -121,17 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
   }
   
-//  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//    let formatedDeviceToken:String = self.getSimpleDeviceToken("\(deviceToken)")
-//    UserDefaults.standard.set(deviceToken, forKey: "deviceToken")
-//    UserDefaults.standard.set(formatedDeviceToken, forKey: "deviceTokenString")
-//    
-//    CHPush().subscribeForNotifications()
-//    
-//    
-//    
-//  }
-  
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     let formatedDeviceToken:String = self.getSimpleDeviceToken("\(deviceToken)")
@@ -147,9 +142,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //Handle the notification
   }
   
+//  @available(iOS 10.0, *)
+//  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//    //Handle the notification
+//    response.notificatio
+//    CHPush().alertPush("GOT PUSH", type: "Warning")
+//  
+//  }
+  
+  
   @available(iOS 10.0, *)
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    //Handle the notification
+    if response.notification.request.content.title == "Friend request" {
+      CHPush().localPush("toFriends", object: self)
+    }
   }
   
   func getSimpleDeviceToken(_ deviceToken:String)->String{
@@ -164,10 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     print(error)
   }
   
-  //  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-  //    <#code#>
-  //  }
-  
+ 
   //  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
   //    
   //    let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
