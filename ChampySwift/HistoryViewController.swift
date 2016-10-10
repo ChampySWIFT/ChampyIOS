@@ -22,9 +22,34 @@ class HistoryViewController: UIViewController {
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
   
+  @IBOutlet weak var challengesBatButtonItem: UIBarButtonItem!
+  @IBOutlet weak var friendsBarButton: UIBarButtonItem!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    var unconfirmedChallenges:Int = 0
+    self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
+    
+    for challenge in CHChalenges().getInProgressChallenges(CHSession().currentUserId).reversed() {
+      let challengeType = CHChalenges().getChallengeType(challenge)
+      if challengeType == .unconfirmedDuelRecipient || challengeType == .unconfirmedDuelSender {
+        unconfirmedChallenges += 1
+        self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
+      }
+    }
+    
+    if appDelegate.unconfirmedChallenges > 0 {
+      if self.challengesBatButtonItem.badgeLayer != nil {
+        self.challengesBatButtonItem.updateBadge(number: appDelegate.unconfirmedChallenges)
+      } else {
+        self.challengesBatButtonItem.addBadge(number: appDelegate.unconfirmedChallenges)
+      }
+    }
+    
+    if appDelegate.unconfirmedChallenges == 0 {
+      if self.challengesBatButtonItem.badgeLayer != nil {self.challengesBatButtonItem.removeBadge()}
+    }
+    
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.hidesBackButton = true
     if appDelegate.historyViewController == nil {
@@ -36,6 +61,22 @@ class HistoryViewController: UIViewController {
     
     
     Async.background{
+      CHRequests().getAllUsers { (result, json) in
+        Async.main {
+          let friendsBadgeCount = CHUsers().getIncomingRequestCount()
+          if friendsBadgeCount > 0 {
+            if self.friendsBarButton.badgeLayer != nil {
+              self.friendsBarButton.updateBadge(number: friendsBadgeCount)
+            } else {
+              self.friendsBarButton.addBadge(number: friendsBadgeCount)
+            }
+          }
+          
+          if CHUsers().getIncomingRequestCount() == 0 {
+            if self.friendsBarButton.badgeLayer != nil {self.friendsBarButton.removeBadge()}
+          }
+        }
+      }
       if IJReachability.isConnectedToNetwork()  {
         
         CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
@@ -60,6 +101,9 @@ class HistoryViewController: UIViewController {
       }
       
     }
+    
+    
+    
     // Do any additional setup after loading the view.
   }
   

@@ -99,6 +99,11 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   }
   
   func sendAction() {
+    if CHSession().currentUserObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+      self.alertWithMessage("Can't create more challenges", type: .Warning)
+      return
+    }
+    
     guard IJReachability.isConnectedToNetwork() else {
       
       self.alertWithMessage("No Internet Connection", type: .Warning)

@@ -78,6 +78,31 @@ import SwiftyJSON
     
   }
   
+  
+  func setUpforUnknownDuel(){
+    self.myName.adjustsFontSizeToFitWidth = true
+    self.partnerName.adjustsFontSizeToFitWidth = true
+    self.avatar.layer.cornerRadius = self.avatar.frame.size.width / 2
+    self.avatar.layer.masksToBounds = true
+    self.challengeIcon.layer.cornerRadius = self.avatar.frame.size.width / 2
+    self.challengeIcon.layer.masksToBounds = true
+    self.initialVsFrame = self.vsLabel.frame
+    self.partnerName.layer.opacity = 0.0
+    self.myName.layer.opacity = 0.0
+    self.myNameNonDuel.layer.opacity = 0.0
+    self.vsLabel.layer.opacity = 0.0
+    self.generalItem = nil
+    self.myNameNonDuel.text = CHSession().currentUserName
+    self.challengeIcon.image = UIImage(named: "DuelColor")
+    self.myName.text = CHSession().currentUserName
+    
+    self.historyTitle.text = "Duel with Unknown User"
+    self.pointLabel.text = "10"
+    self.avatar.image = UIImage(named: "noImageIcon")
+    self.partnerName.text = "Unknown User"
+    
+  }
+  
   func setUp(_ json:JSON = nil){
     if json != nil {
       wasOpened = false

@@ -26,6 +26,8 @@ class CHChalenges: NSObject {
     
   }
   
+  let maxChallengesCount = 5
+  
   
   /**
    get All Challenges

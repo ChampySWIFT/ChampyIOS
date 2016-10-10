@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   weak var winsPrototypeIcon = #imageLiteral(resourceName: "wins")
   weak var totalPrototypeIcon = #imageLiteral(resourceName: "Total")
   weak var inProgressPrototypeIcon = #imageLiteral(resourceName: "inProgressMiniImage")
-  
+  var unconfirmedChallenges:Int = 0
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

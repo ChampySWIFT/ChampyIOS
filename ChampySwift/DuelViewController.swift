@@ -151,6 +151,16 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   }
   
   func sendAction() {
+    if CHSession().currentUserObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+      self.alertWithMessage("Can't create more challenges", type:.Warning)
+      return
+    }
+    
+    if self.userObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+      self.alertWithMessage("Can't send more challenges to your friend", type: .Warning)
+      return
+    }
+    
     guard IJReachability.isConnectedToNetwork() else {
       //      CHPush().alertPush("No Internet Connection", type: "Warning")
       self.alertWithMessage("No Internet Connection", type: .Warning)

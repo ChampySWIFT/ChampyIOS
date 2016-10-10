@@ -18,9 +18,9 @@
         <!--All Friends Table View Controller-->
         <scene sceneID="Nxc-Dq-6Zv">
             <objects>
-                <tableViewController storyboardIdentifier="AllFriendsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7uf-Ay-HjC" customClass="AllFriendsTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AllFriendsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7uf-Ay-HjC" customClass="AllFriendsTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WUU-cr-g2c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -28,10 +28,10 @@
                         <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="x9Q-Ee-Kh6">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x9Q-Ee-Kh6" id="g55-43-4bb">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -95,13 +95,13 @@
         <!--Wellcome at Champy-->
         <scene sceneID="veX-JL-GJB">
             <objects>
-                <viewController storyboardIdentifier="RoleControlViewController" title="Wellcome at Champy" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kwx-da-bOR" customClass="RoleControlViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RoleControlViewController" title="Wellcome at Champy" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kwx-da-bOR" customClass="RoleControlViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZX4-9G-lmt"/>
                         <viewControllerLayoutGuide type="bottom" id="Zap-kH-Gqy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V3g-mx-mgU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="tW0-t3-g3j"/>
@@ -144,13 +144,13 @@
         <!--Wake Up Info View Controller-->
         <scene sceneID="GB8-Xh-AHu">
             <objects>
-                <viewController storyboardIdentifier="WakeUpInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hcc-6L-wEj" customClass="WakeUpInfoViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WakeUpInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hcc-6L-wEj" customClass="WakeUpInfoViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qlt-uz-htF"/>
                         <viewControllerLayoutGuide type="bottom" id="RsF-c6-TAu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4Hp-WV-ogl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOZ-yh-c3v">
@@ -251,13 +251,13 @@
         <!--Facebook Auth View Controller-->
         <scene sceneID="Q6x-qV-btc">
             <objects>
-                <viewController id="9uJ-qs-hQI" customClass="FacebookAuthViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9uJ-qs-hQI" customClass="FacebookAuthViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HY1-Wf-7St"/>
                         <viewControllerLayoutGuide type="bottom" id="9JE-yT-X8S"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cIP-xM-JI6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="19g-1a-bkK"/>
@@ -310,13 +310,13 @@
         <!--Welcome at Champy-->
         <scene sceneID="gZ2-uW-zfc">
             <objects>
-                <viewController storyboardIdentifier="AuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xjQ-ad-gAJ" customClass="AuthViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xjQ-ad-gAJ" customClass="AuthViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kmj-SJ-DRD"/>
                         <viewControllerLayoutGuide type="bottom" id="WqL-aq-Irf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RXu-y8-Xic">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="sE0-2R-9NU"/>
@@ -377,13 +377,13 @@
         <!--Challenges-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tAl-US-TeY"/>
@@ -417,7 +417,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvv-xF-fTN" customClass="ScoreBorder" customModule="ChampySwift" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvv-xF-fTN" customClass="ScoreBorder" customModule="Champy" customModuleProvider="target">
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="Pm5-a8-nxi"/>
@@ -470,7 +470,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xju-CE-xZz" customClass="ScoreBorder" customModule="ChampySwift" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xju-CE-xZz" customClass="ScoreBorder" customModule="Champy" customModuleProvider="target">
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="3vh-VZ-lXG"/>
@@ -522,7 +522,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRY-Q0-eTz" customClass="ScoreBorder" customModule="ChampySwift" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRY-Q0-eTz" customClass="ScoreBorder" customModule="Champy" customModuleProvider="target">
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="klm-HP-pWg"/>
@@ -586,8 +586,8 @@
                                         </constraints>
                                         <items>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="ciy-ag-jl6"/>
-                                            <barButtonItem image="ChallengeActive" id="Fks-Kp-AeX">
-                                                <color key="tintColor" red="0.98431372549019602" green="0.81176470588235294" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <barButtonItem image="ChallengeActive" id="4lx-nt-07Q">
+                                                <color key="tintColor" red="0.97647058823529409" green="0.77254901960784317" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="Kni-D3-2KY"/>
                                             <barButtonItem image="clock" id="JjO-GY-VjY">
@@ -823,11 +823,13 @@
                         <outlet property="background" destination="tAl-US-TeY" id="Imq-RO-Vr9"/>
                         <outlet property="carousel" destination="dSt-Z0-FdX" id="npp-dO-GPc"/>
                         <outlet property="centerBackground" destination="vaT-1Z-Rdl" id="lyL-Js-m7C"/>
+                        <outlet property="challengesbarButton" destination="4lx-nt-07Q" id="7FQ-Yj-iG8"/>
                         <outlet property="duelContainer" destination="Hgg-KG-DEg" id="cPf-0J-nSB"/>
                         <outlet property="firstContainer" destination="aUG-PU-l7o" id="Cp4-jU-kZA"/>
                         <outlet property="firstMiniIcon" destination="g2m-OG-DZe" id="GRi-3j-UGK"/>
                         <outlet property="firstNumber" destination="2rs-dB-hmm" id="BPo-z8-qOY"/>
                         <outlet property="firstScoreBorder" destination="jvv-xF-fTN" id="suO-LN-ruh"/>
+                        <outlet property="friendsBarButton" destination="lsM-wK-Ygd" id="6Sz-hB-ejR"/>
                         <outlet property="plusIcon" destination="b28-eG-qhc" id="Rjc-yn-HCR"/>
                         <outlet property="plusTapped" destination="7Kc-TF-CJB" id="nJ6-M7-PYJ"/>
                         <outlet property="secondContainer" destination="2D2-G3-cLW" id="tVA-fz-fre"/>
@@ -856,13 +858,13 @@
         <!--Create new challenge-->
         <scene sceneID="V2M-sC-LAf">
             <objects>
-                <viewController storyboardIdentifier="DuelViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GoI-sF-xHM" customClass="DuelViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DuelViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GoI-sF-xHM" customClass="DuelViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CLN-G3-1lE"/>
                         <viewControllerLayoutGuide type="bottom" id="cc3-0a-0Qr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GvA-tl-Nwg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duelbackground" translatesAutoresizingMaskIntoConstraints="NO" id="u4M-fq-v78"/>
@@ -1099,13 +1101,13 @@
         <!--Create new Challenge-->
         <scene sceneID="ViS-Np-9xB">
             <objects>
-                <viewController storyboardIdentifier="SelfImprovementViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iBM-OT-xok" customClass="SelfImprovementViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelfImprovementViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iBM-OT-xok" customClass="SelfImprovementViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xUO-mh-4eL"/>
                         <viewControllerLayoutGuide type="bottom" id="YWK-Nt-8yU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jW2-J0-SEC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duelbackground" translatesAutoresizingMaskIntoConstraints="NO" id="idq-YW-SIX"/>
@@ -1278,13 +1280,13 @@
         <!--History View Controller-->
         <scene sceneID="Mrl-8K-OKz">
             <objects>
-                <viewController storyboardIdentifier="HistoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zay-9G-GqL" customClass="HistoryViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zay-9G-GqL" customClass="HistoryViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rMs-Eg-qKi"/>
                         <viewControllerLayoutGuide type="bottom" id="4Ez-81-wc6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GxZ-ko-tVL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-zq-rUh"/>
@@ -1402,7 +1404,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="background" destination="FaR-zq-rUh" id="Cbm-p7-UXp"/>
+                        <outlet property="challengesBatButtonItem" destination="sqJ-bi-M3H" id="WiY-ro-eyK"/>
                         <outlet property="contentScrollView" destination="AI8-xQ-VcQ" id="vyX-4Z-fu8"/>
+                        <outlet property="friendsBarButton" destination="tcn-Xn-DVH" id="c5Y-wJ-aUj"/>
                         <outlet property="segmentControl" destination="yp8-Kw-1j6" id="M6a-Sk-DuI"/>
                     </connections>
                 </viewController>
@@ -1413,13 +1417,13 @@
         <!--Friends View Controller-->
         <scene sceneID="qvf-sF-Blk">
             <objects>
-                <viewController storyboardIdentifier="FriendsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Wc-bI-oaW" customClass="FriendsViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Wc-bI-oaW" customClass="FriendsViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="utc-5U-5t0"/>
                         <viewControllerLayoutGuide type="bottom" id="iYg-nC-3tY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B68-rN-0ee">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dum-y2-jSU"/>
@@ -1563,7 +1567,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="background" destination="dum-y2-jSU" id="N17-Jh-rlk"/>
+                        <outlet property="challengesBarButtonItem" destination="PtW-T6-Xw8" id="N4q-63-oKD"/>
                         <outlet property="contentScrollView" destination="hFx-NW-bZb" id="rYU-Yo-J24"/>
+                        <outlet property="friendsBarButton" destination="hH2-fL-Nb7" id="n17-Zz-vYO"/>
                         <outlet property="segmentControl" destination="Pub-j1-P3N" id="Bsy-Wf-89K"/>
                     </connections>
                 </viewController>
@@ -1574,13 +1580,13 @@
         <!--Settings-->
         <scene sceneID="bJG-9Z-drY">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QNZ-yS-rxy" customClass="SettingsViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QNZ-yS-rxy" customClass="SettingsViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jm8-SK-2iq"/>
                         <viewControllerLayoutGuide type="bottom" id="kO1-6K-ljG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Xz5-EA-wPa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="5w9-8N-zHd"/>
@@ -1682,6 +1688,8 @@
                     <navigationItem key="navigationItem" title="Settings" id="S85-Cc-HZq"/>
                     <connections>
                         <outlet property="background" destination="5w9-8N-zHd" id="eJV-Rs-tLR"/>
+                        <outlet property="challengesBarButtonItem" destination="fzO-Hz-lcR" id="l5U-4C-QjF"/>
+                        <outlet property="friendsBarButton" destination="b3N-8J-Sp8" id="FCq-jq-q02"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="git-OQ-hSe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1691,9 +1699,9 @@
         <!--Settings Table View Controller-->
         <scene sceneID="Sx1-lW-fKn">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yig-3N-Dws" customClass="SettingsTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yig-3N-Dws" customClass="SettingsTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Fb-3G-2bF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1752,7 +1760,7 @@
                                         <rect key="frame" x="0.0" y="173" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OVy-0F-T2C" id="Ef7-pa-SqM">
-                                            <frame key="frameInset" width="320" height="40"/>
+                                            <frame key="frameInset" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gl4-Yi-bKf">
@@ -1796,7 +1804,7 @@
                                         <rect key="frame" x="0.0" y="213" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7E2-9L-i9l" id="OU7-K6-OeT">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCQ-FF-7rA">
@@ -1833,7 +1841,7 @@
                                         <rect key="frame" x="0.0" y="273" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mHh-j9-bw7" id="2jZ-PF-LEL">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-7y-nSU">
@@ -1870,7 +1878,7 @@
                                         <rect key="frame" x="0.0" y="333" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yVF-6A-IzQ" id="yzd-Va-154">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m14-RX-CZM">
@@ -1969,7 +1977,7 @@
                                         <rect key="frame" x="0.0" y="393" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXe-Lf-HTo" id="uEb-As-gs9">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcN-tp-kUb">
@@ -2070,7 +2078,7 @@
                                         <rect key="frame" x="0.0" y="453" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hcr-wP-4k9" id="Iea-ep-8rM">
-                                            <frame key="frameInset" width="320" height="40"/>
+                                            <frame key="frameInset" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsJ-d6-PYn">
@@ -2114,7 +2122,7 @@
                                         <rect key="frame" x="0.0" y="493" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wYU-03-sLL" id="QVz-QM-GZw">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-ay-6Ld">
@@ -2200,7 +2208,7 @@
                                         <rect key="frame" x="0.0" y="553" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VyO-I7-5dN" id="Hdj-lp-uta">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHM-HE-93Y">
@@ -2247,7 +2255,7 @@
                                         <rect key="frame" x="0.0" y="613" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YQp-Lc-Gmf" id="wK2-1Z-op7">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMF-LM-nda">
@@ -2294,7 +2302,7 @@
                                         <rect key="frame" x="0.0" y="673" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nBF-hH-K17" id="VOl-Ny-4Z6">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sd2-iS-VJL">
@@ -2341,7 +2349,7 @@
                                         <rect key="frame" x="0.0" y="733" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jK8-vZ-c0T" id="JZY-gT-6iM">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5P-FO-27D">
@@ -2388,7 +2396,7 @@
                                         <rect key="frame" x="0.0" y="793" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4l2-9H-6mq" id="jJT-Hb-p83">
-                                            <frame key="frameInset" width="320" height="40"/>
+                                            <frame key="frameInset" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b1h-IE-sqK">
@@ -2432,7 +2440,7 @@
                                         <rect key="frame" x="0.0" y="833" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeC-Td-xYO" id="54Y-dw-W9c">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDh-cr-VZb">
@@ -2479,7 +2487,7 @@
                                         <rect key="frame" x="0.0" y="893" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZO9-Nw-7xQ" id="Mzd-S9-fCh">
-                                            <frame key="frameInset" width="320" height="40"/>
+                                            <frame key="frameInset" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-Qg-hfI">
@@ -2523,7 +2531,7 @@
                                         <rect key="frame" x="0.0" y="933" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YrM-4S-dIn" id="HjR-JL-S4B">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5U-HK-Abl">
@@ -2560,7 +2568,7 @@
                                         <rect key="frame" x="0.0" y="993" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZII-S3-Ozg" id="w14-ex-796">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fo-IZ-Jon">
@@ -2597,7 +2605,7 @@
                                         <rect key="frame" x="0.0" y="1053" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bwT-Kl-ag0" id="veG-W9-6QU">
-                                            <frame key="frameInset" width="320" height="60"/>
+                                            <frame key="frameInset" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5Q-cn-P00">
@@ -2674,9 +2682,9 @@
         <!--Pending Friends Controller-->
         <scene sceneID="gRV-3f-0YB">
             <objects>
-                <tableViewController storyboardIdentifier="PendingFriendsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RGO-Cq-jTZ" customClass="PendingFriendsController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PendingFriendsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RGO-Cq-jTZ" customClass="PendingFriendsController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="gJH-Ir-gqw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2684,10 +2692,10 @@
                         <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dxA-y2-ZZa">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxA-y2-ZZa" id="eWZ-np-VZg">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -2720,17 +2728,17 @@
         <!--In Progress Table View Controller-->
         <scene sceneID="tt6-bJ-a1h">
             <objects>
-                <tableViewController storyboardIdentifier="InProgressTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hqw-tJ-7Io" customClass="InProgressTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="InProgressTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hqw-tJ-7Io" customClass="InProgressTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4R7-Jm-2FY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="okp-YB-8j3">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="okp-YB-8j3" id="UeI-yB-hVV">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -2760,18 +2768,18 @@
         <!--Wins Table View Controller-->
         <scene sceneID="El8-T7-VYo">
             <objects>
-                <tableViewController storyboardIdentifier="WinsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dVO-hD-2Hc" customClass="WinsTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WinsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dVO-hD-2Hc" customClass="WinsTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kpz-7b-aar">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Vpf-vc-1jW">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vpf-vc-1jW" id="Fro-Mm-GeL">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -2801,18 +2809,18 @@
         <!--Failed Table View Controller-->
         <scene sceneID="6Bb-so-IS4">
             <objects>
-                <tableViewController storyboardIdentifier="FailedTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rus-ro-p6M" customClass="FailedTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FailedTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rus-ro-p6M" customClass="FailedTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uQq-JY-CwS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cVa-QI-Jcb">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cVa-QI-Jcb" id="OO7-hL-Gzv">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -2842,9 +2850,9 @@
         <!--Friends Table View Controller-->
         <scene sceneID="7i6-EN-EeQ">
             <objects>
-                <tableViewController storyboardIdentifier="FriendsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="88D-os-YqH" customClass="FriendsTableViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FriendsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="88D-os-YqH" customClass="FriendsTableViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="InT-vM-kwk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2852,10 +2860,10 @@
                         <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="7xA-Ru-IeR">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7xA-Ru-IeR" id="P5V-PQ-IJW">
-                                    <frame key="frameInset" width="320" height="44"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -2888,13 +2896,13 @@
         <!--Create New Challenge-->
         <scene sceneID="19b-ZZ-EQ6">
             <objects>
-                <viewController storyboardIdentifier="WakeUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K4u-HI-wb9" customClass="WakeUpViewController" customModule="ChampySwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WakeUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K4u-HI-wb9" customClass="WakeUpViewController" customModule="Champy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kyo-8N-aze"/>
                         <viewControllerLayoutGuide type="bottom" id="JGw-JW-WRo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1Dq-Eo-z14">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duelbackground" translatesAutoresizingMaskIntoConstraints="NO" id="hNh-dR-l9T"/>
@@ -3257,15 +3265,15 @@
         <image name="plusicon" width="26" height="26"/>
         <image name="sciross" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
-        <image name="wins" width="600" height="600"/>
+        <image name="wins" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h8x-8O-Ltp"/>
-        <segue reference="GJt-aR-ZLh"/>
-        <segue reference="LdF-ez-JyE"/>
-        <segue reference="fXf-B3-CK5"/>
-        <segue reference="TyF-sl-2H6"/>
         <segue reference="YcO-lb-OnH"/>
-        <segue reference="uT9-h1-AmF"/>
+        <segue reference="KWy-Sq-UFz"/>
+        <segue reference="ggH-dX-57V"/>
+        <segue reference="lcB-oY-rVi"/>
+        <segue reference="DSc-Xv-fDL"/>
+        <segue reference="xgf-yx-vXc"/>
+        <segue reference="Bpc-Yg-btr"/>
     </inferredMetricsTieBreakers>
 </document>

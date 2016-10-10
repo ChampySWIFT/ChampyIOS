@@ -135,7 +135,9 @@
 		57FCDC781D3672DD00BE9262 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
 		57FCDC791D3672DD00BE9262 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */; };
 		57FCDC7A1D3672DD00BE9262 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */; };
-		964BF0B8D3FD85BAB646A003 /* Pods_ChampySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94430A928AF04817A64C764 /* Pods_ChampySwift.framework */; };
+		6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */; };
+		790CB9DA136B31D9BDEE5AA4 /* Pods_ChampyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */; };
+		A79081C971694F3E4F89DEB6 /* Pods_ChampyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */; };
 		F058DBD6870325289AA1D6AF /* Pods_ChampySwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -165,10 +167,10 @@
 		0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MNMBottomPullToRefresh.strings; sourceTree = "<group>"; };
 		0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MNMBottomPullToRefreshArrow.png; sourceTree = "<group>"; };
 		0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
-		1BC8E7847E0C24063DB5706C /* Pods-ChampySwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.debug.xcconfig"; sourceTree = "<group>"; };
 		1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.release.xcconfig"; sourceTree = "<group>"; };
 		37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		450640A618ECB1EE939FC91B /* Pods-ChampySwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5704A3091D4246F5007CAAA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5704A30A1D4246F5007CAAA4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5704A30B1D4246F6007CAAA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,7 +223,7 @@
 		577FAD521CEC6D4300DA5F9D /* SelfImprovementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementViewController.swift; sourceTree = "<group>"; };
 		5784FF8E1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderViewForPendingFriendsCells.xib; sourceTree = "<group>"; };
 		5784FF901D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewForPendingFriendsCells.swift; sourceTree = "<group>"; };
-		579C18561CCB595700D6EEA9 /* ChampySwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChampySwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		579C18561CCB595700D6EEA9 /* Champy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Champy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579C18591CCB595700D6EEA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		579C185B1CCB595700D6EEA9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		579C185E1CCB595700D6EEA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -230,7 +232,7 @@
 		579C18681CCB595700D6EEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		579C18711CCB595700D6EEA9 /* ChampySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampySwiftTests.swift; sourceTree = "<group>"; };
 		579C18731CCB595700D6EEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		579C18781CCB595800D6EEA9 /* ChampySwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampySwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		579C18781CCB595800D6EEA9 /* ChampyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579C187C1CCB595800D6EEA9 /* ChampySwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampySwiftUITests.swift; sourceTree = "<group>"; };
 		579C187E1CCB595800D6EEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		579F35CF1D06B38F00C4A77B /* SwipyCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipyCell.framework; path = "../../../../../../Users/molnarkristian/Library/Developer/Xcode/DerivedData/ChampySwift-emuxlvywuewwnbazdkahvknzpppf/Build/Products/Debug-iphoneos/SwipyCell.framework"; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 		57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		57DBA4AB1D366E7D00DD0035 /* ChampySwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		57DBA4AB1D366E7D00DD0035 /* ChampyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57DBA4AD1D366E7D00DD0035 /* ChampySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampySwiftTests.swift; sourceTree = "<group>"; };
 		57DBA4AF1D366E7D00DD0035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57DBF6281CEC6DF500659B79 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
@@ -300,11 +302,14 @@
 		57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleControlViewController.swift; sourceTree = "<group>"; };
 		57ED480C1CD8E12800E2CCFF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		57FBC97E1CD9F49900341A2D /* APCustomBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCustomBlurView.swift; sourceTree = "<group>"; };
-		707DA3066377AAB6AE3AC58C /* Pods-ChampySwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift.release.xcconfig"; sourceTree = "<group>"; };
-		72FC0ED8A15B6B5A927105D9 /* Pods-ChampySwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftTests/Pods-ChampySwiftTests.release.xcconfig"; sourceTree = "<group>"; };
-		A61C4D44075402B05B8A82B7 /* Pods-ChampySwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwiftTests/Pods-ChampySwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A94430A928AF04817A64C764 /* Pods_ChampySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E84BC967ED07191C78A1C3A3 /* Pods-ChampySwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampySwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift.debug.xcconfig"; sourceTree = "<group>"; };
+		BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.release.xcconfig"; sourceTree = "<group>"; };
+		CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Champy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +333,7 @@
 				579F35CC1D06B38F00C4A77B /* SwiftHTTP.framework in Frameworks */,
 				57DBA48E1D36677300DD0035 /* FBSDKCoreKit.framework in Frameworks */,
 				579F35CD1D06B38F00C4A77B /* SwiftyJSON.framework in Frameworks */,
-				964BF0B8D3FD85BAB646A003 /* Pods_ChampySwift.framework in Frameworks */,
+				6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +361,7 @@
 				57DBA4881D3662A300DD0035 /* SwiftyJSON.framework in Frameworks */,
 				57DBA4891D3662A300DD0035 /* SwipyCell.framework in Frameworks */,
 				179C1BC104D7A03EFD193535 /* Pods_ChampySwiftUITests.framework in Frameworks */,
+				790CB9DA136B31D9BDEE5AA4 /* Pods_ChampyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +374,7 @@
 				57FCDC7A1D3672DD00BE9262 /* FBSDKShareKit.framework in Frameworks */,
 				57FCDC771D3672DD00BE9262 /* FBSDKCoreKit.framework in Frameworks */,
 				57FCDC781D3672DD00BE9262 /* FBSDKLoginKit.framework in Frameworks */,
+				A79081C971694F3E4F89DEB6 /* Pods_ChampyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,9 +540,9 @@
 		579C18571CCB595700D6EEA9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				579C18561CCB595700D6EEA9 /* ChampySwift.app */,
-				579C18781CCB595800D6EEA9 /* ChampySwiftUITests.xctest */,
-				57DBA4AB1D366E7D00DD0035 /* ChampySwiftTests.xctest */,
+				579C18561CCB595700D6EEA9 /* Champy.app */,
+				579C18781CCB595800D6EEA9 /* ChampyUITests.xctest */,
+				57DBA4AB1D366E7D00DD0035 /* ChampyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -713,12 +720,12 @@
 		748FB7733E530F87CD162CDB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E84BC967ED07191C78A1C3A3 /* Pods-ChampySwift.debug.xcconfig */,
-				707DA3066377AAB6AE3AC58C /* Pods-ChampySwift.release.xcconfig */,
-				A61C4D44075402B05B8A82B7 /* Pods-ChampySwiftTests.debug.xcconfig */,
-				72FC0ED8A15B6B5A927105D9 /* Pods-ChampySwiftTests.release.xcconfig */,
-				1BC8E7847E0C24063DB5706C /* Pods-ChampySwiftUITests.debug.xcconfig */,
-				450640A618ECB1EE939FC91B /* Pods-ChampySwiftUITests.release.xcconfig */,
+				158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */,
+				322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */,
+				5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */,
+				C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */,
+				BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */,
+				DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -764,6 +771,9 @@
 				A94430A928AF04817A64C764 /* Pods_ChampySwift.framework */,
 				1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */,
 				37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */,
+				CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */,
+				583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */,
+				5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -771,9 +781,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		579C18551CCB595700D6EEA9 /* ChampySwift */ = {
+		579C18551CCB595700D6EEA9 /* Champy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwift" */;
+			buildConfigurationList = 579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "Champy" */;
 			buildPhases = (
 				99A4546EDF1335B970AE583A /* [CP] Check Pods Manifest.lock */,
 				579C18521CCB595700D6EEA9 /* Sources */,
@@ -786,14 +796,14 @@
 			);
 			dependencies = (
 			);
-			name = ChampySwift;
+			name = Champy;
 			productName = ChampySwift;
-			productReference = 579C18561CCB595700D6EEA9 /* ChampySwift.app */;
+			productReference = 579C18561CCB595700D6EEA9 /* Champy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		579C18771CCB595800D6EEA9 /* ChampySwiftUITests */ = {
+		579C18771CCB595800D6EEA9 /* ChampyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 579C18871CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwiftUITests" */;
+			buildConfigurationList = 579C18871CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampyUITests" */;
 			buildPhases = (
 				79811992F5AC99F0AE96D7E1 /* [CP] Check Pods Manifest.lock */,
 				579C18741CCB595800D6EEA9 /* Sources */,
@@ -806,14 +816,14 @@
 			dependencies = (
 				579C187A1CCB595800D6EEA9 /* PBXTargetDependency */,
 			);
-			name = ChampySwiftUITests;
+			name = ChampyUITests;
 			productName = ChampySwiftUITests;
-			productReference = 579C18781CCB595800D6EEA9 /* ChampySwiftUITests.xctest */;
+			productReference = 579C18781CCB595800D6EEA9 /* ChampyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		57DBA4AA1D366E7D00DD0035 /* ChampySwiftTests */ = {
+		57DBA4AA1D366E7D00DD0035 /* ChampyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 57DBA4B21D366E7D00DD0035 /* Build configuration list for PBXNativeTarget "ChampySwiftTests" */;
+			buildConfigurationList = 57DBA4B21D366E7D00DD0035 /* Build configuration list for PBXNativeTarget "ChampyTests" */;
 			buildPhases = (
 				0201F9E488266F3711FA81F9 /* [CP] Check Pods Manifest.lock */,
 				57DBA4A71D366E7D00DD0035 /* Sources */,
@@ -827,9 +837,9 @@
 			dependencies = (
 				57DBA4B11D366E7D00DD0035 /* PBXTargetDependency */,
 			);
-			name = ChampySwiftTests;
+			name = ChampyTests;
 			productName = ChampySwiftTests;
-			productReference = 57DBA4AB1D366E7D00DD0035 /* ChampySwiftTests.xctest */;
+			productReference = 57DBA4AB1D366E7D00DD0035 /* ChampyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -868,7 +878,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 579C18511CCB595700D6EEA9 /* Build configuration list for PBXProject "ChampySwift" */;
+			buildConfigurationList = 579C18511CCB595700D6EEA9 /* Build configuration list for PBXProject "Champy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -881,9 +891,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				579C18551CCB595700D6EEA9 /* ChampySwift */,
-				579C18771CCB595800D6EEA9 /* ChampySwiftUITests */,
-				57DBA4AA1D366E7D00DD0035 /* ChampySwiftTests */,
+				579C18551CCB595700D6EEA9 /* Champy */,
+				579C18771CCB595800D6EEA9 /* ChampyUITests */,
+				57DBA4AA1D366E7D00DD0035 /* ChampyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -971,7 +981,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwiftTests/Pods-ChampySwiftTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		70EB94B740BD42A334A9F764 /* [CP] Embed Pods Frameworks */ = {
@@ -986,7 +996,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Champy/Pods-Champy-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		740052FCA1DF35D355DB83C6 /* [CP] Copy Pods Resources */ = {
@@ -1001,7 +1011,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwiftUITests/Pods-ChampySwiftUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		79811992F5AC99F0AE96D7E1 /* [CP] Check Pods Manifest.lock */ = {
@@ -1046,7 +1056,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwift/Pods-ChampySwift-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Champy/Pods-Champy-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FF1B59DDAA9B6822DB0A116C /* [CP] Copy Pods Resources */ = {
@@ -1061,7 +1071,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampySwiftTests/Pods-ChampySwiftTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1150,12 +1160,12 @@
 /* Begin PBXTargetDependency section */
 		579C187A1CCB595800D6EEA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 579C18551CCB595700D6EEA9 /* ChampySwift */;
+			target = 579C18551CCB595700D6EEA9 /* Champy */;
 			targetProxy = 579C18791CCB595800D6EEA9 /* PBXContainerItemProxy */;
 		};
 		57DBA4B11D366E7D00DD0035 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 579C18551CCB595700D6EEA9 /* ChampySwift */;
+			target = 579C18551CCB595700D6EEA9 /* Champy */;
 			targetProxy = 57DBA4B01D366E7D00DD0035 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1269,7 +1279,7 @@
 		};
 		579C18821CCB595800D6EEA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E84BC967ED07191C78A1C3A3 /* Pods-ChampySwift.debug.xcconfig */;
+			baseConfigurationReference = 158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1300,7 +1310,7 @@
 		};
 		579C18831CCB595800D6EEA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707DA3066377AAB6AE3AC58C /* Pods-ChampySwift.release.xcconfig */;
+			baseConfigurationReference = 322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1330,7 +1340,7 @@
 		};
 		579C18881CCB595800D6EEA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BC8E7847E0C24063DB5706C /* Pods-ChampySwiftUITests.debug.xcconfig */;
+			baseConfigurationReference = BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1348,7 +1358,7 @@
 		};
 		579C18891CCB595800D6EEA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 450640A618ECB1EE939FC91B /* Pods-ChampySwiftUITests.release.xcconfig */;
+			baseConfigurationReference = DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1366,7 +1376,7 @@
 		};
 		57DBA4B31D366E7D00DD0035 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A61C4D44075402B05B8A82B7 /* Pods-ChampySwiftTests.debug.xcconfig */;
+			baseConfigurationReference = 5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1378,13 +1388,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AzinecLLC.ChampySwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChampySwift.app/ChampySwift";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Champy.app/Champy";
 			};
 			name = Debug;
 		};
 		57DBA4B41D366E7D00DD0035 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72FC0ED8A15B6B5A927105D9 /* Pods-ChampySwiftTests.release.xcconfig */;
+			baseConfigurationReference = C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1396,14 +1406,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AzinecLLC.ChampySwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChampySwift.app/ChampySwift";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Champy.app/Champy";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		579C18511CCB595700D6EEA9 /* Build configuration list for PBXProject "ChampySwift" */ = {
+		579C18511CCB595700D6EEA9 /* Build configuration list for PBXProject "Champy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				579C187F1CCB595800D6EEA9 /* Debug */,
@@ -1412,7 +1422,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwift" */ = {
+		579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "Champy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				579C18821CCB595800D6EEA9 /* Debug */,
@@ -1421,7 +1431,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		579C18871CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampySwiftUITests" */ = {
+		579C18871CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "ChampyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				579C18881CCB595800D6EEA9 /* Debug */,
@@ -1430,7 +1440,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		57DBA4B21D366E7D00DD0035 /* Build configuration list for PBXNativeTarget "ChampySwiftTests" */ = {
+		57DBA4B21D366E7D00DD0035 /* Build configuration list for PBXNativeTarget "ChampyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57DBA4B31D366E7D00DD0035 /* Debug */,

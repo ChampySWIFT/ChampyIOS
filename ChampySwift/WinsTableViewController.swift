@@ -132,9 +132,19 @@ class WinsTableViewController: UITableViewController {
       self.identifiers.append(item["_id"].stringValue)
       let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       content.setUp(item)
-      
       self.historyItems.append(content)
     }
+    
+    if CHSession().currentUserObject["successChallenges"].intValue > self.historyItems.count {
+      for i:Int in 0...CHSession().currentUserObject["successChallenges"].intValue - self.historyItems.count - 1 {
+        self.identifiers.append("Unknown\(i)")
+        let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
+        content.setUpforUnknownDuel()
+        self.historyItems.append(content)
+      }
+      
+    }
+    
   }
   
   func disableTapForASec() {

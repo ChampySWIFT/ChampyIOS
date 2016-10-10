@@ -10,6 +10,7 @@
   import UIKit
   import Async
   import SwiftyJSON
+//  import UIViewBadge
   
   class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
     let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -22,6 +23,7 @@
     var opened:Bool = false
     
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var challengeButton: UIButton!
     
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var firstContainer: UIView!
@@ -39,7 +41,9 @@
     @IBOutlet weak var wakeUpContainer: UIView!
     @IBOutlet weak var selfImprovementContainer: UIView!
     @IBOutlet weak var duelContainer: UIView!
+    @IBOutlet weak var friendsBarButton: UIBarButtonItem!
     
+    @IBOutlet weak var challengesbarButton: UIBarButtonItem!
     var centerTapped:Bool = false
     var inProgressChallenges:Int = 0
     var wins:Int = 0
@@ -77,7 +81,10 @@
     
     func fillCarousel() {
       Async.main{
-        
+        var firstIncomigRequestCount:Int = -1
+        var i:Int = 0
+        var unconfirmedChallenges:Int = 0
+        self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
         for item in self.itemViewArray {
           item.removeFromSuperview()
         }
@@ -87,11 +94,18 @@
         
         let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
         
-        
         for challenge in self.challenges {
+          
           var containerView: UIView
           let challengeType = CHChalenges().getChallengeType(challenge)
-          
+          if challengeType == .unconfirmedDuelRecipient || challengeType == .unconfirmedDuelSender {
+            if challengeType == .unconfirmedDuelRecipient {
+              firstIncomigRequestCount = i
+            }
+            unconfirmedChallenges += 1
+            self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
+          }
+          i += 1
           var timeIdentifier = "0"
           if  challenge["senderProgress"] != nil {
             timeIdentifier = challenge["senderProgress"][challenge["senderProgress"].count - 1]["at"].stringValue
@@ -100,6 +114,7 @@
           let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)-\(timeIdentifier)"
           if self.appDelegate.mainViewCard[cardIdentifier] != nil {
             containerView = self.appDelegate.mainViewCard[cardIdentifier]!
+            
           } else {
             
             switch challengeType {
@@ -107,6 +122,7 @@
               let itemView = UnConfirmedDuel(frame:frame)
               itemView.setUp(challenge)
               containerView = itemView
+              
               break
               
             case .unconfirmedDuelSender:
@@ -172,19 +188,43 @@
         
         
         self.carousel.reloadData()
-        let duration:Double = Double(self.challenges.count / 6)
-        if self.challenges.count > 15 {
-          self.carousel.scrollToItem(at: self.challenges.count - 1, animated: true)
-        } else {
-          self.carousel.scrollToItem(at: self.challenges.count - 1, duration: duration)
-        }
         
         self.firstNumber.text = "\(self.inProgressChallenges)"
         self.secondNumber.text = "\(self.wins)"
         self.thirdNumber.text = "\(self.points)"
         
+        if unconfirmedChallenges > 0 {
+          if self.challengesbarButton.badgeLayer != nil {
+            self.challengesbarButton.updateBadge(number: unconfirmedChallenges)
+          } else {
+            self.challengesbarButton.addBadge(number: unconfirmedChallenges)
+          }
+        }
+        
+        if unconfirmedChallenges == 0 {
+          if self.challengesbarButton.badgeLayer != nil {self.challengesbarButton.removeBadge()}
+        }
+        
+        if firstIncomigRequestCount != -1 {
+          let duration:Double = Double(self.challenges.count / 6)
+          if self.challenges.count > 15 {
+            self.carousel.scrollToItem(at: firstIncomigRequestCount, animated: true)
+          } else {
+            self.carousel.scrollToItem(at: firstIncomigRequestCount, duration: duration)
+          }
+        } else {
+          let duration:Double = Double(self.challenges.count / 6)
+          if self.challenges.count > 15 {
+            self.carousel.scrollToItem(at: self.challenges.count - 1, animated: true)
+          } else {
+            self.carousel.scrollToItem(at: self.challenges.count - 1, duration: duration)
+          }
+          
+        }
         
       }
+      
+      
     }
     
     func fillCHallenges() {
@@ -217,8 +257,16 @@
       self.navigationItem.leftBarButtonItem = nil
       
       
+//      self.challengesBarButton.customView?.addSubview(badge)
+      
     }
     
+    func buildACustomButton() -> UIButton {
+      let button = UIButton(type: UIButtonType.infoDark)
+      button.frame = CGRect(x:0, y:0, width: 24, height: 24);
+      button.backgroundColor = UIColor.blue;
+      return button;
+    }
     
     func setUpBehavior() {
       Async.background{
@@ -252,7 +300,20 @@
           
         })
         CHRequests().getAllUsers { (result, json) in
-          
+          Async.main {
+            let friendsBadgeCount = CHUsers().getIncomingRequestCount()
+            if friendsBadgeCount > 0 {
+              if self.friendsBarButton.badgeLayer != nil {
+                self.friendsBarButton.updateBadge(number: friendsBadgeCount)
+              } else {
+                self.friendsBarButton.addBadge(number: friendsBadgeCount)
+              }
+            }
+            
+            if CHUsers().getIncomingRequestCount() == 0 {
+              if self.friendsBarButton.badgeLayer != nil {self.friendsBarButton.removeBadge()}
+            }
+          }
         }
         
         CHRequests().getChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
@@ -555,4 +616,70 @@
     
     
   }
+  
+  
+  extension CAShapeLayer {
+    
+    
+    func drawCircleAtLocation(location: CGPoint, withRadius radius: CGFloat, andColor color: UIColor, filled: Bool) {
+      fillColor = filled ? color.cgColor : UIColor.white.cgColor
+      strokeColor = color.cgColor
+      let origin = CGPoint(x: location.x - radius, y: location.y - radius)
+      path = UIBezierPath(ovalIn: CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))).cgPath
+    }
+  }
+ 
+ 
+  private var handle: UInt8 = 0;
+    
+    extension UIBarButtonItem {
+      
+      var badgeLayer: CAShapeLayer? {
+        if let b: AnyObject = objc_getAssociatedObject(self, &handle) as AnyObject? {
+          return b as? CAShapeLayer
+        } else {
+          return nil
+        }
+      }
+      
+      func addBadge(number: Int, withOffset offset: CGPoint = CGPoint.zero, andFilled filled: Bool = true) {
+        let color:UIColor = UIColor.red
+        guard let view = self.value(forKey: "view") as? UIView else { return }
+        
+        badgeLayer?.removeFromSuperlayer()
+        
+        // Initialize Badge
+        let badge = CAShapeLayer()
+        let radius = CGFloat(7)
+        let location = CGPoint(x: view.frame.width - (radius + offset.x), y: (radius + offset.y))
+        badge.drawCircleAtLocation(location: location, withRadius: radius, andColor: color, filled: filled)
+        view.layer.addSublayer(badge)
+        
+        // Initialiaze Badge's label
+        let label = CATextLayer()
+        label.string = "\(number)"
+        label.alignmentMode = kCAAlignmentCenter
+        label.fontSize = 11
+        label.frame = CGRect(origin: CGPoint(x: location.x - 4, y: offset.y), size: CGSize(width: 8, height: 16))
+        label.foregroundColor = filled ? UIColor.white.cgColor : color.cgColor
+        label.backgroundColor = UIColor.clear.cgColor
+        label.contentsScale = UIScreen.main.scale
+        badge.addSublayer(label)
+        
+        // Save Badge as UIBarButtonItem property
+        objc_setAssociatedObject(self, &handle, badge, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+      }
+      
+      func updateBadge(number number: Int) {
+        if let text = badgeLayer?.sublayers?.filter({ $0 is CATextLayer }).first as? CATextLayer {
+          text.string = "\(number)"
+        }
+      }
+      
+      func removeBadge() {
+        badgeLayer?.removeFromSuperlayer()
+      }
+      
+    }
+  
   

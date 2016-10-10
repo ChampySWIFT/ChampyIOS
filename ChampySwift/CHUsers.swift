@@ -111,6 +111,25 @@ class CHUsers: NSObject {
   }
  
   
+  func getIncomingRequestCount() -> Int {
+    var result = 0
+    for friend in getPendingFriend(CHSession().currentUserId) {
+      
+      switch CHSession().currentUserId {
+      case friend["friend"]["_id"].stringValue:
+        break
+        
+      case friend["owner"]["_id"].stringValue:
+       result += 1
+        break
+      default:
+        continue
+      }
+    }
+    
+    return result
+  }
+  
   /**
    Get one user from local database
    

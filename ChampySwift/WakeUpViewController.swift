@@ -171,6 +171,10 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   
   
   func sendAction() {
+    if CHSession().currentUserObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+      CHPush().alertPush("Can't create more challenges", type: "Warning")
+      return
+    }
     var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
     days = (days.replacingOccurrences(of: " Day", with: ""))
     

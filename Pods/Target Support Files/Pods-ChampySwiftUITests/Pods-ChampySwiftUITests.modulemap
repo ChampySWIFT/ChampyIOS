@@ -1,6 +1,0 @@
-framework module Pods_ChampySwiftUITests {
-  umbrella header "Pods-ChampySwiftUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

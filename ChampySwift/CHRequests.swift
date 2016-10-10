@@ -314,8 +314,8 @@ class CHRequests: NSObject {
       completitionHandler(false, nil)
       return
     }
-    let url = "\(self.APIurl)/users?token=\(self.token)"
-//    let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
+//    let url = "\(self.APIurl)/users?token=\(self.token)"
+    let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.GET(url)

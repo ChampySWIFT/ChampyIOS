@@ -3,7 +3,7 @@ platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-target 'ChampySwift' do
+target 'Champy' do
   pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
@@ -19,7 +19,7 @@ target 'ChampySwift' do
   #pod 'FacebookShare'
 end
 
-target 'ChampySwiftUITests' do
+target 'ChampyUITests' do
   pod 'Socket.IO-Client-Swift', '~> 8.0.2'
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
@@ -30,7 +30,7 @@ target 'ChampySwiftUITests' do
   pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
 end
 
-target 'ChampySwiftTests' do
+target 'ChampyTests' do
   pod 'Socket.IO-Client-Swift', '~> 8.0.2'
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'

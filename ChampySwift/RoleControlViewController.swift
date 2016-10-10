@@ -244,6 +244,7 @@ class RoleControlViewController: UIViewController {
   }
   
   func sendReloadNotiFriends() {
+    CHPush().localPush("refreshBadge", object: self)
     CHPush().localPush("pendingReload", object: self)
     CHPush().localPush("friendsReload", object: self)
     CHPush().localPush("allReload", object: self)

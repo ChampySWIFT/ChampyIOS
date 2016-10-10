@@ -20,12 +20,35 @@ class FriendsViewController: UIViewController {
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
   
+  @IBOutlet weak var challengesBarButtonItem: UIBarButtonItem!
+  @IBOutlet weak var friendsBarButton: UIBarButtonItem!
   
   @IBOutlet weak var segmentControl: UISegmentedControl!
   @IBOutlet weak var contentScrollView: UIScrollView!
   @IBOutlet weak var background: UIImageView!
   override func viewDidLoad() {
     super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(FriendsViewController.refreshBadge), name: NSNotification.Name(rawValue: "refreshBadge"), object: nil)
+    var unconfirmedChallenges:Int = 0
+    self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
+    
+    for challenge in CHChalenges().getInProgressChallenges(CHSession().currentUserId).reversed() {
+      let challengeType = CHChalenges().getChallengeType(challenge)
+      if challengeType == .unconfirmedDuelRecipient || challengeType == .unconfirmedDuelSender {
+        unconfirmedChallenges += 1
+        self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
+      }
+    }
+    
+    
+    if appDelegate.unconfirmedChallenges > 0 {
+      if self.challengesBarButtonItem.badgeLayer != nil {
+        self.challengesBarButtonItem.updateBadge(number: appDelegate.unconfirmedChallenges)
+      } else {
+        self.challengesBarButtonItem.addBadge(number: appDelegate.unconfirmedChallenges)
+      }
+    }
+    
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.hidesBackButton = true
     if appDelegate.friendsViewController == nil {
@@ -36,6 +59,22 @@ class FriendsViewController: UIViewController {
     segmentControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
     
     Async.background{
+      CHRequests().getAllUsers { (result, json) in
+        Async.main {
+          let friendsBadgeCount = CHUsers().getIncomingRequestCount()
+          if friendsBadgeCount > 0 {
+            if self.friendsBarButton.badgeLayer != nil {
+              self.friendsBarButton.updateBadge(number: friendsBadgeCount)
+            } else {
+              self.friendsBarButton.addBadge(number: friendsBadgeCount)
+            }
+          }
+          
+          if CHUsers().getIncomingRequestCount() == 0 {
+            if self.friendsBarButton.badgeLayer != nil {self.friendsBarButton.removeBadge()}
+          }
+        }
+      }
       if IJReachability.isConnectedToNetwork()  {
         
         CHRequests().checkUser(CHSession().currentUserId) { (json, status) in
@@ -63,6 +102,26 @@ class FriendsViewController: UIViewController {
     
   }
   
+  func refreshBadge() {
+    Async.background {
+      CHRequests().getAllUsers { (result, json) in
+        Async.main {
+          let friendsBadgeCount = CHUsers().getIncomingRequestCount()
+          if friendsBadgeCount > 0 {
+            if self.friendsBarButton.badgeLayer != nil {
+              self.friendsBarButton.updateBadge(number: friendsBadgeCount)
+            } else {
+              self.friendsBarButton.addBadge(number: friendsBadgeCount)
+            }
+          }
+          
+          if CHUsers().getIncomingRequestCount() == 0 {
+            if self.friendsBarButton.badgeLayer != nil {self.friendsBarButton.removeBadge()}
+          }
+        }
+      }
+    }
+  }
   
   @IBAction func shareAction(_ sender: AnyObject) {
     let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
@@ -163,7 +222,11 @@ class FriendsViewController: UIViewController {
     contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     CHPush().localPush("pendingReload", object: self)
     CHPush().localPush("friendsReload", object: self)
-    
+    if CHUsers().getIncomingRequestCount() > 0 {
+      let p =  CGPoint(x:self.view.frame.size.width,y:0)
+      contentScrollView.setContentOffset(p, animated: false)
+      
+    }
   }
   
   override func viewDidDisappear(_ animated: Bool) {

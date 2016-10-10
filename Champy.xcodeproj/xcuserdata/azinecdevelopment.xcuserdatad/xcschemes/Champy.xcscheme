@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D48FE5D1C33F5C5AB2F652D2A0F06B40"
-               BuildableName = "Pods_ChampySwiftUITests.framework"
-               BlueprintName = "Pods-ChampySwiftUITests"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "579C18551CCB595700D6EEA9"
+               BuildableName = "Champy.app"
+               BlueprintName = "Champy"
+               ReferencedContainer = "container:Champy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "579C18551CCB595700D6EEA9"
+            BuildableName = "Champy.app"
+            BlueprintName = "Champy"
+            ReferencedContainer = "container:Champy.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D48FE5D1C33F5C5AB2F652D2A0F06B40"
-            BuildableName = "Pods_ChampySwiftUITests.framework"
-            BlueprintName = "Pods-ChampySwiftUITests"
-            ReferencedContainer = "container:Pods.xcodeproj">
+            BlueprintIdentifier = "579C18551CCB595700D6EEA9"
+            BuildableName = "Champy.app"
+            BlueprintName = "Champy"
+            ReferencedContainer = "container:Champy.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,6 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "579C18551CCB595700D6EEA9"
+            BuildableName = "Champy.app"
+            BlueprintName = "Champy"
+            ReferencedContainer = "container:Champy.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

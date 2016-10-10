@@ -420,6 +420,7 @@ import Async
           if result {
             Async.main {
               self.tapped = false
+              CHPush().localPush("refreshBadge", object: self)
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "\(CHSession().currentUserName) has accepted your request", options: "")
             }
           } else {
@@ -522,6 +523,7 @@ import Async
     CHRequests().removeFriendRequest(CHSession().currentUserId, friendId: self.userObject["_id"].stringValue, completitionHandler: { (result, json) in
       if result {
         Async.main {
+          CHPush().localPush("refreshBadge", object: self)
           self.tapped = false
           self.confirmationVindow.isHidden = true
         }
