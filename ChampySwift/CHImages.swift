@@ -59,7 +59,7 @@ class CHImages: NSObject {
   
   func setImageForMiniIconWins(imageView:UIImageView) {
     
-    var cachename = "wins"
+    let cachename = "wins"
     let myCache = ImageCache(name: cachename)
     
     
@@ -73,7 +73,7 @@ class CHImages: NSObject {
   
   func setImageForMiniIconInProgress(imageView:UIImageView) {
     
-    var cachename = "inProgress"
+    let cachename = "inProgress"
     let myCache = ImageCache(name: cachename)
     
     
@@ -87,7 +87,7 @@ class CHImages: NSObject {
   
   func setImageForMiniIconTotal(imageView:UIImageView) {
     
-    var cachename = "total"
+    let cachename = "total"
     let myCache = ImageCache(name: cachename)
     
     

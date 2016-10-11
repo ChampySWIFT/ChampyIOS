@@ -127,7 +127,7 @@ class MNMBottomPullToRefreshManager: NSObject {
   
   func tableViewScrolled() {
     if !pullToRefreshView.isHidden && !pullToRefreshView.isLoading {
-      var offset: CGFloat = self.tableScrollOffset()
+      let offset: CGFloat = self.tableScrollOffset()
       if offset >= 0.0 {
         pullToRefreshView.changeStateOfControl(.idle, offset: offset)
       }
@@ -145,8 +145,8 @@ class MNMBottomPullToRefreshManager: NSObject {
   
   func tableViewReleased() {
     if !pullToRefreshView.isHidden && !pullToRefreshView.isLoading {
-      var offset: CGFloat = self.tableScrollOffset()
-      var height: CGFloat = -pullToRefreshView.fixedHeight
+      let offset: CGFloat = self.tableScrollOffset()
+      let height: CGFloat = -pullToRefreshView.fixedHeight
       if offset <= 0.0 && offset < height {
         client.bottomPull(toRefreshTriggered: self)
         pullToRefreshView.changeStateOfControl(.loading, offset: offset)

@@ -670,7 +670,7 @@
         objc_setAssociatedObject(self, &handle, badge, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
       }
       
-      func updateBadge(number number: Int) {
+      func updateBadge(number: Int) {
         if let text = badgeLayer?.sublayers?.filter({ $0 is CATextLayer }).first as? CATextLayer {
           text.string = "\(number)"
         }

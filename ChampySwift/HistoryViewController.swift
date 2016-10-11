@@ -57,7 +57,7 @@ class HistoryViewController: UIViewController {
     }
     CHImages().setUpBackground(background, frame: self.view.frame)
     let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
-    segmentControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
+    segmentControl.setTitleTextAttributes((attr as! [AnyHashable: Any]) , for: UIControlState())
     
     
     Async.background{

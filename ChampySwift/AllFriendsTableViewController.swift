@@ -33,17 +33,13 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   }
   
   override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    if (scrollView.contentOffset.y + scrollView.frame.size.height == scrollView.contentSize.height)
-    {
-     loadMoreFriends()
-    }
-    
+    if (scrollView.contentOffset.y + scrollView.frame.size.height == scrollView.contentSize.height) { loadMoreFriends() }
   }
   
-    override func viewDidAppear(_ animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     center.addObserver(self, selector: #selector(AllFriendsTableViewController.refreshTableViewAction(_:)), name: NSNotification.Name(rawValue: "allReload"), object: nil)
     self.refreshTableViewAction(self.refreshTableView)
-    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,24 +48,21 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    
   }
   
   // MARK: - Table view data source
   
   override func numberOfSections(in tableView: UITableView) -> Int {
-    
     return 1
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-   
-    return identifiers	.count
+   return identifiers	.count
   }
   
   override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
-      weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
+      weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
       if (content?.opened)! {
         content?.close()
         heights[(indexPath as NSIndexPath).row] = 66
@@ -87,14 +80,13 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
-    let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-    
+    weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
     
     if (indexPath as NSIndexPath).row == self.selectedRow {
       heights[(indexPath as NSIndexPath).row] = 220.0
       return 220
     } else {
-      content.close()
+      content?.close()
       heights[(indexPath as NSIndexPath).row] = 66
       return 66
     }
@@ -112,15 +104,22 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       cell!.contentView.backgroundColor = UIColor.clear
       
       //        let content = friendsContent[indexPath.row] as! FriendCell
-      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
-      let friend = self.userArray[indexPath.row]
-      let status = CHUsers().getStatus(friend) //"Other"
-      content.status = status
+      autoreleasepool {
+        var content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+        let friend = self.userArray[indexPath.row]
+        let status = CHUsers().getStatus(friend) //"Other"
+        content.status = status
+        
+        content.setUp(friend)
+        content.close()
+        self.friendsContent[(indexPath as NSIndexPath).row] = content
+        
+        cell?.addSubview(content)
+      }
       
-      content.setUp(friend)
-      content.close()
-      self.friendsContent[(indexPath as NSIndexPath).row] = content
-      cell?.addSubview(content)
+      
+      
+      
       cell!.backgroundColor = UIColor.clear
       displayiedCells += 1
     }
@@ -138,8 +137,8 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       disableTapForASec()
       tableView.beginUpdates()
       if (indexPath as NSIndexPath).row == selectedRow {
-        let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-        content.close()
+        weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
+        content?.close()
         selectedRow = -1
         self.setTimeout(0.4, block: {
           tableView.endUpdates()
@@ -148,8 +147,8 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
           })
         })
       } else {
-        let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-        content.open()
+        weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
+        content?.open()
         self.selectedRow = (indexPath as NSIndexPath).row
         tableView.endUpdates()
         self.setTimeout(0.8, block: {
@@ -230,8 +229,6 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     self.identifiers.removeAll()
     heights.removeAll()
     self.userArray.removeAll()
-    var i = 0;
-    
     var toValue = 20
     
     if CHUsers().getUsersCount() < toValue {
@@ -260,8 +257,6 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   func appendArray(fromValue:Int, toValue:Int) {
     CHPush().alertPush("Loading more friends", type: "Info")
-    let newArray = CHUsers().getUsers(from: fromValue, to: toValue)
-    
     for friend in CHUsers().getUsers(from: fromValue, to: toValue)  {
       let status = CHUsers().getStatus(friend)
       if status == "Other" {
@@ -280,7 +275,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   }
   
   func loadMoreFriends() {
-    var toValue = 5
+    var toValue = 50
     
     if self.userCount == CHUsers().getUsersCount() {
       return

@@ -99,8 +99,6 @@ class MNMBottomPullToRefreshView: UIView {
       
     case .pull:
       if rotateIconWhileBecomingVisible {
-        var angle: CGFloat = (-offset * .pi) / self.frame.height
-//        iconImageView.transform = CGAffineTransformIdentity.rotated(by: angle)
       }
       else {
 //        iconImageView.transform = CGAffineTransformIdentity
@@ -146,7 +144,7 @@ class MNMBottomPullToRefreshView: UIView {
     containerView.backgroundColor = UIColor.clear
     containerView.autoresizingMask = [.flexibleWidth, .flexibleLeftMargin, .flexibleRightMargin, .flexibleBottomMargin]
     self.addSubview(containerView)
-    var iconImage = UIImage(named: MNM_BOTTOM_PTR_ICON_BOTTOM_IMAGE)!
+    let iconImage = UIImage(named: MNM_BOTTOM_PTR_ICON_BOTTOM_IMAGE)!
     iconImageView = UIImageView(frame: CGRect(x: 30.0, y: round(frame.height / 2.0) - round(iconImage.size.height / 2.0), width: iconImage.size.width, height: iconImage.size.height))
     iconImageView.contentMode = .center
     iconImageView.image = iconImage
@@ -157,8 +155,8 @@ class MNMBottomPullToRefreshView: UIView {
     loadingActivityIndicator.hidesWhenStopped = true
     loadingActivityIndicator.autoresizingMask = .flexibleRightMargin
     containerView.addSubview(loadingActivityIndicator)
-    var topMargin: CGFloat = 10.0
-    var gap: CGFloat = 20.0
+    let topMargin: CGFloat = 10.0
+    let gap: CGFloat = 20.0
     messageLabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + gap, y: topMargin, width: frame.size.width - iconImageView.frame.maxX - gap * 2.0, height: frame.height - topMargin * 2.0))
     messageLabel.backgroundColor = UIColor.clear
     messageLabel.textColor = UIColor.white
@@ -181,7 +179,7 @@ class MNMBottomPullToRefreshView: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    var messageSize = messageLabel.text
+    
     var frame = messageLabel.frame
     frame.size.width = messageLabel.frame.size.width
     messageLabel.frame = frame

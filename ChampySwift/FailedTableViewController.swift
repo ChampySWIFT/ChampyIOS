@@ -63,7 +63,7 @@ class FailedTableViewController: UITableViewController {
     
     let identifier = self.identifiers[(indexPath as NSIndexPath).row]
     //    var cell = tableView.dequeueReusableCellWithIdentifier("CELL\(identifier)") as UITableViewCell?
-    var cell = tableView.dequeueReusableCell(withIdentifier: "CELL\(identifier)") as! UITableViewCell?
+    var cell = tableView.dequeueReusableCell(withIdentifier: "CELL\(identifier)") 
     
     cell = nil
     autoreleasepool {
@@ -95,7 +95,7 @@ class FailedTableViewController: UITableViewController {
       return
     }
     
-    CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
+    CHRequests().retrieveFails(CHSession().currentUserId) { (result, json) in
       if result && json != nil {
         Async.main {
           self.fillArray()
@@ -133,21 +133,7 @@ class FailedTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     return
-    if tap {
-      disableTapForASec()
-      tableView.beginUpdates()
-      if (indexPath as NSIndexPath).row == selectedRow {
-        let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-        content.close()
-        selectedRow = -1
-      } else {
-        let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-        content.open()
-        self.selectedRow = (indexPath as NSIndexPath).row
-      }
-      
-      tableView.endUpdates()
-    }
+    
   }
   
   

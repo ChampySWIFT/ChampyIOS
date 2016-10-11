@@ -135,17 +135,16 @@ class CHBanners: NSObject {
   
   func dismissView(_ withTimeOut:Bool = false) {
     if banner != nil {
-    var frame = banner.frame
-    var time:Double = 0.0
-    if withTimeOut {
-      time = 2.0
-    }
-    
-    UIView.animate(withDuration: 1.0, delay: time, options: .curveEaseOut, animations: {
-      self.banner.layer.opacity = 0
-      }, completion: { finished in
-        self.banner.removeFromSuperview()
-    })
+      var time:Double = 0.0
+      if withTimeOut {
+        time = 2.0
+      }
+      
+      UIView.animate(withDuration: 1.0, delay: time, options: .curveEaseOut, animations: {
+        self.banner.layer.opacity = 0
+        }, completion: { finished in
+          self.banner.removeFromSuperview()
+      })
     }
   }
   
@@ -158,8 +157,6 @@ class CHBanners: NSObject {
   
   func animateView() {
     var frame = banner.frame
-    let newFrame = banner.frame
-    
     frame.origin.x = -1 * frame.size.width
     self.banner.layer.opacity = 0
     

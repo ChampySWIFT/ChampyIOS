@@ -129,7 +129,7 @@ import SwiftyJSON
         let objectsToShare = [textToShare, myWebsite] as [Any]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        activityVC.popoverPresentationController?.sourceView = sender as! UIView
+        activityVC.popoverPresentationController?.sourceView = (sender as! UIView)
         topController.present(activityVC, animated: true, completion: nil)
       }
     }

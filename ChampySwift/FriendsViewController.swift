@@ -56,7 +56,7 @@ class FriendsViewController: UIViewController {
     }
     CHImages().setUpBackground(background, frame: self.view.frame)
     let attr = NSDictionary(object: UIFont(name: "BebasNeueRegular", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
-    segmentControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
+    segmentControl.setTitleTextAttributes((attr as! [AnyHashable: Any]) , for: UIControlState())
     
     Async.background{
       CHRequests().getAllUsers { (result, json) in
@@ -234,9 +234,6 @@ class FriendsViewController: UIViewController {
   }
   
   func setUpFrames() {
-
-    
-    let pagesScrollViewSize = contentScrollView.frame.size
     contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height - 88)
     
     var firstFrame:CGRect  = table1.tableView.frame

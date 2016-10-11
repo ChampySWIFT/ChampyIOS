@@ -15,15 +15,6 @@ class CHPush: NSObject {
   //openImagePicker - open image picker from main view
   
   func sendPushToUser(_ userId:String, message:String, options:String, type:String = "usual", requestId:String = "nill")  {
-    let data = [
-      "alert" : message,
-      "badge" : "Increment",
-      "sounds" : "cheering.caf",
-      "type":type,
-      "requestId": requestId
-      
-    ]
-    
     
   }
   
@@ -35,7 +26,7 @@ class CHPush: NSObject {
     let deviceToken:Data = CurrentUser.data(forKey: "deviceToken")!
     FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
     
-    guard let contents = FIRInstanceID.instanceID().token()
+    guard FIRInstanceID.instanceID().token() != nil
       else {
         return
     }

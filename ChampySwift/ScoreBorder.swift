@@ -264,7 +264,7 @@ public enum ScoreBorderGlowMode {
   }
   
   open func pauseAnimation() {
-    guard let presentationLayer = progressLayer.presentation() as! KDCircularProgressViewLayer! else { return }
+    guard let presentationLayer = progressLayer.presentation() as KDCircularProgressViewLayer! else { return }
     let currentValue = presentationLayer.angle
     progressLayer.removeAllAnimations()
     animationCompletionBlock = nil
@@ -412,11 +412,6 @@ public enum ScoreBorderGlowMode {
       let reducedAngle = UtilityFunctions.Mod(angle, range: 360, minMax: (0, 360))
       let fromAngle = ConversionFunctions.DegreesToRadians(CGFloat(-startAngle))
       let toAngle = ConversionFunctions.DegreesToRadians(CGFloat((clockwise == true ? -reducedAngle : reducedAngle) - startAngle))
-//      CGContextAddArc(imageCtx, CGFloat(size.width/2.0),CGFloat(size.height/2.0), arcRadius, fromAngle, toAngle, clockwise == true ? 1 : 0)
-      
-      let imagePoint = CGPoint(x: CGFloat(size.width/2.0), y: CGFloat(size.height/2.0))
-      
-      let value = clockwise == true ? 1 : 0
       imageCtx?.addArc(center: point, radius: arcRadius, startAngle: fromAngle, endAngle: toAngle, clockwise: true)
       
       let glowValue = GlowConstants.glowAmountForAngle(reducedAngle, glowAmount: glowAmount, glowMode: glowMode, size: size.width)

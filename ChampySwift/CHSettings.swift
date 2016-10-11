@@ -42,7 +42,6 @@ class CHSettings: NSObject {
   
   func getMidnightOfTheDay(_ dateInSec:Int) -> Int {
     let date = Date(timeIntervalSince1970: Double(dateInSec))
-    let dateFormatter = DateFormatter()
     let calendar = Calendar.current
     let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: date)
     let hour = comp.hour

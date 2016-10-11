@@ -66,7 +66,7 @@ class CHUIElements: NSObject {
         }
       }
     }
-    catch let error as NSError {
+    catch _ as NSError {
       
     }
     

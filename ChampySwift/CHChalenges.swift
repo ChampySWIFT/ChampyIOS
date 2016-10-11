@@ -209,7 +209,8 @@ class CHChalenges: NSObject {
    @return array of failed challenges
    */
   func getFailedChallenges(_ userId:String) -> [JSON] {
-    return getChalengeArrayByKyValueCombination(userId, value: false)
+    return CHSession().getJSONByKey("fails\(userId)").arrayValue
+//    return getChalengeArrayByKyValueCombination(userId, value: false)
   }
   
   
@@ -332,7 +333,7 @@ class CHChalenges: NSObject {
     
     if item["status"].stringValue == "started" {
       let endTimeBorder = CHUIElements().getCurretnTime()
-      let beginTimeBorder = endTimeBorder - 30
+      _ = endTimeBorder - 30
       let challenge = item["challenge"]
       let array = CHSettings().stringToArray(challenge["details"].stringValue.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "[", with: ""))
       let time:Int = Int(array[item["senderProgress"].count])!

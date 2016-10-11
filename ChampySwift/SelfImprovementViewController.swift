@@ -145,24 +145,16 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       
       ////print(dayNumber)
       guard conditions.isValidConditions() else {
-//        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
         self.alertWithMessage("Invalid Challenge Name", type: .Warning)
         return
       }
       
       guard dayNumber.isDayNumber() else {
         self.alertWithMessage("Invalid Day Count", type: .Warning)
-//        CHPush().alertPush("Invalid Day Count", type: "Warning")
         return
       }
       
       let daysec = CHSettings().daysToSec(Int(dayNumber)!)
-      
-      var array:[Int] = []
-      
-      
-      
-      
       let params:[String:String] = [
         "name": conditions,
         "type": CHSettings().self.selfImprovementsId,

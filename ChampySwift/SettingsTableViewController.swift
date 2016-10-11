@@ -72,13 +72,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.inputFieldsForTime.inputAccessoryView = toolBar;
     self.inputFieldsForTime.inputView = datePicker;
     self.inputFieldsForTime.delegate  = self
-    var minuteString = ""
-    let minutes:Int = CHSession().getIntByKey("minsDN")
-    ////print(minutes)
-    if minutes == 0 {
+    
+    if CHSession().getIntByKey("minsDN") == 0 {
       self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):00"
     } else {
-      self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):\(minutes)"
+      self.inputFieldsForTime.text = "\(CHSession().getIntByKey("hoursDN")):\(CHSession().getIntByKey("minsDN"))"
     }
     
   }
@@ -148,7 +146,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   
   @IBAction func logOutAction(_ sender: AnyObject) {
     if !IJReachability.isConnectedToNetwork()  {
-      let a = CHRequests()
+      _ = CHRequests()
       return
     }
     self.logOutButton.isHidden = true

@@ -29,8 +29,6 @@ import Async
     notifCenter.addObserver(self, selector: #selector(NewChallenge.dismissKeyboard), name: NSNotification.Name(rawValue: "dismissKeyboard"), object: nil)
     self.ConditionsTextField.text = ""
     self.daysTextField.text = "21 Days"
-    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewChallenge.dismissKeyboard))
-//    self.view.addGestureRecognizer(tap)
     ConditionsTextField.delegate = self
     
     

@@ -106,8 +106,7 @@ class FacebookAuthViewController: UIViewController {
                   
                   let res = result as! [String:AnyObject]
                   if error != nil {
-                    let errorMessage = error?.localizedDescription
-                    ////print(errorMessage)
+                    
                     self.dismiss(animated: true, completion: {
                       self.tapped = false
                       CHPush().alertPush("Can't get friends from facebook", type: "Warning")

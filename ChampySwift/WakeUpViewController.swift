@@ -72,15 +72,9 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     let barButtonDone                       = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(WakeUpViewController.valueChangedInDateField))
     barButtonDone.tintColor = CHUIElements().APPColors["navigationBar"]
     toolBar.items                           = [spaceButton, barButtonDone]
-//    self.timeField.inputAccessoryView = toolBar
-    
     timeField.inputAccessoryView = toolBar;
     timeField.inputView = datePicker;
     timeField.delegate  = self
-//    datePicker.addSubview()
-//    timeField.inputView =
-    
-    // Do any additional setup after loading the view.
   }
   
   func valueChangedInDateField(_ sender:AnyObject) {
@@ -92,8 +86,6 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
     
     let calendar = Calendar.current
     let comp = (calendar as NSCalendar).components([.hour, .minute, .second], from: datePicker.date)
-    let hour = comp.hour
-    let minute = comp.minute
     
     self.timeField.text = strDate
     self.timeField.resignFirstResponder()

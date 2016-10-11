@@ -96,7 +96,7 @@ class CHSession: NSObject {
     appDelegate.historyTable2 = nil
     appDelegate.historyTable3 = nil
     let array = appDelegate.mainViewCard as [String:UIView]
-    for (kind, item) in array {
+    for (_, item) in array {
       item.removeFromSuperview()
     }
     URLCache.shared.removeAllCachedResponses()

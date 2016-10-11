@@ -12,10 +12,10 @@ import Async
 @IBDesignable class FriendCell: UIView {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
-  var view: UIView!
+  weak var view: UIView!
   var width:CGFloat = 0.0
   var opened:Bool = false
-  @IBOutlet var mainContent: UIView!
+  @IBOutlet weak var mainContent: UIView!
   @IBOutlet weak var separator: UIView!
   
   @IBOutlet weak var plusButton: UIButton!
@@ -434,8 +434,7 @@ import Async
       case "Friends" :
         self.tapped = false
         CHSession().setSelectedFriend(self.userObject["_id"].stringValue)
-        CHPush().localPush("openDuelView", object: self
-        )
+        CHPush().localPush("openDuelView", object: self)
         break
       default:
         self.tapped = false
