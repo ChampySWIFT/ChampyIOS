@@ -87,25 +87,25 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       if content.userAvatar != nil {
         content.userAvatar.removeFromSuperview()
       }
-      if content.secondContainer != nil && content.firstContainer != nil && content.thirdContainer != nil {
-        for item in content.firstContainer.subviews {
-          item.removeFromSuperview()
-        }
-        
-        for item in content.secondContainer.subviews {
-          item.removeFromSuperview()
-        }
-        for item in content.thirdContainer.subviews {
-          print(content.thirdContainer.subviews)
-          item.removeFromSuperview()
-        }
-        
-        content.firstContainer.removeFromSuperview()
-        
-        content.secondContainer.removeFromSuperview()
-        
-        content.thirdContainer.removeFromSuperview()
-      }
+//      if content.secondContainer != nil && content.firstContainer != nil && content.thirdContainer != nil {
+//        for item in content.firstContainer.subviews {
+//          item.removeFromSuperview()
+//        }
+//        
+//        for item in content.secondContainer.subviews {
+//          item.removeFromSuperview()
+//        }
+//        for item in content.thirdContainer.subviews {
+//          print(content.thirdContainer.subviews)
+//          item.removeFromSuperview()
+//        }
+//        
+//        content.firstContainer.removeFromSuperview()
+//        
+//        content.secondContainer.removeFromSuperview()
+//        
+//        content.thirdContainer.removeFromSuperview()
+//      }
 //      content.userAvatar.removeFromSuperview()
       
       
