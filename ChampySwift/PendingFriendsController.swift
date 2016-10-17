@@ -257,6 +257,7 @@ class PendingFriendsController: UITableViewController {
         self.outgoing.append(friend)
         content.status = "Outgoing"
         content.setUp(friend["owner"])
+        content.setUpImage()
         self.outgoingfriendsContent.append(content)
         break
         
@@ -265,6 +266,7 @@ class PendingFriendsController: UITableViewController {
         self.incoming.append(friend)
         content.status = "Incoming"
         content.setUp(friend["friend"])
+        content.setUpImage()
         self.incomingfriendsContent.append(content)
         break
       default:

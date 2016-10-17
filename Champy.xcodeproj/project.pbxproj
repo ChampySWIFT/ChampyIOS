@@ -14,6 +14,7 @@
 		0D959BA81DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */; };
 		0D959BA91DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */; };
 		0D959BAA1DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */; };
+		0D9E29441DB4F7BA000F2833 /* champy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9E29431DB4F7BA000F2833 /* champy.png */; };
 		179C1BC104D7A03EFD193535 /* Pods_ChampySwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */; };
 		5704A30C1D4246F6007CAAA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A3091D4246F5007CAAA4 /* AVFoundation.framework */; };
 		5704A30D1D4246F6007CAAA4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A30A1D4246F5007CAAA4 /* CoreFoundation.framework */; };
@@ -167,6 +168,7 @@
 		0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MNMBottomPullToRefresh.strings; sourceTree = "<group>"; };
 		0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MNMBottomPullToRefreshArrow.png; sourceTree = "<group>"; };
 		0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
+		0D9E29431DB4F7BA000F2833 /* champy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = champy.png; sourceTree = "<group>"; };
 		158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.debug.xcconfig"; sourceTree = "<group>"; };
 		1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.release.xcconfig"; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				57C763631CE9AF8100C3695A /* Fonts */,
 				57A3C6D31CDB7C2200997E41 /* privacy.html */,
 				571F789A1CF880AD008A45DE /* out.caf */,
+				0D9E29431DB4F7BA000F2833 /* champy.png */,
 				57E9740C1D2685FD00E573CA /* out.wav */,
 				579C18591CCB595700D6EEA9 /* AppDelegate.swift */,
 				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
@@ -934,6 +937,7 @@
 				576D7E701CEAFB8E00AA7094 /* NewChallenge.xib in Resources */,
 				579C185F1CCB595700D6EEA9 /* Main.storyboard in Resources */,
 				57E9740D1D2685FD00E573CA /* out.wav in Resources */,
+				0D9E29441DB4F7BA000F2833 /* champy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

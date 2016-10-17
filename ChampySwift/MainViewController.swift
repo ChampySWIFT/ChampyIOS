@@ -57,6 +57,13 @@
     
     let center = NotificationCenter.default
     
+    
+    
+    
+    deinit {
+      print("valami")
+    }
+    
     func printFonts() {
       let fontFamilyNames = UIFont.familyNames
       for familyName in fontFamilyNames {

@@ -33,7 +33,7 @@ import Async
     
     
     if !empty {
-      print(object)
+      //print(object)
       pointsLabel.text = object["points"].stringValue
       pointsLabel.adjustsFontSizeToFitWidth = true
       

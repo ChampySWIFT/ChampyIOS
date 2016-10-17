@@ -34,7 +34,7 @@ class CHRequests: NSObject {
       return
     }
     self.token = CHSession().getToken()
-    print(token)
+    //print(token)
   }
   
   func getTokenForTests() {
@@ -53,13 +53,13 @@ class CHRequests: NSObject {
     }
     let url = "\(self.APIurl)/users/\(ownerId)?token=\(self.token)"
     let operationQueue = OperationQueue()
-    //////print(url)
+    ////////print(url)
     do {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         
         let json             = JSON(data: response.data)
-        //////print(json)
+        ////////print(json)
         if let _ = response.error {
           completitionHandler(json["description"], false)
           return
@@ -135,7 +135,7 @@ class CHRequests: NSObject {
           "challenge" : json["data"]["_id"].stringValue
         ]
         
-        //////print(params1)
+        ////////print(params1)
         
         self.createDuelInProgressChallenge(params1, completitionHandler: { (secresult, secjson) in
           completitionHandler(secjson, secresult)
@@ -160,7 +160,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //print(json)
+        ////print(json)
         if let _ = response.error {
           completitionHandler(json, false)
           return
@@ -212,7 +212,7 @@ class CHRequests: NSObject {
       opt.onFinish = { response in
         let json = JSON(data: response.data)
         
-        //////print(json)
+        ////////print(json)
         if response.error != nil {
           completitionHandler(false, json)
           return
@@ -288,13 +288,13 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(self.APIurl)/users/\(userId)?token=\(self.token)"
-    //////print(url)
+    ////////print(url)
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //////print(json)
+        ////////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -406,8 +406,8 @@ class CHRequests: NSObject {
     ]
     let operationQueue = OperationQueue()
     
-    //////print(params)
-    //////print(url)
+    ////////print(params)
+    ////////print(url)
     do {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
@@ -443,7 +443,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -475,7 +475,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        //////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -648,7 +648,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //print(json)
+        ////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -807,7 +807,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //////print(json)
+        ////////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -834,7 +834,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //////print(json)
+        ////////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -861,7 +861,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //print(json)
+        ////print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return

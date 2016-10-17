@@ -14,7 +14,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   func bottomPull(toRefreshTriggered manager: MNMBottomPullToRefreshManager) {
-    print("refreshed")
+    //print("refreshed")
   }
   
   var pulltorefreshManager:MNMBottomPullToRefreshManager!
@@ -26,7 +26,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   var userCount:Int = 0
   let center = NotificationCenter.default
   var userArray:[JSON] = []
-  var contentToRemove:[FriendCell] = []
+  lazy var contentToRemove:[FriendCell] = []
   var contentToRemoveCell:[UITableViewCell] = []
   var displayiedCells:Int = 0
   var closedCellHeight:CGFloat = 80
@@ -74,7 +74,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       }
       contentToRemove.append(content!)
       contentToRemoveCell.append(cell)
-      if contentToRemove.count > 15 {
+      if contentToRemove.count > 50 {
         cleareContentToRemove()
       }
       cell.removeFromSuperview()
@@ -96,7 +96,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
 //          item.removeFromSuperview()
 //        }
 //        for item in content.thirdContainer.subviews {
-//          print(content.thirdContainer.subviews)
+//          //print(content.thirdContainer.subviews)
 //          item.removeFromSuperview()
 //        }
 //        
@@ -177,6 +177,13 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
           tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         })
       }
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
+      weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
+      content?.setUpImage()
     }
   }
   
@@ -273,20 +280,16 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   func appendArray(fromValue:Int, toValue:Int) {
     var sendPush:Bool = false
     for friend in CHUsers().getUsers(from: fromValue, to: toValue)  {
-      let status = CHUsers().getStatus(friend)
-      if status == "Other" {
-        if !identifiers.contains("\(friend["_id"].stringValue)") {
-          sendPush = true
-          heights.append(closedCellHeight)
-          self.friendsContent.append(appDelegate.prototypeFriendCell)
-          identifiers.append("\(friend["_id"].stringValue)")
-          self.userArray.append(friend)
-          cleareContentToRemove()
-        }
+      if !identifiers.contains("\(friend["_id"].stringValue)") && CHUsers().getStatus(friend) == "Other" {
+        sendPush = true
+        heights.append(closedCellHeight)
+        self.friendsContent.append(appDelegate.prototypeFriendCell)
+        identifiers.append("\(friend["_id"].stringValue)")
+        self.userArray.append(friend)
       }
     }
     if sendPush {
-      
+      cleareContentToRemove()
       CHPush().alertPush("Loading more friends", type: "Info")
       self.userCount = self.friendsContent.count
       self.tableView.reloadData()

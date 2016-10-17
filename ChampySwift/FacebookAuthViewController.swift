@@ -20,11 +20,11 @@ class FacebookAuthViewController: UIViewController {
 //    loginManager.logIn([ .PublicProfile, .UserFriends, .Email ], viewController: self) { loginResult in
 //      switch loginResult {
 //      case .Failed(let error):
-//        print(error)
+//        //print(error)
 //      case .Cancelled:
-//        print("User cancelled login.")
+//        //print("User cancelled login.")
 //      case .Success(let grantedPermissions, let declinedPermissions, let accessToken):
-//        print("Logged in!")
+//        //print("Logged in!")
 //      }
     
     
@@ -96,7 +96,7 @@ class FacebookAuthViewController: UIViewController {
           
           //          FBReq
           CHRequests().createUser(params, completitionHandler: { (json, status) in
-            print(json)
+            //print(json)
             self.tapped = false
             if status {
               Async.main {
@@ -114,7 +114,7 @@ class FacebookAuthViewController: UIViewController {
                     })
                     /* Handle error */
                   }
-                  print(result)
+                  //print(result)
                   Async.main {
                     
                     let array = res["data"] as! [[String:String]]

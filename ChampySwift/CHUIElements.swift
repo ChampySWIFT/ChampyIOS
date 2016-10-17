@@ -48,7 +48,7 @@ class CHUIElements: NSObject {
         audioPlayer.prepareToPlay()
         audioPlayer.play()
       }catch {
-        print("Error getting the audio file")
+        //print("Error getting the audio file")
       }
       
     
@@ -174,10 +174,15 @@ extension UITableViewCell {
 }
 
 extension UIImageView {
-  func roundCornersAndSetUpWithId(id:String) {
+  func roundCornersAndSetUpWithId(id:String, userObject:JSON = nil) {
     self.layer.masksToBounds = true
     self.layer.cornerRadius  = self.frame.size.width / 2
-    CHImages().setImageForFriend(id, imageView: self)
+    if userObject["photo"] != nil {
+      CHImages().setImageForFriend(id, imageView: self, userObject: userObject)
+    } else {
+      CHImages().setUpDefaultImageForFriend(id, imageView: self)
+    }
+    
   }
 
 }
@@ -228,7 +233,7 @@ extension JSON {
       do {
         return try JSONSerialization.jsonObject(with: data, options: []) as? [[String:AnyObject]]
       } catch let error as NSError {
-        print(error)
+        //print(error)
       }
     }
     return nil

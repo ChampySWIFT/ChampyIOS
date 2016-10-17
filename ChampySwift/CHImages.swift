@@ -31,18 +31,36 @@ class CHImages: NSObject {
     
     
   }
+  //Bundle.main.url(forResource: "champy", withExtension: "png")
   
-  func setImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
-    let url = URL(string: CHUsers().getPhotoUrlString(userId))
-    var user:JSON! = nil
-    if userId == CHSession().currentUserId {
-      user = CHSession().currentUserObject
-    } else {
-      user = CHUsers().getUserById(userId)
-    }
-      
+  func setUpDefaultImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
+    let url = Bundle.main.url(forResource: "champy", withExtension: "png")
     
-    var cachename = "initialCache"
+    var cachename = "defaultImage"
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
+      
+    }
+  }
+  
+  func setImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect(), userObject:JSON = nil) {
+    let url = URL(string: CHUsers().getPhotoUrlString(userId))
+    var user:JSON! = userObject
+    
+    
+    if user == nil {
+      if userId == CHSession().currentUserId {
+        user = CHSession().currentUserObject
+      } else {
+        user = CHUsers().getUserById(userId)
+      }
+    }
+    
+    var cachename = "default"
     if user["lastPhotoUpdated"].intValue != 0 {
       cachename = user["lastPhotoUpdated"].stringValue
     }

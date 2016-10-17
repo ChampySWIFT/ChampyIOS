@@ -105,6 +105,10 @@ import Async
     firstContainer.cleareScoreContainer()
   }
   
+  func setUpImage() {
+    self.userAvatar.roundCornersAndSetUpWithId(id: userObject["_id"].stringValue, userObject: userObject)
+  }
+  
   
   func setUp(_ json:JSON) {
     
@@ -123,19 +127,17 @@ import Async
     
     if json != nil {
       userObject = json
-      self.userAvatar.roundCornersAndSetUpWithId(id: json["_id"].stringValue)
-      
-      self.username.text        = json.getStringByKey(key: "name")
+     self.username.text        = json.getStringByKey(key: "name")
       self.userLevel.text       = "Level \(json["level"].getStringByKey(key: "number")) Champy"
       
-      self.wins = json.getIntByKey(key: "successChallenges")
-      self.inProgressChallenges = json.getIntByKey(key: "inProgressChallengesCount")
+      self.wins = json["successChallenges"].intValue
+      self.inProgressChallenges = json["inProgressChallengesCount"].intValue
       self.points = json.getSummOffElements(keys: ["inProgressChallengesCount", "allChallengesCount"])
       
       
-      self.inProgressCount.text = json.getStringByKey(key: "inProgressChallengesCount")
+      self.inProgressCount.text = json["inProgressChallengesCount"].stringValue
       self.allCount.text        = "\(self.points)"
-      self.winsCount.text       = json.getStringByKey(key: "successChallenges")
+      self.winsCount.text       = json["successChallenges"].stringValue
       
       
       [username, userLevel, inProgressCount, allCount, winsCount].adjustFontSizeToFiTWidthForObjects(value: true)
@@ -243,7 +245,7 @@ import Async
     })
     self.cleareScoreborder()
     self.animateScoreBorders()
-    ////////print("open")
+    //////////print("open")
   }
   
   func close() {
@@ -299,7 +301,7 @@ import Async
     
     
     
-    ////////print("close")
+    //////////print("close")
   }
   
   func setTimeout(_ delay:TimeInterval, block:@escaping ()->Void) -> Timer {
@@ -321,9 +323,9 @@ import Async
             
         })
         CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
-          ////print(json)
+          //////print(json)
           if result {
-            ////print(json)
+            //////print(json)
             Async.main {
               self.tapped = false
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "New Friend Request From \(CHSession().currentUserName)", options: "")

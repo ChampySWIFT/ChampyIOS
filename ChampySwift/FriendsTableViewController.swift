@@ -112,7 +112,7 @@ class FriendsTableViewController: UITableViewController {
           //            object = friend["friend"]
           //          }
           //          content.setUp(object)
-          //          ////print(indexPath.row)
+          //          //////print(indexPath.row)
           let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
           cell?.addSubview(content)
           cell!.backgroundColor = UIColor.clear
@@ -181,6 +181,7 @@ class FriendsTableViewController: UITableViewController {
       }
       
       content.setUp(object)
+      content.setUpImage()
       self.friendsContent.append(content)
       identifiers.append("\(friend["_id"].stringValue)")
     }
