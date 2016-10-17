@@ -62,13 +62,13 @@ class CHUsers: NSObject {
 //      return false
 //    }
 //    
-//    guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
-//      return false
-//    }
-//    
-//    guard item["name"].stringValue != "sadassecondFacebookIdasda" else {
-//      return false
-//    }
+    guard item["name"].stringValue != "sadasfirstFacebookIdasda" else {
+      return false
+    }
+    
+    guard item["name"].stringValue != "sadassecondFacebookIdasda" else {
+      return false
+    }
     
 //        guard getStatus(item) == "Other" else {
 //          return false
@@ -94,19 +94,27 @@ class CHUsers: NSObject {
   }
   
   func getUsersCount() -> Int {
-    return (CHSession().getJSONByKey("userList").arrayValue).count
+    return CHSession().getJSONByKey("userList").arrayValue.count
   }
   
   func getUsers(from:Int, to:Int) -> [JSON] {
-    var array = (CHSession().getJSONByKey("userList").arrayValue)
+    let array = CHSession().getJSONByKey("userList").arrayValue[from...to]
     var friends:[JSON] = []
-    for i:Int in from...to {
-      if !self.isFacebookFriend(array[i]["facebookId"].stringValue) || !isValidUser(array[i]) {
+    for item in array {
+      if !self.isFacebookFriend(item["facebookId"].stringValue) || !isValidUser(item) {
+//                continue
+      }
+//      
+      if !isValidUser(item) {
 //        continue
       }
-      friends.append(array[i])
+      friends.append(item)
     }
-    
+//    
+//    for i:Int in from...to {
+//     
+//    }
+//    
     return friends
   }
  
@@ -138,13 +146,8 @@ class CHUsers: NSObject {
    @return user json object
    */
   func getUserById(_ userId:String) -> JSON {
-    for (_, item): (String, JSON) in CHSession().getJSONByKey("userList") {
-      guard item["_id"].stringValue == userId else {
-        continue
-      }
-      return item
-    }
-    return nil
+    return CHSession().getJSONByKey("userList").userImLookinFor(key: "_id", value: userId)
+   
   }
 
   
@@ -185,8 +188,7 @@ class CHUsers: NSObject {
  */
   
   func isFacebookFriend(_ facebookId:String) -> Bool {
-    let facebookFriends = CHSession().getFacebookFriends()
-    if facebookFriends.range(of: facebookId) != nil {
+    if CHSession().getFacebookFriends().range(of: facebookId) != nil {
       return true
     }
     

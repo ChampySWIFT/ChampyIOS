@@ -57,6 +57,8 @@ class CHUIElements: NSObject {
     
   }
   
+
+  
   func stringToJSON(_ jsonString:String) -> JSON {
     do {
       if let data:Data = jsonString.data(using: String.Encoding.utf8, allowLossyConversion: false){
@@ -160,3 +162,108 @@ extension String {
   }
   
 }
+
+extension UITableViewCell {
+  func noSelectionNoColorNoAccessoryNoContentView() {
+    self.backgroundColor = UIColor.clear
+    self.accessoryType  = .none
+    self.selectionStyle = UITableViewCellSelectionStyle.none
+    self.contentView.backgroundColor = UIColor.clear
+    
+  }
+}
+
+extension UIImageView {
+  func roundCornersAndSetUpWithId(id:String) {
+    self.layer.masksToBounds = true
+    self.layer.cornerRadius  = self.frame.size.width / 2
+    CHImages().setImageForFriend(id, imageView: self)
+  }
+
+}
+
+
+extension Array  {
+  
+  func adjustFontSizeToFiTWidthForObjects(value:Bool)  {
+    
+    for x in self {
+      let t = x as! UILabel;
+      t.adjustsFontSizeToFitWidth = true
+    }
+    
+  }
+}
+
+extension JSON {
+  
+  func getElementFromList(key:String, value:String) -> JSON {
+  
+    for json:JSON in self.arrayValue {
+      if json[key].stringValue == value {
+          return json
+      }
+    }
+    
+    return nil
+  }
+  
+  func userImLookinFor(key:String, value:String) -> JSON {
+    let array:[[String:AnyObject]] = self.arrayObject as! [[String:AnyObject]]
+    let new = array.filter({
+      if let subid = $0[key] {
+        return subid as! String == value
+      } else {
+        return false
+      }
+    })
+    return JSON(dictionaryObject: new[0]) 
+  }
+  
+  
+  
+  
+  func convertUsersStringToDictionary(text:String) -> [[String:AnyObject]]? {
+    if let data = text.data(using: String.Encoding.utf8) {
+      do {
+        return try JSONSerialization.jsonObject(with: data, options: []) as? [[String:AnyObject]]
+      } catch let error as NSError {
+        print(error)
+      }
+    }
+    return nil
+  }
+  
+  func getIntByKey(key:String) -> Int {
+    if self[key].int != nil {
+      return self[key].intValue
+    }
+    
+    return 0
+  }
+  
+  func getStringByKey(key:String) -> String {
+    if self[key].string != nil {
+      return self[key].stringValue
+    }
+    
+    return ""
+  }
+  
+  
+  func getSummOffElements(keys:[String]) -> Int {
+    var result = 0
+    for key in keys {
+      if self[key].int != nil {
+        result += self[key].intValue
+      }
+    }
+    
+    
+    return result
+  }
+  
+  
+  
+}
+

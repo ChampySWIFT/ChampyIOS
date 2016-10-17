@@ -466,7 +466,7 @@ import SwiftyJSON
       if self.generalItem["recipient"] != nil {
         self.historyTitle.text = "Duel with \(self.generalItem["recipient"]["name"].stringValue)"
         self.pointLabel.text = "\(self.generalItem["challenge"]["points"].stringValue)"
-        
+        self.historyTitle.adjustsFontSizeToFitWidth = true
         CHImages().setImageForFriend(self.generalItem["recipient"]["_id"].stringValue, imageView: self.avatar)
         self.partnerName.text = self.generalItem["recipient"]["name"].stringValue
         return

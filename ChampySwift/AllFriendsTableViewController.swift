@@ -21,13 +21,17 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   var tap:Bool = true
   var identifiers:[String]    = []
   var selectedRow:Int         = -1
-  var friendsContent:[UIView] = []
+  var friendsContent:[UIView?] = []
   var heights:[CGFloat]       = []
   var userCount:Int = 0
   let center = NotificationCenter.default
   var userArray:[JSON] = []
-  
+  var contentToRemove:[FriendCell] = []
+  var contentToRemoveCell:[UITableViewCell] = []
   var displayiedCells:Int = 0
+  var closedCellHeight:CGFloat = 80
+  
+  
   override func viewDidDisappear(_ animated: Bool) {
     center.removeObserver(self, name: NSNotification.Name(rawValue: "allReload"), object: nil)
   }
@@ -65,70 +69,88 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
       if (content?.opened)! {
         content?.close()
-        heights[(indexPath as NSIndexPath).row] = 66
+        heights[(indexPath as NSIndexPath).row] = closedCellHeight
         self.selectedRow = -1
       }
-      if content?.userAvatar != nil {
-      content?.userAvatar.removeFromSuperview()
+      contentToRemove.append(content!)
+      contentToRemoveCell.append(cell)
+      if contentToRemove.count > 15 {
+        cleareContentToRemove()
       }
-      content?.userAvatar = nil
-      content?.removeFromSuperview()
-      content = nil
+      cell.removeFromSuperview()
       self.friendsContent[(indexPath as NSIndexPath).row] = appDelegate.prototypeFriendCell
     }
   }
   
+  func cleareContentToRemove() {
+    for content in contentToRemove {
+      if content.userAvatar != nil {
+        content.userAvatar.removeFromSuperview()
+      }
+      if content.secondContainer != nil && content.firstContainer != nil && content.thirdContainer != nil {
+        for item in content.firstContainer.subviews {
+          item.removeFromSuperview()
+        }
+        
+        for item in content.secondContainer.subviews {
+          item.removeFromSuperview()
+        }
+        for item in content.thirdContainer.subviews {
+          print(content.thirdContainer.subviews)
+          item.removeFromSuperview()
+        }
+        
+        content.firstContainer.removeFromSuperview()
+        
+        content.secondContainer.removeFromSuperview()
+        
+        content.thirdContainer.removeFromSuperview()
+      }
+//      content.userAvatar.removeFromSuperview()
+      
+      
+      
+      content.userAvatar = nil
+      content.removeFromSuperview()
+      contentToRemove.remove(at: contentToRemove.index(of: content)!)
+    }
+    
+    for var content in contentToRemoveCell {
+      content.removeFromSuperview()
+      contentToRemoveCell.remove(at: contentToRemoveCell.index(of: content)!)
+    }
+  }
+  
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
-    weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-    
+    weak var content = friendsContent[(indexPath as NSIndexPath).row] as? FriendCell
     if (indexPath as NSIndexPath).row == self.selectedRow {
       heights[(indexPath as NSIndexPath).row] = 220.0
       return 220
     } else {
       content?.close()
-      heights[(indexPath as NSIndexPath).row] = 66
-      return 66
+      heights[(indexPath as NSIndexPath).row] = CGFloat(closedCellHeight)
+      return CGFloat(closedCellHeight)
     }
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
     let identifier = self.identifiers[(indexPath as NSIndexPath).row]
-    var cell = tableView.dequeueReusableCell(withIdentifier: "CELL\(identifier)")
-    cell = nil
-    if cell == nil {
-      cell                 = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
-      cell?.accessoryType  = .none
-      cell?.selectionStyle = UITableViewCellSelectionStyle.none
-      cell!.contentView.backgroundColor = UIColor.clear
-      
-      //        let content = friendsContent[indexPath.row] as! FriendCell
-      autoreleasepool {
-        var content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
-        let friend = self.userArray[indexPath.row]
-        let status = CHUsers().getStatus(friend) //"Other"
-        content.status = status
-        
-        content.setUp(friend)
-        content.close()
-        self.friendsContent[(indexPath as NSIndexPath).row] = content
-        
-        cell?.addSubview(content)
-      }
-      
-      
-      
-      
-      cell!.backgroundColor = UIColor.clear
+    var cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
+   
+    let friend = self.userArray[indexPath.row]
+    let status = CHUsers().getStatus(friend) //"Other"
+    autoreleasepool {
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: closedCellHeight))
+      content.status = status
+      content.setUp(friend)
+      content.close()
+      self.friendsContent[(indexPath as NSIndexPath).row] = content
+      cell.addSubview(content)
+      cell.noSelectionNoColorNoAccessoryNoContentView()
       displayiedCells += 1
     }
-    
-    
-    
-    
-    
-    return cell!
+//    appDelegate.friendCells["CELL\(identifier)"] = cell
+    return cell
   }
   
   
@@ -194,7 +216,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   }
   
   func viewWithLabel(_ text: String) -> UIView {
-    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
+    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: closedCellHeight))
     label.text = text
     label.font = CHUIElements().font16
     label.numberOfLines = 3
@@ -216,7 +238,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   func destroyAll() {
     for item in self.friendsContent {
-      item.removeFromSuperview()
+      item?.removeFromSuperview()
     }
     self.friendsContent.removeAll()
   }
@@ -239,7 +261,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     for friend in CHUsers().getUsers(from: 0, to: toValue)  {
       let status = CHUsers().getStatus(friend)
       if status == "Other" {
-        heights.append(66)
+        heights.append(closedCellHeight)
         self.friendsContent.append(appDelegate.prototypeFriendCell)
         identifiers.append("\(friend["_id"].stringValue)")
         self.userArray.append(friend)
@@ -248,30 +270,28 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     self.userCount = self.friendsContent.count
   }
   
-  
-  
-  
-  
-  
-  
-  
   func appendArray(fromValue:Int, toValue:Int) {
-    CHPush().alertPush("Loading more friends", type: "Info")
+    var sendPush:Bool = false
     for friend in CHUsers().getUsers(from: fromValue, to: toValue)  {
       let status = CHUsers().getStatus(friend)
       if status == "Other" {
         if !identifiers.contains("\(friend["_id"].stringValue)") {
-          heights.append(66)
+          sendPush = true
+          heights.append(closedCellHeight)
           self.friendsContent.append(appDelegate.prototypeFriendCell)
           identifiers.append("\(friend["_id"].stringValue)")
           self.userArray.append(friend)
+          cleareContentToRemove()
         }
-        
       }
     }
+    if sendPush {
+      
+      CHPush().alertPush("Loading more friends", type: "Info")
+      self.userCount = self.friendsContent.count
+      self.tableView.reloadData()
+    }
     
-    self.userCount = self.friendsContent.count
-    self.tableView.reloadData()
   }
   
   func loadMoreFriends() {
@@ -284,6 +304,11 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     if self.userCount + toValue >= CHUsers().getUsersCount() {
       toValue = CHUsers().getUsersCount() - self.userCount
     }
+    
+    if CHUsers().getUsers(from: self.userCount - 1, to: self.userCount + toValue - 1).count == 0 {
+      return
+    }
+    
     
     self.appendArray(fromValue: self.userCount - 1, toValue: self.userCount + toValue - 1)
   }

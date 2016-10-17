@@ -10,14 +10,9 @@ import UIKit
 import SwiftyJSON
 import Async
 @IBDesignable class FriendCell: UIView {
-  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
-  weak var view: UIView!
-  var width:CGFloat = 0.0
-  var opened:Bool = false
   @IBOutlet weak var mainContent: UIView!
   @IBOutlet weak var separator: UIView!
-  
   @IBOutlet weak var plusButton: UIButton!
   @IBOutlet weak var minusButton: UIButton!
   @IBOutlet weak var userAvatar: UIImageView!
@@ -28,7 +23,6 @@ import Async
   @IBOutlet weak var allCount: UILabel!
   @IBOutlet weak var pointsCount: UIView!
   @IBOutlet weak var pointsContainer: UIView!
-  
   @IBOutlet weak var confirmationVindow: UIView!
   @IBOutlet weak var firstContainer: UIView!
   @IBOutlet weak var firstScoreIndicator: ScoreBorder!
@@ -44,106 +38,26 @@ import Async
   @IBOutlet weak var thirdScoreIcon: UIImageView!
   @IBOutlet weak var scoreContainer: UIView!
   
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
+  weak var view: UIView!
+  var width:CGFloat = 0.0,
+  initialNameLevel:CGRect! = nil,
+  initialLevelFrame:CGRect! = nil,
+  initialScoreFrame:CGRect! = nil,
+  initialPlusFrame :CGRect! = nil,
+  initialMinusFrame:CGRect! = nil,
+  initialAvatarFrame:CGRect! = nil,
+  tapped:Bool = false,
+  opened:Bool = false,
+  minusButtonState = false,
+  plusButtonState = false,
+  points = 0,
+  inProgressChallenges = 0,
+  wins = 0,
+  status = "other",
+  userObject:JSON! = nil
   
-  var minusButtonState = false
-  var plusButtonState = false
-  var initialNameLevel:CGRect! = nil
-  var initialLevelFrame:CGRect! = nil
-  var initialScoreFrame:CGRect! = nil
-  
-  var initialPlusFrame :CGRect! = nil
-  var initialMinusFrame:CGRect! = nil
-  var initialAvatarFrame:CGRect! = nil
-  
-  
-  
-  var points = 0
-  var inProgressChallenges = 0
-  var wins = 0
-  var status = "other"
-  var userObject:JSON! = nil
-  
-  var tapped:Bool = false
-  
-  func animateScoreBorders() {
-    firstScoreIndicator.rotateScoreViewToZero()
-    firstScoreIndicator.rotateView(1.0)
-    firstScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
-      if ended {
-        self.firstScoreLabel.adjustsFontSizeToFitWidth = true
-        self.firstScoreLabel.isHidden = false
-        self.firstScoreIndicator.fillScoreBorder(0.5)
-        self.firstContainer.bringSubview(toFront: self.firstScoreLabel)
-        self.firstScoreLabel.method   = UILabelCountingMethodLinear
-        self.firstScoreLabel.format   = "%d";
-        self.firstMiniIcon.isHidden
-          = false
-        //        self.firstScoreLabel.animationDuration = 0.5
-        self.firstScoreLabel.count(from: 0, to: Float(self.inProgressChallenges), withDuration: 0.5)
-        
-      }
-    }
-    
-    secondScoreIndicator.rotateScoreViewToZero()
-    secondScoreIndicator.rotateView(1.0)
-    secondScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
-      if ended {
-        self.secondScoreLabel.adjustsFontSizeToFitWidth = true
-        self.secondScoreLabel.isHidden = false
-        self.secondScoreIndicator.fillScoreBorder(0.5)
-        self.secondContainer.bringSubview(toFront: self.secondScoreLabel)
-        self.secondScoreLabel.method   = UILabelCountingMethodLinear
-        self.secondScoreLabel.format   = "%d";
-        self.secondMiniIcon.isHidden = false
-        self.secondScoreLabel.count(from: 0, to: Float(self.wins), withDuration: 0.5)
-        //        self.secondScoreLabel.countFrom(0, to: Float(self.wins))
-      }
-    }
-    
-    thirdScoreIndicator.rotateScoreViewToZero()
-    thirdScoreIndicator.rotateView(1.0)
-    thirdScoreIndicator.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
-      if ended {
-        self.thirdScoreLabel.adjustsFontSizeToFitWidth = true
-        self.thirdScoreLabel.isHidden = false
-        self.thirdScoreIndicator.fillScoreBorder(0.5)
-        self.thirdContainer.bringSubview(toFront: self.thirdScoreLabel)
-        self.thirdScoreLabel.method   = UILabelCountingMethodLinear
-        self.thirdScoreLabel.format   = "%d";
-        self.thirdScoreIcon.isHidden = false
-        self.thirdScoreLabel.count(from: 0, to: Float(self.points), withDuration: 0.5)
-      }
-    }
-    
-    
-  }
-  
-  func cleareScoreborder() {
-    for item in thirdContainer.subviews {
-      if item.layer.value(forKey: "type") != nil {
-        if item.layer.value(forKey: "type") as! String == "inner" {
-          item.removeFromSuperview()
-        }
-      }
-    }
-    
-    for item:UIView in secondContainer.subviews {
-      if item.layer.value(forKey: "type") != nil {
-        if item.layer.value(forKey: "type") as! String == "inner" {
-          item.removeFromSuperview()
-        }
-      }
-    }
-    
-    for item:UIView in firstContainer.subviews {
-      if item.layer.value(forKey: "type") != nil {
-        if item.layer.value(forKey: "type") as! String == "inner" {
-          item.removeFromSuperview()
-        }
-      }
-    }
-  }
   
   func xibSetup() {
     view                  = loadViewFromNib()
@@ -153,9 +67,6 @@ import Async
     view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
     // Adding custom subview on top of our view (over any custom drawing > see note below)
     addSubview(view)
-    CHImages().setImageForMiniIconInProgress(imageView: self.firstMiniIcon)
-    CHImages().setImageForMiniIconWins(imageView: self.secondMiniIcon)
-    CHImages().setImageForMiniIconTotal(imageView: self.thirdScoreIcon)
   }
   
   func loadViewFromNib() -> UIView {
@@ -171,50 +82,63 @@ import Async
     // 2. call super.init(frame:)
     super.init(frame: frame)
     // 3. Setup view from .xib file
-    
     xibSetup()
-    
   }
   
+  required init?(coder aDecoder: NSCoder) {
+    // 1. setup any properties here
+    // 2. call super.init(coder:)
+    super.init(coder: aDecoder)
+    // 3. Setup view from .xib file
+    xibSetup()
+  }
+  
+  func animateScoreBorders() {
+    firstScoreIndicator.rotateScoreBorderOnFriends(scoreLabel: self.firstScoreLabel, in: self.firstContainer, with: self.firstMiniIcon, with: self.inProgressChallenges)
+    secondScoreIndicator.rotateScoreBorderOnFriends(scoreLabel: self.secondScoreLabel, in: self.secondContainer, with: self.secondMiniIcon, with: self.wins)
+    thirdScoreIndicator.rotateScoreBorderOnFriends(scoreLabel: self.thirdScoreLabel, in: self.thirdContainer, with: self.thirdScoreIcon, with: self.points)
+  }
+  
+  func cleareScoreborder() {
+    thirdContainer.cleareScoreContainer()
+    secondContainer.cleareScoreContainer()
+    firstContainer.cleareScoreContainer()
+  }
+  
+  
   func setUp(_ json:JSON) {
-    
-    userAvatar.layer.masksToBounds = true
-    userAvatar.layer.cornerRadius  = 25.0
     
     self.width             = self.view.frame.width
     self.initialNameLevel  = self.username.frame
     self.initialLevelFrame = self.userLevel.frame
     self.initialScoreFrame = self.scoreContainer.frame
     self.initialAvatarFrame = self.userAvatar.frame
-    self.confirmationVindow.isHidden = true
     self.initialPlusFrame  = self.plusButton.frame
+   self.initialMinusFrame = self.minusButton.frame
+    self.confirmationVindow.isHidden = true
+   
     self.initialPlusFrame.origin.x = self.width
-    
     self.plusButton.frame = self.initialPlusFrame
-    
-    self.initialMinusFrame = self.minusButton.frame
     
     
     if json != nil {
       userObject = json
-      CHImages().setImageForFriend(json["_id"].stringValue, imageView: self.userAvatar)
-      self.username.text        = json["name"].stringValue
-      self.userLevel.text       = "Level \(json["level"]["number"].stringValue) Champy"
+      self.userAvatar.roundCornersAndSetUpWithId(id: json["_id"].stringValue)
       
-      self.wins = json["successChallenges"].intValue
-      self.inProgressChallenges = json["inProgressChallengesCount"].intValue
-      self.points = json["inProgressChallengesCount"].intValue + json["allChallengesCount"].intValue
+      self.username.text        = json.getStringByKey(key: "name")
+      self.userLevel.text       = "Level \(json["level"].getStringByKey(key: "number")) Champy"
+      
+      self.wins = json.getIntByKey(key: "successChallenges")
+      self.inProgressChallenges = json.getIntByKey(key: "inProgressChallengesCount")
+      self.points = json.getSummOffElements(keys: ["inProgressChallengesCount", "allChallengesCount"])
       
       
-      self.inProgressCount.text = json["inProgressChallengesCount"].stringValue
+      self.inProgressCount.text = json.getStringByKey(key: "inProgressChallengesCount")
       self.allCount.text        = "\(self.points)"
-      self.winsCount.text       = json["successChallenges"].stringValue
+      self.winsCount.text       = json.getStringByKey(key: "successChallenges")
       
-      self.username.adjustsFontSizeToFitWidth        = true
-      self.userLevel.adjustsFontSizeToFitWidth       = true
-      self.inProgressCount.adjustsFontSizeToFitWidth = true
-      self.allCount.adjustsFontSizeToFitWidth        = true
-      self.winsCount.adjustsFontSizeToFitWidth       = true
+      
+      [username, userLevel, inProgressCount, allCount, winsCount].adjustFontSizeToFiTWidthForObjects(value: true)
     }
     
     switch self.status {
@@ -236,10 +160,10 @@ import Async
     case "Friends" :
       minusButtonState = false
       plusButtonState = false
-      
       self.minusButton.setImage(#imageLiteral(resourceName: "deleteFriend"), for: .normal)
       self.plusButton.setImage(#imageLiteral(resourceName: "challengeFriend"), for: .normal)
       break
+      
     default:
       minusButtonState = true
       plusButtonState = true
@@ -252,11 +176,14 @@ import Async
     
   }
   
+  func triggerTapped(value:Bool){
+    self.tapped = false
+  }
   
   func open() {
-    ////print(self.userObject)
     self.tapped = true
-    self.setTimeout(1.0) { 
+    
+    self.setTimeout(1.0) {
       self.tapped = false
     }
     
@@ -328,14 +255,14 @@ import Async
     self.pointsContainer.isHidden = false
     closeConfirmationWindow()
     var viewFrame = mainContent.frame
-    viewFrame.size.height = 66
+    viewFrame.size.height = 80
     self.mainContent.frame = viewFrame
     
     var frame = userAvatar.frame
     frame.origin.x = 8
     
     var separatorFrame = separator.frame
-    separatorFrame.origin.y = 65
+    separatorFrame.origin.y = 79
     
     
     UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
@@ -534,11 +461,42 @@ import Async
   }
   
   
-  required init?(coder aDecoder: NSCoder) {
-    // 1. setup any properties here
-    // 2. call super.init(coder:)
-    super.init(coder: aDecoder)
-    // 3. Setup view from .xib file
-    xibSetup()
+  
+  
+}
+
+extension ScoreBorder {
+  func rotateScoreBorderOnFriends(scoreLabel:UICountingLabel, in container:UIView, with miniIcon:UIImageView, with value:Int) {
+    self.rotateScoreViewToZero()
+    self.rotateView(1.0)
+    self.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
+      if ended {
+        scoreLabel.adjustsFontSizeToFitWidth = true
+        scoreLabel.isHidden = false
+        self.fillScoreBorder(0.5)
+        container.bringSubview(toFront: scoreLabel)
+        scoreLabel.method   = UILabelCountingMethodLinear
+        scoreLabel.format   = "%d";
+        miniIcon.isHidden = false
+        scoreLabel.count(from: 0, to: Float(value), withDuration: 0.5)
+      }
+    }
+
+  }
+  
+  
+  
+}
+
+extension UIView {
+  func cleareScoreContainer() {
+    for item in self.subviews {
+      if item.layer.value(forKey: "type") != nil {
+        if item.layer.value(forKey: "type") as! String == "inner" {
+          item.removeFromSuperview()
+        }
+      }
+    }
   }
 }
+

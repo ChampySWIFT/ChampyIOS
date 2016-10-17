@@ -15,6 +15,7 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
   var CurrentUser:UserDefaults = UserDefaults.standard
+//  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   var window: UIWindow?
   var mainView:UIView! = nil
@@ -38,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   weak var winsPrototypeIcon = #imageLiteral(resourceName: "wins")
   weak var totalPrototypeIcon = #imageLiteral(resourceName: "Total")
   weak var inProgressPrototypeIcon = #imageLiteral(resourceName: "inProgressMiniImage")
+  
+  
+  var friendCells:[String:UITableViewCell] = [:]
   var unconfirmedChallenges:Int = 0
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
