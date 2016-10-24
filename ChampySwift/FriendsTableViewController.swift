@@ -78,8 +78,8 @@ class FriendsTableViewController: UITableViewController {
     } else {
       let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
       content.close()
-      heights.append(66)
-      return 66
+      heights.append(80)
+      return 80
     }
   }
   
@@ -172,7 +172,7 @@ class FriendsTableViewController: UITableViewController {
     
     self.friendsContent.removeAll()
     for friend in CHUsers().getFriends(CHSession().currentUserId) {
-      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       
       content.status = "Friends"
       var object = friend["owner"]
@@ -209,7 +209,7 @@ class FriendsTableViewController: UITableViewController {
   }
   
   func viewWithLabel(_ text: String) -> UIView {
-    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 66))
+    let label = UILabel(frame: CGRect(x:0, y: 0, width: self.view.frame.width / 2, height: 80))
     label.text = text
     label.font = CHUIElements().font16
     label.numberOfLines = 3

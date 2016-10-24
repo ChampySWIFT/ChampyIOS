@@ -26,6 +26,9 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   var viewObjects:[NewChallenge]! = []
   var userObject:JSON! = nil
   
+  
+    
+  
   @IBAction func closeView(_ sender: AnyObject) {
     self.dismiss(animated: true) { 
       CHPush().localPush("refreshIcarousel", object: self)

@@ -252,6 +252,9 @@ class RoleControlViewController: UIViewController {
   
   func alert(_ notif:Notification) {
     let object = (notif as NSNotification).userInfo as! [String:String]
+    if object["isCreatedChallenge"] == "true" {
+      return
+    }
     var type:CHBanners.CHBannerTypes! = nil
     
     let remoteType:String = object["type"]!

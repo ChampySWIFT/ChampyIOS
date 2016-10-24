@@ -15,11 +15,11 @@ class CHSession: NSObject {
   
   let CurrentUser = UserDefaults.standard
   
-  var currentUserObject:JSON! = nil
+  var currentUserObject:JSON!      = nil
   var currentUserId:String         = ""
   var currentUserFacebookId:String = ""
   var currentUserName:String       = ""
-  var logined:Bool                 = false
+  public var logined:Bool          = false
   
   var selectedFriendId:String {
     if self.CurrentUser.object(forKey: "selectedFriendId") != nil {
@@ -44,6 +44,7 @@ class CHSession: NSObject {
   func updateUserObject(_ userObject:JSON) {
     self.currentUserObject     = userObject
     self.CurrentUser.set("\(userObject)", forKey: "userObject")
+    
   }
   
   func createSessionForTheUserWithFacebookId(_ facebookId:String, name:String, andObjectId objectId: String, userObject:JSON) {

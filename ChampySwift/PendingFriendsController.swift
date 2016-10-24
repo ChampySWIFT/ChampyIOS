@@ -27,7 +27,7 @@ class PendingFriendsController: UITableViewController {
   var incomingidentifiers:[String]    = []
   var outgoingidentifiers:[String]    = []
   var pendingFriends:[JSON] = []
-  let closedHeight:CGFloat = 66.0
+  let closedHeight:CGFloat = 80.0
   let openedHeight:CGFloat = 220.0
   
   
@@ -249,7 +249,7 @@ class PendingFriendsController: UITableViewController {
     self.pendingFriends = CHUsers().getPendingFriend(CHSession().currentUserId)
     
     for friend in pendingFriends {
-      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
+      let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       
       switch CHSession().currentUserId {
       case friend["friend"]["_id"].stringValue:
@@ -276,9 +276,9 @@ class PendingFriendsController: UITableViewController {
   }
   
   func getEmpty(_ text:String) ->UIView {
-    let container = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
-    let innercontainer = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
-    let label = UILabel(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 66))
+    let container = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 80))
+    let innercontainer = UIView(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 80))
+    let label = UILabel(frame: CGRect(x: 0, y:0, width: self.view.frame.size.width, height: 80))
     
     container.backgroundColor = UIColor.clear
     innercontainer.backgroundColor = UIColor.clear

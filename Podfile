@@ -14,6 +14,7 @@ target 'Champy' do
   pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod "Device", '~> 2.0.0'
   #pod 'FacebookCore'
   #pod 'FacebookLogin'
   #pod 'FacebookShare'
@@ -28,6 +29,7 @@ target 'ChampyUITests' do
   pod 'JSONWebToken'
   pod 'Kingfisher', '~> 3.0'
   pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
+  pod "Device", '~> 2.0.0'
 end
 
 target 'ChampyTests' do
@@ -39,6 +41,7 @@ target 'ChampyTests' do
   pod 'JSONWebToken'
   pod 'Kingfisher', '~> 3.0'
   pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
+  pod "Device", '~> 2.0.0'
   
  end
 

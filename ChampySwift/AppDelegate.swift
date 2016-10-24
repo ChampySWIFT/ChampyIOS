@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import UserNotifications
 import Firebase
-
+import Async
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     CHPush().clearBadgeNumber()
     self.prototypeFriendCell = FriendCell()
+    
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   

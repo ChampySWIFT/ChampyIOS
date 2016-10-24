@@ -30,7 +30,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   var contentToRemoveCell:[UITableViewCell] = []
   var displayiedCells:Int = 0
   var closedCellHeight:CGFloat = 80
-  
+  var cells:[String:UITableViewCell] = [:]
   
   override func viewDidDisappear(_ animated: Bool) {
     center.removeObserver(self, name: NSNotification.Name(rawValue: "allReload"), object: nil)
@@ -64,6 +64,8 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
    return identifiers	.count
   }
   
+  
+  
   override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
       weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
@@ -87,28 +89,6 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       if content.userAvatar != nil {
         content.userAvatar.removeFromSuperview()
       }
-//      if content.secondContainer != nil && content.firstContainer != nil && content.thirdContainer != nil {
-//        for item in content.firstContainer.subviews {
-//          item.removeFromSuperview()
-//        }
-//        
-//        for item in content.secondContainer.subviews {
-//          item.removeFromSuperview()
-//        }
-//        for item in content.thirdContainer.subviews {
-//          //print(content.thirdContainer.subviews)
-//          item.removeFromSuperview()
-//        }
-//        
-//        content.firstContainer.removeFromSuperview()
-//        
-//        content.secondContainer.removeFromSuperview()
-//        
-//        content.thirdContainer.removeFromSuperview()
-//      }
-//      content.userAvatar.removeFromSuperview()
-      
-      
       
       content.userAvatar = nil
       content.removeFromSuperview()
@@ -135,7 +115,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let identifier = self.identifiers[(indexPath as NSIndexPath).row]
-    var cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
+    let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "CELL\(identifier)")
    
     let friend = self.userArray[indexPath.row]
     let status = CHUsers().getStatus(friend) //"Other"
@@ -143,13 +123,13 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: closedCellHeight))
       content.status = status
       content.setUp(friend)
+      content.setUpImage()
       content.close()
       self.friendsContent[(indexPath as NSIndexPath).row] = content
       cell.addSubview(content)
       cell.noSelectionNoColorNoAccessoryNoContentView()
       displayiedCells += 1
     }
-//    appDelegate.friendCells["CELL\(identifier)"] = cell
     return cell
   }
   
@@ -181,13 +161,19 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   }
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
-      weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
-      content?.setUpImage()
-    }
   }
   
   @IBOutlet weak var refreshTableView: UIRefreshControl!
+  
+  
+  func alertWithMessage(_ message:String, type:CHBanners.CHBannerTypes) {
+    Async.main {
+      let banner = CHBanners(withTarget: self.view, andType: type)
+      banner.showBannerForViewControllerAnimated(true, message: message)
+    }
+  }
+
+  
   
   @IBAction func refreshTableViewAction(_ sender: AnyObject) {
     guard IJReachability.isConnectedToNetwork() else {
@@ -195,13 +181,15 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
       CHPush().alertPush("No Internet Connection", type: "Warning")
       return
     }
-    CHPush().alertPush("Updating Friends List", type: "Success")
     Async.background{
       CHRequests().getAllUsers { (result, json) in
         CHRequests().getFriends(CHSession().currentUserId, completitionHandler: { (result, json) in
           if result {
             Async.main {
-              
+              for item in self.identifiers {
+                self.cells[item]?.removeFromSuperview()
+              }
+              self.cells.removeAll()
               self.fillArray()
               self.tableView.reloadData()
               self.refreshTableView.endRefreshing()
