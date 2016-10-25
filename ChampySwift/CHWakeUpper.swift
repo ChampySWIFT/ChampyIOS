@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import UserNotifications
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -68,7 +69,7 @@ class CHWakeUpper: NSObject {
     
     return true
   }
-  
+//--------------------------------------------------------------------------------------------------------
   func setUpWakeUpArray(_ array:[String]) {
     for timeItem in array {
       if Int(timeItem) >= CHUIElements().getCurretnTime() {
@@ -78,6 +79,7 @@ class CHWakeUpper: NSObject {
   }
   
   func setUpScheduledLocalNotification(_ alertAction:String, alertBody:String, timeInterval:Double, type:String, wakeUpId:String = "") {
+    
     let localNotification:UILocalNotification = UILocalNotification()
     localNotification.alertAction = alertAction 
     localNotification.alertBody   = alertBody
@@ -85,8 +87,14 @@ class CHWakeUpper: NSObject {
       "type": type,
       "wakeUpId": wakeUpId
     ]
+    if Int(timeInterval) < CHUIElements().getCurretnTime() {
+      return
+    }
+    
     localNotification.fireDate    = Date(timeIntervalSince1970: timeInterval)
+    
     localNotification.soundName   = "out.wav"
+    localNotification.hasAction   = true
     UIApplication.shared.scheduleLocalNotification(localNotification)
   }
   

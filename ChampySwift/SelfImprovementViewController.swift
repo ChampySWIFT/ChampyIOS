@@ -41,7 +41,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     challengeView.type       = .linear
     challengeView.decelerationRate = 0.0
     
-    self.userObject = CHUsers().getUserById(CHSession().selectedFriendId)
+    self.userObject = CHSession().currentUserObject
     self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
     
     self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
