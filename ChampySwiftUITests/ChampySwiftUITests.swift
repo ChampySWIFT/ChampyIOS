@@ -10,7 +10,7 @@ import XCTest
 import SwiftyJSON
 import UIKit
 
-@testable import ChampySwift
+@testable import Champy
 
 class ChampySwiftUITests: XCTestCase {
   

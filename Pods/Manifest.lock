@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.0.0)
   - AsyncSwift (2.0.0)
   - CryptoSwift (0.6.0)
+  - Device (2.0.0)
   - Firebase/Analytics (3.6.0):
     - FirebaseAnalytics (= 3.4.2)
   - Firebase/Core (3.6.0):
@@ -40,6 +41,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AsyncSwift
+  - Device (~> 2.0.0)
   - Firebase/Core
   - Firebase/Messaging
   - Fusuma (from `https://github.com/pruthvikar/Fusuma.git`, commit `503865a`)
@@ -63,6 +65,7 @@ SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   AsyncSwift: 6ba6ed9ecb51344458063f7c86fe447ab824e313
   CryptoSwift: 4a599b7241b8d3b857d6e2c28867d0bd5d1aae24
+  Device: d18c6b7f5c38f3be11dd05c4f24a091bb7061b36
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
@@ -78,6 +81,6 @@ SPEC CHECKSUMS:
   SwiftHTTP: 6d57b54ee84d9ad9cf81b6bc1c4cae593e3f6329
   SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: cda53751e9321d238c13fe3acc3af0e2064ea43c
+PODFILE CHECKSUM: f595ef19cf7f5f1e53237cb7b0e3787d62d06f44
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

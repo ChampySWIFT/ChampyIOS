@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		0D1ADAA61DA25D220067EB51 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */; };
 		0D1ADAA71DA25D220067EB51 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */; };
+		0D74E93D1DBDF48300081CCD /* ChampyTestsSwift3_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */; };
+		0D74E9441DBDF66900081CCD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48A1D36677300DD0035 /* FBSDKCoreKit.framework */; };
+		0D74E9451DBDF66900081CCD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
+		0D74E9461DBDF66900081CCD /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */; };
+		0D74E9471DBDF66900081CCD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */; };
+		0D74E94F1DBDFBD500081CCD /* ChampyUITests3_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74E94E1DBDFBD500081CCD /* ChampyUITests3_0.swift */; };
+		0D74E9561DBDFCB800081CCD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48A1D36677300DD0035 /* FBSDKCoreKit.framework */; };
+		0D74E9571DBDFCB800081CCD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
+		0D74E9581DBDFCB800081CCD /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */; };
+		0D74E9591DBDFCB800081CCD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */; };
+		0D74E95B1DBE4B5300081CCD /* out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0D74E95A1DBE4B5300081CCD /* out.mp3 */; };
+		0D74E95D1DBE51AA00081CCD /* sub.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0D74E95C1DBE51AA00081CCD /* sub.caf */; };
 		0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */; };
 		0D959BA41DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */; };
 		0D959BA81DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */; };
@@ -139,10 +151,26 @@
 		6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */; };
 		790CB9DA136B31D9BDEE5AA4 /* Pods_ChampyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */; };
 		A79081C971694F3E4F89DEB6 /* Pods_ChampyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */; };
+		AACD075BE62A7F8335A2986E /* Pods_ChampyTestsSwift3_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC2793E37D08AD310290985 /* Pods_ChampyTestsSwift3_0.framework */; };
+		D22EFB7230677CBF42AE4C70 /* Pods_ChampyUITests3_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD01EC77A637916B2EEDC69C /* Pods_ChampyUITests3_0.framework */; };
 		F058DBD6870325289AA1D6AF /* Pods_ChampySwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0D74E93F1DBDF48300081CCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 579C184E1CCB595700D6EEA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 579C18551CCB595700D6EEA9;
+			remoteInfo = Champy;
+		};
+		0D74E9511DBDFBD500081CCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 579C184E1CCB595700D6EEA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 579C18551CCB595700D6EEA9;
+			remoteInfo = Champy;
+		};
 		579C18791CCB595800D6EEA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 579C184E1CCB595700D6EEA9 /* Project object */;
@@ -162,6 +190,14 @@
 /* Begin PBXFileReference section */
 		0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		0D74E93A1DBDF48300081CCD /* ChampyTestsSwift3.0.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyTestsSwift3.0.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampyTestsSwift3_0.swift; sourceTree = "<group>"; };
+		0D74E93E1DBDF48300081CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D74E94C1DBDFBD500081CCD /* ChampyUITests3.0.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyUITests3.0.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D74E94E1DBDFBD500081CCD /* ChampyUITests3_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampyUITests3_0.swift; sourceTree = "<group>"; };
+		0D74E9501DBDFBD500081CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D74E95A1DBE4B5300081CCD /* out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = out.mp3; sourceTree = "<group>"; };
+		0D74E95C1DBE51AA00081CCD /* sub.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sub.caf; sourceTree = "<group>"; };
 		0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChampySwift.entitlements; sourceTree = "<group>"; };
 		0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshManager.swift; sourceTree = "<group>"; };
 		0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshView.swift; sourceTree = "<group>"; };
@@ -169,6 +205,7 @@
 		0D959BA61DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MNMBottomPullToRefreshArrow.png; sourceTree = "<group>"; };
 		0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		0D9E29431DB4F7BA000F2833 /* champy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = champy.png; sourceTree = "<group>"; };
+		14142884974D960E4D97B441 /* Pods-ChampyUITests3.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests3.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests3.0/Pods-ChampyUITests3.0.release.xcconfig"; sourceTree = "<group>"; };
 		158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.debug.xcconfig"; sourceTree = "<group>"; };
 		1F6AF4466EFACBD3277134D7 /* Pods_ChampySwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.release.xcconfig"; sourceTree = "<group>"; };
@@ -307,14 +344,43 @@
 		583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTestsSwift3.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0.debug.xcconfig"; sourceTree = "<group>"; };
+		6BC2793E37D08AD310290985 /* Pods_ChampyTestsSwift3_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTestsSwift3_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77262443217FF587F4AC7208 /* Pods-ChampyTestsSwift3.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTestsSwift3.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0.release.xcconfig"; sourceTree = "<group>"; };
 		A94430A928AF04817A64C764 /* Pods_ChampySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD01EC77A637916B2EEDC69C /* Pods_ChampyUITests3_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyUITests3_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.release.xcconfig"; sourceTree = "<group>"; };
 		CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Champy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D10979A34178250DAB1A9525 /* Pods-ChampyUITests3.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests3.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests3.0/Pods-ChampyUITests3.0.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0D74E9371DBDF48300081CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D74E9461DBDF66900081CCD /* FBSDKMessengerShareKit.framework in Frameworks */,
+				AACD075BE62A7F8335A2986E /* Pods_ChampyTestsSwift3_0.framework in Frameworks */,
+				0D74E9471DBDF66900081CCD /* FBSDKShareKit.framework in Frameworks */,
+				0D74E9441DBDF66900081CCD /* FBSDKCoreKit.framework in Frameworks */,
+				0D74E9451DBDF66900081CCD /* FBSDKLoginKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D74E9491DBDFBD500081CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D74E9581DBDFCB800081CCD /* FBSDKMessengerShareKit.framework in Frameworks */,
+				D22EFB7230677CBF42AE4C70 /* Pods_ChampyUITests3_0.framework in Frameworks */,
+				0D74E9591DBDFCB800081CCD /* FBSDKShareKit.framework in Frameworks */,
+				0D74E9561DBDFCB800081CCD /* FBSDKCoreKit.framework in Frameworks */,
+				0D74E9571DBDFCB800081CCD /* FBSDKLoginKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		579C18531CCB595700D6EEA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -395,6 +461,24 @@
 			name = BottomRefresh;
 			sourceTree = "<group>";
 		};
+		0D74E93B1DBDF48300081CCD /* ChampyTestsSwift3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */,
+				0D74E93E1DBDF48300081CCD /* Info.plist */,
+			);
+			path = ChampyTestsSwift3.0;
+			sourceTree = "<group>";
+		};
+		0D74E94D1DBDFBD500081CCD /* ChampyUITests3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				0D74E94E1DBDFBD500081CCD /* ChampyUITests3_0.swift */,
+				0D74E9501DBDFBD500081CCD /* Info.plist */,
+			);
+			path = ChampyUITests3.0;
+			sourceTree = "<group>";
+		};
 		57336C161CD771EC00C5B6F1 /* Carts */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +497,8 @@
 				57A3C6D31CDB7C2200997E41 /* privacy.html */,
 				571F789A1CF880AD008A45DE /* out.caf */,
 				0D9E29431DB4F7BA000F2833 /* champy.png */,
+				0D74E95A1DBE4B5300081CCD /* out.mp3 */,
+				0D74E95C1DBE51AA00081CCD /* sub.caf */,
 				57E9740C1D2685FD00E573CA /* out.wav */,
 				579C18591CCB595700D6EEA9 /* AppDelegate.swift */,
 				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
@@ -534,6 +620,8 @@
 				579C18701CCB595700D6EEA9 /* ChampySwiftTests */,
 				579C187B1CCB595800D6EEA9 /* ChampySwiftUITests */,
 				57DBA4AC1D366E7D00DD0035 /* ChampySwiftTests */,
+				0D74E93B1DBDF48300081CCD /* ChampyTestsSwift3.0 */,
+				0D74E94D1DBDFBD500081CCD /* ChampyUITests3.0 */,
 				579C18571CCB595700D6EEA9 /* Products */,
 				A38A0ABE7876BF781FBBA41F /* Frameworks */,
 				748FB7733E530F87CD162CDB /* Pods */,
@@ -546,6 +634,8 @@
 				579C18561CCB595700D6EEA9 /* Champy.app */,
 				579C18781CCB595800D6EEA9 /* ChampyUITests.xctest */,
 				57DBA4AB1D366E7D00DD0035 /* ChampyTests.xctest */,
+				0D74E93A1DBDF48300081CCD /* ChampyTestsSwift3.0.xctest */,
+				0D74E94C1DBDFBD500081CCD /* ChampyUITests3.0.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -729,6 +819,10 @@
 				C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */,
 				BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */,
 				DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */,
+				69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */,
+				77262443217FF587F4AC7208 /* Pods-ChampyTestsSwift3.0.release.xcconfig */,
+				D10979A34178250DAB1A9525 /* Pods-ChampyUITests3.0.debug.xcconfig */,
+				14142884974D960E4D97B441 /* Pods-ChampyUITests3.0.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -777,6 +871,8 @@
 				CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */,
 				583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */,
 				5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */,
+				6BC2793E37D08AD310290985 /* Pods_ChampyTestsSwift3_0.framework */,
+				BD01EC77A637916B2EEDC69C /* Pods_ChampyUITests3_0.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -784,6 +880,48 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0D74E9391DBDF48300081CCD /* ChampyTestsSwift3.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D74E9431DBDF48300081CCD /* Build configuration list for PBXNativeTarget "ChampyTestsSwift3.0" */;
+			buildPhases = (
+				3584F64144ECF03F4A92AA99 /* [CP] Check Pods Manifest.lock */,
+				0D74E9361DBDF48300081CCD /* Sources */,
+				0D74E9371DBDF48300081CCD /* Frameworks */,
+				0D74E9381DBDF48300081CCD /* Resources */,
+				27E938CBF4A2CBE37C49ACDC /* [CP] Embed Pods Frameworks */,
+				5538A7FFBA1C08DE36916C33 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D74E9401DBDF48300081CCD /* PBXTargetDependency */,
+			);
+			name = ChampyTestsSwift3.0;
+			productName = ChampyTestsSwift3.0;
+			productReference = 0D74E93A1DBDF48300081CCD /* ChampyTestsSwift3.0.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0D74E94B1DBDFBD500081CCD /* ChampyUITests3.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D74E9531DBDFBD500081CCD /* Build configuration list for PBXNativeTarget "ChampyUITests3.0" */;
+			buildPhases = (
+				FE46030E11E5E7037E0C1C63 /* [CP] Check Pods Manifest.lock */,
+				0D74E9481DBDFBD500081CCD /* Sources */,
+				0D74E9491DBDFBD500081CCD /* Frameworks */,
+				0D74E94A1DBDFBD500081CCD /* Resources */,
+				6C7718481D6F503D569C208E /* [CP] Embed Pods Frameworks */,
+				3D9D28E2E2ECD6659858A8FE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D74E9521DBDFBD500081CCD /* PBXTargetDependency */,
+			);
+			name = ChampyUITests3.0;
+			productName = ChampyUITests3.0;
+			productReference = 0D74E94C1DBDFBD500081CCD /* ChampyUITests3.0.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		579C18551CCB595700D6EEA9 /* Champy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 579C18811CCB595800D6EEA9 /* Build configuration list for PBXNativeTarget "Champy" */;
@@ -813,6 +951,7 @@
 				579C18751CCB595800D6EEA9 /* Frameworks */,
 				579C18761CCB595800D6EEA9 /* Resources */,
 				740052FCA1DF35D355DB83C6 /* [CP] Copy Pods Resources */,
+				70C613B1520337C7FD749930 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -851,10 +990,20 @@
 		579C184E1CCB595700D6EEA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = AzinecLLC;
 				TargetAttributes = {
+					0D74E9391DBDF48300081CCD = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 579C18551CCB595700D6EEA9;
+					};
+					0D74E94B1DBDFBD500081CCD = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 579C18551CCB595700D6EEA9;
+					};
 					579C18551CCB595700D6EEA9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = EWU83H92V3;
@@ -897,11 +1046,27 @@
 				579C18551CCB595700D6EEA9 /* Champy */,
 				579C18771CCB595800D6EEA9 /* ChampyUITests */,
 				57DBA4AA1D366E7D00DD0035 /* ChampyTests */,
+				0D74E9391DBDF48300081CCD /* ChampyTestsSwift3.0 */,
+				0D74E94B1DBDFBD500081CCD /* ChampyUITests3.0 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0D74E9381DBDF48300081CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D74E94A1DBDFBD500081CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		579C18541CCB595700D6EEA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -919,11 +1084,13 @@
 				5730E6EC1D083FA500D1EEA4 /* InviteFriendsView.xib in Resources */,
 				57336C231CD783D700C5B6F1 /* BebasNeue Thin.otf in Resources */,
 				57D29E8A1D00754F0016CBF5 /* HistoryCell.xib in Resources */,
+				0D74E95D1DBE51AA00081CCD /* sub.caf in Resources */,
 				0D959BA91DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow.png in Resources */,
 				57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */,
 				57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */,
 				575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */,
 				57C795D11D67409A007A861F /* GoogleService-Info.plist in Resources */,
+				0D74E95B1DBE4B5300081CCD /* out.mp3 in Resources */,
 				57336C151CD771E700C5B6F1 /* WakeUpChallenge.xib in Resources */,
 				57B2FE4B1CEDD49E00BE1189 /* UnConfirmedDuelSender.xib in Resources */,
 				57DBF6291CEC6DF500659B79 /* Entitlements.plist in Resources */,
@@ -970,7 +1137,82 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		27E938CBF4A2CBE37C49ACDC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3584F64144ECF03F4A92AA99 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3D9D28E2E2ECD6659858A8FE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyUITests3.0/Pods-ChampyUITests3.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5538A7FFBA1C08DE36916C33 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C7718481D6F503D569C208E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyUITests3.0/Pods-ChampyUITests3.0-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D957FB06FEB20D2B840A4CA /* [CP] Embed Pods Frameworks */ = {
@@ -986,6 +1228,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70C613B1520337C7FD749930 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChampyUITests/Pods-ChampyUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		70EB94B740BD42A334A9F764 /* [CP] Embed Pods Frameworks */ = {
@@ -1030,7 +1287,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		99A4546EDF1335B970AE583A /* [CP] Check Pods Manifest.lock */ = {
@@ -1045,7 +1302,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B2C6F00EEA3781B8286252D8 /* [CP] Copy Pods Resources */ = {
@@ -1061,6 +1318,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Champy/Pods-Champy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE46030E11E5E7037E0C1C63 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FF1B59DDAA9B6822DB0A116C /* [CP] Copy Pods Resources */ = {
@@ -1081,6 +1353,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0D74E9361DBDF48300081CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D74E93D1DBDF48300081CCD /* ChampyTestsSwift3_0.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D74E9481DBDFBD500081CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D74E94F1DBDFBD500081CCD /* ChampyUITests3_0.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		579C18521CCB595700D6EEA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1162,6 +1450,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0D74E9401DBDF48300081CCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 579C18551CCB595700D6EEA9 /* Champy */;
+			targetProxy = 0D74E93F1DBDF48300081CCD /* PBXContainerItemProxy */;
+		};
+		0D74E9521DBDFBD500081CCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 579C18551CCB595700D6EEA9 /* Champy */;
+			targetProxy = 0D74E9511DBDFBD500081CCD /* PBXContainerItemProxy */;
+		};
 		579C187A1CCB595800D6EEA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 579C18551CCB595700D6EEA9 /* Champy */;
@@ -1194,6 +1492,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0D74E9411DBDF48300081CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ChampyTestsSwift3.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AzinecLLC.ChampyTestsSwift3-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Champy.app/Champy";
+			};
+			name = Debug;
+		};
+		0D74E9421DBDF48300081CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77262443217FF587F4AC7208 /* Pods-ChampyTestsSwift3.0.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ChampyTestsSwift3.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AzinecLLC.ChampyTestsSwift3-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Champy.app/Champy";
+			};
+			name = Release;
+		};
+		0D74E9541DBDFBD500081CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D10979A34178250DAB1A9525 /* Pods-ChampyUITests3.0.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ChampyUITests3.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AzinecLLC.ChampyUITests3-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Champy;
+			};
+			name = Debug;
+		};
+		0D74E9551DBDFBD500081CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14142884974D960E4D97B441 /* Pods-ChampyUITests3.0.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ChampyUITests3.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AzinecLLC.ChampyUITests3-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Champy;
+			};
+			name = Release;
+		};
 		579C187F1CCB595800D6EEA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1355,8 +1743,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = ChampySwift;
+				TEST_TARGET_NAME = Champy;
 			};
 			name = Debug;
 		};
@@ -1373,8 +1762,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = ChampySwift;
+				TEST_TARGET_NAME = Champy;
 			};
 			name = Release;
 		};
@@ -1417,6 +1807,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0D74E9431DBDF48300081CCD /* Build configuration list for PBXNativeTarget "ChampyTestsSwift3.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D74E9411DBDF48300081CCD /* Debug */,
+				0D74E9421DBDF48300081CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D74E9531DBDFBD500081CCD /* Build configuration list for PBXNativeTarget "ChampyUITests3.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D74E9541DBDFBD500081CCD /* Debug */,
+				0D74E9551DBDFBD500081CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		579C18511CCB595700D6EEA9 /* Build configuration list for PBXProject "Champy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
