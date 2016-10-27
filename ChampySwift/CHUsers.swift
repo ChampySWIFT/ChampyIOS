@@ -98,6 +98,7 @@ class CHUsers: NSObject {
   }
   
   func getUsers(from:Int, to:Int) -> [JSON] {
+    if to < from {return []}
     let array = CHSession().getJSONByKey("userList").arrayValue[from...to]
     var friends:[JSON] = []
     for item in array {

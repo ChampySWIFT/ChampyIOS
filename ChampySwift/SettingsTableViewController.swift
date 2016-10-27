@@ -57,6 +57,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     CHImages().setUpAvatar(userAvatar)
     
     
+    
     CHUIElements().setUpDailyReminderCredentials(self.isHidden, switcher: self.dailyNOtificatorButton, picker: self.pickerView, label: self.dailyLabel)
     datePicker = CHUIElements().initAndSetUpDatePicker(30)
     
@@ -262,6 +263,11 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     }
     let fusuma = FusumaViewController()
     fusuma.delegate = self
+    fusumaTintColor = CHUIElements().APPColors["Info"]!
+    fusumaBackgroundColor = CHUIElements().APPColors["navigationBar"]!
+    fusumaCropImage = true
+    fusumaTintIcons = true
+    
     self.present(fusuma, animated: true, completion: nil)
     
   }
@@ -284,8 +290,71 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     }
   }
   
+  func imageRotatedByDegrees(oldImage: UIImage, deg degrees: CGFloat) -> UIImage {
+    //Calculate the size of the rotated view's containing box for our drawing space
+    let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: oldImage.size.width, height: oldImage.size.height))
+    let t: CGAffineTransform = CGAffineTransform(rotationAngle: degrees * CGFloat(M_PI / 180))
+    rotatedViewBox.transform = t
+    let rotatedSize: CGSize = rotatedViewBox.frame.size
+    //Create the bitmap context
+    UIGraphicsBeginImageContext(rotatedSize)
+    let bitmap: CGContext = UIGraphicsGetCurrentContext()!
+    //Move the origin to the middle of the image so we will rotate and scale around the center.
+    bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+    //Rotate the image context
+    bitmap.rotate(by: (degrees * CGFloat(M_PI / 180)))
+    //Now, draw the rotated/scaled image into the context
+    bitmap.scaleBy(x: 1.0, y: -1.0)
+    
+    bitmap.draw(oldImage.cgImage!, in: CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height))
+//    CGContextDrawImage(bitmap, CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height), oldImage.cgImage)
+    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext()
+    return newImage
+  }
+  
   // MARK: - Other functions methods
   func fusumaImageSelected(_ image: UIImage) {
+    var transform = CGAffineTransform.identity
+    CHPush().updateImageOnSettings(image)
+    self.userAvatar.image = image
+    var newImage = image
+    switch image.imageOrientation {
+    case .down:
+      print("down")
+      break
+    case .leftMirrored:
+      print("leftMirrored")
+      transform = transform.translatedBy(x: image.size.width, y: image.size.height);
+      transform = transform.rotated(by: CGFloat(M_PI));
+      break;
+    case .rightMirrored:
+      print("rightMirrored")
+      transform = transform.translatedBy(x: image.size.width, y: image.size.height);
+      transform = transform.rotated(by: CGFloat(M_PI));
+//      image.imageRotatedByDegrees(degrees: 90, flip: false)
+      break;
+    case .left:
+      print("left")
+      break
+      
+    case .right:
+      transform = transform.translatedBy(x: image.size.width, y: image.size.height);
+      transform = transform.rotated(by: CGFloat(M_PI));
+//      image.imageRotatedByDegrees(degrees: 90, flip: false)
+
+//      newImage = self.imageRotatedByDegrees(oldImage: image, deg: 90)
+      newImage = image.fixOrientation(img: image)
+      print("right")
+      break
+    case .up:
+      print("up")
+      break
+    default:
+      print("default")
+      break
+    }
+    
     if IJReachability.isConnectedToNetwork() == false {
       return
     } else {
@@ -295,7 +364,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
         banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
       }
       
-      CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: image, completitionHandler: { (result, json) in
+      CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: newImage, completitionHandler: { (result, json) in
         if result {
           Async.main {
             banner.changeText("Uploaded")
@@ -346,4 +415,54 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   
+}
+
+extension Double {
+  func toRadians() -> CGFloat {
+    return CGFloat(self * .pi / 180.0)
+  }
+}
+
+extension UIImage {
+  
+  func fixOrientation(img:UIImage) -> UIImage {
+    
+    if (img.imageOrientation == UIImageOrientation.up) {
+      return img;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale);
+    let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+    img.draw(in: rect)
+    
+    let normalizedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext();
+    return normalizedImage;
+    
+  }
+  
+  
+  func rotated(by degrees: Double) -> UIImage? {
+    guard let cgImage = self.cgImage else { return nil }
+    
+    let transform = CGAffineTransform(rotationAngle: degrees.toRadians())
+    var rect = CGRect(origin: .zero, size: self.size).applying(transform)
+    rect.origin = .zero
+    
+    if #available(iOS 10.0, *) {
+      let renderer = UIGraphicsImageRenderer(size: rect.size)
+      return renderer.image { renderContext in
+        renderContext.cgContext.translateBy(x: rect.midX, y: rect.midY)
+        renderContext.cgContext.rotate(by: degrees.toRadians())
+        renderContext.cgContext.scaleBy(x: 1.0, y: -1.0)
+        
+        let drawRect = CGRect(origin: CGPoint(x: -self.size.width/2, y: -self.size.height/2), size: self.size)
+        renderContext.cgContext.draw(cgImage, in: drawRect)
+      }
+    } else {
+      return self
+      // Fallback on earlier versions
+    }
+    
+  }
 }

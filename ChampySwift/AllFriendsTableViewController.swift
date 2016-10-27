@@ -246,7 +246,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     self.identifiers.removeAll()
     heights.removeAll()
     self.userArray.removeAll()
-    var toValue = 20
+    var toValue = 50
     
     if CHUsers().getUsersCount() < toValue {
       toValue = CHUsers().getUsersCount() - 1

@@ -26,7 +26,7 @@ class CHChalenges: NSObject {
     
   }
   
-  let maxChallengesCount = 5
+  let maxChallengesCount = 55
   
   
   /**
@@ -125,6 +125,20 @@ class CHChalenges: NSObject {
   }
   
   
+  func canISendChallengeToTheFriend(friendId:String, challengeId:String) -> Bool {
+    for item in self.getInProgressChallenges(CHSession().currentUserId) {
+      if item["challenge"]["_id"].stringValue != challengeId {
+        continue
+      }
+      if item["sender"]["_id"].stringValue == friendId || item["recipient"]["_id"].stringValue == friendId {
+        if item["status"].stringValue == "pending" || item["status"].stringValue == "started" {
+          return false
+        }
+      }
+    }
+    
+    return true
+  }
   
   func surrenderAllInProgressChallengesWithThisFriend(_ userId:String) {
     for item in self.getInProgressChallenges(CHSession().currentUserId) {

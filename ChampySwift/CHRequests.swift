@@ -34,7 +34,7 @@ class CHRequests: NSObject {
       return
     }
     self.token = CHSession().getToken()
-    //print(token)
+    print(token)
   }
   
   func getTokenForTests() {
@@ -314,8 +314,8 @@ class CHRequests: NSObject {
       completitionHandler(false, nil)
       return
     }
-    let url = "\(self.APIurl)/users?token=\(self.token)"
-//    let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
+//    let url = "\(self.APIurl)/users?token=\(self.token)"
+    let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.GET(url)
@@ -754,6 +754,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           CHRequests().updateUserFromRemote({ (thirdresult, thirdjson) in
             CHPush().localPush("refreshIcarousel", object: self)

@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "second_option_text.png"
+      "filename" : "pencilNew.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "second_option_text-1.png"
+      "filename" : "pencilNew-1.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "second_option_text-2.png"
+      "filename" : "pencilNew-2.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

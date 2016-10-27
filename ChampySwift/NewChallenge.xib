@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BebasNeue Book.otf">
+        <array key="BebasNeue Book.otf">
             <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-        </mutableArray>
-        <mutableArray key="BebasNeue Regular.otf">
+        </array>
+        <array key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
-            <string>BebasNeueRegular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewChallenge" customModule="ChampySwift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewChallenge" customModule="Champy" customModuleProvider="target">
             <connections>
                 <outlet property="ConditionsTextField" destination="mX0-Z2-a3D" id="Vbz-B6-NEG"/>
                 <outlet property="daysTextField" destination="A5P-eQ-Kyu" id="fhQ-j5-Mxi"/>
@@ -34,29 +31,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kq-oD-Dga">
-                    <rect key="frame" x="8" y="8" width="197" height="273"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asd" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-Z2-a3D">
-                            <rect key="frame" x="0.0" y="8" width="197" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="TAC-o3-v16"/>
                             </constraints>
-                            <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcO-Tz-lcq">
-                            <rect key="frame" x="0.0" y="39" width="197" height="1"/>
-                            <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="wFD-EO-6iR"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8G-lI-Cwv">
-                            <rect key="frame" x="0.0" y="203" width="197" height="70"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8G-lI-Cwv">
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScoreBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Hvx-mi-tbW">
-                                    <rect key="frame" x="68" y="9" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="Jz4-1R-1qh"/>
                                         <constraint firstAttribute="height" constant="60" id="ZNd-kx-8eY"/>
@@ -69,20 +61,18 @@
                                     </variation>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Challenge" translatesAutoresizingMaskIntoConstraints="NO" id="W5A-RI-O1D">
-                                    <rect key="frame" x="91" y="47" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="PsM-lO-XsB"/>
                                         <constraint firstAttribute="width" constant="15" id="VEP-Jb-j8U"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1 challenge" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRz-cf-HGc">
-                                    <rect key="frame" x="0.0" y="8" width="65" height="62"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="62" id="4Rk-7y-XBc"/>
                                         <constraint firstAttribute="width" constant="65" id="i0C-aN-sqD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="13"/>
-                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -91,30 +81,27 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI6-k7-2HU">
-                                    <rect key="frame" x="78" y="13" width="41" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="41" id="5qH-MZ-10J"/>
                                         <constraint firstAttribute="height" constant="32" id="lqk-d1-B7y"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="27"/>
-                                    <color key="textColor" red="0.94509803921568625" green="0.58823529411764708" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.94509803921568625" green="0.58823529411764708" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJz-mv-f39">
-                                    <rect key="frame" x="0.0" y="0.0" width="197" height="1"/>
-                                    <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="vqL-ot-JyW"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward +10 points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsm-2Y-9bT">
-                                    <rect key="frame" x="132" y="8" width="65" height="62"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="65" id="2lf-1J-B2b"/>
                                         <constraint firstAttribute="height" constant="62" id="kkw-DZ-lzg"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="13"/>
-                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -123,7 +110,7 @@
                                     </variation>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="Hvx-mi-tbW" firstAttribute="leading" secondItem="mRz-cf-HGc" secondAttribute="trailing" constant="3" id="2Wy-Sd-xh3"/>
                                 <constraint firstItem="VI6-k7-2HU" firstAttribute="leading" secondItem="mRz-cf-HGc" secondAttribute="trailing" constant="12" id="2eN-51-awf"/>
@@ -180,10 +167,8 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXW-UF-le3">
-                            <rect key="frame" x="0.0" y="119" width="197" height="79"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ah-mS-sYx">
-                                    <rect key="frame" x="157" y="31" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="C6y-ky-Knt"/>
                                         <constraint firstAttribute="height" constant="30" id="l9Q-I3-g7P"/>
@@ -202,17 +187,15 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 Days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5P-eQ-Kyu">
-                                    <rect key="frame" x="55" y="29" width="86" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="3Ii-8i-etN"/>
                                         <constraint firstAttribute="width" constant="86" id="Hm5-Jt-G7m"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="30"/>
-                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-JR-pSS">
-                                    <rect key="frame" x="0.0" y="31" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="0L6-bI-bux"/>
                                         <constraint firstAttribute="width" constant="40" id="6pA-J1-PSK"/>
@@ -223,7 +206,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="9Ah-mS-sYx" firstAttribute="leading" secondItem="A5P-eQ-Kyu" secondAttribute="trailing" constant="16" id="6ig-Gy-DK9"/>
                                 <constraint firstItem="l8U-JR-pSS" firstAttribute="top" secondItem="ZXW-UF-le3" secondAttribute="top" constant="31" id="Dsg-bg-NN7"/>
@@ -242,13 +225,12 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="every day for the next" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cft-Ix-xRv">
-                            <rect key="frame" x="0.0" y="48" width="197" height="63"/>
                             <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
-                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Y8G-lI-Cwv" firstAttribute="top" secondItem="ZXW-UF-le3" secondAttribute="bottom" constant="5" id="2uo-bB-7Kb"/>
                         <constraint firstItem="cft-Ix-xRv" firstAttribute="leading" secondItem="6Kq-oD-Dga" secondAttribute="leading" id="7K1-lx-lRc"/>
@@ -279,7 +261,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6Kq-oD-Dga" secondAttribute="trailing" constant="8" id="HaD-uY-fwi"/>
                 <constraint firstItem="6Kq-oD-Dga" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Yid-aR-q0b"/>
@@ -293,9 +275,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Challenge" width="44" height="44"/>
-        <image name="ScoreBorder" width="136" height="136"/>
-        <image name="minusicon" width="52" height="52"/>
-        <image name="plusicon" width="52" height="52"/>
+        <image name="Challenge" width="22" height="22"/>
+        <image name="ScoreBorder" width="68" height="68"/>
+        <image name="minusicon" width="26" height="26"/>
+        <image name="plusicon" width="26" height="26"/>
     </resources>
 </document>

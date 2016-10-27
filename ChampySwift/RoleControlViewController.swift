@@ -28,14 +28,11 @@ class RoleControlViewController: UIViewController {
   }
   
   override func viewDidLoad() {
-    //    [self.navigationController setNaviga/tionBarHidden:YES animated:animated];
     self.navigationController?.setNavigationBarHidden(true, animated: false)
     super.viewDidLoad()
     let value = UIInterfaceOrientation.portrait.rawValue
     UIDevice.current.setValue(value, forKey: "orientation")
     let center = NotificationCenter.default
-    //    setUpBehavior
-    //toFriends
     center.addObserver(self, selector: #selector(RoleControlViewController.alert(_:)), name: NSNotification.Name(rawValue: "alert"), object: nil)
     center.addObserver(self, selector: #selector(RoleControlViewController.setUpBehavior), name: NSNotification.Name(rawValue: "setUpBehavior"), object: nil)
     center.addObserver(self, selector: #selector(RoleControlViewController.toFriends), name: NSNotification.Name(rawValue: "toFriends"), object: nil)
@@ -199,14 +196,15 @@ class RoleControlViewController: UIViewController {
     
     self.socket.on("InProgressChallenge:sender:checked") { (data, act) in
       let res = data as! [[String:AnyObject]]
-      if res[0]["recipientSuccess"] as! Int == 0 || res[0]["senderSuccess"] as! Int == 0 {
+      print(res)
+//      if res[0]["recipientSuccess"] as! Int == 0 || res[0]["senderSuccess"] as! Int == 0 {
         CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
           if result {
             CHPush().alertPush("Challenge Checked", type: "Success")
             CHPush().localPush("refreshIcarousel", object: self)
           }
         })
-      } 
+//      } 
     }
     
     
@@ -237,10 +235,12 @@ class RoleControlViewController: UIViewController {
       })
     }
     
-    self.socket.onAny {_ in 
-      //////print("Got event: \($0.event)")
-    }
-    
+//    self.socket.onAny {_ in 
+//      print("Got event: \($0.event)")
+//    }
+//    
+//self.socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}    
+//    self.soc
   }
   
   func sendReloadNotiFriends() {

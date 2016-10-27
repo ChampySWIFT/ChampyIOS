@@ -151,6 +151,11 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
   }
   
   func sendAction() {
+    if !CHChalenges().canISendChallengeToTheFriend(friendId: CHSession().selectedFriendId, challengeId: self.challenges[challengeView.currentItemIndex]["_id"].stringValue) {
+      self.alertWithMessage("You can't duplicate challenges with your friend", type:.Warning)
+      return
+    }
+    
     if CHSession().currentUserObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
       self.alertWithMessage("Can't create more challenges", type:.Warning)
       return
