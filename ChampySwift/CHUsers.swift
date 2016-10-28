@@ -147,8 +147,14 @@ class CHUsers: NSObject {
    @return user json object
    */
   func getUserById(_ userId:String) -> JSON {
-    return CHSession().getJSONByKey("userList").userImLookinFor(key: "_id", value: userId)
-   
+//    return CHSession().getJSONByKey("userList").userImLookinFor(key: "_id", value: userId)
+    for item in CHSession().getJSONByKey("userList").arrayValue {
+      if item["_id"].stringValue == userId {
+        return item
+      }
+    }
+    
+    return nil
   }
 
   

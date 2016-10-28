@@ -16,8 +16,11 @@ class CHImages: NSObject {
   func setUpAvatar(_ imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
     
     let url = URL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
-    let user = CHUsers().getUserById(CHSession().currentUserId)
+    let user:JSON = CHSession().currentUserObject
+    
     var cachename = "initialCache"
+    
+    
     if user["lastPhotoUpdated"].intValue != 0 {
       cachename = user["lastPhotoUpdated"].stringValue
     }

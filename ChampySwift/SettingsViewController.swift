@@ -8,7 +8,8 @@
 
 import UIKit
 import Async
-
+import AVFoundation
+import Photos
 import AVFoundation
 class SettingsViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -20,6 +21,7 @@ class SettingsViewController: UIViewController {
   override func viewDidLoad() {
     
     super.viewDidLoad()
+    checkForAuthorizationStatus()
     var unconfirmedChallenges:Int = 0
     self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
     
@@ -73,11 +75,12 @@ class SettingsViewController: UIViewController {
               CHSession().clearSession({ (result) in
                 if result {
                   Async.main {
-                    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-                    self.present(roleControlViewController, animated: false, completion: { 
-                      
-                    })
+//                    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
+//                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
+//                    self.present(roleControlViewController, animated: false, completion: { 
+//                      
+//                    })
+                    self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
                   }
                 }
               })
@@ -98,6 +101,34 @@ class SettingsViewController: UIViewController {
     center.removeObserver(self, name: NSNotification.Name(rawValue: "updateImage"), object: nil)
   }
   
+  func checkForAuthorizationStatus() {
+    
+    
+    if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+      PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
+        
+      })
+    }
+    
+    
+    if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) ==  AVAuthorizationStatus.authorized
+    {
+      // Already Authorized
+    }
+    else
+    {
+      AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted :Bool) -> Void in
+        if granted == true
+        {
+          // User granted
+        }
+        else
+        {
+          // User Rejected
+        }
+      });
+    }
+  }
   
   func setUpBackground() {
     Async.main {
