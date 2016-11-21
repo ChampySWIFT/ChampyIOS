@@ -11,7 +11,10 @@ import Async
 import AVFoundation
 import Photos
 import AVFoundation
+import CoreMotion
+
 class SettingsViewController: UIViewController {
+  var manager: CMMotionManager!
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   let center = NotificationCenter.default
   
@@ -92,12 +95,10 @@ class SettingsViewController: UIViewController {
     }
     
     
-    
-    
-    
   }
   
   override func viewDidDisappear(_ animated: Bool) {
+    manager.stopDeviceMotionUpdates()
     center.removeObserver(self, name: NSNotification.Name(rawValue: "updateImage"), object: nil)
   }
   
@@ -142,7 +143,18 @@ class SettingsViewController: UIViewController {
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    
+    manager = CMMotionManager()
+    if manager.isDeviceMotionAvailable {
+      manager.deviceMotionUpdateInterval = 0.01
+      
+      manager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: { (data, error) in
+        if (data?.userAcceleration.x)! < Double(-2.5) {
+          self.navigationController?.popViewController(animated: true)
+        }
+        
+      })
+    }
+
     center.addObserver(self, selector: #selector(SettingsViewController.setUpBackroundNotif(_:)), name: NSNotification.Name(rawValue: "updateImage"), object: nil)
   }
   

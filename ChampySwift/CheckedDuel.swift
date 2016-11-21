@@ -51,9 +51,6 @@ import Async
     super.init(frame: frame)
     // 3. Setup view from .xib file
     xibSetup()
-    
-    
-    
   }
   
   func setUp(_ json:JSON = nil){
@@ -65,19 +62,16 @@ import Async
     
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]
     gradient.opacity = 0.8
-    //Or any colors
+    
     self.topBarBackground.layer.addSublayer(gradient)
     self.bringSubview(toFront: self.topBarBackground)
-    //    recipientImage
-    //    self.recipientImage.layer.opacity = 0.5
     self.sendertImage.layer.masksToBounds = true
     self.recipientImage.layer.masksToBounds = true
-    //    self.topBarBackground.bringSubviewToFront(recipientImage)
     self.topBarBackground.bringSubview(toFront: duelIcon)
     self.topBarBackground.bringSubview(toFront: duelLabel)
     
-    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
-    statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
+//    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
+//    statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
     
     
     

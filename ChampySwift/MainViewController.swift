@@ -11,6 +11,7 @@
   import Async
   import SwiftyJSON
 //  import UIViewBadge
+  import CoreMotion
   
   class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
     let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -58,7 +59,7 @@
     let center = NotificationCenter.default
     
     
-    
+    var manager: CMMotionManager!
     
     deinit {
       print("valami")
@@ -99,7 +100,10 @@
         self.challenges.removeAll()
         self.challenges = CHChalenges().getInProgressChallenges(CHSession().currentUserId).reversed()
         
-        let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
+        let height = self.carousel.frame.size.height
+        
+//        let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.7, height: (self.view.frame.size.height / 2.2) - 5)
+        let frame = CGRect(x:0, y:-5, width:self.view.frame.size.width / 1.4, height: height)
         
         for challenge in self.challenges {
           
@@ -262,7 +266,9 @@
       
       self.navigationItem.hidesBackButton = true
       self.navigationItem.leftBarButtonItem = nil
-      
+//      self.carousel
+//      challengeView.type       = .linear
+//      challengeView.decelerationRate = 0.0
       
 //      self.challengesBarButton.customView?.addSubview(badge)
       
@@ -354,10 +360,43 @@
       self.plusIcon.addGestureRecognizer(plusTapped)
       
       CHImages().setUpBackground(background, frame: self.view.frame)
+      manager = CMMotionManager()
+      if manager.isGyroAvailable {
+        
+      }
       
+      manager.startGyroUpdates()
+      
+      let queue = OperationQueue.main
+      
+      if manager.isDeviceMotionAvailable {
+        manager.deviceMotionUpdateInterval = 0.01
+        
+        manager.startDeviceMotionUpdates(to: queue, withHandler: { (data, error) in
+          if (data?.userAcceleration.z)! < Double(-2.5) {
+//            self.dismiss(animated: true, completion: {
+//              
+//            })
+            self.centerTappedAction(self)
+//            self.openAction()
+          }
+          
+        })
+      }
     }
     
     
+    
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+      switch option {
+      case .spacing:
+        return value * 1.1
+      case .wrap:
+        return 0.0
+      default:
+        return value
+      }
+    }
     func getUserData() {
       CHRequests().updateUserFromRemote { (result, json) in
         if result {
@@ -450,16 +489,7 @@
       return containerView
     }
     
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-      switch option {
-      case .spacing:
-        return value * 1.1
-      case .wrap:
-        return 0.0
-      default:
-        return value
-      }
-    }
+    
     
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()

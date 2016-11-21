@@ -8,6 +8,7 @@
 
 import UIKit
 import Async
+import CoreMotion
 
 class HistoryViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -21,7 +22,7 @@ class HistoryViewController: UIViewController {
   var table3 = FailedTableViewController()
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
-  
+  var manager: CMMotionManager!
   @IBOutlet weak var challengesBatButtonItem: UIBarButtonItem!
   @IBOutlet weak var friendsBarButton: UIBarButtonItem!
   
@@ -157,7 +158,17 @@ class HistoryViewController: UIViewController {
   
   
   override func viewDidAppear(_ animated: Bool) {
-    
+    manager = CMMotionManager()
+    if manager.isDeviceMotionAvailable {
+      manager.deviceMotionUpdateInterval = 0.01
+      
+      manager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: { (data, error) in
+        if (data?.userAcceleration.x)! < Double(-2.5) {
+          self.navigationController?.popViewController(animated: true)
+        }
+        
+      })
+    }
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
     
@@ -186,6 +197,19 @@ class HistoryViewController: UIViewController {
     
     
     self.setUpFrames()
+    var frame1 = table1.tableView.frame
+    frame1.size.height -= 44
+    
+    
+    var frame2 = table2.tableView.frame
+    frame1.size.height -= 44
+    
+    var frame3 = table3.tableView.frame
+    frame3.size.height -= 44
+    table1.tableView.frame = frame1
+    table2.tableView.frame = frame2
+    table3.tableView.frame = frame3
+    
     
     self.addChildViewController(table1)
     self.addChildViewController(table2)
@@ -201,8 +225,13 @@ class HistoryViewController: UIViewController {
     
     loadVisiblePages()
     contentScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    self.contentScrollView.contentSize = CGSize(width: (self.view.frame.size.width * 3.0), height: contentScrollView.frame.size.height)
+    
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    self.manager.stopDeviceMotionUpdates()
+  }
   
   func setUpFrames() {
     
@@ -238,6 +267,7 @@ class HistoryViewController: UIViewController {
     
     // First, determine which page is currently visible
     let pageWidth = contentScrollView.frame.size.width
+    
     let page      = Int(floor((contentScrollView.contentOffset.x * 3.0 + pageWidth) / (pageWidth * 3.0)))
     
     

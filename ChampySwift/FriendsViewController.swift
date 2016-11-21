@@ -8,6 +8,7 @@
 
 import UIKit
 import Async
+import CoreMotion
 
 class FriendsViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -15,7 +16,7 @@ class FriendsViewController: UIViewController {
   var table3 = AllFriendsTableViewController()
   var table2 = PendingFriendsController()
   var table1 = FriendsTableViewController()
-  
+  var manager: CMMotionManager!
   let delegate = UIApplication.shared.delegate as! AppDelegate
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
@@ -84,12 +85,7 @@ class FriendsViewController: UIViewController {
               CHSession().clearSession({ (result) in
                 if result {
                   Async.main {
-//                    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-//                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-//                    self.present(roleControlViewController, animated: false, completion: {
-//                      
-//                    })
-                      self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
+                    self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
                   }
                 }
               })
@@ -101,7 +97,11 @@ class FriendsViewController: UIViewController {
       
     }
     
+    
+    
   }
+  
+  
   
   func refreshBadge() {
     Async.background {
@@ -172,12 +172,23 @@ class FriendsViewController: UIViewController {
   
   
   func scrollViewDidScroll(_ scrollView: UIScrollView!) {
+    print(self.table1.tableView.frame)
     loadVisiblePages()
   }
   
   
   override func viewDidAppear(_ animated: Bool) {
-    
+    manager = CMMotionManager()
+    if manager.isDeviceMotionAvailable {
+      manager.deviceMotionUpdateInterval = 0.01
+      
+      manager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: { (data, error) in
+        if (data?.userAcceleration.x)! < Double(-2.5) {
+          self.navigationController?.popViewController(animated: true)
+        }
+        
+      })
+    }
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
     
@@ -231,11 +242,11 @@ class FriendsViewController: UIViewController {
   }
   
   override func viewDidDisappear(_ animated: Bool) {
+    manager.stopDeviceMotionUpdates()
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "inviteFriend"), object: nil)
   }
   
   func setUpFrames() {
-    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height - 88)
     
     var firstFrame:CGRect  = table1.tableView.frame
     firstFrame.origin.x    = 0
@@ -258,6 +269,9 @@ class FriendsViewController: UIViewController {
     thirdFrame.size.width  = self.contentScrollView.frame.size.width
     thirdFrame.size.height = self.contentScrollView.frame.size.height
     table3.tableView.frame = thirdFrame
+    
+    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height * 0.5)
+    
   }
   
   

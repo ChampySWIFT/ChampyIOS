@@ -9,7 +9,7 @@
 import UIKit
 import Async
 import SwiftyJSON
-
+import CoreMotion
 class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
   
   
@@ -28,10 +28,32 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   var datePicker:UIDatePicker! = nil
   var dateInt:Int = 0
   var initialTime = 21600
+  var manager: CMMotionManager!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    manager = CMMotionManager()
+    if manager.isGyroAvailable {
+      
+    }
+    
+    manager.startGyroUpdates()
+    
+    let queue = OperationQueue.main
+    
+    if manager.isDeviceMotionAvailable {
+      manager.deviceMotionUpdateInterval = 0.01
+      
+      manager.startDeviceMotionUpdates(to: queue, withHandler: { (data, error) in
+        if (data?.userAcceleration.x)! < Double(-2.5) {
+          self.dismiss(animated: true, completion: { 
+            
+          })
+        }
+        
+      })
+    }
     datePicker = UIDatePicker() // Although you probably have an IBOutlet
     datePicker.datePickerMode = UIDatePickerMode.time
     datePicker.backgroundColor = UIColor.lightGray
