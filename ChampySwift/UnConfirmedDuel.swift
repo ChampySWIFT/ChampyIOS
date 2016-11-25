@@ -57,9 +57,11 @@ import SwiftyJSON
     
     
   }
+  //updatePhotoOnCards
+  
+  
   
   func setUp(_ json:JSON = nil){
-    
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)

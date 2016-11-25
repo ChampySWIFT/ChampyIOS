@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
 
+  @IBOutlet weak var progressBar: RPCircularProgress!
   
   @IBOutlet weak var userAvatar: UIImageView!
   @IBOutlet weak var userName: UILabel!
@@ -82,6 +83,12 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField == self.inputFieldsForTime {
+      self.initChoosing()
+    }
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -134,9 +141,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
         })
         
       }
-      
-      
-      })
+    })
     
     let Cancle = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil)
     forgot.addAction(Cancle)
@@ -166,11 +171,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     CHSession().clearSession({ (result) in
       if result {
         Async.main {
-          
           self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
-//          self.present(roleControlViewController, animated: false, completion: {
-          
-//          })
         }
       }
     })
@@ -228,12 +229,6 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
               if result {
                 Async.main {
                   self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
-//                  let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-//                  let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-//                  
-//                  self.present(roleControlViewController, animated: false, completion: {
-//                    
-//                  })
                 }
               }
             })
@@ -363,8 +358,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
       Async.main {
         banner.showBannerForViewControllerAnimatedWithReturning(true, message: "Uploading Profile Photo, please wait...")
       }
-      
-      CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: newImage, completitionHandler: { (result, json) in
+      CHRequests().uploadUsersPhoto(CHSession().currentUserId, image: newImage, bar: self.progressBar, completitionHandler: { (result, json) in
         if result {
           Async.main {
             banner.changeText("Uploaded")
@@ -372,15 +366,19 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
             banner.dismissView(true)
             //          CHImages().setUpAvatar(self.userAvatar)
             CHPush().updateImageOnSettings(image)
+            CHPush().localPush("updatePhotoOnCards", object: self)
             self.userAvatar.image = image
             
           }
         } else {
-          banner.changeText("Uploaded")
+          CHImages().setUpAvatar(self.userAvatar)
+          banner.changeText("")
           banner.changeType(.Warning)
           banner.dismissView(true)
         }
       })
+      
+      
     }
     
   }
@@ -392,6 +390,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   func fusumaCameraRollUnauthorized() {
     
   }
+  
+  
   
   func valueChangedInDateField() {
     let dateFormatter = DateFormatter()
@@ -412,6 +412,21 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     CHSession().CurrentUser.set(hour, forKey: "hoursDN")
     CHSession().CurrentUser.set(minute, forKey: "minsDN")
     
+  }
+  
+  func initChoosing() {
+    let calendar:NSCalendar = NSCalendar.current as NSCalendar
+    var components = calendar.components([.hour, .minute, .second], from: NSDate() as Date)
+    components.hour = 12
+    components.minute = 0
+    components.second = 0
+    datePicker.setDate(calendar.date(from: components)!, animated: true)
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.timeStyle = DateFormatter.Style.short
+    dateFormatter.dateFormat = "HH:mm"
+    let strDate = dateFormatter.string(from: datePicker.date)
+    self.inputFieldsForTime.text = strDate
   }
   
   

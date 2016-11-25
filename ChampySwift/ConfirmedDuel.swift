@@ -59,7 +59,21 @@ import Async
     
   }
   
+  func updatePhotoOnCards() {
+    switch  CHSession().currentUserId {
+    case challengeObject["sender"]["_id"].stringValue:
+      CHImages().setImageForFriend(CHSession().currentUserId, imageView: self.sendertImage)
+      break
+    case challengeObject["recipient"]["_id"].stringValue:
+      CHImages().setImageForFriend(CHSession().currentUserId, imageView: self.recipientImage)
+      break
+    default:
+      self.duelLabel.text = "New challenge"
+    }
+  }
+  
   func setUp(_ json:JSON = nil){
+    NotificationCenter.default.addObserver(self, selector: #selector(ConfirmedDuel.updatePhotoOnCards), name: NSNotification.Name(rawValue: "updatePhotoOnCards"), object: nil)
     
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()

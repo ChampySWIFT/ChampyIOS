@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D1ADAA61DA25D220067EB51 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */; };
 		0D1ADAA71DA25D220067EB51 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */; };
+		0D57A5471DE5F00400C9D78F /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */; };
 		0D74E93D1DBDF48300081CCD /* ChampyTestsSwift3_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */; };
 		0D74E9441DBDF66900081CCD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48A1D36677300DD0035 /* FBSDKCoreKit.framework */; };
 		0D74E9451DBDF66900081CCD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
@@ -81,7 +82,6 @@
 		579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C18591CCB595700D6EEA9 /* AppDelegate.swift */; };
 		579C185C1CCB595700D6EEA9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C185B1CCB595700D6EEA9 /* MainViewController.swift */; };
 		579C185F1CCB595700D6EEA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579C185D1CCB595700D6EEA9 /* Main.storyboard */; };
-		579C18621CCB595700D6EEA9 /* ChampySwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 579C18601CCB595700D6EEA9 /* ChampySwift.xcdatamodeld */; };
 		579C18671CCB595700D6EEA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579C18651CCB595700D6EEA9 /* LaunchScreen.storyboard */; };
 		579C187D1CCB595800D6EEA9 /* ChampySwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C187C1CCB595800D6EEA9 /* ChampySwiftUITests.swift */; };
 		579F35C21D06B38F00C4A77B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B665AE1CDB829600FD57C9 /* Alamofire.framework */; };
@@ -190,6 +190,7 @@
 /* Begin PBXFileReference section */
 		0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		0D74E93A1DBDF48300081CCD /* ChampyTestsSwift3.0.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyTestsSwift3.0.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampyTestsSwift3_0.swift; sourceTree = "<group>"; };
 		0D74E93E1DBDF48300081CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -266,7 +267,6 @@
 		579C18591CCB595700D6EEA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		579C185B1CCB595700D6EEA9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		579C185E1CCB595700D6EEA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		579C18611CCB595700D6EEA9 /* ChampySwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChampySwift.xcdatamodel; sourceTree = "<group>"; };
 		579C18661CCB595700D6EEA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		579C18681CCB595700D6EEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		579C18711CCB595700D6EEA9 /* ChampySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampySwiftTests.swift; sourceTree = "<group>"; };
@@ -552,6 +552,7 @@
 			children = (
 				0D62B1AC1DA561E1003BB2B1 /* BottomRefresh */,
 				57FBC97E1CD9F49900341A2D /* APCustomBlurView.swift */,
+				0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */,
 				57BED09B1CD8AF6700D94A48 /* CHBanners.swift */,
 				577D5F941CCE30670002F0E0 /* CHUIAnimations.swift */,
 				577D5F9E1CCE5A010002F0E0 /* CHUIElements.swift */,
@@ -646,7 +647,6 @@
 				0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */,
 				577D5F8D1CCE27BE0002F0E0 /* app */,
 				577D5F8C1CCE22A50002F0E0 /* Supporting Files */,
-				579C18601CCB595700D6EEA9 /* ChampySwift.xcdatamodeld */,
 				57AD266E1CD898AB000F33CB /* FacebookModules */,
 			);
 			path = ChampySwift;
@@ -1399,7 +1399,6 @@
 				575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */,
 				574CE87A1D3CB9E8004A9345 /* FacebookAuthViewController.swift in Sources */,
 				577D5FA41CCF5B840002F0E0 /* FriendsViewController.swift in Sources */,
-				579C18621CCB595700D6EEA9 /* ChampySwift.xcdatamodeld in Sources */,
 				57D5E9D91CE2220D00AD20CC /* DuelViewController.swift in Sources */,
 				57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */,
 				57AD26671CD895E9000F33CB /* AuthViewController.swift in Sources */,
@@ -1420,6 +1419,7 @@
 				574738391D25043200071A01 /* WakeUpInfoViewController.swift in Sources */,
 				575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */,
 				577D5F951CCE30670002F0E0 /* CHUIAnimations.swift in Sources */,
+				0D57A5471DE5F00400C9D78F /* RPCircularProgress.swift in Sources */,
 				579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */,
 				571F78971CF851DF008A45DE /* CHWakeUpper.swift in Sources */,
 				57B3912F1CDBA8A800F58A15 /* AllFriendsTableViewController.swift in Sources */,
@@ -1862,19 +1862,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		579C18601CCB595700D6EEA9 /* ChampySwift.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				579C18611CCB595700D6EEA9 /* ChampySwift.xcdatamodel */,
-			);
-			currentVersion = 579C18611CCB595700D6EEA9 /* ChampySwift.xcdatamodel */;
-			path = ChampySwift.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 579C184E1CCB595700D6EEA9 /* Project object */;
 }

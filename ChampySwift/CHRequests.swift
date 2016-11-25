@@ -10,7 +10,7 @@
 import UIKit
 import SwiftHTTP
 import SwiftyJSON
-
+import Async 
 class CHRequests: NSObject {
   
   var APIurl:String = "http://46.101.213.24:3007/v1"
@@ -200,7 +200,7 @@ class CHRequests: NSObject {
     
   }
   
-  func uploadUsersPhoto(_ userId:String, image:UIImage, completitionHandler:@escaping (_ result:Bool, _ json:JSON)->()){
+  func uploadUsersPhoto(_ userId:String, image:UIImage, bar:RPCircularProgress! = nil, completitionHandler:@escaping (_ result:Bool, _ json:JSON)->()){
     if !canPerform {
       completitionHandler(false, nil)
       return
@@ -208,11 +208,19 @@ class CHRequests: NSObject {
     let url = "\(self.APIurl)/users/\(userId)/photo?token=\(self.token)"
     let operationQueue = OperationQueue()
     do {
-      let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 70)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
+      let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 50)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
+      CHBanners().setTimeout(20, block: {
+        if !opt.isFinished {
+          opt.cancel()
+          CHPush().alertPush("Failed to Upload Photo", type: "Warning")
+          completitionHandler(false, nil)
+        }
+        
+      })
+      
       opt.onFinish = { response in
         let json = JSON(data: response.data)
         
-        ////////print(json)
         if response.error != nil {
           completitionHandler(false, json)
           return
@@ -541,6 +549,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -566,6 +575,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           completitionHandler(json, false)
           return
@@ -750,13 +760,14 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(self.APIurl)/in-progress-challenges/\(challengeId)/check?token=\(self.token)"
+    let currentTime = CHUIElements().getCurretnTime() * 1000
+//    let url = "\(self.APIurl)/in-progress-challenges/\(challengeId)/checkChallengeWithClientTime?time=\(currentTime)&token=\(self.token)"
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
-        if let _ = response.error {
+          if let _ = response.error {
           CHRequests().updateUserFromRemote({ (thirdresult, thirdjson) in
             CHPush().localPush("refreshIcarousel", object: self)
             completitionHandler(false, json)

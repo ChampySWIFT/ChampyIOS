@@ -197,18 +197,18 @@ class HistoryViewController: UIViewController {
     
     
     self.setUpFrames()
-    var frame1 = table1.tableView.frame
-    frame1.size.height -= 44
-    
-    
-    var frame2 = table2.tableView.frame
-    frame1.size.height -= 44
-    
-    var frame3 = table3.tableView.frame
-    frame3.size.height -= 44
-    table1.tableView.frame = frame1
-    table2.tableView.frame = frame2
-    table3.tableView.frame = frame3
+//    var frame1 = table1.tableView.frame
+//    frame1.size.height -= 44
+//    
+//    
+//    var frame2 = table2.tableView.frame
+//    frame1.size.height -= 44
+//    
+//    var frame3 = table3.tableView.frame
+//    frame3.size.height -= 44
+//    table1.tableView.frame = frame1
+//    table2.tableView.frame = frame2
+//    table3.tableView.frame = frame3
     
     
     self.addChildViewController(table1)
@@ -260,6 +260,8 @@ class HistoryViewController: UIViewController {
     thirdFrame.size.width  = self.contentScrollView.frame.size.width
     thirdFrame.size.height = self.contentScrollView.frame.size.height
     table3.tableView.frame = thirdFrame
+    
+    contentScrollView.isScrollEnabled = false
   }
   
   

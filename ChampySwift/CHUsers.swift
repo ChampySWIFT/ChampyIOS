@@ -19,7 +19,7 @@ class CHUsers: NSObject {
    @return photo url of some user
    */
   func getPhotoUrlString(_ userId:String) -> String {
-    return "http://46.101.213.24:3007/photos/users/\(userId)/small.png"
+    return "http://46.101.213.24:3007/photos/users/\(userId)/medium.png"
   }
   
   /**
@@ -30,7 +30,7 @@ class CHUsers: NSObject {
    @return photo url of some user
    */
   func getPhotoUrlStringForBackgroung(_ userId:String) -> String {
-    return "http://46.101.213.24:3007/photos/users/\(userId)/small.png"
+    return "http://46.101.213.24:3007/photos/users/\(userId)/medium.png"
   }
   
   /**

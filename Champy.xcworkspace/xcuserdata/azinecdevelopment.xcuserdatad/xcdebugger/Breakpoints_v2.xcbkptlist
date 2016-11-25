@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChampySwift/ConfirmedDuel.swift"
-            timestampString = "499077414.101146"
+            timestampString = "501607539.745677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "setUp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -368,6 +368,70 @@
             startingLineNumber = "102"
             endingLineNumber = "102"
             landmarkName = "getUsers(from:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChampySwift/CHRequests.swift"
+            timestampString = "501610234.946152"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "590"
+            endingLineNumber = "590"
+            landmarkName = "createSelfImprovementChallengeAndSendIt(_:completitionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Champy.CHRequests.(createSelfImprovementChallengeAndSendIt (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completitionHandler : (SwiftyJSON.JSON, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Champy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/azinecdevelopment/Documents/Kris-Work/Champy/ChampySwift/CHRequests.swift"
+                  timestampString = "501755675.925318"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "590"
+                  endingLineNumber = "590"
+                  offsetFromSymbolStart = "2380">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Champy.CHRequests.(createSelfImprovementChallengeAndSendIt (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, completitionHandler : (SwiftyJSON.JSON, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Champy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/azinecdevelopment/Documents/Kris-Work/Champy/ChampySwift/CHRequests.swift"
+                  timestampString = "501755675.92717"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "590"
+                  endingLineNumber = "590"
+                  offsetFromSymbolStart = "480">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChampySwift/CHRequests.swift"
+            timestampString = "501610234.946152"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "591"
+            endingLineNumber = "591"
+            landmarkName = "createSelfImprovementChallengeAndSendIt(_:completitionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

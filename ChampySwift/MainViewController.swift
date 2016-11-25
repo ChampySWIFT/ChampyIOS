@@ -68,10 +68,7 @@
     func printFonts() {
       let fontFamilyNames = UIFont.familyNames
       for familyName in fontFamilyNames {
-        
-        
         let names = UIFont.fontNames(forFamilyName: familyName )
-        
       }
     }
     

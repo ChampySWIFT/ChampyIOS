@@ -26,7 +26,7 @@ class CHChalenges: NSObject {
     
   }
   
-  let maxChallengesCount = 55
+  let maxChallengesCount = 30
   
   
   /**
@@ -258,18 +258,18 @@ class CHChalenges: NSObject {
    @return CHChallengeSubType of Self Improvement
    */
   func getSelfImprovementStatus(_ item:JSON) -> CHChallengeSubType {
+    return checkTime(item: item)
+  }
+  
+  func checkTime(item:JSON, key:String = "senderProgress") -> CHChallengeSubType {
     let currentDate = CHUIElements().getCurretnTime()
-    let surrenderTime = CHSettings().daysToSec(2)
-    let borderTime = CHSettings().daysToSec(1)
-    var checkMidnight = 0
-    guard item["status"].stringValue == "started" else {
-      return .startedSelfImprovement
-    }
+    let day = CHSettings().daysToSec(1)
+    let currentMidnight = CHSettings().getMidnightOfTheDay(currentDate) //1479772801 + day//
     
-    guard item["senderProgress"].count > 0 else {
-      checkMidnight = CHSettings().getMidnightOfTheDay(item["created"].intValue)
-      
-      if currentDate - item["created"].intValue > surrenderTime {
+    var lastCheck = item["created"].intValue
+    
+    if item[key].count == 0 {
+      if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck > day {
         CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
           
         })
@@ -277,21 +277,24 @@ class CHChalenges: NSObject {
       return .startedSelfImprovement
     }
     
-    checkMidnight = CHSettings().getMidnightOfTheDay(item["senderProgress"][item["senderProgress"].count - 1]["at"].intValue)
     
+    if item[key].count > 0 {
+      lastCheck = item[key][item[key].count - 1]["at"].intValue
+    }
     
-    if currentDate - checkMidnight <= borderTime {
+    if currentMidnight - lastCheck < 0 && currentMidnight - lastCheck > -1 * day {
       return .confirmedSelfImprovement
     }
     
-    if currentDate - checkMidnight > borderTime {
+    if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck < day {
+      return .startedSelfImprovement
+    }
+    
+    if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck > day {
       CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
         
       })
     }
-    
-    
-    
     return .startedSelfImprovement
   }
   
@@ -347,17 +350,17 @@ class CHChalenges: NSObject {
     
     if item["status"].stringValue == "started" {
       let endTimeBorder = CHUIElements().getCurretnTime()
-      _ = endTimeBorder - 30
       let challenge = item["challenge"]
       let array = CHSettings().stringToArray(challenge["details"].stringValue.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "[", with: ""))
       let time:Int = Int(array[item["senderProgress"].count])!
       
+      let gap = 300
       
       if endTimeBorder - time < 0 {
         return .waitingForNextDayWakeUp
       }
       
-      if endTimeBorder - time > 0 && endTimeBorder - time < 30 {
+      if endTimeBorder - time > 0 && endTimeBorder - time < gap {
         CHRequests().checkChallenge(item["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             CHPush().localPush("refreshIcarousel", object: self)
@@ -368,7 +371,7 @@ class CHChalenges: NSObject {
         return .waitingForNextDayWakeUp
       }
       
-      if endTimeBorder - time > 30 {
+      if endTimeBorder - time > gap {
         CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
           if result {
             CHPush().alertPush("failed a wake up challenge", type: "Success")

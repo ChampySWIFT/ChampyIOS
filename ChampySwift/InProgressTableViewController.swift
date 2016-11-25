@@ -35,15 +35,18 @@ class InProgressTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     //    return 80
-    if (indexPath as NSIndexPath).row == self.selectedRow {
-      heights.append(170)
-      return 170
-    } else {
-      let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-      content.close()
-      heights.append(80)
-      return 80
-    }
+//    if (indexPath as NSIndexPath).row == self.selectedRow {
+//      heights.append(170)
+//      return 170
+//    } else {
+//      let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
+//      content.close()
+//      heights.append(80)
+//      return 80
+//    }\
+    
+    heights.append(80)
+    return 80
     
   }
   
@@ -112,21 +115,7 @@ class InProgressTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     return
-    if tap {
-      disableTapForASec()
-      tableView.beginUpdates()
-      if (indexPath as NSIndexPath).row == selectedRow {
-        let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-        content.close()
-        selectedRow = -1
-      } else {
-        let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-        content.open()
-        self.selectedRow = (indexPath as NSIndexPath).row
-      }
-      
-      tableView.endUpdates()
-    }
+    
   }
   
   func fillArray() {

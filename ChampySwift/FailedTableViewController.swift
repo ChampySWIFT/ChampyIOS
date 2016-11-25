@@ -44,15 +44,16 @@ class FailedTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     //    return 80
-    if (indexPath as NSIndexPath).row == self.selectedRow {
-      heights.append(170)
-      return 170
-    } else {
-      let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
-      content.close()
-      heights.append(80)
-      return 80
-    }
+    heights.append(80)
+    return 80
+//    if (indexPath as NSIndexPath).row == self.selectedRow {
+//      heights.append(170)
+//      return 170
+//    } else {
+//      let content = historyItems[(indexPath as NSIndexPath).row] as! HistoryCell
+//      content.close()
+//      
+//    }
     
   }
   

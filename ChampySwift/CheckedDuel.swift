@@ -53,7 +53,21 @@ import Async
     xibSetup()
   }
   
+  func updatePhotoOnCards() {
+    switch  CHSession().currentUserId {
+    case challengeObject["sender"]["_id"].stringValue:
+      CHImages().setImageForFriend(CHSession().currentUserId, imageView: self.sendertImage)
+      break
+    case challengeObject["recipient"]["_id"].stringValue:
+      CHImages().setImageForFriend(CHSession().currentUserId, imageView: self.recipientImage)
+      break
+    default:
+      self.duelLabel.text = "New challenge"
+    }
+  }
+  
   func setUp(_ json:JSON = nil){
+    NotificationCenter.default.addObserver(self, selector: #selector(CheckedDuel.updatePhotoOnCards), name: NSNotification.Name(rawValue: "updatePhotoOnCards"), object: nil)
     
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()
@@ -70,7 +84,7 @@ import Async
     self.topBarBackground.bringSubview(toFront: duelIcon)
     self.topBarBackground.bringSubview(toFront: duelLabel)
     
-//    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
+    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
 //    statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
     
     

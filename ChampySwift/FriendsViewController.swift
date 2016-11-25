@@ -9,7 +9,7 @@
 import UIKit
 import Async
 import CoreMotion
-
+import FBSDKShareKit
 class FriendsViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
@@ -125,18 +125,23 @@ class FriendsViewController: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: AnyObject) {
-    let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
-    if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
-      
-      let objectsToShare = [textToShare, myWebsite] as [Any]
-      let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-      
-      activityVC.popoverPresentationController?.sourceView = sender as? UIView
-      self.present(activityVC, animated: true, completion: {
-        
-      })
-      
-    }
+//    let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
+//    if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
+//      
+//      let objectsToShare = [textToShare, myWebsite] as [Any]
+//      let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//      
+//      activityVC.popoverPresentationController?.sourceView = sender as? UIView
+//      self.present(activityVC, animated: true, completion: {
+//        
+//      })
+//      
+//    }
+    let content = FBSDKAppInviteContent()
+    content.appLinkURL = NSURL(string: "http://molnarkristian.000webhostapp.com/index.html") as URL!
+    content.appInvitePreviewImageURL = NSURL(string: "https://itunes.apple.com/app/id1110777364") as URL!
+    FBSDKAppInviteDialog.show(from: self, with: content, delegate: self)
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -270,7 +275,8 @@ class FriendsViewController: UIViewController {
     thirdFrame.size.height = self.contentScrollView.frame.size.height
     table3.tableView.frame = thirdFrame
     
-    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height * 0.5)
+    contentScrollView.contentSize  = CGSize(width: self.view.frame.size.width * 3, height: self.view.frame.size.height)
+    contentScrollView.isScrollEnabled = false
     
   }
   
@@ -304,4 +310,14 @@ class FriendsViewController: UIViewController {
   
   
   
+}
+
+extension FriendsViewController: FBSDKAppInviteDialogDelegate{
+  func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
+    //TODO
+  }
+  
+  func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: Error!) {
+    //TODO
+  }
 }

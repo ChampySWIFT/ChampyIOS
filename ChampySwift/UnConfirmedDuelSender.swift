@@ -12,7 +12,7 @@ import SwiftyJSON
 @IBDesignable class UnConfirmedDuelSender: UIView {
 
   var view: UIView!
-  
+  var challengeObject:JSON! = nil
   @IBOutlet weak var topBarBackground: UIView!
   @IBOutlet weak var duelIcon: UIImageView!
   @IBOutlet weak var duelLabel: UILabel!
@@ -49,14 +49,12 @@ import SwiftyJSON
     super.init(frame: frame)
     // 3. Setup view from .xib file
     xibSetup()
-    
-    
-    
   }
   
+  
   func setUp(_ json:JSON = nil){
-    
-    
+    challengeObject = json
+
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
