@@ -39,7 +39,7 @@ class CHImages: NSObject {
   func setUpDefaultImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
     let url = Bundle.main.url(forResource: "champy", withExtension: "png")
     
-    var cachename = "defaultImage"
+    let cachename = "defaultImage"
     let myCache = ImageCache(name: cachename)
     
     

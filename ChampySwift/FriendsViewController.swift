@@ -125,24 +125,29 @@ class FriendsViewController: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: AnyObject) {
-//    let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
-//    if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
-//      
-//      let objectsToShare = [textToShare, myWebsite] as [Any]
-//      let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//      
-//      activityVC.popoverPresentationController?.sourceView = sender as? UIView
-//      self.present(activityVC, animated: true, completion: {
-//        
-//      })
-//      
-//    }
-    let content = FBSDKAppInviteContent()
-    content.appLinkURL = NSURL(string: "http://molnarkristian.000webhostapp.com/index.html") as URL!
-    content.appInvitePreviewImageURL = NSURL(string: "https://itunes.apple.com/app/id1110777364") as URL!
-    FBSDKAppInviteDialog.show(from: self, with: content, delegate: self)
+    let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
+    if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
+      
+      let objectsToShare = [textToShare, myWebsite] as [Any]
+      let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+      
+      activityVC.popoverPresentationController?.sourceView = sender as? UIView
+      self.present(activityVC, animated: true, completion: {
+        
+      })
+      
+    }
+//    let content = FBSDKAppInviteContent()
+//    content.appLinkURL = NSURL(string: "http://molnarkristian.000webhostapp.com/index.html") as URL!
+//    content.appInvitePreviewImageURL = NSURL(string: "https://itunes.apple.com/app/id998522595") as URL!
+//    FBSDKAppInviteDialog.show(from: self, with: content, delegate: self)
+//    
+    
+  
     
   }
+  
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -177,7 +182,7 @@ class FriendsViewController: UIViewController {
   
   
   func scrollViewDidScroll(_ scrollView: UIScrollView!) {
-    print(self.table1.tableView.frame)
+    
     loadVisiblePages()
   }
   
@@ -306,11 +311,14 @@ class FriendsViewController: UIViewController {
       
       return
     }
+  
+    
+  
   }
   
   
-  
 }
+
 
 extension FriendsViewController: FBSDKAppInviteDialogDelegate{
   func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {

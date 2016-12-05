@@ -48,7 +48,7 @@ class CHUIElements: NSObject {
         audioPlayer.prepareToPlay()
         audioPlayer.play()
       }catch {
-        //print("Error getting the audio file")
+       
       }
       
     
@@ -129,6 +129,14 @@ extension String {
                                     range: NSMakeRange(0, utf16.count)) != nil
   }
   
+  func isChallengeName() -> Bool {
+    let regex = try! NSRegularExpression(pattern: "[1234567890QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+                                         options: [.caseInsensitive])
+    
+    return regex.firstMatch(in: self.lowercased(), options:[],
+                            range: NSMakeRange(0, utf16.count)) != nil
+  }
+  
   
   func isDayNumber() -> Bool {
     //    ^[0-9]{1,3}$
@@ -149,7 +157,7 @@ extension String {
   
   func isValidConditions() -> Bool {
     //    ^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$
-    let regex = try! NSRegularExpression(pattern: "^[QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$",
+    let regex = try! NSRegularExpression(pattern: "^[1234567890QWERTYUIOPLKJHGFDSAZXCVBNMйцукенгшщзхїґєждлорпавіфячсмитьбюыЙЦУКЕНГШЩЗХЇЄЖДЛҐОРПАВИФЯЧСМІТЬБЮЫqwertyuioplkjhgfdsazxcvbnmàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,45}$",
                                          options: [.caseInsensitive])
     
     return regex.firstMatch(in: self.lowercased(), options:[],
@@ -233,7 +241,7 @@ extension JSON {
       do {
         return try JSONSerialization.jsonObject(with: data, options: []) as? [[String:AnyObject]]
       } catch let error as NSError {
-        //print(error)
+        
       }
     }
     return nil

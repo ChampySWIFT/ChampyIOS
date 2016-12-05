@@ -203,8 +203,6 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
       array.append(self.dateInt + CHSettings().daysToSec(i))
     }
     
-    //////print(array)
-    
     let params:[String:String] = [
       "name": "Wake Up At \(timeField.text! as String)",
       "type": CHSettings().self.wakeUpIds,
@@ -232,7 +230,7 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
       
     } else {
       self.alertWithMessage("Can`t create challenge", type: .Warning)
-//      CHPush().alertPush("Can`t create challenge", type: "Warning")
+
     }
   }
   

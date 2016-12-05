@@ -23,6 +23,13 @@ class CHPush: NSObject {
     #if (arch(i386) || arch(x86_64)) && (os(iOS) || os(watchOS) || os(tvOS))
       return
     #endif
+    
+    
+    if CurrentUser.object(forKey: "deviceToken") == nil {
+      return
+    }
+    
+    
     let deviceToken:Data = CurrentUser.data(forKey: "deviceToken")!
     FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
     
@@ -46,7 +53,7 @@ class CHPush: NSObject {
     ]
     
     CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-      
+     
     }
   }
   

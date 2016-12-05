@@ -30,25 +30,41 @@ class CHSession: NSObject {
   
   
   override init() {
+ 
+    super.init()
     
     
-    if UserDefaults.standard.bool(forKey: "loggedIn") {
+    
+    
+    if UserDefaults.standard.integer(forKey: "loggedIn") == 1 {
       self.currentUserId         = UserDefaults.standard.string(forKey: "userId")!
       self.currentUserName       = UserDefaults.standard.string(forKey: "userName")!
       self.currentUserFacebookId = UserDefaults.standard.string(forKey: "facebookId")!
       self.currentUserObject     = CHUIElements().stringToJSON(UserDefaults.standard.string(forKey: "userObject")!)
+
       self.logined               = true
     }
   }
   
+    
   func updateUserObject(_ userObject:JSON) {
     self.currentUserObject     = userObject
     self.CurrentUser.set("\(userObject)", forKey: "userObject")
     
   }
   
+  func isLogined() -> Bool {
+    
+    if CurrentUser.string(forKey: "facebookfriends") == nil  {
+      self.logined = false
+      return false
+    }
+    
+    return true
+  }
+  
   func createSessionForTheUserWithFacebookId(_ facebookId:String, name:String, andObjectId objectId: String, userObject:JSON) {
-    self.CurrentUser.set(true, forKey: "loggedIn")
+    UserDefaults.standard.set(1, forKey: "loggedIn")
     self.CurrentUser.set(facebookId, forKey: "facebookId")
     self.CurrentUser.set(name, forKey: "userName")
     self.CurrentUser.set(objectId, forKey: "userId")
@@ -65,20 +81,28 @@ class CHSession: NSObject {
   }
   
   func clearSession(_ completitionHandler:(_ result:Bool)->()) {
-    let params = [
-      "APNIdentifier" : "none" //deviceToken.description as String
-    ]
     
-    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
+    let userId = currentUserId
+    let token = CHRequests().token
+    
+    Async.background {
+      CHRequests().clearSession(userId, token: token) { (result, json) in
+        
+      }
     }
+    
+    
+    
     
     let appDelegate     = UIApplication.shared.delegate as! AppDelegate
     
-    self.CurrentUser.set(nil, forKey: "facebookId")
-    self.CurrentUser.set(nil, forKey: "userName")
-    self.CurrentUser.set(nil, forKey: "userId")
-    self.CurrentUser.set(nil, forKey: "facebookfriends")
-    self.CurrentUser.set(false, forKey: "loggedIn")
+//    UserDefaults.resetStandardUserDefaults()
+    UserDefaults.standard.set(0, forKey: "loggedIn")
+   UserDefaults.standard.set(nil, forKey: "facebookId")
+    UserDefaults.standard.set(nil, forKey: "userName")
+    UserDefaults.standard.set(nil, forKey: "userId")
+    UserDefaults.standard.set(nil, forKey: "facebookfriends")
+    
     self.logined = false
     appDelegate.subscribed = false
     
@@ -103,6 +127,7 @@ class CHSession: NSObject {
     URLCache.shared.removeAllCachedResponses()
     FBSDKLoginManager().logOut()
     completitionHandler(true)
+    
   }
   
   func getFacebookFriends() -> String {
@@ -132,7 +157,7 @@ class CHSession: NSObject {
   }
   
   func getJSONByKey(_ key:String) -> JSON {
-//    ////print(self.getStringByKey(key))
+
     return CHUIElements().stringToJSON(self.getStringByKey(key))
   }
   

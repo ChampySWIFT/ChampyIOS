@@ -14,9 +14,9 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   func bottomPull(toRefreshTriggered manager: MNMBottomPullToRefreshManager) {
-    //print("refreshed")
+   
   }
-  
+  var cantClick = false
   var pulltorefreshManager:MNMBottomPullToRefreshManager!
   var tap:Bool = true
   var identifiers:[String]    = []
@@ -135,6 +135,11 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if self.cantClick {
+      
+      return
+    }
+    
     if tap {
       disableTapForASec()
       tableView.beginUpdates()
@@ -149,9 +154,13 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
           })
         })
       } else {
-        weak var content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
-        content?.open()
         self.selectedRow = (indexPath as NSIndexPath).row
+        let isIndexValid = friendsContent.indices.contains(self.selectedRow)
+        if !isIndexValid {
+          refreshTableViewAction(self.refreshTableView)
+        }
+        weak var content = friendsContent[self.selectedRow] as! FriendCell
+        content?.open()
         tableView.endUpdates()
         self.setTimeout(0.8, block: {
           tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
@@ -176,6 +185,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
   
   
   @IBAction func refreshTableViewAction(_ sender: AnyObject) {
+    self.cantClick = true
     guard IJReachability.isConnectedToNetwork() else {
       self.refreshTableView.endRefreshing()
       CHPush().alertPush("No Internet Connection", type: "Warning")
@@ -192,6 +202,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
               self.cells.removeAll()
               self.fillArray()
               self.tableView.reloadData()
+              self.cantClick = false
               self.refreshTableView.endRefreshing()
             }
           }
@@ -246,7 +257,7 @@ class AllFriendsTableViewController: UITableViewController, MNMBottomPullToRefre
     self.identifiers.removeAll()
     heights.removeAll()
     self.userArray.removeAll()
-    var toValue = 50
+    var toValue = 60
     
     if CHUsers().getUsersCount() < toValue {
       toValue = CHUsers().getUsersCount() - 1

@@ -16,8 +16,8 @@ class CHRequests: NSObject {
   var APIurl:String = "http://46.101.213.24:3007/v1"
   var SocketUrl:String = "http://46.101.213.24:3007"
   
-  var privacyUrl:String = "http://46.101.213.24:3007/privacy"
-  var termsUrl:String = "http://46.101.213.24:3007/terms"
+  var privacyUrl:String = "http://champyapp.com/privacy-policy.html"
+  var termsUrl:String = "http://champyapp.com/terms.html"
 //  var APIurl:String = "http://192.168.88.101:3007/v1"
 //  var SocketUrl:String = "http://192.168.88.101:3007"
   
@@ -34,7 +34,7 @@ class CHRequests: NSObject {
       return
     }
     self.token = CHSession().getToken()
-    print(token)
+    
   }
   
   func getTokenForTests() {
@@ -53,13 +53,13 @@ class CHRequests: NSObject {
     }
     let url = "\(self.APIurl)/users/\(ownerId)?token=\(self.token)"
     let operationQueue = OperationQueue()
-    ////////print(url)
+    
     do {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         
         let json             = JSON(data: response.data)
-        ////////print(json)
+        ////////   
         if let _ = response.error {
           completitionHandler(json["description"], false)
           return
@@ -96,8 +96,8 @@ class CHRequests: NSObject {
           })
           return
         }
-        
-        CHUsers().localCreateUser(params["facebookId"]!, objectId: json["data"]["_id"].stringValue, name: json["data"]["name"].stringValue, userObject: json["data"])
+         CHUsers().localCreateUser(params["facebookId"]!, objectId: json["data"]["_id"].stringValue, name: json["data"]["name"].stringValue, userObject: json["data"])
+        CHPush().subscribeForNotifications()
         
         CHRequests().uploadUsersPhoto(json["data"]["_id"].stringValue, image: CHRequests().getFacebookImageById(params["facebookId"]!), completitionHandler: { (result, json) in
           completitionHandler(json["data"], true)
@@ -135,7 +135,6 @@ class CHRequests: NSObject {
           "challenge" : json["data"]["_id"].stringValue
         ]
         
-        ////////print(params1)
         
         self.createDuelInProgressChallenge(params1, completitionHandler: { (secresult, secjson) in
           completitionHandler(secjson, secresult)
@@ -160,7 +159,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        ////   
         if let _ = response.error {
           completitionHandler(json, false)
           return
@@ -208,8 +207,8 @@ class CHRequests: NSObject {
     let url = "\(self.APIurl)/users/\(userId)/photo?token=\(self.token)"
     let operationQueue = OperationQueue()
     do {
-      let opt = try HTTP.PUT(url, parameters: [ "photo": Upload(data: UIImageJPEGRepresentation(image, 50)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
-      CHBanners().setTimeout(20, block: {
+      let opt = try HTTP.PUT(url, parameters: ["photo": Upload(data: UIImageJPEGRepresentation(image, 50)!, fileName: "photo.jpg", mimeType: "multipart/form-data")])
+      CHBanners().setTimeout(30, block: {
         if !opt.isFinished {
           opt.cancel()
           CHPush().alertPush("Failed to Upload Photo", type: "Warning")
@@ -220,7 +219,7 @@ class CHRequests: NSObject {
       
       opt.onFinish = { response in
         let json = JSON(data: response.data)
-        
+           
         if response.error != nil {
           completitionHandler(false, json)
           return
@@ -249,7 +248,35 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url, parameters: params)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //        json)
+           
+        if let _ = response.error {
+          completitionHandler(false, json)
+          return
+        }
+        CHUsers().localCreateUser(CHSession().currentUserFacebookId, objectId: json["data"]["_id"].stringValue, name: json["data"]["name"].stringValue, userObject: json["data"])
+        completitionHandler(true, json)
+      }
+      operationQueue.addOperation(opt)
+    } catch {
+      completitionHandler(true, nil)
+    }
+  }
+  
+  
+  
+  func clearSession(_ userId:String, token:String, completitionHandler:@escaping (_ result:Bool, _ json:JSON)->()) {
+    if !canPerform {
+      completitionHandler(false, nil)
+      return
+    }
+    let url = "\(self.APIurl)/users/\(userId)?token=\(token)"
+    
+    let operationQueue = OperationQueue()
+    do {
+      let opt = try HTTP.PUT(url, parameters: ["APNIdentifier" : "none"])
+      opt.onFinish = { response in
+        let json             = JSON(data: response.data)
+           
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -296,13 +323,13 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(self.APIurl)/users/\(userId)?token=\(self.token)"
-    ////////print(url)
+    
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////////print(json)
+        ////////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -324,7 +351,7 @@ class CHRequests: NSObject {
     }
 //    let url = "\(self.APIurl)/users?token=\(self.token)"
     let url = "\(self.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
-    print(url)
+    
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.GET(url)
@@ -415,8 +442,7 @@ class CHRequests: NSObject {
     ]
     let operationQueue = OperationQueue()
     
-    ////////print(params)
-    ////////print(url)
+    
     do {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
@@ -452,7 +478,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.PUT(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //////print(json)
+        //////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -484,7 +510,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.DELETE(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        //////print(json)
+        //////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -549,7 +575,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
+           
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -575,7 +601,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url, parameters: params)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        print(json)
+           
         if let _ = response.error {
           completitionHandler(json, false)
           return
@@ -659,7 +685,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        ////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -760,7 +786,7 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(self.APIurl)/in-progress-challenges/\(challengeId)/check?token=\(self.token)"
-    let currentTime = CHUIElements().getCurretnTime() * 1000
+    _ = CHUIElements().getCurretnTime() * 1000
 //    let url = "\(self.APIurl)/in-progress-challenges/\(challengeId)/checkChallengeWithClientTime?time=\(currentTime)&token=\(self.token)"
     let operationQueue = OperationQueue()
     do {
@@ -820,7 +846,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////////print(json)
+        ////////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -847,7 +873,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////////print(json)
+        ////////   
         if let _ = response.error {
           completitionHandler(false, json)
           return
@@ -874,7 +900,7 @@ class CHRequests: NSObject {
       let opt = try HTTP.POST(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
-        ////print(json)
+        ////   
         if let _ = response.error {
           completitionHandler(false, json)
           return

@@ -39,7 +39,8 @@ import Async
   @IBOutlet weak var scoreContainer: UIView!
   
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
-  
+  var atIndexPath:IndexPath! = nil
+  var fromTableView:UITableView! = nil
   weak var view: UIView!
   var width:CGFloat = 0.0,
   initialNameLevel:CGRect! = nil,
@@ -185,7 +186,7 @@ import Async
   func open() {
     self.tapped = true
     
-    self.setTimeout(1.0) {
+    self.setTimeout(1.2) {
       self.tapped = false
     }
     
@@ -236,16 +237,19 @@ import Async
     frame1?.origin.y = (frame1?.origin.y)! - 112
     
     UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-      self.scoreContainer.frame = frame1!
-      self.scoreContainer.isHidden = false
-      self.minusButton.frame = minusButtonFrame
-      self.plusButton.frame = plusButtonFrame
-      }, completion: { finished in
-        
+      if self.scoreContainer != nil && self.minusButton != nil && self.plusButton != nil {
+        self.scoreContainer.frame = frame1!
+        self.scoreContainer.isHidden = false
+        self.minusButton.frame = minusButtonFrame
+        self.plusButton.frame = plusButtonFrame
+      }
+    }, completion: { finished in
+      
     })
     self.cleareScoreborder()
     self.animateScoreBorders()
-    //////////print("open")
+    
+    
   }
   
   func close() {
@@ -301,7 +305,7 @@ import Async
     
     
     
-    //////////print("close")
+    
   }
   
   func setTimeout(_ delay:TimeInterval, block:@escaping ()->Void) -> Timer {
@@ -309,7 +313,7 @@ import Async
   }
   
   @IBAction func addAction(_ sender: AnyObject) {
-    
+    if tapped { return }
     if !tapped {
       
       self.tapped = true
@@ -322,11 +326,10 @@ import Async
           }, completion: { finished in
             
         })
+        
         CHRequests().sendFriendRequest(CHSession().currentUserId, friendId: userObject["_id"].stringValue) { (result, json) in
-          //////print(json)
           if result {
-            //////print(json)
-            Async.main {
+           Async.main {
               self.tapped = false
               CHPush().sendPushToUser(self.userObject["_id"].stringValue, message: "New Friend Request From \(CHSession().currentUserName)", options: "")
             }
@@ -362,6 +365,15 @@ import Async
         
       case "Friends" :
         self.tapped = false
+        if CHSession().currentUserObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+          CHPush().alertPush("Can't create more challenges", type: "Warning")
+          return
+        }
+        
+        if self.userObject["inProgressChallengesCount"].intValue >= CHChalenges().maxChallengesCount {
+          CHPush().alertPush("Can't send more challenges to your friend", type: "Warning")
+          return
+        }
         CHSession().setSelectedFriend(self.userObject["_id"].stringValue)
         CHPush().localPush("openDuelView", object: self)
         break
@@ -380,7 +392,7 @@ import Async
   }
   
   @IBAction func minusAction(_ sender: AnyObject) {
-    
+    if tapped { return }
     if !tapped {
       
       self.tapped = true

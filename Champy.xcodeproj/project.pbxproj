@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D1ADAA61DA25D220067EB51 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */; };
-		0D1ADAA71DA25D220067EB51 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */; };
 		0D57A5471DE5F00400C9D78F /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */; };
 		0D74E93D1DBDF48300081CCD /* ChampyTestsSwift3_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */; };
 		0D74E9441DBDF66900081CCD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48A1D36677300DD0035 /* FBSDKCoreKit.framework */; };
@@ -385,8 +383,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D1ADAA61DA25D220067EB51 /* UserNotifications.framework in Frameworks */,
-				0D1ADAA71DA25D220067EB51 /* UserNotificationsUI.framework in Frameworks */,
 				5704A30C1D4246F6007CAAA4 /* AVFoundation.framework in Frameworks */,
 				5704A30D1D4246F6007CAAA4 /* CoreFoundation.framework in Frameworks */,
 				5704A30E1D4246F6007CAAA4 /* Foundation.framework in Frameworks */,
@@ -991,7 +987,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = AzinecLLC;
 				TargetAttributes = {
 					0D74E9391DBDF48300081CCD = {
@@ -1496,6 +1492,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -1519,6 +1516,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77262443217FF587F4AC7208 /* Pods-ChampyTestsSwift3.0.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -1542,6 +1540,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D10979A34178250DAB1A9525 /* Pods-ChampyUITests3.0.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -1564,6 +1563,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14142884974D960E4D97B441 /* Pods-ChampyUITests3.0.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -1596,8 +1596,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1643,8 +1645,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1663,6 +1667,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1673,6 +1678,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
@@ -1704,6 +1710,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 322093DD3BA57CF988BA11E6 /* Pods-Champy.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChampySwift/ChampySwift.entitlements;
@@ -1734,6 +1741,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE5772737D710E0C1CEFE1DB /* Pods-ChampyUITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -1753,6 +1761,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DEFC758431B1AF17BCD2F0EB /* Pods-ChampyUITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -1772,6 +1781,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1790,6 +1800,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4BB2168B435B226672FD19F /* Pods-ChampyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -43,7 +43,7 @@ class RoleControlViewController: UIViewController {
     let authViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "AuthViewController")
     authViewController.modalPresentationStyle = .overCurrentContext
     
-    if !CHSession().logined {
+    if !CHSession().isLogined() {
       self.present(authViewController, animated: false, completion: {
         
       })
@@ -196,15 +196,16 @@ class RoleControlViewController: UIViewController {
     
     self.socket.on("InProgressChallenge:sender:checked") { (data, act) in
       let res = data as! [[String:AnyObject]]
-      print(res)
-//      if res[0]["recipientSuccess"] as! Int == 0 || res[0]["senderSuccess"] as! Int == 0 {
-        CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
-          if result {
-            CHPush().alertPush("Challenge Checked", type: "Success")
-            CHPush().localPush("refreshIcarousel", object: self)
-          }
-        })
-//      } 
+     
+      CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId, completitionHandler: { (result, json) in
+        if result {
+          CHPush().alertPush("Challenge Checked", type: "Success")
+          CHPush().localPush("refreshIcarousel", object: self)
+        }
+      })
+
+      
+
     }
     
     
@@ -235,12 +236,6 @@ class RoleControlViewController: UIViewController {
       })
     }
     
-//    self.socket.onAny {_ in 
-//      print("Got event: \($0.event)")
-//    }
-//    
-//self.socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}    
-//    self.soc
   }
   
   func sendReloadNotiFriends() {

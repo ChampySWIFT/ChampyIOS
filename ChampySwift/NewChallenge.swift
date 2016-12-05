@@ -33,7 +33,7 @@ import Async
     
     
     if !empty {
-      //print(object)
+     
       pointsLabel.text = object["points"].stringValue
       pointsLabel.adjustsFontSizeToFitWidth = true
       
@@ -196,14 +196,14 @@ import Async
       return
     }
     
-    if !enteredText.isName() {
+    if !enteredText.isChallengeName() {
       alertWithMessage("Wrong symbols", type: .Warning)
 //      CHPush().alertPush("Wrong symbols", type: "Warning")
       return
     }
     
     if enteredText.characters.count > 40 {
-      alertWithMessage("Entered Name is to long", type: .Warning)
+      alertWithMessage("Entered Name is too long", type: .Warning)
 //      CHPush().alertPush("Entered name is too long", type: "Warning")
       return
     }

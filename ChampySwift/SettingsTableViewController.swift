@@ -41,7 +41,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   
   var isHidden = true
   var datePicker:UIDatePicker! = nil
-  
+  var fusuma:FusumaViewController! = nil
   // MARK: - Override lifecycle methods
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -256,7 +256,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
       CHPush().alertPush("No internet connection", type: "Warning")
       return
     }
-    let fusuma = FusumaViewController()
+    fusuma = FusumaViewController()
     fusuma.delegate = self
     fusumaTintColor = CHUIElements().APPColors["Info"]!
     fusumaBackgroundColor = CHUIElements().APPColors["navigationBar"]!
@@ -310,43 +310,42 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   
   // MARK: - Other functions methods
   func fusumaImageSelected(_ image: UIImage) {
+    fusuma = nil
     var transform = CGAffineTransform.identity
     CHPush().updateImageOnSettings(image)
     self.userAvatar.image = image
     var newImage = image
     switch image.imageOrientation {
     case .down:
-      print("down")
+      
       break
     case .leftMirrored:
-      print("leftMirrored")
+      
       transform = transform.translatedBy(x: image.size.width, y: image.size.height);
       transform = transform.rotated(by: CGFloat(M_PI));
       break;
     case .rightMirrored:
-      print("rightMirrored")
+      
       transform = transform.translatedBy(x: image.size.width, y: image.size.height);
       transform = transform.rotated(by: CGFloat(M_PI));
-//      image.imageRotatedByDegrees(degrees: 90, flip: false)
+
       break;
     case .left:
-      print("left")
+      
       break
       
     case .right:
       transform = transform.translatedBy(x: image.size.width, y: image.size.height);
       transform = transform.rotated(by: CGFloat(M_PI));
-//      image.imageRotatedByDegrees(degrees: 90, flip: false)
 
-//      newImage = self.imageRotatedByDegrees(oldImage: image, deg: 90)
       newImage = image.fixOrientation(img: image)
-      print("right")
+      
       break
     case .up:
-      print("up")
+      
       break
     default:
-      print("default")
+      
       break
     }
     
@@ -364,7 +363,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
             banner.changeText("Uploaded")
             banner.changeType(.Success)
             banner.dismissView(true)
-            //          CHImages().setUpAvatar(self.userAvatar)
+            
             CHPush().updateImageOnSettings(image)
             CHPush().localPush("updatePhotoOnCards", object: self)
             self.userAvatar.image = image
@@ -385,6 +384,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   
   func fusumaDismissedWithImage(_ image: UIImage) {
     
+    fusuma = nil
   }
   
   func fusumaCameraRollUnauthorized() {

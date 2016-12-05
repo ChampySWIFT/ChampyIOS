@@ -105,14 +105,7 @@ class FriendsTableViewController: UITableViewController {
           cell?.addSubview(inviteFriendsContent)
           cell!.backgroundColor = UIColor.clear
         } else {
-          //          let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 66))
-          //          let friend = CHUsers().getFriends(CHSession().currentUserId)[indexPath.row]
-          //          var object = friend["owner"]
-          //          if friend["owner"]["_id"].stringValue == CHSession().currentUserId {
-          //            object = friend["friend"]
-          //          }
-          //          content.setUp(object)
-          //          //////print(indexPath.row)
+          
           let content = friendsContent[(indexPath as NSIndexPath).row] as! FriendCell
           cell?.addSubview(content)
           cell!.backgroundColor = UIColor.clear

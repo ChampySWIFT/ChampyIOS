@@ -114,9 +114,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
       
     else{ //If user is not on iOS 10 use the old methods we've been using
-      let notificationSettings = UIUserNotificationSettings(
-        types: [.badge, .sound, .alert], categories: nil)
+      let notificationSettings = UIUserNotificationSettings( types: [.badge, .sound, .alert], categories: nil)
       application.registerUserNotificationSettings(notificationSettings)
+      application.registerForRemoteNotifications()
       
     }
     
@@ -135,6 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   
+  
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     let formatedDeviceToken:String = self.getSimpleDeviceToken("\(deviceToken)")
     UserDefaults.standard.set(deviceToken, forKey: "deviceToken")
@@ -148,16 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     //Handle the notification
   }
-  
-//  @available(iOS 10.0, *)
-//  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//    //Handle the notification
-//    response.notificatio
-//    CHPush().alertPush("GOT PUSH", type: "Warning")
-//  
-//  }
-  
-  
+   
   @available(iOS 10.0, *)
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     if response.notification.request.content.title == "Friend request" {
@@ -174,28 +166,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
   
   func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-    //print(error)
+    
   }
   
- 
-  //  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-  //    
-  //    let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
-  //    
-  //    let deviceTokenString: String = (deviceToken.description as NSString)
-  //      .stringByTrimmingCharactersInSet(characterSet)
-  //      .stringByReplacingOccurrencesOfString( " ", withString: "") as String
-  //    
-  //    let params = [
-  //      "APNIdentifier" : deviceTokenString//deviceToken.description as String
-  //    ]
-  //    
-  //    CHRequests().updateUserProfile(CHSession().currentUserId, params: params) { (result, json) in
-  //      if result {
-  //        //////////print("success")
-  //      }
-  //    }
-  //  }
   
   func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
     if notification.userInfo != nil {
@@ -220,10 +193,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
   func applicationDidEnterBackground(_ application: UIApplication) {
     FIRMessaging.messaging().disconnect()
-    //////////print("Disconnected from FCM.")
+    
     CHWakeUpper().setUpWakeUp()
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
   }
   
   func applicationWillEnterForeground(_ application: UIApplication) {

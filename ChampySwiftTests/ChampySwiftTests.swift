@@ -66,7 +66,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -97,7 +97,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -129,7 +129,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -165,7 +165,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -220,7 +220,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -275,7 +275,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -330,7 +330,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -376,7 +376,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
     
@@ -410,7 +410,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -444,7 +444,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -478,7 +478,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -511,7 +511,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -543,7 +543,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -577,7 +577,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -611,7 +611,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -645,7 +645,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -679,7 +679,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -718,7 +718,6 @@ class ChampySwiftTests: XCTestCase {
             self.chRequests1.sendFriendRequest(self.user1["_id"].stringValue, friendId: self.user2["_id"].stringValue, completitionHandler: { (result, json) in
               if status {
                 self.chRequests2.acceptFriendRequest(self.user2["_id"].stringValue, friendId: self.user1["_id"].stringValue, completitionHandler: { (result, json) in
-                  //////print(json)
                   
                   let params:[String:String] = [
                     "name": "name",
@@ -729,8 +728,7 @@ class ChampySwiftTests: XCTestCase {
                   ]
                   
                   self.chRequests1.createChallengeAndSendIt(self.user2["_id"].stringValue, params: params, completitionHandler: { (json, status) in
-                    //////print(json)
-                    //////print(status)
+                    
                     if status {
                       XCTAssert(true)
                     } else {
@@ -749,7 +747,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -771,7 +769,7 @@ class ChampySwiftTests: XCTestCase {
       self.chRequests1.getTokenForTests()
       if status {
         self.chRequests1.uploadUsersPhoto(json["_id"].stringValue, image: UIImage(named: "center")!, completitionHandler: { (result, json) in
-          //////print(json)
+          //////   
           if result {
             XCTAssert(true)
           } else {
@@ -786,7 +784,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 20) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -823,7 +821,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 20) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -834,7 +832,8 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
+        
       }
     }
   }
@@ -845,7 +844,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -858,7 +857,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -869,7 +868,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -880,7 +879,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -891,7 +890,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -902,7 +901,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -913,7 +912,7 @@ class ChampySwiftTests: XCTestCase {
     expectation.fulfill()
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -951,7 +950,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -982,7 +981,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1014,7 +1013,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1050,7 +1049,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1083,7 +1082,6 @@ class ChampySwiftTests: XCTestCase {
           self.chRequests2.getTokenForTests()
           if status {
             self.user2 = json
-            //            self.secondToken = CHSession().getTokenWithFaceBookId(self.secondFacebookId)
             
             self.chRequests2.sendFriendRequest(self.user2["_id"].stringValue, friendId: self.user1["_id"].stringValue, completitionHandler: { (result, json) in
               if status {
@@ -1105,7 +1103,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1138,7 +1136,6 @@ class ChampySwiftTests: XCTestCase {
           self.chRequests2.getTokenForTests()
           if status {
             self.user2 = json
-            //            self.secondToken = CHSession().getTokenWithFaceBookId(self.secondFacebookId)
             
             self.chRequests2.sendFriendRequest(self.user2["_id"].stringValue, friendId: self.user1["_id"].stringValue, completitionHandler: { (result, json) in
               if status {
@@ -1160,7 +1157,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1193,7 +1190,6 @@ class ChampySwiftTests: XCTestCase {
           self.chRequests2.getTokenForTests()
           if status {
             self.user2 = json
-            //            self.secondToken = CHSession().getTokenWithFaceBookId(self.secondFacebookId)
             
             self.chRequests2.sendFriendRequest(self.user2["_id"].stringValue, friendId: self.user1["_id"].stringValue, completitionHandler: { (result, json) in
               if status {
@@ -1215,7 +1211,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1261,7 +1257,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
     
@@ -1295,7 +1291,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1329,7 +1325,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1363,7 +1359,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1396,7 +1392,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1428,7 +1424,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1462,7 +1458,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1496,7 +1492,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1530,7 +1526,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1564,7 +1560,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }
@@ -1603,7 +1599,7 @@ class ChampySwiftTests: XCTestCase {
             self.chRequests1.sendFriendRequest(self.user1["_id"].stringValue, friendId: self.user2["_id"].stringValue, completitionHandler: { (result, json) in
               if status {
                 self.chRequests2.acceptFriendRequest(self.user2["_id"].stringValue, friendId: self.user1["_id"].stringValue, completitionHandler: { (result, json) in
-                  //////print(json)
+                  //////   
                   
                   let params:[String:String] = [
                     "name": "name",
@@ -1614,7 +1610,7 @@ class ChampySwiftTests: XCTestCase {
                   ]
                   
                   self.chRequests1.createChallengeAndSendIt(self.user2["_id"].stringValue, params: params, completitionHandler: { (json, status) in
-                    //////print(json)
+                   
                     if status {
                       XCTAssert(true)
                     } else {
@@ -1633,7 +1629,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 10) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+       
       }
     }
   }
@@ -1656,7 +1652,7 @@ class ChampySwiftTests: XCTestCase {
       if status {
         sleep(2)
         self.chRequests1.uploadUsersPhoto(json["_id"].stringValue, image: UIImage(named: "center")!, completitionHandler: { (result, json) in
-          //////print(json)
+          
           if result {
             XCTAssert(true)
           } else {
@@ -1671,7 +1667,7 @@ class ChampySwiftTests: XCTestCase {
     
     waitForExpectations(timeout: 20) { error in
       if let error = error {
-        //////////print("Error: \(error.localizedDescription)")
+        
       }
     }
   }

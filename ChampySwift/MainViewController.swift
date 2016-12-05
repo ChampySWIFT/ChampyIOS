@@ -62,7 +62,7 @@
     var manager: CMMotionManager!
     
     deinit {
-      print("valami")
+      
     }
     
     func printFonts() {
@@ -253,9 +253,9 @@
       super.viewDidLoad()
       self.navigationController?.setNavigationBarHidden(false, animated: false)
       center.addObserver(self, selector: #selector(MainViewController.setUpBehavior), name: NSNotification.Name(rawValue: "setUpBehavior"), object: nil)
-      if CHSession().logined {
+//      if CHSession().logined {
         self.setUpBehavior()
-      }
+//      }
       
       self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueRegular", size: 18)!,  NSForegroundColorAttributeName: CHUIElements().APPColors["title"]!]
      // navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
@@ -339,7 +339,6 @@
       }
       
       self.getUserData()
-      
       
       self.wellcomeLabel.text = "Welcome \(CHSession().currentUserName)"
       self.wellcomeLabel.adjustsFontSizeToFitWidth = true
@@ -465,6 +464,9 @@
       center.addObserver(self, selector: #selector(MainViewController.refreshCarousel), name: NSNotification.Name(rawValue: "refreshIcarousel"), object: nil)
       center.addObserver(self, selector: #selector(MainViewController.showModal), name: NSNotification.Name(rawValue: "wakeUpCreated"), object: nil)
       self.fillCarousel()
+//      if CHSession().logined {
+//        self.setUpBehavior()
+//      }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -579,8 +581,8 @@
     @IBOutlet var plusTapped: UITapGestureRecognizer!
     
     @IBAction func centerTappedAction(_ sender: AnyObject) {
-      if self.challenges.count >= 30 {
-        CHPush().alertPush("Can`t add new challenge", type: "Warning")
+      if self.challenges.count >= CHChalenges().maxChallengesCount {
+        CHPush().alertPush("Can't add new challenge", type: "Warning")
         return
       }
       checkerAction()
