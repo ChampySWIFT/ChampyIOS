@@ -128,6 +128,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+## Google
+
+Copyright 2016 Google Inc.
+
+## GoogleAnalytics
+
+Copyright 2016 Google
+
 ## GoogleIPhoneUtilities
 
 Copyright 2015 Google Inc.

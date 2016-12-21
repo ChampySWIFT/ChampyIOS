@@ -33,11 +33,24 @@ import Async
     
     
     if !empty {
-     
       pointsLabel.text = object["points"].stringValue
       pointsLabel.adjustsFontSizeToFitWidth = true
+      var changed = false
+      if object["name"].stringValue.contains("a books") {
+        ConditionsTextField.text = "Reading Books"
+        changed = true
+      }
       
-      ConditionsTextField.text = object["name"].stringValue
+      if object["name"].stringValue.contains("Taking stares") {
+        ConditionsTextField.text = "Taking Stairs"
+        changed = true
+      }
+      
+      if !changed {
+        ConditionsTextField.text = object["name"].stringValue
+      }
+      
+//      ConditionsTextField.text = object["name"].stringValue
       ConditionsTextField.adjustsFontSizeToFitWidth = true
       
       rewardLabel.text = "Reward +\(object["points"].stringValue) points"

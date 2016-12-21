@@ -61,6 +61,20 @@ import SwiftyJSON
     if object != nil {
       self.objectChallenge = object
       self.descLabel.text = object["challenge"]["name"].stringValue
+      var changed = false
+      if object["challenge"]["name"].stringValue.contains("a books") {
+        descLabel.text = "Reading Books"
+        changed = true
+      }
+      
+      if object["challenge"]["name"].stringValue.contains("Taking stares") {
+        descLabel.text = "Taking Stairs"
+        changed = true
+      }
+      
+      if !changed {
+        descLabel.text = object["challenge"]["name"].stringValue
+      }
     }
     
   }

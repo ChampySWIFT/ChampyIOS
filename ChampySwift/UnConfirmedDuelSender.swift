@@ -58,26 +58,36 @@ import SwiftyJSON
     let gradient:CAGradientLayer = CAGradientLayer()
     let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: topBarBackground.frame.size.height)
     gradient.frame               = frame
-    
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]
     gradient.opacity = 0.8
-    //Or any colors
+    
     self.topBarBackground.layer.addSublayer(gradient)
     self.bringSubview(toFront: self.topBarBackground)
-    //    recipientImage
-    //    self.recipientImage.layer.opacity = 0.5
     self.recipientImage.layer.masksToBounds = true
-    //    self.topBarBackground.bringSubviewToFront(recipientImage)
     self.topBarBackground.bringSubview(toFront: duelIcon)
     self.topBarBackground.bringSubview(toFront: duelLabel)
     
-    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
+    var changed = false
+    if json["challenge"]["name"].stringValue.contains("a books") {
+      challengeDescriptionLabel.text = "Reading Books"
+      changed = true
+    }
+    
+    if json["challenge"]["name"].stringValue.contains("Taking stares") {
+      challengeDescriptionLabel.text = "Taking Stairs"
+      changed = true
+    }
+    
+    if !changed {
+      challengeDescriptionLabel.text = json["challenge"]["name"].stringValue
+    }
+//    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
     statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
     
     let days = Int(CHSettings().secToDays(json["challenge"]["duration"].intValue))
     var day = "days"
     
-    if days == 1 {
+      if days == 1 {
       day = "day"
     }
     

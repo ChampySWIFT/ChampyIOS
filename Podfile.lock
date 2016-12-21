@@ -23,6 +23,12 @@ PODS:
     - GoogleIPhoneUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
   - Fusuma (0.5.3)
+  - Google/Analytics (3.0.3):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - GoogleAnalytics (3.17.0)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleIPhoneUtilities (1.2.1):
@@ -45,6 +51,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - Fusuma (from `https://github.com/pruthvikar/Fusuma.git`, commit `503865a`)
+  - Google/Analytics
   - JSONWebToken
   - Kingfisher (~> 3.0)
   - Socket.IO-Client-Swift (~> 8.0.2)
@@ -71,6 +78,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseMessaging: 789d23fd796594dfb55dcf36cd325541df887c22
   Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
@@ -81,6 +90,6 @@ SPEC CHECKSUMS:
   SwiftHTTP: 6d57b54ee84d9ad9cf81b6bc1c4cae593e3f6329
   SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: f595ef19cf7f5f1e53237cb7b0e3787d62d06f44
+PODFILE CHECKSUM: 68bf9720736cf8301aafdbd8f68c741d4e66bed8
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.beta.1

@@ -93,7 +93,22 @@ import Async
     self.topBarBackground.bringSubview(toFront: duelIcon)
     self.topBarBackground.bringSubview(toFront: duelLabel)
     
-    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
+    var changed = false
+    if json["challenge"]["name"].stringValue.contains("a books") {
+      challengeDescriptionLabel.text = "Reading Books"
+      changed = true
+    }
+    
+    if json["challenge"]["name"].stringValue.contains("Taking stares") {
+      challengeDescriptionLabel.text = "Taking Stairs"
+      changed = true
+    }
+    
+    if !changed {
+      challengeDescriptionLabel.text = json["challenge"]["name"].stringValue
+    }
+    
+//    challengeDescriptionLabel.text = json["challenge"]["description"].stringValue
     statsLabel.text = "Level 1 Champy / Reward +\(json["challenge"]["points"].stringValue) "
     
 //    self.daysLabel.text = "\(Int(CHSettings().secToDays(json["challenge"]["duration"].intValue))) days"

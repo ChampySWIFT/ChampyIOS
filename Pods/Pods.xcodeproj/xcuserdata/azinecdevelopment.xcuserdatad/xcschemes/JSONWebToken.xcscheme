@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "73A5535D0CE110D2F409284CC5CE551A"
+               BlueprintIdentifier = "E2F52FFAF549EE6FF0CB50A7D6621CF3"
                BuildableName = "JWT.framework"
                BlueprintName = "JSONWebToken"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "73A5535D0CE110D2F409284CC5CE551A"
+            BlueprintIdentifier = "E2F52FFAF549EE6FF0CB50A7D6621CF3"
             BuildableName = "JWT.framework"
             BlueprintName = "JSONWebToken"
             ReferencedContainer = "container:Pods.xcodeproj">

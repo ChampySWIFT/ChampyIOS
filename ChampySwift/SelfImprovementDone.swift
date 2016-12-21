@@ -57,8 +57,21 @@ import SwiftyJSON
     self.topBarBackground.bringSubview(toFront: selfImprovementLabel)
     if object != nil {
       self.objectChallenge = object
-      self.challenge.text = object["challenge"]["name"].stringValue
+//      self.challenge.text = object["challenge"]["name"].stringValue
+      var changed = false
+      if object["challenge"]["name"].stringValue.contains("a books") {
+        challenge.text = "Reading Books"
+        changed = true
+      }
       
+      if object["challenge"]["name"].stringValue.contains("Taking stares") {
+        challenge.text = "Taking Stairs"
+        changed = true
+      }
+      
+      if !changed {
+        challenge.text = object["challenge"]["name"].stringValue
+      }
       let originalDays = CHSettings().secToDays(object["challenge"]["duration"].intValue)
       let passedDays = object["senderProgress"].count
       
