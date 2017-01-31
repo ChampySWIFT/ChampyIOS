@@ -10,12 +10,15 @@
   import UIKit
   import Async
   import SwiftyJSON
-//  import UIViewBadge
+  import Firebase
+  import HealthKit
   import CoreMotion
   
   class MainViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
     let appDelegate     = UIApplication.shared.delegate as! AppDelegate
     let CurrentUser = UserDefaults.standard
+    
+    fileprivate var steps = [HKQuantitySample]()
     
     @IBOutlet weak var wellcomeLabel: UILabel!
     @IBOutlet weak var mainMenu: UIView!
@@ -58,6 +61,21 @@
     
     let center = NotificationCenter.default
     
+    let healthStore: HKHealthStore? = {
+      if HKHealthStore.isHealthDataAvailable() {
+        return HKHealthStore()
+      } else {
+        return nil
+      }
+    }()
+    
+    let storage: HKHealthStore? = {
+      if HKHealthStore.isHealthDataAvailable() {
+        return HKHealthStore()
+      } else {
+        return nil
+      }
+    }()
     
     var manager: CMMotionManager!
     
@@ -120,7 +138,7 @@
           }
           
           let cardIdentifier = "\(challenge["_id"].stringValue)-\(challengeType.rawValue)-\(timeIdentifier)"
-          if self.appDelegate.mainViewCard[cardIdentifier] != nil {
+          if self.appDelegate.mainViewCard[cardIdentifier] != nil   {
             containerView = self.appDelegate.mainViewCard[cardIdentifier]!
             
           } else {
@@ -156,6 +174,11 @@
               itemView.setUp(challenge)
               containerView = itemView
               break
+            case .startedDuelStepCounter:
+              let itemView = StepCounterDuelUnchecked(frame: frame)
+              itemView.setUp(challenge)
+              containerView = itemView
+              break
               
             case .startedDuel:
               let itemView = ConfirmedDuel(frame:frame)
@@ -165,6 +188,12 @@
               
             case .checkedForToday:
               let itemView = CheckedDuel(frame:frame)
+              itemView.setUp(challenge)
+              containerView = itemView
+              break
+              
+            case .checkedForTodayStepCounter:
+              let itemView = StepCounterDuelChecked(frame:frame)
               itemView.setUp(challenge)
               containerView = itemView
               break
@@ -178,7 +207,18 @@
               itemView.setUp(challenge)
               containerView = itemView
               break
-              
+            case .customStepCountingInProgress:
+              let itemView = StepCounterSelfImprovement(frame: frame)
+              itemView.setUp(challenge)
+              containerView = itemView
+              break
+            case .customStepCountingStarted:
+              let itemView = StepCounterSelfImprovementUnchecked(frame: frame)
+              itemView.setUp(challenge)
+              containerView = itemView
+              break
+            
+//
               
             default:
               let itemView = WakeUpChallenge(frame:frame)
@@ -235,6 +275,17 @@
       
     }
     
+    @IBAction func tappedScoreContainerOnMainViewThirdItemAction(_ sender: Any) {
+      FIRAnalytics.setUserPropertyString("ScoreContainerThirdItem", forName: "favourite_screen")
+    }
+    @IBAction func tappedScoreContainerOnMainViewFirstItemAction(_ sender: Any) {
+      FIRAnalytics.setUserPropertyString("ScoreContainerFirstItem", forName: "favourite_screen")
+    }
+    @IBAction func tappedScoreContainerOnMainViewAction(_ sender: Any) {
+      FIRAnalytics.setUserPropertyString("ScoreContainerSecondItem", forName: "favourite_screen")
+    }
+    
+    @IBOutlet var tappedScoreContainerOnMainView: UITapGestureRecognizer!
     func fillCHallenges() {
       if IJReachability.isConnectedToNetwork() {
         CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in
@@ -248,28 +299,24 @@
     }
     
     override func viewDidLoad(){
-      
       self.navigationController?.setNavigationBarHidden(false, animated: false)
       super.viewDidLoad()
+      
       self.navigationController?.setNavigationBarHidden(false, animated: false)
       center.addObserver(self, selector: #selector(MainViewController.setUpBehavior), name: NSNotification.Name(rawValue: "setUpBehavior"), object: nil)
-//      if CHSession().logined {
-        self.setUpBehavior()
-//      }
+      
+      self.setUpBehavior()
+
       
       self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueRegular", size: 18)!,  NSForegroundColorAttributeName: CHUIElements().APPColors["title"]!]
-     // navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
-     // navigationController!.navigationBar.tintColor    = UIColor.white
-      
+     
       self.navigationItem.hidesBackButton = true
       self.navigationItem.leftBarButtonItem = nil
-//      self.carousel
-//      challengeView.type       = .linear
-//      challengeView.decelerationRate = 0.0
-      
-//      self.challengesBarButton.customView?.addSubview(badge)
       
     }
+    
+    
+    
     
     func buildACustomButton() -> UIButton {
       let button = UIButton(type: UIButtonType.infoDark)
@@ -291,7 +338,6 @@
                     Async.main {
                       let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
                       let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-//                      self.presentViewController(roleControlViewController, animated: false, completion: .push)
                       self.present(roleControlViewController, animated: false, completion: {
                         
                       })
@@ -370,11 +416,7 @@
         
         manager.startDeviceMotionUpdates(to: queue, withHandler: { (data, error) in
           if (data?.userAcceleration.z)! < Double(-2.5) {
-//            self.dismiss(animated: true, completion: {
-//              
-//            })
             self.centerTappedAction(self)
-//            self.openAction()
           }
           
         })
@@ -393,6 +435,7 @@
         return value
       }
     }
+    
     func getUserData() {
       CHRequests().updateUserFromRemote { (result, json) in
         if result {
@@ -449,9 +492,9 @@
                 self.wins                 = userObject["successChallenges"].intValue
                 self.points               = userObject["allChallengesCount"].intValue + userObject["inProgressChallengesCount"].intValue
                 
-                self.firstNumber.text = "\(self.inProgressChallenges)"   //.countFrom(0, to: Float(self.inProgressChallenges))
-                self.secondNumber.text = "\(self.wins)" //.countFrom(0, to: Float(self.wins))
-                self.thirdNumber.text = "\(self.points)" //.countFrom(0, to: Float(self.points))
+                self.firstNumber.text = "\(self.inProgressChallenges)"   
+                self.secondNumber.text = "\(self.wins)"
+                self.thirdNumber.text = "\(self.points)" 
               }
             }
           }
@@ -464,21 +507,74 @@
       center.addObserver(self, selector: #selector(MainViewController.refreshCarousel), name: NSNotification.Name(rawValue: "refreshIcarousel"), object: nil)
       center.addObserver(self, selector: #selector(MainViewController.showModal), name: NSNotification.Name(rawValue: "wakeUpCreated"), object: nil)
       self.fillCarousel()
-//      if CHSession().logined {
-//        self.setUpBehavior()
-//      }
+      var newStorage:HKHealthStore! = nil
+      if HKHealthStore.isHealthDataAvailable() {
+        newStorage = HKHealthStore()
+      } else {
+        //      return
+      }
+      
+      
+      let stepsCount = HKQuantityType.quantityType( forIdentifier: HKQuantityTypeIdentifier.stepCount)
+      
+      let dataTypesToWrite = NSSet(object: stepsCount)
+      let dataTypesToRead = NSSet(object: stepsCount)
+      
+      newStorage.requestAuthorization(toShare: dataTypesToWrite as! Set<HKSampleType>, read: dataTypesToRead as! Set<HKObjectType>, completion: { [unowned self] (success, error) in
+        if success {
+          let today = NSDate()
+          let tomorrow = today.addingTimeInterval(24 * 60 * 60)
+          
+          let stepsCount = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
+          let date = NSDate()
+          let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+          let newDate = cal.startOfDay(for: date as Date)
+          let predicate = HKQuery.predicateForSamples(withStart: newDate as Date, end: tomorrow as Date, options: .strictStartDate)
+          let interval: NSDateComponents = NSDateComponents()
+          interval.day = 1
+          
+          let query = HKStatisticsCollectionQuery(quantityType: stepsCount!, quantitySamplePredicate: predicate, options: [.cumulativeSum], anchorDate: newDate as Date, intervalComponents:interval as DateComponents)
+          
+          query.initialResultsHandler = { query, results, error in
+            if error != nil {
+              print(error.debugDescription)
+              return
+            }
+            if let myResults = results{
+              myResults.enumerateStatistics(from: NSDate() as Date, to: NSDate() as Date) { statistics, stop in
+                if let quantity = statistics.sumQuantity() {
+                  let steps = quantity.doubleValue(for: HKUnit.count())
+                  UserDefaults.standard.set(steps, forKey: "todaysStepCount")
+                  
+//                  stepCount
+                  CHRequests().updateUserProfile(CHSession().currentUserId, params: ["stepCount" : "\(steps)"], completitionHandler: { (status, result) in
+                    if status {
+                      CHPush().localPush("updateStepsOnCards", object: self)
+                    }
+                  })
+                  print("Steps = \(steps)")
+                }
+              }
+            }
+          }
+          
+          newStorage.execute(query)
+        } else {
+          print(error.debugDescription)
+        }
+      })
+      
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-      //    self.view.removeFromSuperview()
+      
       self.center.removeObserver(self, name: NSNotification.Name(rawValue: "refreshIcarousel"), object: nil)
       self.center.removeObserver(self, name: NSNotification.Name(rawValue: "wakeUpCreated"), object: nil)
       
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-      //    return CHChalenges().getInProgressChallenges(CHSession().currentUserId).count
-      return self.itemViewArray.count
+     return self.itemViewArray.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -643,10 +739,7 @@
     
     
     @IBAction func logOutAction(_ sender: AnyObject) {
-      //    CHSession().clearSession()
-      //    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-      //    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RoleControlViewController")
-      //    presentViewController(roleControlViewController, type: .push, animated: false)
+    
     }
     
     
@@ -716,6 +809,9 @@
         badgeLayer?.removeFromSuperlayer()
       }
       
+      
+           
     }
+  
   
   

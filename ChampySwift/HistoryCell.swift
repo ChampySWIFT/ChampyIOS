@@ -92,15 +92,16 @@ import SwiftyJSON
       self.generalItem = json
      
       switch json["challenge"]["type"].stringValue {
-      case CHChallengeType.SelfImprovement.rawValue :
+        
+      case CHSettings().selfImprovementsId :
         setUpSelfImprovement()
         self.type = .SelfImprovement
         break
-      case CHChallengeType.WakeUp.rawValue:
+      case CHSettings().wakeUpIds:
         setUpWakeUP()
         self.type = .WakeUp
         break
-      case CHChallengeType.Duel.rawValue:
+      case CHSettings().duelsId:
         setUpDuel()
         self.type = .Duel
         break

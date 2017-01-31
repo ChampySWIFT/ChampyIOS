@@ -18,12 +18,16 @@ class CHChalenges: NSObject {
     case confirmedSelfImprovement = "confirmedSelfImprovement"
     case wakeUpChallenge = "wakeUpChallenge"
     case startedDuel = "startedDuel"
+    case startedDuelStepCounter = "startedDuelStepCounter"
     case checkedForToday = "checkedForToday"
+    case checkedForTodayStepCounter = "checkedForTodayStepCounter"
     case checkedSelfImprovementForToday = "checkedSelfImprovementForToday"
     case timedOutWakeUp = "timedOutWakeUp"
     case waitingForNextDayWakeUp = "waitingForNextDayWakeUp"
     case undefined = "undefined"
-    
+    case customStepCountingStarted = "customStepCountingStarted"
+    case customStepCountingInProgress = "customStepCountingInProgress"
+    case customStepCountingDone = "customStepCountingDone"
   }
   
   let maxChallengesCount = 30
@@ -258,7 +262,49 @@ class CHChalenges: NSObject {
    @return CHChallengeSubType of Self Improvement
    */
   func getSelfImprovementStatus(_ item:JSON) -> CHChallengeSubType {
-    return checkTime(item: item)
+    if item["challenge"]["description"].stringValue == "customStepCounting" {
+      return checkStepCountingTime(item: item)
+//      return checkTime(item: item)
+    } else {
+      return checkTime(item: item)
+    }
+  }
+  
+  func checkStepCountingTime(item:JSON, key:String = "senderProgress") -> CHChallengeSubType {
+    let currentDate = CHUIElements().getCurretnTime()
+    let day = CHSettings().daysToSec(1)
+    let currentMidnight = CHSettings().getMidnightOfTheDay(currentDate) //1479772801 + day//
+    
+    var lastCheck = item["created"].intValue
+    
+    if item[key].count == 0 {
+      if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck > day {
+        CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+          
+        })
+      }
+      return .customStepCountingStarted
+    }
+    
+    
+    if item[key].count > 0 {
+      lastCheck = item[key][item[key].count - 1]["at"].intValue
+    }
+    
+    if currentMidnight - lastCheck < 0 && currentMidnight - lastCheck > -1 * day {
+      return .customStepCountingInProgress
+    }
+    
+    if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck < day {
+      return .customStepCountingStarted
+    }
+    
+    if currentMidnight - lastCheck > 0 && currentMidnight - lastCheck > day {
+      CHRequests().surrender(item["_id"].stringValue, completitionHandler: { (result, json) in
+        
+      })
+    }
+    return .customStepCountingStarted
   }
   
   func checkTime(item:JSON, key:String = "senderProgress") -> CHChallengeSubType {
@@ -320,7 +366,11 @@ class CHChalenges: NSObject {
           
         })
       }
-      return .startedDuel
+      if item["challenge"]["description"].stringValue == "customStepCountingDuel" {
+        return .startedDuelStepCounter
+      } else {
+        return .startedDuel
+      }
     }
     
     checkMidnight = CHSettings().getMidnightOfTheDay(item[key][item[key].count - 1]["at"].intValue)
@@ -332,10 +382,19 @@ class CHChalenges: NSObject {
     }
     
     if (currentDate - checkMidnight < surrenderTime) && (currentDate - checkMidnight > borderTime) {
-      return .startedDuel
+      if item["challenge"]["description"].stringValue == "customStepCountingDuel" {
+        return .startedDuelStepCounter
+      } else {
+        return .startedDuel
+      }
     }
     
-    return .checkedForToday
+    if item["challenge"]["description"].stringValue == "customStepCountingDuel" {
+      return .checkedForTodayStepCounter
+    } else {
+      return .checkedForToday
+    }
+    
     
   }
   

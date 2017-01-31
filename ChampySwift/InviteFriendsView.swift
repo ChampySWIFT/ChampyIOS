@@ -12,6 +12,8 @@ import UIKit
 
   var view: UIView!
   
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
   
   var tapped = false
   func xibSetup() {

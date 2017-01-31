@@ -31,7 +31,7 @@ class CHPush: NSObject {
     
     
     let deviceToken:Data = CurrentUser.data(forKey: "deviceToken")!
-    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
+    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .prod)
     
     guard FIRInstanceID.instanceID().token() != nil
       else {

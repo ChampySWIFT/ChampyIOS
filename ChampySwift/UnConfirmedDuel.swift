@@ -102,6 +102,11 @@ import SwiftyJSON
     
     self.daysLabel.text = "\(days) \(day)"
     
+    
+    if json["challenge"]["description"].stringValue == "customStepCountingDuel" {
+      self.challengeDescriptionLabel.text = "\(challengeObject["challenge"]["name"].stringValue) every day \(challengeObject["challenge"]["details"].stringValue) steps"
+    }
+    
     switch  CHSession().currentUserId {
     case json["sender"]["_id"].stringValue:
       self.duelLabel.text = "New challenge from \(json["recipient"]["name"].stringValue)"

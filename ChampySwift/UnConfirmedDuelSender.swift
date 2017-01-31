@@ -91,6 +91,10 @@ import SwiftyJSON
       day = "day"
     }
     
+    if json["challenge"]["description"].stringValue == "customStepCountingDuel" {
+      self.challengeDescriptionLabel.text = "\(challengeObject["challenge"]["name"].stringValue) every day \(challengeObject["challenge"]["details"].stringValue) steps"
+    }
+    
     self.daysLabel.text = "\(days) \(day)"
     
     switch  CHSession().currentUserId {
@@ -107,6 +111,29 @@ import SwiftyJSON
     }
     
     
+  }
+  
+  @IBAction func cancelrequestAction(_ sender: Any) {
+    
+    
+    
+  }
+  @IBAction func cancelRequest2Action(_ sender: Any) {
+    let alert = UIAlertController(title: "Warning", message: "Are You Sure?", preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) in
+      CHRequests().rejectInvite(self.challengeObject["_id"].stringValue) { (result, json) in
+        if result {
+          CHPush().localPush("refreshIcarousel", object: self)
+        } else {
+          CHPush().alertPush(json["error"].stringValue, type: "Warning")
+        }
+      }
+    }))
+    
+    alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil))
+    if let topController = UIApplication.topViewController() {
+      topController.present(alert, animated: true, completion: nil)
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {

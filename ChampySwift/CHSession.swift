@@ -96,7 +96,6 @@ class CHSession: NSObject {
     
     let appDelegate     = UIApplication.shared.delegate as! AppDelegate
     
-//    UserDefaults.resetStandardUserDefaults()
     UserDefaults.standard.set(0, forKey: "loggedIn")
    UserDefaults.standard.set(nil, forKey: "facebookId")
     UserDefaults.standard.set(nil, forKey: "userName")

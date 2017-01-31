@@ -11,9 +11,7 @@ import Async
 import SocketIO
 
 class RoleControlViewController: UIViewController {
-  //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://192.168.1.104:3007")
-  //  var socket:SocketIOClient = SocketIOClient(socketURL: "http://46.101.213.24:3007")
-  var socket:SocketIOClient = SocketIOClient(socketURL: URL(string: CHRequests().SocketUrl)!)
+  var socket:SocketIOClient = SocketIOClient(socketURL: URL(string: CHRequests.SocketUrl)!)
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidAppear(_ animated: Bool) {

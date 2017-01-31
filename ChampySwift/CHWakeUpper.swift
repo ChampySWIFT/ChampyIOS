@@ -42,6 +42,13 @@ class CHWakeUpper: NSObject {
     fireComponents.minute = 00
     
     
+    if CHSession().CurrentUser.object(forKey: "hoursDN") != nil && CHSession().CurrentUser.object(forKey: "minsDN") != nil {
+      fireComponents.hour = CHSession().CurrentUser.integer(forKey: "hoursDN")
+      fireComponents.minute = CHSession().CurrentUser.integer(forKey: "minsDN")
+      
+    }
+    print(CHSession().CurrentUser.integer(forKey: "minsDN"))
+
     dateFire = calendar.date(from: fireComponents)!
     
     let localNotification = UILocalNotification()

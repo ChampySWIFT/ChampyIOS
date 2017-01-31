@@ -166,16 +166,4 @@ class CHImages: NSObject {
   
 }
 
-extension UIImageView{
-  
-  func makeBlurImage(_ targetImageView:UIImageView?) {
-    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-    
-    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-    blurEffectView.alpha = 0.7
-    blurEffectView.frame = targetImageView!.bounds
-    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
-    targetImageView?.addSubview(blurEffectView)
-  }
-  
-}
+

@@ -100,6 +100,8 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   }
   
   func valueChangedInDateField(_ sender:AnyObject) {
+    Extensions.logEvent(eventName: "Wake up time changed")
+    
     let dateFormatter = DateFormatter()
     
     dateFormatter.timeStyle = DateFormatter.Style.short
@@ -133,6 +135,7 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   
   
   @IBAction func plusOneDayAction(_ sender: AnyObject) {
+    Extensions.logEvent(eventName: "wakeUp `+` ButtonTapped")
     var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
     days = (days.replacingOccurrences(of: " Day", with: ""))
     
@@ -153,6 +156,7 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   }
   
   @IBAction func minusOneDayAction(_ sender: AnyObject) {
+    Extensions.logEvent(eventName: "wakeUp `-` ButtonTapped")
     var days:String = (dayLabel.text?.replacingOccurrences(of: " Days", with: ""))!
     days = (days.replacingOccurrences(of: " Day", with: ""))
     
@@ -259,9 +263,6 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
   
   func backtoMain() {
     Async.main{
-//      self.performSegueWithIdentifier("backtoMain", sender: nil)
-//
-//      self.showModal()
       self.dismiss(animated: true) {
         CHPush().localPush("wakeUpCreated", object: self)
         CHPush().localPush("refreshIcarousel", object: self)
@@ -283,15 +284,4 @@ class WakeUpViewController: UIViewController, UIPickerViewDelegate, UITextFieldD
       banner.showBannerForViewControllerAnimated(true, message: message)
     }
   }
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
 }

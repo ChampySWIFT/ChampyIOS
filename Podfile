@@ -15,7 +15,6 @@ target 'Champy' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Device', '~> 2.0.0'
-  pod 'Google/Analytics'
   #pod 'FacebookCore'
   #pod 'FacebookLogin'
   #pod 'FacebookShare'

@@ -93,9 +93,10 @@ import SwiftyJSON
   }
   
   @IBAction func shareAction(_ sender: AnyObject) {
-    let textToShare = "Constantly improving myself with Champy. Self-Improvement challenge “\(self.objectChallenge["challenge"]["name"].stringValue)”"
+    let challengeName:String = self.challenge.text!
+    let textToShare = "Constantly improving myself with Champy. Self-Improvement challenge “\(challengeName)”"
     if let topController = UIApplication.topViewController() {
-      if let myWebsite = URL(string: "http://champyapp.com") {
+      if let myWebsite = URL(string: "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1110777364&mt=8") {
         self.tapped = false
         let objectsToShare = [textToShare, myWebsite] as [Any]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

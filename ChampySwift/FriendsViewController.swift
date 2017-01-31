@@ -10,6 +10,7 @@ import UIKit
 import Async
 import CoreMotion
 import FBSDKShareKit
+import Firebase
 class FriendsViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
@@ -125,6 +126,7 @@ class FriendsViewController: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: AnyObject) {
+    FIRAnalytics.setUserPropertyString("FriendsPageCenterIconTapped", forName: "favourite_screen")
     let textToShare = "Hey! I’ve just started using Champy. Join me so we can improve our lives together."
     if let myWebsite = URL(string: "https://itunes.apple.com/app/id1110777364") {
       
@@ -160,14 +162,18 @@ class FriendsViewController: UIViewController {
     case 1:
       let p =  CGPoint(x:self.view.frame.size.width,y:0)
       contentScrollView.setContentOffset(p, animated: true)
+      FIRAnalytics.setUserPropertyString("PendingSectiontapped", forName: "favourite_screen")
       break
     case 2:
       let p =  CGPoint(x:self.view.frame.size.width * 2,y:0)
       contentScrollView.setContentOffset(p, animated: true)
+      FIRAnalytics.setUserPropertyString("OthersSectiontapped", forName: "favourite_screen")
+      
       break
     case 0:
       let p =  CGPoint(x:0,y:0)
       contentScrollView.setContentOffset(p, animated: true)
+      FIRAnalytics.setUserPropertyString("FriendsSectiontapped", forName: "favourite_screen")
       break
       
     default:

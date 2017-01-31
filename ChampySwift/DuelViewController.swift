@@ -60,6 +60,7 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
     CHRequests().getChallenges(CHSession().currentUserId) { (result, json) in
       self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
       self.challenges.insert(nil, at: 0)
+      self.challenges.insert(nil, at: 1)
       Async.main {
         var i:Int = 0
         self.viewObjects.removeAll()
@@ -71,7 +72,11 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
           if item != nil {
             itemView.setUp(item, empty: false)
           } else {
-            itemView.setUp(item, empty: true)
+            if i == 0 {
+              itemView.setUp(item, empty: true, stepcounter: true)
+            } else if i == 1 {
+              itemView.setUp(item, empty: true, stepcounter: false)
+            }
           }
           self.viewObjects.append(itemView)
           i = i + 1
@@ -176,9 +181,8 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
       return
     }
     
-    
-    
     if self.challenges[challengeView.currentItemIndex] != nil {
+      Extensions.logEvent(eventName: "custom duel challenge created")
       let params:[String:String] = [
         "recipient" : CHSession().selectedFriendId,
         "challenge" : self.challenges[challengeView.currentItemIndex]["_id"].stringValue
@@ -196,60 +200,112 @@ class DuelViewController: UIViewController, iCarouselDataSource, iCarouselDelega
         }
       }
     } else {
-      let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
       
-      var enteredText:String = view.ConditionsTextField.text!
-      enteredText = enteredText.condenseWhitespace()
-      enteredText = enteredText.trimmingCharacters(
-        in: CharacterSet.whitespacesAndNewlines
-      )
-      
-      let conditions:String = enteredText
-      
-      var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
-      dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
-      
-      
-      guard enteredText.isValidChallengeName() else{
-        self.alertWithMessage("Invalid Challenge Name", type: .Warning)
-        return
+      switch challengeView.currentItemIndex {
+        
+      case 0:
+        self.createCustomChallengeWithCustomName()
+        break
+        
+      case 1:
+        self.createCustomStepCountingChallenge()
+        break
+        
+      default:
+        break
+        
       }
       
-      guard conditions.isValidConditions() else {
-        self.alertWithMessage("Invalid Challenge Name", type: .Warning)
-        //        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
-        return
-      }
-      
-      guard dayNumber.isDayNumber() else {
-        self.alertWithMessage("Invlid Day Count", type: .Warning)
-        //        CHPush().alertPush("Invalid Day Count", type: "Warning")
-        return
-      }
-      
-      let daysec = CHSettings().daysToSec(Int(dayNumber)!)
-      
-      let params:[String:String] = [
-        "name": conditions,
-        "type": CHSettings().duelsId,
-        "description": conditions,
-        "details": conditions,
-        "duration": "\(daysec)"
-      ]
-      
-      CHRequests().createChallengeAndSendIt(CHSession().selectedFriendId, params: params, completitionHandler: { (json, status) in
-        if status {
-          CHPush().alertPush("Sent", type: "Success")
-          self.backtoMain()
-          CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
-        } else {
-          CHPush().alertPush(json["error"].stringValue, type: "Warning")
-        }
-      })
       
     }
     
     
+  }
+  
+  func createCustomChallengeWithCustomName() {
+    Extensions.logEvent(eventName: "predesigned duel challenge created")
+    let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
+    
+    var enteredText:String = view.ConditionsTextField.text!
+    enteredText = enteredText.condenseWhitespace()
+    enteredText = enteredText.trimmingCharacters(
+      in: CharacterSet.whitespacesAndNewlines
+    )
+    
+    let conditions:String = enteredText
+    
+    var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+    dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
+    
+    
+    guard enteredText.isValidChallengeName() else{
+      self.alertWithMessage("Invalid Challenge Name", type: .Warning)
+      return
+    }
+    
+    guard conditions.isValidConditions() else {
+      self.alertWithMessage("Invalid Challenge Name", type: .Warning)
+      //        CHPush().alertPush("Invalid Challenge Name", type: "Warning")
+      return
+    }
+    
+    guard dayNumber.isDayNumber() else {
+      self.alertWithMessage("Invlid Day Count", type: .Warning)
+      //        CHPush().alertPush("Invalid Day Count", type: "Warning")
+      return
+    }
+    
+    let daysec = CHSettings().daysToSec(Int(dayNumber)!)
+    
+    let params:[String:String] = [
+      "name": conditions,
+      "type": CHSettings().duelsId,
+      "description": conditions,
+      "details": conditions,
+      "duration": "\(daysec)"
+    ]
+    
+    CHRequests().createChallengeAndSendIt(CHSession().selectedFriendId, params: params, completitionHandler: { (json, status) in
+      if status {
+        CHPush().alertPush("Sent", type: "Success")
+        self.backtoMain()
+        CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
+      } else {
+        CHPush().alertPush(json["error"].stringValue, type: "Warning")
+      }
+    })
+  }
+  
+  func createCustomStepCountingChallenge () {
+    let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
+    var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+    dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
+    let stepNumber:String = view.stepsTextField.text!.replacingOccurrences(of: " Steps", with: "")
+    
+    guard dayNumber.isDayNumber() else {
+      self.alertWithMessage("Invlid Day Count", type: .Warning)
+      return
+    }
+    
+    let daysec = CHSettings().daysToSec(Int(dayNumber)!)
+    
+    let params:[String:String] = [
+      "name": "Step by Step",
+      "type": CHSettings().duelsId,
+      "description": "customStepCountingDuel",
+      "details": stepNumber,
+      "duration": "\(daysec)"
+    ]
+    
+    CHRequests().createChallengeAndSendIt(CHSession().selectedFriendId, params: params, completitionHandler: { (json, status) in
+      if status {
+        CHPush().alertPush("Sent", type: "Success")
+        self.backtoMain()
+        CHPush().sendPushToUser(CHSession().selectedFriendId, message: "\(CHSession().currentUserName) has sent you a new duel", options: "")
+      } else {
+        CHPush().alertPush(json["error"].stringValue, type: "Warning")
+      }
+    })
   }
   
   func backtoMain() {

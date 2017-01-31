@@ -479,38 +479,9 @@ import Async
   
 }
 
-extension ScoreBorder {
-  func rotateScoreBorderOnFriends(scoreLabel:UICountingLabel, in container:UIView, with miniIcon:UIImageView, with value:Int) {
-    self.rotateScoreViewToZero()
-    self.rotateView(1.0)
-    self.animateFromAngle(0, toAngle: 360, duration: 1.0) { (ended) in
-      if ended {
-        scoreLabel.adjustsFontSizeToFitWidth = true
-        scoreLabel.isHidden = false
-        self.fillScoreBorder(0.5)
-        container.bringSubview(toFront: scoreLabel)
-        scoreLabel.method   = UILabelCountingMethodLinear
-        scoreLabel.format   = "%d";
-        miniIcon.isHidden = false
-        scoreLabel.count(from: 0, to: Float(value), withDuration: 0.5)
-      }
-    }
 
-  }
-  
-  
-  
-}
 
 extension UIView {
-  func cleareScoreContainer() {
-    for item in self.subviews {
-      if item.layer.value(forKey: "type") != nil {
-        if item.layer.value(forKey: "type") as! String == "inner" {
-          item.removeFromSuperview()
-        }
-      }
-    }
-  }
+  
 }
 

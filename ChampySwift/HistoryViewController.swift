@@ -9,6 +9,7 @@
 import UIKit
 import Async
 import CoreMotion
+import Firebase
 
 class HistoryViewController: UIViewController {
   let appDelegate     = UIApplication.shared.delegate as! AppDelegate
@@ -17,9 +18,12 @@ class HistoryViewController: UIViewController {
   @IBOutlet weak var contentScrollView: UIScrollView!
   @IBOutlet weak var background: UIImageView!
   
-  var table1 = InProgressTableViewController()
-  var table2 = WinsTableViewController()
-  var table3 = FailedTableViewController()
+  var table1 = HistoryTableViewController()
+  var table2 = HistoryTableViewController() 
+  var table3 = HistoryTableViewController()
+  
+
+  
   var pageImages: [UIImage]       = []
   var pageViews: [UIImageView?]   = []
   var manager: CMMotionManager!
@@ -28,6 +32,12 @@ class HistoryViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    table1.type = .inProgress
+    table2.type = .wins
+    table3.type = .failed
+    
+    
     var unconfirmedChallenges:Int = 0
     self.appDelegate.unconfirmedChallenges = unconfirmedChallenges
     
@@ -88,12 +98,6 @@ class HistoryViewController: UIViewController {
                 if result {
                   Async.main {
                     self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
-//                    let mainStoryboard: UIStoryboard                 = UIStoryboard(name: "Main",bundle: nil)
-//                    let roleControlViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RoleControlViewController")
-//                    
-//                    self.present(roleControlViewController, animated: false, completion: {
-//                      
-//                    })
                   }
                 }
               })
@@ -175,42 +179,31 @@ class HistoryViewController: UIViewController {
     if appDelegate.historyTable1 != nil {
       table1 = appDelegate.historyTable1
     } else {
-      appDelegate.historyTable1 = mainStoryboard.instantiateViewController(withIdentifier: "InProgressTableViewController") as! InProgressTableViewController
+      appDelegate.historyTable1 = mainStoryboard.instantiateViewController(withIdentifier: "HistoryTableViewController") as! HistoryTableViewController
       table1 = appDelegate.historyTable1
     }
     
     if appDelegate.historyTable2 != nil {
       table2 = appDelegate.historyTable2
     } else {
-      appDelegate.historyTable2 = mainStoryboard.instantiateViewController(withIdentifier: "WinsTableViewController") as! WinsTableViewController
+      appDelegate.historyTable2 = mainStoryboard.instantiateViewController(withIdentifier: "HistoryTableViewController") as! HistoryTableViewController
       table2 = appDelegate.historyTable2
     }
     
     if appDelegate.historyTable3 != nil {
       table3 = appDelegate.historyTable3
     } else {
-      appDelegate.historyTable3 = mainStoryboard.instantiateViewController(withIdentifier: "FailedTableViewController") as! FailedTableViewController
+      appDelegate.historyTable3 = mainStoryboard.instantiateViewController(withIdentifier: "HistoryTableViewController") as! HistoryTableViewController
       table3 = appDelegate.historyTable3
     }
     
     
+    table1.type = .inProgress
+    table2.type = .wins
+    table3.type = .failed
     
     
     self.setUpFrames()
-//    var frame1 = table1.tableView.frame
-//    frame1.size.height -= 44
-//    
-//    
-//    var frame2 = table2.tableView.frame
-//    frame1.size.height -= 44
-//    
-//    var frame3 = table3.tableView.frame
-//    frame3.size.height -= 44
-//    table1.tableView.frame = frame1
-//    table2.tableView.frame = frame2
-//    table3.tableView.frame = frame3
-    
-    
     self.addChildViewController(table1)
     self.addChildViewController(table2)
     self.addChildViewController(table3)

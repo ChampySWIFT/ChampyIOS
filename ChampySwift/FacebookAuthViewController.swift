@@ -70,8 +70,15 @@ class FacebookAuthViewController: UIViewController {
             return
           }
           let fbResult   = result as! Dictionary<String, AnyObject>
+          print(fbResult)
+          var email = ""
+          if fbResult["email"] != nil {
+            email      = fbResult["email"] as! String
+          } else {
+            email = "asd\(fbResult["id"] as! String)@cantgetemail.com"
+          }
+          
           let name       = fbResult["name"] as! String
-          let email      = fbResult["email"] as! String
           let facebookId = fbResult["id"] as! String
           
           let params:[String:String] = [
@@ -87,6 +94,7 @@ class FacebookAuthViewController: UIViewController {
             //   
             self.tapped = false
             if status {
+              print(json)
               Async.main {
                 let faceParams = ["fields": "id"]
                 let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: faceParams)

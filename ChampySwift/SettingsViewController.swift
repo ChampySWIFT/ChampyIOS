@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 import AVFoundation
 import CoreMotion
+import Firebase
 
 class SettingsViewController: UIViewController {
   var manager: CMMotionManager!
@@ -24,6 +25,7 @@ class SettingsViewController: UIViewController {
   override func viewDidLoad() {
     
     super.viewDidLoad()
+    FIRAnalytics.setUserPropertyString("Settings", forName: "favourite_screen")
     checkForAuthorizationStatus()
     var unconfirmedChallenges:Int = 0
     self.appDelegate.unconfirmedChallenges = unconfirmedChallenges

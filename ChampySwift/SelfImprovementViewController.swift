@@ -46,24 +46,30 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     
     self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
     self.challenges.insert(nil, at: 0)
+    self.challenges.insert(nil, at: 1)
     Async.main {
       var i:Int = 0
       self.viewObjects.removeAll()
+      
       for item in self.challenges {
         let cardheight = self.view.frame.size.height - 272
-        
         let frame = CGRect(x:0, y:5, width:self.view.frame.size.width / 1.4, height: cardheight/*self.view.frame.size.height / 2.0*/)
         let itemView = NewChallenge(frame:frame)
         if item != nil {
+          
           itemView.setUp(item, empty: false)
         } else {
-          itemView.setUp(item, empty: true)
+          if i == 0 {
+            itemView.setUp(item, empty: true, stepcounter: true)
+          } else if i == 1 {
+            itemView.setUp(item, empty: true, stepcounter: false)
+          }
         }
         self.viewObjects.append(itemView)
         i = i + 1
       }
       self.challengeView.reloadData()
-      self.challengeView.scrollToItem(at: 1, animated: false)
+      self.challengeView.scrollToItem(at: 2, animated: false)
     }
     self.view.bringSubview(toFront: self.challengeView)
     
@@ -119,6 +125,8 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     }
     
     if self.challenges[challengeView.currentItemIndex] != nil {
+      Extensions.logEvent(eventName: "custom self improvement challenge created")
+      
       let params:[String:String] = [
         "challenge": self.challenges[challengeView.currentItemIndex]["_id"].stringValue
       ]
@@ -127,52 +135,107 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
         self.finisher(result)
       })
     } else {
-      let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
       
-      var enteredText:String = view.ConditionsTextField.text!
-      enteredText = enteredText.condenseWhitespace()
-      enteredText = enteredText.trimmingCharacters(
-        in: CharacterSet.whitespacesAndNewlines
-      )
-      
-      
-      guard enteredText.isValidChallengeName() else{
-        self.alertWithMessage("Invalid Challenge Name", type: .Warning)
-        return
+      switch challengeView.currentItemIndex {
+        
+      case 0:
+        self.createCustomChallengeWithCustomName()
+        break
+        
+      case 1:
+        self.createCustomStepCountingChallenge()
+        break
+        
+      default:
+        break
+        
       }
-      
-      let conditions:String = enteredText
-      
-      var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
-      dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
-      
-      
-      guard conditions.isValidConditions() else {
-        self.alertWithMessage("Invalid Challenge Name", type: .Warning)
-        return
-      }
-      
-      guard dayNumber.isDayNumber() else {
-        self.alertWithMessage("Invalid Day Count", type: .Warning)
-        return
-      }
-      
-      let daysec = CHSettings().daysToSec(Int(dayNumber)!)
-      let params:[String:String] = [
-        "name": conditions,
-        "type": CHSettings().self.selfImprovementsId,
-        "description": conditions,
-        "details": conditions,
-        "duration": "\(daysec)"
-      ]
-      
-      CHRequests().createSelfImprovementChallengeAndSendIt(params, completitionHandler: { (json, status) in
-        self.finisher(status)
-      })
       
     }
     
     
+  }
+  
+  func createCustomStepCountingChallenge() {
+    Extensions.logEvent(eventName: "predesigned step counting challenge created")
+    let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
+    
+    let conditions:String = "Step by step"
+    
+    var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+    dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
+    
+    let stepNumber:String = view.stepsTextField.text!.replacingOccurrences(of: " Steps", with: "")
+    
+    guard dayNumber.isDayNumber() else {
+      self.alertWithMessage("Invalid Day Count", type: .Warning)
+      return
+    }
+    
+    guard stepNumber.isStepNumber() else {
+      self.alertWithMessage("Invalid Step Count", type: .Warning)
+      return
+    }
+    
+    let daysec = CHSettings().daysToSec(Int(dayNumber)!)
+    let params:[String:String] = [
+      "name": conditions,
+      "type": CHSettings().self.selfImprovementsId,
+      "description": "customStepCounting",
+      "details": stepNumber,
+      "duration": "\(daysec)"
+    ]
+    
+    CHRequests().createSelfImprovementChallengeAndSendIt(params, completitionHandler: { (json, status) in
+      self.finisher(status)
+    })
+  }
+  
+  func createCustomChallengeWithCustomName() {
+    Extensions.logEvent(eventName: "predesigned self improvement challenge created")
+    let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
+    
+    var enteredText:String = view.ConditionsTextField.text!
+    enteredText = enteredText.condenseWhitespace()
+    enteredText = enteredText.trimmingCharacters(
+      in: CharacterSet.whitespacesAndNewlines
+    )
+    
+    
+    guard enteredText.isValidChallengeName() else{
+      self.alertWithMessage("Invalid Challenge Name", type: .Warning)
+      return
+    }
+    
+    let conditions:String = enteredText
+    
+    var dayNumber:String = view.daysTextField.text!.replacingOccurrences(of: " Days", with: "")
+    dayNumber = dayNumber.replacingOccurrences(of: " Day", with: "")
+    
+    
+    guard conditions.isValidConditions() else {
+      self.alertWithMessage("Invalid Challenge Name", type: .Warning)
+      return
+    }
+    
+    guard dayNumber.isDayNumber() else {
+      self.alertWithMessage("Invalid Day Count", type: .Warning)
+      return
+    }
+    
+    let daysec = CHSettings().daysToSec(Int(dayNumber)!)
+    let params:[String:String] = [
+      "name": conditions,
+      "type": CHSettings().selfImprovementsId,
+      "description": conditions,
+      "details": conditions,
+      "duration": "\(daysec)"
+    ]
+    
+    CHRequests().createSelfImprovementChallengeAndSendIt(params, completitionHandler: { (json, status) in
+      self.finisher(status)
+    })
+
   }
   
   func backtoMain() {

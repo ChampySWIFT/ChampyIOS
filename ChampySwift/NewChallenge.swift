@@ -16,16 +16,19 @@ import Async
   
   @IBOutlet weak var ConditionsTextField: UITextField!
   @IBOutlet weak var daysTextField: UILabel!
-  @IBOutlet weak var pointsLabel: UILabel!
-  @IBOutlet weak var levelLabel: UILabel!
-  @IBOutlet weak var rewardLabel: UILabel!
-  
+  @IBOutlet weak var stepsTextField: UILabel!
+  @IBOutlet weak var stepsContainer: UIView!
+  @IBOutlet weak var numberOfStepsLabel: UILabel!
+ 
   var selectedTitle:String = ""
   var selectedDayCount:Int = 21
   let notifCenter = NotificationCenter.default
   
+  var customStepCounter:Bool = false
   
-  func setUp(_ object:JSON, empty:Bool = false){
+  
+  func setUp(_ object:JSON, empty:Bool = false, stepcounter:Bool = false){
+    self.customStepCounter = stepcounter
     notifCenter.addObserver(self, selector: #selector(NewChallenge.dismissKeyboard), name: NSNotification.Name(rawValue: "dismissKeyboard"), object: nil)
     self.ConditionsTextField.text = ""
     self.daysTextField.text = "21 Days"
@@ -33,8 +36,6 @@ import Async
     
     
     if !empty {
-      pointsLabel.text = object["points"].stringValue
-      pointsLabel.adjustsFontSizeToFitWidth = true
       var changed = false
       if object["name"].stringValue.contains("a books") {
         ConditionsTextField.text = "Reading Books"
@@ -49,28 +50,31 @@ import Async
       if !changed {
         ConditionsTextField.text = object["name"].stringValue
       }
-      
-//      ConditionsTextField.text = object["name"].stringValue
       ConditionsTextField.adjustsFontSizeToFitWidth = true
       
-      rewardLabel.text = "Reward +\(object["points"].stringValue) points"
-      
-     
       ConditionsTextField.isUserInteractionEnabled = false
       
       self.plusOneDay.isHidden = true
       self.minusOneDay.isHidden = true
       
       self.daysTextField.text = "\(Int(CHSettings().secToDays(object["duration"].intValue))) Days"
-      
+      self.stepsContainer.isHidden = true
+      self.numberOfStepsLabel.isHidden = true
     } else {
-      pointsLabel.text = "10"
-      pointsLabel.adjustsFontSizeToFitWidth = true
       
-      ConditionsTextField.placeholder = "Type Your Challenge Name"
-      ConditionsTextField.adjustsFontSizeToFitWidth = true
-      ConditionsTextField.isUserInteractionEnabled = true
-      rewardLabel.text = "Reward +10 points"
+      if customStepCounter {
+        self.stepsContainer.isHidden = true
+        self.numberOfStepsLabel.isHidden = true
+        ConditionsTextField.placeholder = "Type Your Challenge Name"
+        ConditionsTextField.isUserInteractionEnabled = true
+        
+      } else {
+        self.stepsContainer.isHidden = false
+        self.numberOfStepsLabel.isHidden = false
+        ConditionsTextField.text = "Steps"
+        ConditionsTextField.isUserInteractionEnabled = false
+      }
+     ConditionsTextField.adjustsFontSizeToFitWidth = true
       
     }
     
@@ -149,6 +153,34 @@ import Async
 
   }
   
+  
+  @IBAction func plus500StepAction(_ sender: Any) {
+    var steps:String = (stepsTextField.text?.replacingOccurrences(of: " Steps", with: ""))!
+    
+    let currentValue:Int = Int(steps)!
+    if currentValue == 50000 {
+      return
+    }
+    
+    let newValue = currentValue + 500
+    
+    stepsTextField.text = "\(newValue) Steps"
+    
+//    daysTextField.adjustsFontSizeToFitWidth = true
+  }
+  
+  @IBAction func minus500StepAction(_ sender: Any) {
+    var steps:String = (stepsTextField.text?.replacingOccurrences(of: " Steps", with: ""))!
+    
+    let currentValue:Int = Int(steps)!
+    if currentValue == 500 {
+      return
+    }
+    
+    let newValue = currentValue - 500
+    
+    stepsTextField.text = "\(newValue) Steps"
+  }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
     if textField == self.ConditionsTextField {

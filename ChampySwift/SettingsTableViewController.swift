@@ -10,12 +10,10 @@ import UIKit
 import Async
 import SwiftyJSON
 import Fusuma
+import Firebase
 
 class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPickerViewDelegate, UITextFieldDelegate   {
-  public func fusumaVideoCompleted(withFileURL fileURL: URL) {
-    
-  }
-
+  
   @IBOutlet weak var progressBar: RPCircularProgress!
   
   @IBOutlet weak var userAvatar: UIImageView!
@@ -42,6 +40,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   var isHidden = true
   var datePicker:UIDatePicker! = nil
   var fusuma:FusumaViewController! = nil
+  
   // MARK: - Override lifecycle methods
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -155,6 +154,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
       _ = CHRequests()
       return
     }
+    FIRAnalytics.setUserPropertyString("Tried to Log Out", forName: "favourite_screen")
+    
     self.logOutButton.isHidden = true
     self.confirmationLogOutContainer.isHidden = false
     
@@ -171,6 +172,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     CHSession().clearSession({ (result) in
       if result {
         Async.main {
+          FIRAnalytics.setUserPropertyString("LoggedOut", forName: "favourite_screen")
+          
           self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
         }
       }
@@ -185,6 +188,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   @IBAction func deleteAccountAction(_ sender: AnyObject) {
+    FIRAnalytics.setUserPropertyString("Tried to Delete Account", forName: "favourite_screen")
     self.deleteButton.isHidden = true
     self.confirmDeleteAccountContainer.isHidden = false
     
@@ -228,6 +232,7 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
             CHSession().clearSession({ (result) in
               if result {
                 Async.main {
+                  FIRAnalytics.setUserPropertyString("DeletedAccount", forName: "favourite_screen")
                   self.navigationController?.performSegue(withIdentifier: "showRoleControllerFromNavigation", sender: self)
                 }
               }
@@ -274,41 +279,19 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   }
   
   @IBAction func privacyPolicAction(_ sender: AnyObject) {
-    if let requestUrl = URL(string: CHRequests().privacyUrl) {
+    if let requestUrl = URL(string: CHRequests.privacyUrl) {
       UIApplication.shared.openURL(requestUrl)
     }
   }
   
   @IBAction func enUserAgreementAction(_ sender: AnyObject) {
-    if let requestUrl = URL(string: CHRequests().termsUrl) {
+    if let requestUrl = URL(string: CHRequests.termsUrl) {
       UIApplication.shared.openURL(requestUrl)
     }
   }
   
-  func imageRotatedByDegrees(oldImage: UIImage, deg degrees: CGFloat) -> UIImage {
-    //Calculate the size of the rotated view's containing box for our drawing space
-    let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: oldImage.size.width, height: oldImage.size.height))
-    let t: CGAffineTransform = CGAffineTransform(rotationAngle: degrees * CGFloat(M_PI / 180))
-    rotatedViewBox.transform = t
-    let rotatedSize: CGSize = rotatedViewBox.frame.size
-    //Create the bitmap context
-    UIGraphicsBeginImageContext(rotatedSize)
-    let bitmap: CGContext = UIGraphicsGetCurrentContext()!
-    //Move the origin to the middle of the image so we will rotate and scale around the center.
-    bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
-    //Rotate the image context
-    bitmap.rotate(by: (degrees * CGFloat(M_PI / 180)))
-    //Now, draw the rotated/scaled image into the context
-    bitmap.scaleBy(x: 1.0, y: -1.0)
-    
-    bitmap.draw(oldImage.cgImage!, in: CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height))
-//    CGContextDrawImage(bitmap, CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height), oldImage.cgImage)
-    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-    UIGraphicsEndImageContext()
-    return newImage
-  }
+   // MARK: - Other functions methods
   
-  // MARK: - Other functions methods
   func fusumaImageSelected(_ image: UIImage) {
     fusuma = nil
     var transform = CGAffineTransform.identity
@@ -382,6 +365,10 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
+  public func fusumaVideoCompleted(withFileURL fileURL: URL) {
+    
+  }
+
   func fusumaDismissedWithImage(_ image: UIImage) {
     
     fusuma = nil
@@ -391,7 +378,28 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     
   }
   
-  
+  func imageRotatedByDegrees(oldImage: UIImage, deg degrees: CGFloat) -> UIImage {
+    //Calculate the size of the rotated view's containing box for our drawing space
+    let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: oldImage.size.width, height: oldImage.size.height))
+    let t: CGAffineTransform = CGAffineTransform(rotationAngle: degrees * CGFloat(M_PI / 180))
+    rotatedViewBox.transform = t
+    let rotatedSize: CGSize = rotatedViewBox.frame.size
+    //Create the bitmap context
+    UIGraphicsBeginImageContext(rotatedSize)
+    let bitmap: CGContext = UIGraphicsGetCurrentContext()!
+    //Move the origin to the middle of the image so we will rotate and scale around the center.
+    bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+    //Rotate the image context
+    bitmap.rotate(by: (degrees * CGFloat(M_PI / 180)))
+    //Now, draw the rotated/scaled image into the context
+    bitmap.scaleBy(x: 1.0, y: -1.0)
+    
+    bitmap.draw(oldImage.cgImage!, in: CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height))
+    //    CGContextDrawImage(bitmap, CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height), oldImage.cgImage)
+    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext()
+    return newImage
+  }
   
   func valueChangedInDateField() {
     let dateFormatter = DateFormatter()
@@ -408,7 +416,8 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
     self.inputFieldsForTime.text = strDate
     
     inputFieldsForTime.resignFirstResponder()
-    
+    print(hour)
+    print(minute)
     CHSession().CurrentUser.set(hour, forKey: "hoursDN")
     CHSession().CurrentUser.set(minute, forKey: "minsDN")
     
@@ -432,52 +441,4 @@ class SettingsTableViewController: UITableViewController, FusumaDelegate, UIPick
   
 }
 
-extension Double {
-  func toRadians() -> CGFloat {
-    return CGFloat(self * .pi / 180.0)
-  }
-}
 
-extension UIImage {
-  
-  func fixOrientation(img:UIImage) -> UIImage {
-    
-    if (img.imageOrientation == UIImageOrientation.up) {
-      return img;
-    }
-    
-    UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale);
-    let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
-    img.draw(in: rect)
-    
-    let normalizedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-    UIGraphicsEndImageContext();
-    return normalizedImage;
-    
-  }
-  
-  
-  func rotated(by degrees: Double) -> UIImage? {
-    guard let cgImage = self.cgImage else { return nil }
-    
-    let transform = CGAffineTransform(rotationAngle: degrees.toRadians())
-    var rect = CGRect(origin: .zero, size: self.size).applying(transform)
-    rect.origin = .zero
-    
-    if #available(iOS 10.0, *) {
-      let renderer = UIGraphicsImageRenderer(size: rect.size)
-      return renderer.image { renderContext in
-        renderContext.cgContext.translateBy(x: rect.midX, y: rect.midY)
-        renderContext.cgContext.rotate(by: degrees.toRadians())
-        renderContext.cgContext.scaleBy(x: 1.0, y: -1.0)
-        
-        let drawRect = CGRect(origin: CGPoint(x: -self.size.width/2, y: -self.size.height/2), size: self.size)
-        renderContext.cgContext.draw(cgImage, in: drawRect)
-      }
-    } else {
-      return self
-      // Fallback on earlier versions
-    }
-    
-  }
-}

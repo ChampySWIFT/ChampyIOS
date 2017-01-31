@@ -137,6 +137,18 @@ class FriendsTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if friendsContent.indices.contains((indexPath as NSIndexPath).row) {
+      weak var content = (friendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
+      if (content?.opened)! {
+        content?.close()
+        heights[(indexPath as NSIndexPath).row] = 80
+        self.selectedRow = -1
+      }
+//       self.friendsContent[(indexPath as NSIndexPath).row] = appDelegate.prototypeFriendCell
+    }
+  }
+  
   func openDuelView() {
     self.navigationController?.performSegue(withIdentifier: "showDuelViewController", sender: self)
   }
@@ -164,10 +176,12 @@ class FriendsTableViewController: UITableViewController {
     self.destroyAll()
     
     self.friendsContent.removeAll()
+//    for friend in CHUsers().getUsers() {
     for friend in CHUsers().getFriends(CHSession().currentUserId) {
       let content = FriendCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
       
       content.status = "Friends"
+//      content.status = "Other"
       var object = friend["owner"]
       if friend["owner"]["_id"].stringValue == CHSession().currentUserId {
         object = friend["friend"]

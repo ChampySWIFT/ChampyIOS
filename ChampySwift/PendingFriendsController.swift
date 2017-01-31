@@ -192,6 +192,26 @@ class PendingFriendsController: UITableViewController {
     
   }
   
+  override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if incomingfriendsContent.indices.contains((indexPath as NSIndexPath).row) {
+      weak var content = (incomingfriendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
+      if (content?.opened)! {
+        content?.close()
+        heights[(indexPath as NSIndexPath).row] = 80
+        self.selectedRow = -1
+      }
+    }
+    
+    if outgoingfriendsContent.indices.contains((indexPath as NSIndexPath).row) {
+      weak var content = (outgoingfriendsContent[(indexPath as NSIndexPath).row] as! FriendCell)
+      if (content?.opened)! {
+        content?.close()
+        heights[(indexPath as NSIndexPath).row] = 80
+        self.selectedRow = -1
+      }
+    }
+  }
+  
   func triggerContent(_ content: FriendCell, andIndexPath indexPath:IndexPath) {
     if (indexPath as NSIndexPath).row == selectedRow  {
       content.close()

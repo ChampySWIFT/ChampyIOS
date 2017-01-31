@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -62,6 +62,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs access to camera</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Using Step Counter</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Using Step Counter</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to photo library</string>
 	<key>UIAppFonts</key>
@@ -79,6 +83,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
