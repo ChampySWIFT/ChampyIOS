@@ -44,7 +44,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
     self.userObject = CHSession().currentUserObject
     self.challenges = CHChalenges().getAllChallenges(CHSession().currentUserId)
     
-    self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId)
+    self.challenges = CHChalenges().getAllSelfImprovementChallenges(CHSession().currentUserId, withStepCounting: false)
     self.challenges.insert(nil, at: 0)
     self.challenges.insert(nil, at: 1)
     Async.main {
@@ -157,7 +157,7 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
   }
   
   func createCustomStepCountingChallenge() {
-    Extensions.logEvent(eventName: "predesigned step counting challenge created")
+        Extensions.logEvent(eventName: "predesigned step counting challenge created")
     let view:NewChallenge = self.viewObjects[challengeView.currentItemIndex]
     
     let conditions:String = "Step by step"
@@ -177,7 +177,14 @@ class SelfImprovementViewController: UIViewController, iCarouselDataSource, iCar
       return
     }
     
+    
+
+    
     let daysec = CHSettings().daysToSec(Int(dayNumber)!)
+    if !CHChalenges().isPossibleToCreateStepCountingSelfImprovementChallenge(numberOfDays: daysec, numberOfSteps: Int(stepNumber)!) {
+      self.alertWithMessage("Can't create the same challenge multiple times", type: .Warning)
+      return
+    }
     let params:[String:String] = [
       "name": conditions,
       "type": CHSettings().self.selfImprovementsId,

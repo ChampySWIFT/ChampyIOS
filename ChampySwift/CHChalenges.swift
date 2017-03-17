@@ -63,7 +63,29 @@ class CHChalenges: NSObject {
     return result
   }
   
+  func getSelfImprovementStepCountingChallenges() -> [JSON] {
+    var result:[JSON] = []
+    let challenges = getAllSelfImprovementChallenges(CHSession().currentUserId)
+    for item in challenges {
+      if item["description"].stringValue == "customStepCounting" {
+        result.append(item)
+      }
+    }
+    
+    
+    return result
+  }
   
+  func isPossibleToCreateStepCountingSelfImprovementChallenge(numberOfDays:Int, numberOfSteps:Int) -> Bool {
+    for item in getSelfImprovementStepCountingChallenges() {
+      if item["details"].intValue == numberOfSteps && item["duration"].intValue == numberOfDays {
+        return false
+      }
+    }
+    
+    
+    return true
+  }
   
   /**
    get All Self Improvement Challenges
@@ -72,15 +94,18 @@ class CHChalenges: NSObject {
    
    @return array of self improvement challenges
    */
-  func getAllSelfImprovementChallenges(_ userId:String) -> [JSON] {
+  func getAllSelfImprovementChallenges(_ userId:String, withStepCounting:Bool = true) -> [JSON] {
     var result:[JSON] = []
     for (_, item): (String, JSON) in CHSession().getJSONByKey("challenges") {
       guard item["type"]["_id"].stringValue == CHSettings().selfImprovementsId else {
-        
         continue
       }
       
       guard item["approved"].boolValue && item["active"].boolValue else {
+        continue
+      }
+      
+      if item["description"].stringValue == "customStepCounting" && !withStepCounting {
         continue
       }
       

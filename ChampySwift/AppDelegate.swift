@@ -68,10 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//    CHSettings().refreshStepCount()
-
-    
-    
     registerForPushNotifications(application)
     NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification),  name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
     CHPush().clearBadgeNumber()
@@ -95,9 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       }
     }
   }
-  
-  
-
   
   func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) { }
   

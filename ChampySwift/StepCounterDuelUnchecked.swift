@@ -27,11 +27,14 @@ class StepCounterDuelUnchecked: UIView {
   @IBOutlet weak var recipientName: UILabel!
   @IBOutlet weak var senderName: UILabel!
   @IBOutlet weak var sendersStepCounter: UILabel!
+  @IBOutlet weak var doneForTodayLabel: UILabel!
   
   @IBOutlet weak var declineIcon: UIBarButtonItem!
   @IBOutlet weak var acceptIcon: UIBarButtonItem!
   var opponentId: String = ""
   
+  @IBOutlet weak var topBarHeightConstrait: NSLayoutConstraint!
+  @IBOutlet weak var doneForTodayHeightConstrait: NSLayoutConstraint!
   var challengeObject: JSON! = nil
   func xibSetup() {
     view                  = loadViewFromNib()
@@ -57,7 +60,11 @@ class StepCounterDuelUnchecked: UIView {
     super.init(frame: frame)
     // 3. Setup view from .xib file
     xibSetup()
-    
+    if DeviceType.IS_IPHONE_5 {
+      self.topBarHeightConstrait.constant = 80.0
+      self.doneForTodayHeightConstrait.constant = 0
+//      self.doneForTodayLabel.adjustsFontForContentSizeCategory = true
+    }
     
     
   }
@@ -88,7 +95,7 @@ class StepCounterDuelUnchecked: UIView {
     
     challengeObject = json
     let gradient:CAGradientLayer = CAGradientLayer()
-    let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: self.topBarBackground.frame.size.height)
+    let frame                    = CGRect(x: 0, y:0, width: self.frame.size.width, height: self.topBarHeightConstrait.constant)
     gradient.frame               = frame
     
     gradient.colors              = [CHGradients().thirdTopBarColor, CHGradients().secondTopBarColor, CHGradients().firstTopBarColor]
@@ -105,6 +112,7 @@ class StepCounterDuelUnchecked: UIView {
   
     
     self.challengeDescriptionLabel.text = "\(challengeObject["challenge"]["name"].stringValue) every day \(challengeObject["challenge"]["details"].stringValue) steps"
+    self.challengeDescriptionLabel.adjustsFontSizeToFitWidth = true
 //    self.statsLabel.text = "\(stepCount) steps from \(challengeObject["challenge"]["details"].stringValue)"
     
     self.statsLabel.text = "Today: "
@@ -146,23 +154,29 @@ class StepCounterDuelUnchecked: UIView {
   
   
   func setUpStepCounter() {
+    self.autoCheckIfitisPossible()
     var mystepCount:Int = 0
     if  UserDefaults.standard.value(forKey: "todaysStepCount") != nil {
       mystepCount = UserDefaults.standard.value(forKey: "todaysStepCount") as! Int
     }
     
-    
-    
     switch  CHSession().currentUserId {
     case challengeObject["sender"]["_id"].stringValue:
-      var opponentsStepCount = challengeObject["recipient"]["stepCount"].intValue
+      let opponentsStepCount = challengeObject["recipient"]["stepCount"].intValue
+      
+      self.senderName.text = challengeObject["recipient"]["name"].stringValue
+      self.recipientName.text = challengeObject["sender"]["name"].stringValue
       
       self.recipientStepCounter.text = "\(mystepCount)"
       self.sendersStepCounter.text = "\(opponentsStepCount)"
       
       break
     case challengeObject["recipient"]["_id"].stringValue:
-      var opponentsStepCount = challengeObject["sender"]["stepCount"].intValue
+      let opponentsStepCount = challengeObject["sender"]["stepCount"].intValue
+      
+      self.senderName.text = challengeObject["recipient"]["name"].stringValue
+      self.recipientName.text = challengeObject["sender"]["name"].stringValue
+      
       self.recipientStepCounter.text = "\(opponentsStepCount)"
       self.sendersStepCounter.text = "\(mystepCount)"
       
@@ -240,4 +254,23 @@ class StepCounterDuelUnchecked: UIView {
     }
     
   }
+  
+  func autoCheckIfitisPossible() {
+    var stepCount:Int = 0
+    if  UserDefaults.standard.value(forKey: "todaysStepCount") != nil {
+      stepCount = UserDefaults.standard.value(forKey: "todaysStepCount") as! Int
+    }
+    let destination = challengeObject["challenge"]["details"].intValue
+    if stepCount < destination {
+      return
+    }
+    
+    CHRequests().checkChallenge(self.challengeObject["_id"].stringValue) { (result, json) in
+      if result {
+        self.tapped = false
+        CHPush().localPush("refreshIcarousel", object: self)
+      }
+    }
+  }
+  
 }

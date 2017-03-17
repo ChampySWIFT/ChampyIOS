@@ -27,6 +27,10 @@ import Async
   var customStepCounter:Bool = false
   
   
+  func setUpforiPhone5() {
+  
+  }
+  
   func setUp(_ object:JSON, empty:Bool = false, stepcounter:Bool = false){
     self.customStepCounter = stepcounter
     notifCenter.addObserver(self, selector: #selector(NewChallenge.dismissKeyboard), name: NSNotification.Name(rawValue: "dismissKeyboard"), object: nil)

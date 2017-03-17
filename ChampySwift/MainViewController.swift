@@ -286,6 +286,7 @@
     }
     
     @IBOutlet var tappedScoreContainerOnMainView: UITapGestureRecognizer!
+    
     func fillCHallenges() {
       if IJReachability.isConnectedToNetwork() {
         CHRequests().retrieveAllInProgressChallenges(CHSession().currentUserId) { (result, json) in

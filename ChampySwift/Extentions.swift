@@ -355,6 +355,58 @@ extension ScoreBorder {
   
 }
 
+public enum Model : String {
+  case simulator = "simulator/sandbox",
+  iPod1          = "iPod 1",
+  iPod2          = "iPod 2",
+  iPod3          = "iPod 3",
+  iPod4          = "iPod 4",
+  iPod5          = "iPod 5",
+  iPad2          = "iPad 2",
+  iPad3          = "iPad 3",
+  iPad4          = "iPad 4",
+  iPhone4        = "iPhone 4",
+  iPhone4S       = "iPhone 4S",
+  iPhone5        = "iPhone 5",
+  iPhone5S       = "iPhone 5S",
+  iPhone5C       = "iPhone 5C",
+  iPadMini1      = "iPad Mini 1",
+  iPadMini2      = "iPad Mini 2",
+  iPadMini3      = "iPad Mini 3",
+  iPadAir1       = "iPad Air 1",
+  iPadAir2       = "iPad Air 2",
+  iPhone6        = "iPhone 6",
+  iPhone6plus    = "iPhone 6 Plus",
+  iPhone6S       = "iPhone 6S",
+  iPhone6Splus   = "iPhone 6S Plus",
+  unrecognized   = "?unrecognized?"
+}
+
+
+enum UIUserInterfaceIdiom : Int
+{
+  case Unspecified
+  case Phone
+  case Pad
+}
+
+struct ScreenSize
+{
+  static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
+  static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
+  static let SCREEN_MAX_LENGTH    = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+  static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+struct DeviceType
+{
+  static let IS_IPHONE_4_OR_LESS  = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0
+  static let IS_IPHONE_5          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
+  static let IS_IPHONE_6          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
+  static let IS_IPHONE_6P         = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
+  static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+}
+
 extension Double {
   func toRadians() -> CGFloat {
     return CGFloat(self * .pi / 180.0)

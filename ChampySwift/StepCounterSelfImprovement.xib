@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepCounterSelfImprovement" customModule="Champy" customModuleProvider="target">
             <connections>
                 <outlet property="descLabel" destination="9Kt-lL-kXe" id="va6-LI-0NK"/>
+                <outlet property="doneForToday" destination="sGG-5z-NR4" id="EjS-hn-lgp"/>
                 <outlet property="selfImprovementLabel" destination="WdG-QN-x3Z" id="KuT-Vt-o1s"/>
                 <outlet property="selfImprovementUpIcon" destination="mWD-eP-rcX" id="t5r-mK-hTR"/>
                 <outlet property="topBarBackground" destination="Lsu-hh-Qgf" id="hj8-en-ORo"/>

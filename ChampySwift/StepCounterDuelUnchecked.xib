@@ -22,6 +22,8 @@
                 <outlet property="acceptIcon" destination="Nq0-ep-6i9" id="YCX-OA-r1b"/>
                 <outlet property="challengeDescriptionLabel" destination="xmL-hR-Fty" id="cGQ-Ih-GLj"/>
                 <outlet property="declineIcon" destination="lYv-2D-cJN" id="37g-qz-N89"/>
+                <outlet property="doneForTodayHeightConstrait" destination="uaG-VK-Ef3" id="dbw-SJ-GEP"/>
+                <outlet property="doneForTodayLabel" destination="qPS-M1-i9O" id="MNX-IL-PH2"/>
                 <outlet property="duelIcon" destination="hVs-R1-bae" id="bPp-FM-43X"/>
                 <outlet property="duelLabel" destination="oc2-hf-lt6" id="0Rp-nO-IeD"/>
                 <outlet property="recipientImage" destination="fju-5h-tTM" id="LB9-LC-JyH"/>
@@ -32,6 +34,7 @@
                 <outlet property="sendertImage" destination="8qW-l7-k5V" id="eb0-zv-vvx"/>
                 <outlet property="statsLabel" destination="9tC-DJ-hm0" id="aTO-mn-BBV"/>
                 <outlet property="topBarBackground" destination="T6G-Dp-F0I" id="9o6-Og-myk"/>
+                <outlet property="topBarHeightConstrait" destination="0Mn-5V-sPk" id="yIU-et-bIi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -137,7 +140,7 @@
                     <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done for today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPS-M1-i9O">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done for today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="qPS-M1-i9O">
                     <rect key="frame" x="8" y="271" width="184" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="uaG-VK-Ef3"/>
@@ -286,7 +289,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="186" y="276"/>
+            <point key="canvasLocation" x="-42" y="180"/>
         </view>
     </objects>
     <resources>

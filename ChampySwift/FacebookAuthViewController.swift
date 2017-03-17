@@ -88,10 +88,7 @@ class FacebookAuthViewController: UIViewController {
           ]
           
           
-          
-          //          FBReq
           CHRequests().createUser(params, completitionHandler: { (json, status) in
-            //   
             self.tapped = false
             if status {
               print(json)
@@ -101,8 +98,8 @@ class FacebookAuthViewController: UIViewController {
                 request?.start(completionHandler: { (connection, result, error) in
                   
                   let res = result as! [String:AnyObject]
+                  print(res)
                   if error != nil {
-                    
                     self.dismiss(animated: true, completion: {
                       self.tapped = false
                       CHPush().alertPush("Can't get friends from facebook", type: "Warning")
@@ -118,6 +115,7 @@ class FacebookAuthViewController: UIViewController {
                     for item in array {
                       friendsIdArray.append(item["id"]!)
                     }
+                    print(friendsIdArray)
                     CHPush().subscribeForNotifications()
                     CHSession().saveFacebookFriends("\(friendsIdArray)")
                     self.dismiss(animated: false, completion: {

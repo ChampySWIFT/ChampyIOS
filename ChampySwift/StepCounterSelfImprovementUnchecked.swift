@@ -55,7 +55,7 @@ import SwiftyJSON
       stepCount = UserDefaults.standard.value(forKey: "todaysStepCount") as! Int
     }
     self.statsLabel.text = "\(stepCount) steps from \(objectChallenge["challenge"]["details"].stringValue)"
-    
+    autoCheckIfitisPossible()
   }
   
   
@@ -140,6 +140,24 @@ import SwiftyJSON
         self.tapped = false
         button.isHidden = self.tapped
         CHPush().alertPush(json["error"].stringValue, type: "Warning")
+      }
+    }
+  }
+  
+  func autoCheckIfitisPossible() {
+    var stepCount:Int = 0
+    if  UserDefaults.standard.value(forKey: "todaysStepCount") != nil {
+      stepCount = UserDefaults.standard.value(forKey: "todaysStepCount") as! Int
+    }
+    let destination = objectChallenge["challenge"]["details"].intValue
+    if stepCount < destination {
+      return
+    }
+    
+    CHRequests().checkChallenge(self.objectChallenge["_id"].stringValue) { (result, json) in
+      if result {
+        self.tapped = false
+        CHPush().localPush("refreshIcarousel", object: self)
       }
     }
   }

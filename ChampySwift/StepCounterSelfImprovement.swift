@@ -62,7 +62,14 @@ import SwiftyJSON
     if object != nil {
       self.objectChallenge = object
       self.descLabel.text = "\(object["challenge"]["name"].stringValue) every day \(object["challenge"]["details"].stringValue) steps"
+      let originalDays = CHSettings().secToDays(object["challenge"]["duration"].intValue)
+      let passedDays = object["senderProgress"].count
       
+      var day:String = "days"
+      if originalDays - passedDays == 1 {
+        day = "day"
+      }
+      self.doneForToday.text = "\(originalDays - passedDays) \(day) to go"
     }
     
   }
@@ -135,7 +142,24 @@ import SwiftyJSON
     
   }
   
-  
+  func autoCheckIfitisPossible() {
+    var stepCount:Int = 0
+    if  UserDefaults.standard.value(forKey: "todaysStepCount") != nil {
+      stepCount = UserDefaults.standard.value(forKey: "todaysStepCount") as! Int
+    }
+    let destination = objectChallenge["challenge"]["details"].intValue
+    if stepCount < destination {
+      return
+    }
+    
+    CHRequests().checkChallenge(self.objectChallenge["_id"].stringValue) { (result, json) in
+      if result {
+        self.tapped = false
+        CHPush().localPush("refreshIcarousel", object: self)
+      }
+    }
+  }
+
  
 
 

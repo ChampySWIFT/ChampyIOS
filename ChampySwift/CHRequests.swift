@@ -20,7 +20,7 @@ class CHRequests: NSObject {
   static var apinetwork:String = CHApiUrl.remote.rawValue
   
   //Api port
-  static var port:String = CHBuildType.development.rawValue
+  static var port:String = CHBuildType.production.rawValue
   
   //The full API url
   static var APIurl:String = "\(apinetwork):\(port)/v1"
@@ -449,12 +449,13 @@ class CHRequests: NSObject {
       return
     }
     let url = "\(CHRequests.APIurl)/users/getusersbyfacebookid?token=\(self.token)\(CHUsers().getFacebookFriendsQueryPart())"
-    
+    print(url)
     let operationQueue = OperationQueue()
     do {
       let opt = try HTTP.GET(url)
       opt.onFinish = { response in
         let json             = JSON(data: response.data)
+        print(json)
         if let _ = response.error {
           completitionHandler(false, json)
           return
