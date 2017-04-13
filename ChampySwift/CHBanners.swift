@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum CHBannerTypes: String {
+  case Info    = "Info"
+  case Warning = "Warning"
+  case Success = "Success"
+  case Default = "Default"
+}
 
 class CHBanners: NSObject {
   

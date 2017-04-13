@@ -26,61 +26,7 @@ extension MainViewController {
   
 }
 
-extension HistoryViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
 
-extension FriendsViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
-
-extension SettingsViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
-
-extension SelfImprovementViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
-
-extension DuelViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
-
-extension WakeUpViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
-
-extension WakeUpInfoViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    FIRAnalytics.setUserPropertyString(segue.identifier, forName: "favourite_screen")
-  }
-  
-}
 
 extension UIImageView{
   

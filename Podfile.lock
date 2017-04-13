@@ -34,8 +34,10 @@ PODS:
   - JSONWebToken (2.0.1):
     - CryptoSwift (~> 0.6.0)
   - Kingfisher (3.1.1)
+  - SideMenu (2.2.0)
   - Socket.IO-Client-Swift (8.0.2)
   - SwiftHTTP (2.0.1)
+  - SwiftRandom (1.0.0)
   - SwiftyJSON (3.1.0)
 
 DEPENDENCIES:
@@ -47,8 +49,10 @@ DEPENDENCIES:
   - Fusuma (from `https://github.com/pruthvikar/Fusuma.git`, commit `503865a`)
   - JSONWebToken
   - Kingfisher (~> 3.0)
+  - SideMenu
   - Socket.IO-Client-Swift (~> 8.0.2)
   - SwiftHTTP (~> 2.0.0)
+  - SwiftRandom
   - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -77,10 +81,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   JSONWebToken: 37f3666c459ed1a1554663a2741ac7655d488b1f
   Kingfisher: 12b755ae697cc9f0fd3e550db8417fa1233e09ab
+  SideMenu: eeff6b85456c5c6e14165655691d2033f6b24969
   Socket.IO-Client-Swift: 136598e4a81a42b0e6855e7f94a0e5a6efdc5ff8
   SwiftHTTP: 6d57b54ee84d9ad9cf81b6bc1c4cae593e3f6329
+  SwiftRandom: 437275c63500ddf5a565cbd56996fb23f12cfc3d
   SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: f595ef19cf7f5f1e53237cb7b0e3787d62d06f44
+PODFILE CHECKSUM: 059838ab46d2a67d8b610d831303160ee553bf03
 
 COCOAPODS: 1.2.0.beta.1

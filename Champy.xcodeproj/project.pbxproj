@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D43DF231E0D2C6300359B3F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43DF221E0D2C6300359B3F /* FeedbackViewController.swift */; };
+		0D2AC94D1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AC94C1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift */; };
+		0D2AC94F1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AC94E1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift */; };
 		0D54B7E61E1E4583006B381C /* StepCounterSelfImprovement.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D54B7E51E1E4583006B381C /* StepCounterSelfImprovement.xib */; };
 		0D54B7E81E1E45B1006B381C /* StepCounterSelfImprovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D54B7E71E1E45B1006B381C /* StepCounterSelfImprovement.swift */; };
 		0D54B7EA1E1E6F32006B381C /* StepCounterSelfImprovementUnchecked.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D54B7E91E1E6F32006B381C /* StepCounterSelfImprovementUnchecked.xib */; };
@@ -15,6 +16,7 @@
 		0D54B7EE1E1EA5A6006B381C /* StepCounterDuelUnchecked.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D54B7ED1E1EA5A6006B381C /* StepCounterDuelUnchecked.xib */; };
 		0D54B7F01E1EA5B8006B381C /* StepCounterDuelChecked.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D54B7EF1E1EA5B8006B381C /* StepCounterDuelChecked.xib */; };
 		0D54B7F21E1EA61C006B381C /* StepCounterDuelUnchecked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D54B7F11E1EA61C006B381C /* StepCounterDuelUnchecked.swift */; };
+		0D5571CF1E7D31A500A043D0 /* GlobalUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5571CE1E7D31A500A043D0 /* GlobalUse.swift */; };
 		0D57A5471DE5F00400C9D78F /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */; };
 		0D74E93D1DBDF48300081CCD /* ChampyTestsSwift3_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */; };
 		0D74E9441DBDF66900081CCD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48A1D36677300DD0035 /* FBSDKCoreKit.framework */; };
@@ -29,6 +31,8 @@
 		0D74E95B1DBE4B5300081CCD /* out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0D74E95A1DBE4B5300081CCD /* out.mp3 */; };
 		0D74E95D1DBE51AA00081CCD /* sub.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0D74E95C1DBE51AA00081CCD /* sub.caf */; };
 		0D7D3ED61E0AC6270071BF0F /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D3ED51E0AC6270071BF0F /* Extentions.swift */; };
+		0D7D9EA41E97AE8600D2E408 /* Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D9EA31E97AE8600D2E408 /* Segues.swift */; };
+		0D7D9EA81E97B7EE00D2E408 /* FacebookFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D9EA71E97B7EE00D2E408 /* FacebookFriendsViewController.swift */; };
 		0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */; };
 		0D959BA41DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */; };
 		0D959BA81DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA51DA6673A00B3F4BE /* MNMBottomPullToRefresh.strings */; };
@@ -36,8 +40,15 @@
 		0D959BAA1DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */; };
 		0D97F3E41E1FC21E00B24B46 /* StepCounterDuelChecked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D97F3E31E1FC21E00B24B46 /* StepCounterDuelChecked.swift */; };
 		0D97F3E61E1FCA2500B24B46 /* CHActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D97F3E51E1FCA2400B24B46 /* CHActivity.swift */; };
+		0D99366C1E964EB300D38E55 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D99366B1E964EB300D38E55 /* Colors.swift */; };
+		0D9AF18C1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9AF18B1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift */; };
+		0D9AF18E1E7BEF87008F3DAA /* ChallnegesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9AF18D1E7BEF87008F3DAA /* ChallnegesTableViewController.swift */; };
 		0D9E29441DB4F7BA000F2833 /* champy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9E29431DB4F7BA000F2833 /* champy.png */; };
 		0DA342331E1BBD1D00852915 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA342321E1BBD1D00852915 /* HealthKit.framework */; };
+		0DA6285D1E8E356C0024F7C9 /* CreateChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */; };
+		0DA6285F1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */; };
+		0DA628611E8E43600024F7C9 /* CreateChallengeFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */; };
+		0DAA18EF1E7FCDBD00F34E06 /* StreakSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAA18EE1E7FCDBD00F34E06 /* StreakSlider.swift */; };
 		179C1BC104D7A03EFD193535 /* Pods_ChampySwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DBBD4143ED1A65538478 /* Pods_ChampySwiftUITests.framework */; };
 		5704A30C1D4246F6007CAAA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A3091D4246F5007CAAA4 /* AVFoundation.framework */; };
 		5704A30D1D4246F6007CAAA4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5704A30A1D4246F5007CAAA4 /* CoreFoundation.framework */; };
@@ -61,7 +72,6 @@
 		57336C271CD786CF00C5B6F1 /* SelfImprovementInProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */; };
 		57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */; };
 		57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */; };
-		574738391D25043200071A01 /* WakeUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574738381D25043200071A01 /* WakeUpInfoViewController.swift */; };
 		574CE87A1D3CB9E8004A9345 /* FacebookAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */; };
 		575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */; };
 		575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */; };
@@ -83,10 +93,6 @@
 		577D5F971CCE33A50002F0E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577D5F961CCE33A50002F0E0 /* Images.xcassets */; };
 		577D5F9C1CCE50F50002F0E0 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 577D5F9B1CCE50F50002F0E0 /* iCarousel.m */; };
 		577D5F9F1CCE5A010002F0E0 /* CHUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D5F9E1CCE5A010002F0E0 /* CHUIElements.swift */; };
-		577D5FA21CCF5B3C0002F0E0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D5FA11CCF5B3C0002F0E0 /* HistoryViewController.swift */; };
-		577D5FA41CCF5B840002F0E0 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D5FA31CCF5B840002F0E0 /* FriendsViewController.swift */; };
-		577D5FA61CCF5B9D0002F0E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D5FA51CCF5B9D0002F0E0 /* SettingsViewController.swift */; };
-		577FAD531CEC6D4300DA5F9D /* SelfImprovementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577FAD521CEC6D4300DA5F9D /* SelfImprovementViewController.swift */; };
 		5784FF8F1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5784FF8E1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib */; };
 		5784FF911D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784FF901D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift */; };
 		579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C18591CCB595700D6EEA9 /* AppDelegate.swift */; };
@@ -105,7 +111,6 @@
 		57A5A42C1CDE38FE001FE6CD /* NoPendingRequests.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */; };
 		57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */; };
 		57AD26671CD895E9000F33CB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD26661CD895E9000F33CB /* AuthViewController.swift */; };
-		57B099381CEC98C900AA2D63 /* WakeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B099371CEC98C900AA2D63 /* WakeUpViewController.swift */; };
 		57B2FE4B1CEDD49E00BE1189 /* UnConfirmedDuelSender.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B2FE4A1CEDD49E00BE1189 /* UnConfirmedDuelSender.xib */; };
 		57B3912F1CDBA8A800F58A15 /* AllFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3912E1CDBA8A800F58A15 /* AllFriendsTableViewController.swift */; };
 		57B391311CDBA9E700F58A15 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B391301CDBA9E700F58A15 /* FriendCell.xib */; };
@@ -120,7 +125,6 @@
 		57D29E8A1D00754F0016CBF5 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D29E891D00754F0016CBF5 /* HistoryCell.xib */; };
 		57D29E8C1D0076FF0016CBF5 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D29E8B1D0076FF0016CBF5 /* HistoryCell.swift */; };
 		57D363621CFDD3E100152258 /* TimedOutWakeUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D363611CFDD3E100152258 /* TimedOutWakeUp.swift */; };
-		57D5E9D91CE2220D00AD20CC /* DuelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */; };
 		57DA51CA1D006A9A00AAA2B8 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA51C91D006A9A00AAA2B8 /* HistoryTableViewController.swift */; };
 		57DBA4791D3662A300DD0035 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA4681D3662A300DD0035 /* Alamofire.framework */; };
 		57DBA47A1D3662A300DD0035 /* ALCameraViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA4691D3662A300DD0035 /* ALCameraViewController.framework */; };
@@ -198,7 +202,8 @@
 /* Begin PBXFileReference section */
 		0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
-		0D43DF221E0D2C6300359B3F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		0D2AC94C1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsViewController.swift; sourceTree = "<group>"; };
+		0D2AC94E1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeRulesViewController.swift; sourceTree = "<group>"; };
 		0D54B7E51E1E4583006B381C /* StepCounterSelfImprovement.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCounterSelfImprovement.xib; sourceTree = "<group>"; };
 		0D54B7E71E1E45B1006B381C /* StepCounterSelfImprovement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounterSelfImprovement.swift; sourceTree = "<group>"; };
 		0D54B7E91E1E6F32006B381C /* StepCounterSelfImprovementUnchecked.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCounterSelfImprovementUnchecked.xib; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 		0D54B7ED1E1EA5A6006B381C /* StepCounterDuelUnchecked.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCounterDuelUnchecked.xib; sourceTree = "<group>"; };
 		0D54B7EF1E1EA5B8006B381C /* StepCounterDuelChecked.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCounterDuelChecked.xib; sourceTree = "<group>"; };
 		0D54B7F11E1EA61C006B381C /* StepCounterDuelUnchecked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounterDuelUnchecked.swift; sourceTree = "<group>"; };
+		0D5571CE1E7D31A500A043D0 /* GlobalUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUse.swift; sourceTree = "<group>"; };
 		0D57A5461DE5F00400C9D78F /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		0D74E93A1DBDF48300081CCD /* ChampyTestsSwift3.0.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChampyTestsSwift3.0.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D74E93C1DBDF48300081CCD /* ChampyTestsSwift3_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampyTestsSwift3_0.swift; sourceTree = "<group>"; };
@@ -216,6 +222,8 @@
 		0D74E95A1DBE4B5300081CCD /* out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = out.mp3; sourceTree = "<group>"; };
 		0D74E95C1DBE51AA00081CCD /* sub.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sub.caf; sourceTree = "<group>"; };
 		0D7D3ED51E0AC6270071BF0F /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		0D7D9EA31E97AE8600D2E408 /* Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segues.swift; sourceTree = "<group>"; };
+		0D7D9EA71E97B7EE00D2E408 /* FacebookFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriendsViewController.swift; sourceTree = "<group>"; };
 		0D8492951DA3B20100F3A854 /* ChampySwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChampySwift.entitlements; sourceTree = "<group>"; };
 		0D959BA11DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshManager.swift; sourceTree = "<group>"; };
 		0D959BA21DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNMBottomPullToRefreshView.swift; sourceTree = "<group>"; };
@@ -224,8 +232,15 @@
 		0D959BA71DA6673A00B3F4BE /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		0D97F3E31E1FC21E00B24B46 /* StepCounterDuelChecked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounterDuelChecked.swift; sourceTree = "<group>"; };
 		0D97F3E51E1FCA2400B24B46 /* CHActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHActivity.swift; sourceTree = "<group>"; };
+		0D99366B1E964EB300D38E55 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0D9AF18B1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OngoingChallengeTableViewCell.swift; sourceTree = "<group>"; };
+		0D9AF18D1E7BEF87008F3DAA /* ChallnegesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallnegesTableViewController.swift; sourceTree = "<group>"; };
 		0D9E29431DB4F7BA000F2833 /* champy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = champy.png; sourceTree = "<group>"; };
 		0DA342321E1BBD1D00852915 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewController.swift; sourceTree = "<group>"; };
+		0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChallengeDetailsViewController.swift; sourceTree = "<group>"; };
+		0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeFinishViewController.swift; sourceTree = "<group>"; };
+		0DAA18EE1E7FCDBD00F34E06 /* StreakSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakSlider.swift; sourceTree = "<group>"; };
 		0DEB71241E01448D0031421F /* Champy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Champy.entitlements; sourceTree = "<group>"; };
 		14142884974D960E4D97B441 /* Pods-ChampyUITests3.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyUITests3.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyUITests3.0/Pods-ChampyUITests3.0.release.xcconfig"; sourceTree = "<group>"; };
 		158542F8E434D1FB189E1B99 /* Pods-Champy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Champy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Champy/Pods-Champy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +269,6 @@
 		57336C261CD786CF00C5B6F1 /* SelfImprovementInProgress.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementInProgress.xib; sourceTree = "<group>"; };
 		57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementWin.xib; sourceTree = "<group>"; };
 		57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementDone.swift; sourceTree = "<group>"; };
-		574738381D25043200071A01 /* WakeUpInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeUpInfoViewController.swift; sourceTree = "<group>"; };
 		574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuthViewController.swift; sourceTree = "<group>"; };
 		575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnConfirmedDuelSender.swift; sourceTree = "<group>"; };
 		575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmedDuel.xib; sourceTree = "<group>"; };
@@ -278,10 +292,6 @@
 		577D5F9A1CCE50F50002F0E0 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		577D5F9B1CCE50F50002F0E0 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		577D5F9E1CCE5A010002F0E0 /* CHUIElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHUIElements.swift; sourceTree = "<group>"; };
-		577D5FA11CCF5B3C0002F0E0 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		577D5FA31CCF5B840002F0E0 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
-		577D5FA51CCF5B9D0002F0E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		577FAD521CEC6D4300DA5F9D /* SelfImprovementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementViewController.swift; sourceTree = "<group>"; };
 		5784FF8E1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderViewForPendingFriendsCells.xib; sourceTree = "<group>"; };
 		5784FF901D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewForPendingFriendsCells.swift; sourceTree = "<group>"; };
 		579C18561CCB595700D6EEA9 /* Champy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Champy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,7 +310,6 @@
 		57A5A42B1CDE38FE001FE6CD /* NoPendingRequests.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPendingRequests.xib; sourceTree = "<group>"; };
 		57A5A42D1CDE39B4001FE6CD /* NoPendingRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPendingRequests.swift; sourceTree = "<group>"; };
 		57AD26661CD895E9000F33CB /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		57B099371CEC98C900AA2D63 /* WakeUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeUpViewController.swift; sourceTree = "<group>"; };
 		57B2FE4A1CEDD49E00BE1189 /* UnConfirmedDuelSender.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnConfirmedDuelSender.xib; sourceTree = "<group>"; };
 		57B3912E1CDBA8A800F58A15 /* AllFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllFriendsTableViewController.swift; sourceTree = "<group>"; };
 		57B391301CDBA9E700F58A15 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
@@ -328,7 +337,6 @@
 		57D29E891D00754F0016CBF5 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		57D29E8B1D0076FF0016CBF5 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		57D363611CFDD3E100152258 /* TimedOutWakeUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedOutWakeUp.swift; sourceTree = "<group>"; };
-		57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DuelViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		57DA51C91D006A9A00AAA2B8 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		57DBA4681D3662A300DD0035 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../../Users/molnarkristian/Library/Developer/Xcode/DerivedData/ChampySwift-emuxlvywuewwnbazdkahvknzpppf/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		57DBA4691D3662A300DD0035 /* ALCameraViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALCameraViewController.framework; path = "../../../../../../Users/molnarkristian/Library/Developer/Xcode/DerivedData/ChampySwift-emuxlvywuewwnbazdkahvknzpppf/Build/Products/Debug-iphonesimulator/ALCameraViewController/ALCameraViewController.framework"; sourceTree = "<group>"; };
@@ -523,6 +531,7 @@
 				57C795D01D67409A007A861F /* GoogleService-Info.plist */,
 				579C18681CCB595700D6EEA9 /* Info.plist */,
 				57DBF6281CEC6DF500659B79 /* Entitlements.plist */,
+				0D5571CE1E7D31A500A043D0 /* GlobalUse.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -543,17 +552,9 @@
 			isa = PBXGroup;
 			children = (
 				579C185B1CCB595700D6EEA9 /* MainViewController.swift */,
-				577D5FA11CCF5B3C0002F0E0 /* HistoryViewController.swift */,
-				577D5FA31CCF5B840002F0E0 /* FriendsViewController.swift */,
-				577D5FA51CCF5B9D0002F0E0 /* SettingsViewController.swift */,
 				57AD26661CD895E9000F33CB /* AuthViewController.swift */,
 				57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */,
-				57D5E9D81CE2220D00AD20CC /* DuelViewController.swift */,
-				577FAD521CEC6D4300DA5F9D /* SelfImprovementViewController.swift */,
-				57B099371CEC98C900AA2D63 /* WakeUpViewController.swift */,
-				574738381D25043200071A01 /* WakeUpInfoViewController.swift */,
 				574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */,
-				0D43DF221E0D2C6300359B3F /* FeedbackViewController.swift */,
 				57C763641CE9BC4900C3695A /* TableViews */,
 			);
 			name = Controllers;
@@ -626,6 +627,17 @@
 				57D29E891D00754F0016CBF5 /* HistoryCell.xib */,
 				5730E6EB1D083FA500D1EEA4 /* InviteFriendsView.xib */,
 				5784FF8E1D352D6200E1C743 /* HeaderViewForPendingFriendsCells.xib */,
+				0D9AF18B1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift */,
+				0D9AF18D1E7BEF87008F3DAA /* ChallnegesTableViewController.swift */,
+				0D2AC94C1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift */,
+				0D2AC94E1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift */,
+				0DAA18EE1E7FCDBD00F34E06 /* StreakSlider.swift */,
+				0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */,
+				0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */,
+				0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */,
+				0D99366B1E964EB300D38E55 /* Colors.swift */,
+				0D7D9EA31E97AE8600D2E408 /* Segues.swift */,
+				0D7D9EA71E97B7EE00D2E408 /* FacebookFriendsViewController.swift */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1409,58 +1421,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DA6285F1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift in Sources */,
 				57BED09F1CD8B63800D94A48 /* CHRequests.swift in Sources */,
 				576D7E741CEB093300AA7094 /* CHChalenges.swift in Sources */,
 				57BED0A11CD8B64700D94A48 /* CHSession.swift in Sources */,
 				0D97F3E41E1FC21E00B24B46 /* StepCounterDuelChecked.swift in Sources */,
 				0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */,
 				572626C71CD8F7F90022C389 /* CHPush.swift in Sources */,
+				0DAA18EF1E7FCDBD00F34E06 /* StreakSlider.swift in Sources */,
 				5770CCF41CD9E99700D10E5A /* CHImages.swift in Sources */,
 				57B632C81CD78A35000D6868 /* SelfImprovementWin.swift in Sources */,
 				57DA51CA1D006A9A00AAA2B8 /* HistoryTableViewController.swift in Sources */,
 				576B035A1CDDFF2700C19079 /* PendingFriendsController.swift in Sources */,
 				57B96FF31CDBAAE2004B1753 /* FriendCell.swift in Sources */,
+				0D7D9EA41E97AE8600D2E408 /* Segues.swift in Sources */,
 				57B632CB1CD78DB9000D6868 /* UICountingLabel.m in Sources */,
 				5772751B1CEB60DE00848777 /* UnConfirmedDuel.swift in Sources */,
-				57B099381CEC98C900AA2D63 /* WakeUpViewController.swift in Sources */,
 				576D7E721CEAFBB100AA7094 /* NewChallenge.swift in Sources */,
 				0D54B7E81E1E45B1006B381C /* StepCounterSelfImprovement.swift in Sources */,
 				0D54B7F21E1EA61C006B381C /* StepCounterDuelUnchecked.swift in Sources */,
+				0D2AC94F1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift in Sources */,
 				57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */,
 				57336C191CD7753000C5B6F1 /* CHGradients.swift in Sources */,
 				57D29E8C1D0076FF0016CBF5 /* HistoryCell.swift in Sources */,
 				577D5F931CCE2AB20002F0E0 /* ScoreBorder.swift in Sources */,
 				57336C131CD771CE00C5B6F1 /* WakeUpChallenge.swift in Sources */,
-				577FAD531CEC6D4300DA5F9D /* SelfImprovementViewController.swift in Sources */,
 				0D7D3ED61E0AC6270071BF0F /* Extentions.swift in Sources */,
 				57D363621CFDD3E100152258 /* TimedOutWakeUp.swift in Sources */,
-				0D43DF231E0D2C6300359B3F /* FeedbackViewController.swift in Sources */,
+				0DA628611E8E43600024F7C9 /* CreateChallengeFinishViewController.swift in Sources */,
 				57B632C61CD78A1C000D6868 /* SelfImprovementInProgress.swift in Sources */,
+				0D99366C1E964EB300D38E55 /* Colors.swift in Sources */,
 				576B035C1CDE0CD700C19079 /* FriendsTableViewController.swift in Sources */,
 				575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */,
 				574CE87A1D3CB9E8004A9345 /* FacebookAuthViewController.swift in Sources */,
-				577D5FA41CCF5B840002F0E0 /* FriendsViewController.swift in Sources */,
-				57D5E9D91CE2220D00AD20CC /* DuelViewController.swift in Sources */,
 				57A5A42E1CDE39B5001FE6CD /* NoPendingRequests.swift in Sources */,
 				57AD26671CD895E9000F33CB /* AuthViewController.swift in Sources */,
-				577D5FA61CCF5B9D0002F0E0 /* SettingsViewController.swift in Sources */,
 				579C185C1CCB595700D6EEA9 /* MainViewController.swift in Sources */,
 				577D5F9C1CCE50F50002F0E0 /* iCarousel.m in Sources */,
+				0D9AF18C1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift in Sources */,
 				57BED09C1CD8AF6700D94A48 /* CHBanners.swift in Sources */,
 				57ED480B1CD8BD3300E2CCFF /* RoleControlViewController.swift in Sources */,
 				0D97F3E61E1FCA2500B24B46 /* CHActivity.swift in Sources */,
+				0DA6285D1E8E356C0024F7C9 /* CreateChallengeViewController.swift in Sources */,
 				0D959BA41DA6610A00B3F4BE /* MNMBottomPullToRefreshView.swift in Sources */,
 				57ED48091CD8BBDB00E2CCFF /* CHUsers.swift in Sources */,
 				570722061CEB5E6500C0C17F /* CHSettings.swift in Sources */,
 				5784FF911D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift in Sources */,
+				0D5571CF1E7D31A500A043D0 /* GlobalUse.swift in Sources */,
 				577D5F9F1CCE5A010002F0E0 /* CHUIElements.swift in Sources */,
 				575DC72D1CEDECE700CF92D3 /* CheckedDuel.swift in Sources */,
+				0D7D9EA81E97B7EE00D2E408 /* FacebookFriendsViewController.swift in Sources */,
+				0D9AF18E1E7BEF87008F3DAA /* ChallnegesTableViewController.swift in Sources */,
 				57FBC97F1CD9F49900341A2D /* APCustomBlurView.swift in Sources */,
 				5730E6EE1D0842B400D1EEA4 /* InviteFriendsView.swift in Sources */,
-				574738391D25043200071A01 /* WakeUpInfoViewController.swift in Sources */,
 				575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */,
 				577D5F951CCE30670002F0E0 /* CHUIAnimations.swift in Sources */,
 				0D57A5471DE5F00400C9D78F /* RPCircularProgress.swift in Sources */,
+				0D2AC94D1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift in Sources */,
 				579C185A1CCB595700D6EEA9 /* AppDelegate.swift in Sources */,
 				571F78971CF851DF008A45DE /* CHWakeUpper.swift in Sources */,
 				0D54B7EC1E1E6F4C006B381C /* StepCounterSelfImprovementUnchecked.swift in Sources */,
@@ -1468,7 +1485,6 @@
 				576C348D1CFC59D000AB4D86 /* CHCalendar.swift in Sources */,
 				5770CCF61CD9EBD300D10E5A /* IJReachability.swift in Sources */,
 				57ED480D1CD8E12900E2CCFF /* SettingsTableViewController.swift in Sources */,
-				577D5FA21CCF5B3C0002F0E0 /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

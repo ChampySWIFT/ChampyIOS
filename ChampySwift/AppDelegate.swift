@@ -12,6 +12,7 @@ import UserNotifications
 import Firebase
 import Async
 import HealthKit
+import SideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -24,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
   // MARK: - View Controllers
   
-  var historyViewController: HistoryViewController!   = nil
-  var friendsViewController: FriendsViewController!   = nil
-  var settingsViewController: SettingsViewController! = nil
   var table3:AllFriendsTableViewController! = nil
   var table2:PendingFriendsController! = nil
   var table1:FriendsTableViewController! = nil
@@ -69,9 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     registerForPushNotifications(application)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification),  name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
-    CHPush().clearBadgeNumber()
-    self.prototypeFriendCell = FriendCell()
+    SideMenuManager.menuShadowOpacity = 0.0
+    SideMenuManager.menuEnableSwipeGestures = true
+//    SideMenuManager.menuPresentingViewControllerUserInteractionEnabled = true
+    SideMenuManager.menuAnimationBackgroundColor = .white
+    SideMenuManager.menuWidth = ScreenSize.SCREEN_WIDTH - 50.0//[[UIScreen mainScreen] bounds].size.width
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   

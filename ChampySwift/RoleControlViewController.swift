@@ -36,7 +36,7 @@ class RoleControlViewController: UIViewController {
     center.addObserver(self, selector: #selector(RoleControlViewController.toFriends), name: NSNotification.Name(rawValue: "toFriends"), object: nil)
     self.navigationItem.leftBarButtonItem = nil
     
-    navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
+//    navigationController!.navigationBar.barTintColor = CHUIElements().APPColors["navigationBar"]
     let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
     let authViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "AuthViewController")
     authViewController.modalPresentationStyle = .overCurrentContext
@@ -48,7 +48,9 @@ class RoleControlViewController: UIViewController {
     } else {
       self.socket.connect()
       self.handleSocketActions()
-      self.toMainView()
+//      self.toMainView()
+      self.performSegue(withIdentifier: "showChallenges", sender: self)
+      
     }
     
     
@@ -74,11 +76,10 @@ class RoleControlViewController: UIViewController {
   
   func toMainView() {
     Async.main {
-      let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
-      let mainViewController : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-      self.appDelegate.mainViewController = mainViewController
-      
-      self.performSegue(withIdentifier: "showChallenges", sender: self)
+//      let mainStoryboard: UIStoryboard          = UIStoryboard(name: "Main",bundle: nil)
+//      let mainViewController : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//      self.appDelegate.mainViewController = mainViewController
+//      
       
 //      self.present(self.appDelegate.mainViewController, animated: false, completion: {
       

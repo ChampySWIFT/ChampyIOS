@@ -64,12 +64,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SideMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Socket.IO-Client-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SwiftHTTP.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftRandom.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -82,12 +92,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>34BFAE929B97B8A1AD8A25CF29B76881</key>
+		<key>10461C786B651219C2C1793924999479</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A8254A40B807F18BE93EC5251C370A1</key>
+		<key>1AD305E46B4DEBB8B3FF3733EF4F7755</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F8820EA39CDE18B4D86AE572227CD71</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>53365B250A0E2E5E5E0C9C59240B04C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5E90024CA4621EC0A8B8C777C958214A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7099082A1104709B1FB197B25077B68B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,17 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>987188971A6D14F78AC38AF1757A9757</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9C67E3D1DA0CF1653C7E7EA54921B74A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AD930BE776611222E7B1DC8C99B4DD39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +168,11 @@
 			<true/>
 		</dict>
 		<key>EF656A4CEC9DEB54563AFCB5602EF605</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FA8AFB444246EEDE5D2DB8D6AE85AC4B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

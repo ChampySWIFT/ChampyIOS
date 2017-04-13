@@ -4,6 +4,8 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'Champy' do
+  pod  'SwiftRandom'
+  pod 'SideMenu'
   pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
