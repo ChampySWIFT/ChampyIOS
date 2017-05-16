@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -16,26 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="iFd-fL-Zp8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lscreen" translatesAutoresizingMaskIntoConstraints="NO" id="phX-gF-RES">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="iFd-fL-Zp8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="DSd-al-P13"/>
-                            <constraint firstItem="iFd-fL-Zp8" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="QUG-ic-wQf"/>
-                            <constraint firstAttribute="trailing" secondItem="iFd-fL-Zp8" secondAttribute="trailing" id="fWm-F0-h9E"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iFd-fL-Zp8" secondAttribute="bottom" id="klr-lt-82y"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="phX-gF-RES" secondAttribute="bottom" id="5MY-jS-ddw"/>
+                            <constraint firstAttribute="trailing" secondItem="phX-gF-RES" secondAttribute="trailing" id="epv-0k-EJ8"/>
+                            <constraint firstItem="phX-gF-RES" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="nQa-Pv-t5P"/>
+                            <constraint firstItem="phX-gF-RES" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="vBb-R8-qY9"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.5" y="374.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="lscreen" width="640" height="1136"/>
+        <image name="lscreen" width="340" height="633"/>
     </resources>
 </document>

@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BebasNeue Regular.otf">
+        <array key="BebasNeue Regular.otf">
             <string>BebasNeueRegular</string>
-            <string>BebasNeueRegular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelfImprovementInProgress" customModule="ChampySwift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelfImprovementInProgress" customModule="Champy" customModuleProvider="target">
             <connections>
+                <outlet property="descLabel" destination="YXO-N2-qDk" id="vjX-e3-HkK"/>
+                <outlet property="doneForToday" destination="7NK-ck-fcS" id="dQm-WX-Ndr"/>
+                <outlet property="revardLabel" destination="bsP-oJ-3hD" id="MRO-YO-NQk"/>
                 <outlet property="selfImprovementLabel" destination="z7Z-Lf-OnB" id="LAk-Tr-YpP"/>
                 <outlet property="selfImprovementUpIcon" destination="XOh-SF-ipN" id="dJc-dD-FFl"/>
                 <outlet property="topBarBackground" destination="C2b-bW-oP9" id="vN8-8p-aVb"/>
@@ -39,11 +45,11 @@
                                 <constraint firstAttribute="width" constant="83" id="5J7-T5-oeU"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="13"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="XOh-SF-ipN" firstAttribute="centerX" secondItem="C2b-bW-oP9" secondAttribute="centerX" id="8GX-Ol-w0u"/>
                         <constraint firstItem="z7Z-Lf-OnB" firstAttribute="centerX" secondItem="XOh-SF-ipN" secondAttribute="centerX" id="ETW-Rs-mRj"/>
@@ -59,9 +65,27 @@
                         </mask>
                     </variation>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do 10 push-ups every day during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXO-N2-qDk">
+                    <rect key="frame" x="8" y="88" width="184" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="eFQ-qK-LEl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="20"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-oJ-3hD">
+                    <rect key="frame" x="8" y="183" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="39a-Bm-NNM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </label>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjD-3k-NeW">
                     <rect key="frame" x="0.0" y="247" width="200" height="44"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="QFl-Gd-bCa"/>
                     </constraints>
@@ -72,63 +96,44 @@
                                 <rect key="frame" x="21" y="0.0" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="CancleIcon"/>
+                                <connections>
+                                    <action selector="failAction:" destination="-1" eventType="touchUpInside" id="2EF-ev-xaG"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LWV-iu-ICL"/>
                         <barButtonItem title="Item" style="plain" id="M5v-M4-tkT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T7t-Oc-qxm">
-                                <rect key="frame" x="78" y="0.0" width="44" height="44"/>
+                                <rect key="frame" x="135" y="0.0" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AcceptIcon"/>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="nb8-Hc-E7g"/>
-                        <barButtonItem style="plain" id="s5i-fM-R9d">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Edn-Nm-bOW">
-                                <rect key="frame" x="141" y="0.0" width="38" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="TimeIcon"/>
+                                <connections>
+                                    <action selector="acceptAction:" destination="-1" eventType="touchUpInside" id="Fxz-VE-2lJ"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="brH-JA-wZ4"/>
                     </items>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </toolbar>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do 10 push-ups every day during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXO-N2-qDk">
-                    <rect key="frame" x="23" y="88" width="154" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="154" id="6Mc-8i-Bpv"/>
-                        <constraint firstAttribute="height" constant="45" id="eFQ-qK-LEl"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-oJ-3hD">
-                    <rect key="frame" x="8" y="183" width="184" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="39a-Bm-NNM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE FOR TODAY?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NK-ck-fcS">
-                    <rect key="frame" x="8" y="135" width="184" height="51"/>
+                    <rect key="frame" x="8" y="208" width="184" height="39"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="51" id="UCI-20-ksN"/>
+                        <constraint firstAttribute="height" constant="39" id="iSR-6s-YGs"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="33"/>
-                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="GjD-3k-NeW" firstAttribute="top" secondItem="7NK-ck-fcS" secondAttribute="bottom" id="5Mk-YG-yC6"/>
                 <constraint firstAttribute="trailing" secondItem="C2b-bW-oP9" secondAttribute="trailing" id="7V1-r8-hLV"/>
                 <constraint firstAttribute="trailing" secondItem="bsP-oJ-3hD" secondAttribute="trailing" constant="8" id="7y7-7J-mnN"/>
-                <constraint firstItem="7NK-ck-fcS" firstAttribute="top" secondItem="YXO-N2-qDk" secondAttribute="bottom" constant="2" id="8EA-lV-Oap"/>
+                <constraint firstItem="YXO-N2-qDk" firstAttribute="leading" secondItem="4H8-vc-aND" secondAttribute="leading" constant="8" id="AjH-F8-rG5"/>
+                <constraint firstAttribute="trailing" secondItem="YXO-N2-qDk" secondAttribute="trailing" constant="8" id="Bva-b9-6j5"/>
                 <constraint firstItem="YXO-N2-qDk" firstAttribute="top" secondItem="C2b-bW-oP9" secondAttribute="bottom" constant="8" id="Gcm-3m-HkB"/>
                 <constraint firstItem="bsP-oJ-3hD" firstAttribute="top" secondItem="7NK-ck-fcS" secondAttribute="bottom" constant="-3" id="Kc2-8Z-L2g"/>
                 <constraint firstItem="GjD-3k-NeW" firstAttribute="leading" secondItem="4H8-vc-aND" secondAttribute="leading" id="KuN-T0-cz6"/>
@@ -146,6 +151,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="Kc2-8Z-L2g"/>
                     <exclude reference="bI4-7X-7HY"/>
                 </mask>
             </variation>
@@ -153,9 +159,8 @@
         </view>
     </objects>
     <resources>
-        <image name="AcceptIcon" width="44" height="44"/>
-        <image name="CancleIcon" width="44" height="44"/>
-        <image name="SelfImprovement" width="100" height="100"/>
-        <image name="TimeIcon" width="44" height="44"/>
+        <image name="AcceptIcon" width="22" height="22"/>
+        <image name="CancleIcon" width="22" height="22"/>
+        <image name="SelfImprovement" width="50" height="50"/>
     </resources>
 </document>

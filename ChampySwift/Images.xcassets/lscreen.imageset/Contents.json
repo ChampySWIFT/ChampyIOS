@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "launchscreen.png"
+      "filename" : "Champy-Onboarding-Screen1.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "launchscreen-1.png"
+      "filename" : "Champy-Onboarding-Screen1-1.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "launchscreen-2.png"
+      "filename" : "Champy-Onboarding-Screen1-2.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

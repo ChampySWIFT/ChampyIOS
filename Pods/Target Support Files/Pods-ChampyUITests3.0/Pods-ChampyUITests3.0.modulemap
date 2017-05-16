@@ -1,0 +1,6 @@
+framework module Pods_ChampyUITests3_0 {
+  umbrella header "Pods-ChampyUITests3.0-umbrella.h"
+
+  export *
+  module * { export * }
+}

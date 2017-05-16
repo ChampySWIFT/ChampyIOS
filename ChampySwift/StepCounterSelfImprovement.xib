@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepCounterSelfImprovement" customModule="Champy" customModuleProvider="target">
+            <connections>
+                <outlet property="descLabel" destination="9Kt-lL-kXe" id="va6-LI-0NK"/>
+                <outlet property="doneForToday" destination="sGG-5z-NR4" id="EjS-hn-lgp"/>
+                <outlet property="selfImprovementLabel" destination="WdG-QN-x3Z" id="KuT-Vt-o1s"/>
+                <outlet property="selfImprovementUpIcon" destination="mWD-eP-rcX" id="t5r-mK-hTR"/>
+                <outlet property="topBarBackground" destination="Lsu-hh-Qgf" id="hj8-en-ORo"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fzj-50-oTR">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-hh-Qgf">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StepCounter" translatesAutoresizingMaskIntoConstraints="NO" id="mWD-eP-rcX">
+                            <rect key="frame" x="78" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="U4B-Tq-yn0"/>
+                                <constraint firstAttribute="width" constant="44" id="apa-qW-u59"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELF-IMPROVEMENT CHALLENGE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdG-QN-x3Z">
+                            <rect key="frame" x="59" y="53" width="83" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="83" id="BBA-j8-mBo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="mWD-eP-rcX" firstAttribute="centerX" secondItem="Lsu-hh-Qgf" secondAttribute="centerX" id="CaR-dk-3bn"/>
+                        <constraint firstItem="WdG-QN-x3Z" firstAttribute="top" secondItem="mWD-eP-rcX" secondAttribute="bottom" constant="1" id="NV1-iT-1Si"/>
+                        <constraint firstAttribute="height" constant="80" id="Y2P-Yy-5dQ"/>
+                        <constraint firstItem="mWD-eP-rcX" firstAttribute="top" secondItem="Lsu-hh-Qgf" secondAttribute="top" constant="8" id="aOo-mg-jIa"/>
+                        <constraint firstAttribute="bottom" secondItem="WdG-QN-x3Z" secondAttribute="bottom" id="kR9-4A-are"/>
+                        <constraint firstItem="WdG-QN-x3Z" firstAttribute="centerX" secondItem="mWD-eP-rcX" secondAttribute="centerX" id="qJs-S6-7Go"/>
+                        <constraint firstItem="WdG-QN-x3Z" firstAttribute="top" secondItem="mWD-eP-rcX" secondAttribute="bottom" constant="3" id="y2v-GW-KCz"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="y2v-GW-KCz"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do 10 push-ups every day during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kt-lL-kXe">
+                    <rect key="frame" x="23" y="88" width="154" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="ljP-sL-5e7"/>
+                        <constraint firstAttribute="width" constant="154" id="qTa-Xo-Ufn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="20"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCG-Q9-UUr">
+                    <rect key="frame" x="0.0" y="247" width="200" height="44"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="xO2-cT-eRm"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="5YF-H2-GSW"/>
+                        <barButtonItem image="CancleIcon" style="plain" id="BSQ-My-HD0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="smN-DH-cS9">
+                                <rect key="frame" x="21" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancleIcon"/>
+                                <connections>
+                                    <action selector="failAction:" destination="-1" eventType="touchUpInside" id="Rdf-oZ-li0"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="kUF-Do-DHK"/>
+                        <barButtonItem style="plain" id="QgR-zZ-wbB">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sc9-x2-BHK">
+                                <rect key="frame" x="78" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ToFriendIcon"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rfm-ON-7rI"/>
+                        <barButtonItem style="plain" id="zJL-45-3w1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WJy-of-w4b">
+                                <rect key="frame" x="141" y="0.0" width="38" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ShareIcon"/>
+                                <connections>
+                                    <action selector="shareAction:" destination="-1" eventType="touchUpInside" id="6dq-W8-lfN"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="2qq-ir-Fc8"/>
+                    </items>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGG-5z-NR4">
+                    <rect key="frame" x="8" y="207" width="184" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="PEA-up-JhX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="41"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9Kt-lL-kXe" firstAttribute="top" secondItem="Lsu-hh-Qgf" secondAttribute="bottom" constant="8" id="DO1-Yz-MVg"/>
+                <constraint firstItem="Lsu-hh-Qgf" firstAttribute="leading" secondItem="fzj-50-oTR" secondAttribute="leading" id="EoG-mn-Ni5"/>
+                <constraint firstItem="Lsu-hh-Qgf" firstAttribute="top" secondItem="fzj-50-oTR" secondAttribute="top" id="H0X-DH-mRd"/>
+                <constraint firstAttribute="bottom" secondItem="dCG-Q9-UUr" secondAttribute="bottom" id="Ih1-wR-We5"/>
+                <constraint firstItem="dCG-Q9-UUr" firstAttribute="leading" secondItem="fzj-50-oTR" secondAttribute="leading" id="OfP-8E-zs6"/>
+                <constraint firstItem="sGG-5z-NR4" firstAttribute="leading" secondItem="fzj-50-oTR" secondAttribute="leading" constant="8" id="QlA-4O-d4m"/>
+                <constraint firstItem="dCG-Q9-UUr" firstAttribute="top" secondItem="sGG-5z-NR4" secondAttribute="bottom" id="S6q-0E-ray"/>
+                <constraint firstAttribute="trailing" secondItem="sGG-5z-NR4" secondAttribute="trailing" constant="8" id="d3K-Eq-Bkj"/>
+                <constraint firstAttribute="trailing" secondItem="dCG-Q9-UUr" secondAttribute="trailing" id="dcH-or-P3J"/>
+                <constraint firstItem="9Kt-lL-kXe" firstAttribute="centerX" secondItem="Lsu-hh-Qgf" secondAttribute="centerX" id="i49-B9-PPI"/>
+                <constraint firstAttribute="trailing" secondItem="Lsu-hh-Qgf" secondAttribute="trailing" id="oLf-7H-6b9"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="248" y="364.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CancleIcon" width="22" height="22"/>
+        <image name="ShareIcon" width="19" height="22"/>
+        <image name="StepCounter" width="96" height="96"/>
+        <image name="ToFriendIcon" width="22" height="22"/>
+    </resources>
+</document>

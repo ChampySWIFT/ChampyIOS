@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+        </array>
+        <array key="BebasNeue Regular.otf">
+            <string>BebasNeueRegular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimedOutWakeUp" customModule="Champy" customModuleProvider="target">
+            <connections>
+                <outlet property="topBarBackground" destination="NXl-3g-q6Y" id="nve-tD-wi3"/>
+                <outlet property="wakeUpDaysLeft" destination="e0f-fm-gXv" id="ZKC-UM-HGS"/>
+                <outlet property="wakeUpDesc" destination="Q8Z-om-saw" id="cKz-TB-wEi"/>
+                <outlet property="wakeUpIcon" destination="eRl-gt-dYA" id="mJl-02-es8"/>
+                <outlet property="wakeUpLabel" destination="Z8U-dS-eGq" id="yeq-KY-oYN"/>
+                <outlet property="wakeUpReward" destination="6vb-lb-z8B" id="8oY-mX-VSp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ZoF-2J-frN">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXl-3g-q6Y">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wake-up" translatesAutoresizingMaskIntoConstraints="NO" id="eRl-gt-dYA">
+                            <rect key="frame" x="78" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="6Zv-yl-kcp"/>
+                                <constraint firstAttribute="width" constant="44" id="m1L-GA-pmn"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAKE - UP CHALLENGE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8U-dS-eGq">
+                            <rect key="frame" x="59" y="53" width="83" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="83" id="CvE-fF-IbM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.71501361730000002" blue="0.21737093269999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="1mW-GV-rnC"/>
+                        <constraint firstAttribute="bottom" secondItem="Z8U-dS-eGq" secondAttribute="bottom" id="25E-Qv-yO6"/>
+                        <constraint firstItem="eRl-gt-dYA" firstAttribute="centerX" secondItem="NXl-3g-q6Y" secondAttribute="centerX" id="T4n-N0-cWh"/>
+                        <constraint firstItem="Z8U-dS-eGq" firstAttribute="top" secondItem="eRl-gt-dYA" secondAttribute="bottom" constant="3" id="br7-h9-zb0"/>
+                        <constraint firstItem="Z8U-dS-eGq" firstAttribute="top" secondItem="eRl-gt-dYA" secondAttribute="bottom" constant="1" id="g8D-XD-Xuc"/>
+                        <constraint firstItem="eRl-gt-dYA" firstAttribute="top" secondItem="NXl-3g-q6Y" secondAttribute="top" constant="8" id="hzq-pY-299"/>
+                        <constraint firstItem="Z8U-dS-eGq" firstAttribute="centerX" secondItem="eRl-gt-dYA" secondAttribute="centerX" id="wjU-Ef-eIS"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="br7-h9-zb0"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake up at 6 AM every morning during 21 days" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Z-om-saw">
+                    <rect key="frame" x="23" y="88" width="154" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="154" id="Vg0-7V-2cw"/>
+                        <constraint firstAttribute="height" constant="45" id="xpk-rL-WHA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="16"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Level 1 Champy / Reward +10 Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vb-lb-z8B">
+                    <rect key="frame" x="8" y="183" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="Veh-Z4-agK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="highlightedColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </label>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efb-wT-bfa">
+                    <rect key="frame" x="0.0" y="247" width="200" height="44"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="2Hw-BF-1vt"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="FGA-Nv-Xeo"/>
+                        <barButtonItem style="plain" id="Aq4-9M-y49">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ba5-9h-I2d">
+                                <rect key="frame" x="77" y="7" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
+                                <state key="normal" title="Failed">
+                                    <color key="titleColor" red="0.1960784314" green="0.59999999999999998" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5af-Xl-Wlo"/>
+                    </items>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS TO GO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-fm-gXv">
+                    <rect key="frame" x="8" y="205" width="184" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="g9y-pN-ygh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BebasNeueRegular" family="Bebas Neue" pointSize="41"/>
+                    <color key="textColor" red="0.19607843137254902" green="0.59999999999999998" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Efb-wT-bfa" firstAttribute="leading" secondItem="ZoF-2J-frN" secondAttribute="leading" id="EXB-k3-MOI"/>
+                <constraint firstItem="6vb-lb-z8B" firstAttribute="leading" secondItem="ZoF-2J-frN" secondAttribute="leading" constant="8" id="GIC-BE-cYA"/>
+                <constraint firstAttribute="trailing" secondItem="6vb-lb-z8B" secondAttribute="trailing" constant="8" id="GwE-JJ-rcj"/>
+                <constraint firstAttribute="trailing" secondItem="e0f-fm-gXv" secondAttribute="trailing" constant="8" id="OF7-x9-nFo"/>
+                <constraint firstAttribute="trailing" secondItem="Efb-wT-bfa" secondAttribute="trailing" id="UmQ-FC-Dgl"/>
+                <constraint firstItem="NXl-3g-q6Y" firstAttribute="top" secondItem="ZoF-2J-frN" secondAttribute="top" id="YLe-jt-k2w"/>
+                <constraint firstAttribute="trailing" secondItem="NXl-3g-q6Y" secondAttribute="trailing" id="ZKi-6k-qIj"/>
+                <constraint firstItem="e0f-fm-gXv" firstAttribute="leading" secondItem="ZoF-2J-frN" secondAttribute="leading" constant="8" id="d2Y-E6-SWg"/>
+                <constraint firstItem="Q8Z-om-saw" firstAttribute="top" secondItem="NXl-3g-q6Y" secondAttribute="bottom" constant="8" id="ilU-8a-i8c"/>
+                <constraint firstItem="Efb-wT-bfa" firstAttribute="top" secondItem="e0f-fm-gXv" secondAttribute="bottom" id="mYP-Ky-VpP"/>
+                <constraint firstAttribute="bottom" secondItem="Efb-wT-bfa" secondAttribute="bottom" id="qZC-Xc-q3z"/>
+                <constraint firstItem="NXl-3g-q6Y" firstAttribute="leading" secondItem="ZoF-2J-frN" secondAttribute="leading" id="rqW-Ix-M6B"/>
+                <constraint firstItem="6vb-lb-z8B" firstAttribute="top" secondItem="e0f-fm-gXv" secondAttribute="bottom" constant="-10" id="xlo-Z2-3z2"/>
+                <constraint firstItem="Q8Z-om-saw" firstAttribute="centerX" secondItem="NXl-3g-q6Y" secondAttribute="centerX" id="yEj-px-eGC"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="xlo-Z2-3z2"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="248" y="364.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Wake-up" width="50" height="50"/>
+    </resources>
+</document>

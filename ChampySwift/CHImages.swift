@@ -8,79 +8,122 @@
 
 import UIKit
 import Kingfisher
-import DynamicBlurView
+import SwiftyJSON
 
 class CHImages: NSObject {
+  let appDelegate     = UIApplication.shared.delegate as! AppDelegate
   
-  func setUpAvatar(imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
-    let url = NSURL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
-    let myCache = ImageCache(name: urlString)
+  func setUpAvatar(_ imageView:UIImageView, urlString:String = CHUsers().getPhotoUrlString(CHSession().currentUserId)) {
     
-    if IJReachability.isConnectedToNetwork() {
-      myCache.clearDiskCache()
-      myCache.clearMemoryCache()
-      myCache.cleanExpiredDiskCache()
+    let url = URL(string: CHUsers().getPhotoUrlString(CHSession().currentUserId))
+    let user:JSON = CHSession().currentUserObject
+    
+    var cachename = "initialCache"
+    
+    
+    if user["lastPhotoUpdated"].intValue != 0 {
+      cachename = user["lastPhotoUpdated"].stringValue
     }
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
-    }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
+    let myCache = ImageCache(name: cachename)
+    
+    imageView.kf.setImage(with: url, placeholder:  appDelegate.prototypeNoImage, options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+      }) { (image, error, cacheType, imageUrl) in
+        
+    }
+    
+    
+  }
+  //Bundle.main.url(forResource: "champy", withExtension: "png")
+  
+  func setUpDefaultImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
+    let url = Bundle.main.url(forResource: "champy", withExtension: "png")
+    
+    let cachename = "defaultImage"
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
       
     }
   }
   
-  func setImageForFriend(userId:String, imageView:UIImageView, frame:CGRect = CGRect()) {
-    let url = NSURL(string: CHUsers().getPhotoUrlString(userId))
-    let myCache = ImageCache(name: userId)
+  func setImageForFriend(_ userId:String, imageView:UIImageView, frame:CGRect = CGRect(), userObject:JSON = nil) {
+    let url = URL(string: CHUsers().getPhotoUrlString(userId))
+    var user:JSON! = userObject
     
-    if IJReachability.isConnectedToNetwork() {
-      myCache.clearDiskCache()
-      myCache.clearMemoryCache()
-      myCache.cleanExpiredDiskCache()
+    
+    if user == nil {
+      if userId == CHSession().currentUserId {
+        user = CHSession().currentUserObject
+      } else {
+        user = CHUsers().getUserById(userId)
+      }
     }
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: [.TargetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
-    }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
+    
+    var cachename = "default"
+    if user["lastPhotoUpdated"].intValue != 0 {
+      cachename = user["lastPhotoUpdated"].stringValue
+    }
+    let myCache = ImageCache(name: cachename)
+    
+    
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "noImageIcon"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
       
     }
+    
   }
   
-  func setUpBackground(imageView:UIImageView, frame:CGRect = CGRect()) {
-    let url = NSURL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
-    let myCache = ImageCache(name: "\(url)")
+  
+  
+  
+  func setUpBackground(_ imageView:UIImageView, frame:CGRect = CGRect()) {
+    imageView.layer.masksToBounds = true
+    let url = URL(string: CHUsers().getPhotoUrlStringForBackgroung(CHSession().currentUserId))
+    let userObject:JSON =  CHSession().currentUserObject
     
-    let optionInfo: KingfisherOptionsInfo = [
-      .TargetCache(myCache),
-      .DownloadPriority(1),
-      .Transition(ImageTransition.Fade(1))
-    ]
-    if IJReachability.isConnectedToNetwork() {
-//      myCache.clearDiskCache()
-//      myCache.clearMemoryCache()
-//      myCache.cleanExpiredDiskCache()
+    var cachename = "initialCache"
+    if userObject["lastPhotoUpdated"].intValue != 0 {
+      cachename = userObject["lastPhotoUpdated"].stringValue
     }
-    imageView.kf_setImageWithURL(url!, placeholderImage: UIImage(named: "MainBackground"), optionsInfo: optionInfo, progressBlock: { (receivedSize, totalSize) in
-      print("Downloading")
-    }) { (image, error, cacheType, imageURL) in
-      print("Downloaded")
+    let myCache = ImageCache(name: cachename)
+
+    
+//    let optionInfo: KingfisherOptionsInfo = [
+//      .targe(myCache),
+//      .DownloadPriority(1),
+//      .Transition(ImageTransition.Fade(1))
+//    ]
+    
+    imageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "MainBackground"), options: [.targetCache(myCache)], progressBlock: { (receivedSize, totalSize) in
+      
+    }) { (image, error, cacheType, imageUrl) in
       
     }
     
-    //    let frame        = CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height)
-    //    let frame = frame
-    let blurView     = APCustomBlurView(withRadius: 10)
+    
     let gradient     = CAGradientLayer()
-    blurView.frame   = frame
     gradient.frame   = frame
     gradient.colors  = [CHGradients().backgroundGradiend1, CHGradients().backgroundGradiend2]//Or any colors
     gradient.opacity = 0.75
     
-    blurView.layer.addSublayer(gradient)
     
-    imageView.addSubview(blurView)
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+    let blurView = UIVisualEffectView(effect: blurEffect)
+    blurView.frame   = frame
+    blurView.frame = blurView.bounds
+    blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+    
+    imageView.makeBlurImage(imageView)
+    imageView.layer.addSublayer(gradient)
     
     
   }
   
 }
+
+
