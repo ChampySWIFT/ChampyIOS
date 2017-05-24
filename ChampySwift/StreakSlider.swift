@@ -80,7 +80,7 @@ class StreakSlider: UIScrollView{
         var i = 1
         var starterCoord:CGFloat = 0.0
         for item in self.borders {
-            let label = UILabel(frame: CGRect(x: starterCoord, y:0, width: item.frame.origin.x - starterCoord, height: 10.0))
+            let label = UILabel(frame: CGRect(x: starterCoord, y:5, width: item.frame.origin.x - starterCoord, height: 10.0))
             label.text = "Streak \(i)"
             
             label.textColor = .black
