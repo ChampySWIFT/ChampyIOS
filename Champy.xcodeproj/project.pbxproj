@@ -44,7 +44,6 @@
 		0D9AF18C1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9AF18B1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift */; };
 		0D9AF18E1E7BEF87008F3DAA /* ChallnegesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9AF18D1E7BEF87008F3DAA /* ChallnegesTableViewController.swift */; };
 		0D9E29441DB4F7BA000F2833 /* champy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9E29431DB4F7BA000F2833 /* champy.png */; };
-		0DA342331E1BBD1D00852915 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA342321E1BBD1D00852915 /* HealthKit.framework */; };
 		0DA6285D1E8E356C0024F7C9 /* CreateChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */; };
 		0DA6285F1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */; };
 		0DA628611E8E43600024F7C9 /* CreateChallengeFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */; };
@@ -236,7 +235,6 @@
 		0D9AF18B1E7BEDE9008F3DAA /* OngoingChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OngoingChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		0D9AF18D1E7BEF87008F3DAA /* ChallnegesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallnegesTableViewController.swift; sourceTree = "<group>"; };
 		0D9E29431DB4F7BA000F2833 /* champy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = champy.png; sourceTree = "<group>"; };
-		0DA342321E1BBD1D00852915 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewController.swift; sourceTree = "<group>"; };
 		0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChallengeDetailsViewController.swift; sourceTree = "<group>"; };
 		0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeFinishViewController.swift; sourceTree = "<group>"; };
@@ -425,7 +423,6 @@
 				579F35C81D06B38F00C4A77B /* Kingfisher.framework in Frameworks */,
 				579F35CC1D06B38F00C4A77B /* SwiftHTTP.framework in Frameworks */,
 				57DBA48E1D36677300DD0035 /* FBSDKCoreKit.framework in Frameworks */,
-				0DA342331E1BBD1D00852915 /* HealthKit.framework in Frameworks */,
 				579F35CD1D06B38F00C4A77B /* SwiftyJSON.framework in Frameworks */,
 				6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */,
 			);
@@ -870,7 +867,6 @@
 		A38A0ABE7876BF781FBBA41F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0DA342321E1BBD1D00852915 /* HealthKit.framework */,
 				0D1ADAA41DA25D220067EB51 /* UserNotifications.framework */,
 				0D1ADAA51DA25D220067EB51 /* UserNotificationsUI.framework */,
 				5704A3091D4246F5007CAAA4 /* AVFoundation.framework */,
@@ -1055,7 +1051,7 @@
 								enabled = 0;
 							};
 							com.apple.HealthKit = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -1754,7 +1750,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = ChampySwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1763,7 +1759,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1786,7 +1782,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = ChampySwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Azinec.ChampySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1794,7 +1790,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChampySwift/ChampySwift-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

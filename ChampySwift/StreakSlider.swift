@@ -13,14 +13,11 @@ class StreakSlider: UIScrollView{
     private var dayNumber = 21
     let labelWith:CGFloat = 40.0
     
-    //default value =
     private var segments:[Int] = [1, 4, 11, 21]
-    
     private var currentDay:Int = 4
     private var inProgressSegmentIndicator:Int = 0
     
-    
-    var borders:[UIView] = []
+    var frames : [CGRect] = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,23 +28,33 @@ class StreakSlider: UIScrollView{
         super.init(frame: frame)
     }
     
-    
     func setUp() {
         var stepper = 0
-        var gap:CGFloat = 10.0
+        var startCoordx: CGFloat = 0.0
+        var frame :CGRect = CGRect(x: 20.0 , y: 0, width: CGFloat (segments[stepper]) * labelWith + 20, height: self.frame.height)
+        for stepper in 0..<segments.count {
+            if stepper > 0 {
+                frame = CGRect(x:startCoordx + 10.0, y: 0, width: CGFloat (segments[stepper] - segments[stepper - 1]) * (labelWith + 10) + 10, height: self.frame.height)
+            }
+            var border = StreakDayLabel.streakBorder(frame: frame)
+            startCoordx = frame.origin.x + frame.width
+            
+            self.frames.append(frame)
+            self.addSubview(border)
+        }
+        
         
         for i:Int in 0..<dayNumber {
+            var gap:CGFloat = 10.0
             let dayLabelCaption = i+1
             
-            if segments.index(of: dayLabelCaption) != nil {
-                gap = 20.0
+            if segments.index(of: i) != nil {
+                gap = 25.0
                 stepper = stepper + 1
-                let border = StreakDayLabel.streakBorder(frame: CGRect(x: 10.0 + CGFloat(i) * (labelWith + gap)  + labelWith + CGFloat(gap / 2), y: 5, width: 1.0, height: self.frame.height-10))
-                self.borders.append(border)
-                self.addSubview(border)
-            }
+            }            
             
-            let labelFrame = CGRect(x: 10.0 + CGFloat(i) * (labelWith + gap)  , y: (self.frame.size.height - labelWith) * 0.5, width: labelWith, height: labelWith)
+            let labelFrame = CGRect(x: 30.0 + CGFloat(i) * (labelWith + 10.0) + CGFloat (stepper) * 20.0 , y: (self.frame.size.height - labelWith) * 0.5, width: labelWith, height: labelWith)
+            
             let dayLabel = StreakDayLabel(frame: labelFrame)
             
             if dayLabelCaption < self.currentDay {
@@ -66,26 +73,22 @@ class StreakSlider: UIScrollView{
             dayLabel.caption = "\(dayLabelCaption)"
             
             self.addSubview(dayLabel.getLabel())
-            
-            //      if stepper >= segments.count {return}
-            
-            
         }
         
-        self.contentSize = CGSize(width: 21.0 * (labelWith + gap) + 10.0, height: self.frame.size.height)
+        self.contentSize = CGSize(width: 21.0 * (self.labelWith + 10) + CGFloat (self.segments.count) * 20.0 + 30.0, height: self.frame.size.height)
+        print(self.inProgressSegmentIndicator)
         self.setUpStreakTopLabels()
     }
     
+    
     func setUpStreakTopLabels(){
-        var i = 1
-        var starterCoord:CGFloat = 0.0
-        for item in self.borders {
-            let label = UILabel(frame: CGRect(x: starterCoord, y:5, width: item.frame.origin.x - starterCoord, height: 10.0))
-            label.text = "Streak \(i)"
-            
+        for i in 0..<self.frames.count {
+            let frame = self.frames[i]
+            let label = UILabel(frame: CGRect(x: frame.origin.x , y: 5, width: frame.width, height: 10))
+            label.text = "Streak \(i + 1)"
             label.textColor = .black
             
-            if i < self.inProgressSegmentIndicator + 1 && segments.index(of: currentDay) != i - 1 {
+            if i < self.inProgressSegmentIndicator {
                 label.textColor = .green
             }
             
@@ -111,9 +114,10 @@ class StreakSlider: UIScrollView{
              statusLabel.font = UIFont(name: "Arial", size: 8.0)
              self.addSubview(statusLabel)
              */
-            starterCoord = item.frame.origin.x
+            //            starterCoord = item.frame.origin.x 
             
-            i = i + 1
+            //            i = i + 1
+            //        }
         }
     }
     
@@ -123,10 +127,8 @@ class StreakSlider: UIScrollView{
     
     func setCurrentDay(day:Int = 4) {
         self.currentDay = day
-    }
-    
+    }  
 }
-
 
 class StreakDayLabel :UILabel {
     
@@ -150,7 +152,7 @@ class StreakDayLabel :UILabel {
         
         self.layer.cornerRadius = self.frame.width / 2
         self.layer.masksToBounds = true
-        self.backgroundColor =  .clear
+        self.backgroundColor = UIColor(colorLiteralRed: 249, green: 249, blue: 249, alpha: 1.0)
         
         return self
     }
@@ -160,10 +162,11 @@ class StreakDayLabel :UILabel {
     
     class func streakBorder(frame:CGRect) -> UIView {
         let border = UIView(frame: frame)
-        border.backgroundColor = .gray
+        border.backgroundColor = .white
+        border.layer.cornerRadius = 8
+        border.layer.masksToBounds = true
         return border
     }
-    
 }
 
 extension StreakDayLabel {
@@ -193,9 +196,7 @@ extension StreakDayLabel {
     }
     
     func addPendingDayLabelFlag() {
-        
         self.textColor = .black
-        
     }
 }
 
