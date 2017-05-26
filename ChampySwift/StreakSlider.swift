@@ -31,7 +31,7 @@ class StreakSlider: UIScrollView{
     func setUp() {
         var stepper = 0
         var startCoordx: CGFloat = 0.0
-        var frame :CGRect = CGRect(x: 20.0 , y: 0, width: CGFloat (segments[stepper]) * labelWith + 20, height: self.frame.height)
+        var frame :CGRect = CGRect(x: 20.0 , y: 0, width: CGFloat (segments[stepper]) * (labelWith + 10) + 10, height: self.frame.height)
         for stepper in 0..<segments.count {
             if stepper > 0 {
                 frame = CGRect(x:startCoordx + 10.0, y: 0, width: CGFloat (segments[stepper] - segments[stepper - 1]) * (labelWith + 10) + 10, height: self.frame.height)
