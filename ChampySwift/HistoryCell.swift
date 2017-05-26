@@ -57,16 +57,7 @@ import SwiftyJSON
     return view
   }
   
-  override init(frame: CGRect) {
-    // 1. setup any properties here
-    // 2. call super.init(frame:)
-    super.init(frame: frame)
-    // 3. Setup view from .xib file
-    xibSetup()
-    
-    
-    
-  }
+  
   
   
   func setUpforUnknownDuel(){
