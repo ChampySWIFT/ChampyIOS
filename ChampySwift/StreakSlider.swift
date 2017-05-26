@@ -76,7 +76,6 @@ class StreakSlider: UIScrollView{
         }
         
         self.contentSize = CGSize(width: 21.0 * (self.labelWith + 10) + CGFloat (self.segments.count) * 20.0 + 30.0, height: self.frame.size.height)
-        print(self.inProgressSegmentIndicator)
         self.setUpStreakTopLabels()
     }
     
@@ -152,8 +151,7 @@ class StreakDayLabel :UILabel {
         
         self.layer.cornerRadius = self.frame.width / 2
         self.layer.masksToBounds = true
-        self.backgroundColor = UIColor(colorLiteralRed: 249, green: 249, blue: 249, alpha: 1.0)
-        
+
         return self
     }
     
@@ -172,7 +170,6 @@ class StreakDayLabel :UILabel {
 extension StreakDayLabel {
     
     func addDoneFlag() {
-        let frame = self.frame
         let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         imageView.image = UIImage(named: "completeCopy") 
         self.addSubview(imageView)
@@ -193,10 +190,13 @@ extension StreakDayLabel {
         self.textColor = .green
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.green.cgColor
+        self.backgroundColor = .white
     }
+    
     
     func addPendingDayLabelFlag() {
         self.textColor = .black
+        self.backgroundColor = UIColor(colorLiteralRed: 249/255.0, green: 249/255.0, blue: 249/255.0, alpha: 1.0)
     }
 }
 
