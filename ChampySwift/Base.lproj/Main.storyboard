@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2DD-P6-39Q">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2DD-P6-39Q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -166,72 +165,48 @@ You win the challenge by completing all 4 streaks.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6V7-zz-4un">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="8" y="587" width="359" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpw-KW-7cR">
-                                        <rect key="frame" x="153" y="8" width="69" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="3LO-A9-cOT"/>
-                                            <constraint firstAttribute="width" constant="69" id="VBd-yq-7Ld"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="64"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Check In"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="checkInAction:" destination="m4s-ru-gF1" eventType="touchUpInside" id="rGl-9j-9dT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9L-Nm-cah">
-                                        <rect key="frame" x="230" y="8" width="137" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="W21-wt-UoI"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Check In"/>
-                                        <connections>
-                                            <action selector="checkInNeeds:" destination="m4s-ru-gF1" eventType="touchUpInside" id="xDE-jQ-uDm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sv-n8-Cr7">
-                                        <rect key="frame" x="8" y="8" width="137" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="H5c-bp-Fuh"/>
-                                        </constraints>
-                                        <state key="normal" title="Skip a Day"/>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-lA-o7r">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                                        <color key="backgroundColor" white="0.67000000000000004" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="ZQ2-Az-LrF"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.26274509800000001" green="0.84313725490000002" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="q9L-Nm-cah" secondAttribute="bottom" constant="6" id="NTb-Mj-Qxv"/>
-                                    <constraint firstItem="5sv-n8-Cr7" firstAttribute="leading" secondItem="6V7-zz-4un" secondAttribute="leading" constant="8" id="Nnb-xw-XxR"/>
-                                    <constraint firstAttribute="trailing" secondItem="q9L-Nm-cah" secondAttribute="trailing" constant="8" id="PCj-5B-7El"/>
-                                    <constraint firstItem="6kI-lA-o7r" firstAttribute="leading" secondItem="6V7-zz-4un" secondAttribute="leading" id="Vef-hX-ud7"/>
-                                    <constraint firstAttribute="bottom" secondItem="gpw-KW-7cR" secondAttribute="bottom" constant="6" id="YFr-T8-0Uh"/>
-                                    <constraint firstAttribute="trailing" secondItem="6kI-lA-o7r" secondAttribute="trailing" id="byC-k8-hqw"/>
-                                    <constraint firstAttribute="bottom" secondItem="5sv-n8-Cr7" secondAttribute="bottom" constant="6" id="chR-GY-dwp"/>
-                                    <constraint firstItem="gpw-KW-7cR" firstAttribute="leading" secondItem="5sv-n8-Cr7" secondAttribute="trailing" constant="8" id="mN6-Xl-li9"/>
-                                    <constraint firstAttribute="height" constant="44" id="oNv-cF-xqe"/>
-                                    <constraint firstItem="q9L-Nm-cah" firstAttribute="leading" secondItem="gpw-KW-7cR" secondAttribute="trailing" constant="8" id="pHO-eE-lKy"/>
-                                    <constraint firstItem="gpw-KW-7cR" firstAttribute="centerX" secondItem="6V7-zz-4un" secondAttribute="centerX" id="thj-1P-sIV"/>
-                                    <constraint firstItem="6kI-lA-o7r" firstAttribute="top" secondItem="6V7-zz-4un" secondAttribute="top" id="trQ-tc-3On"/>
+                                    <constraint firstItem="gpw-KW-7cR" firstAttribute="top" secondItem="6V7-zz-4un" secondAttribute="top" id="2Kn-Ep-R2Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="gpw-KW-7cR" secondAttribute="bottom" id="IsM-qJ-LjL"/>
+                                    <constraint firstItem="gpw-KW-7cR" firstAttribute="leading" secondItem="6V7-zz-4un" secondAttribute="leading" id="Rqb-qF-zO3"/>
+                                    <constraint firstAttribute="height" constant="64" id="oNv-cF-xqe"/>
+                                    <constraint firstAttribute="trailing" secondItem="gpw-KW-7cR" secondAttribute="trailing" id="uh8-3u-ear"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="occ-lZ-IdC">
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="occ-lZ-IdC">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Se5-kJ-onu"/>
                                 </constraints>
                                 <color key="tintColor" red="0.26274509800000001" green="0.84313725490000002" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
@@ -278,7 +253,7 @@ You win the challenge by completing all 4 streaks.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KXK-I5-DGR" firstAttribute="centerX" secondItem="wj9-wM-cIg" secondAttribute="centerX" id="L2u-GW-k5C"/>
                                     <constraint firstItem="KXK-I5-DGR" firstAttribute="centerY" secondItem="wj9-wM-cIg" secondAttribute="centerY" id="is6-do-q95"/>
@@ -286,33 +261,24 @@ You win the challenge by completing all 4 streaks.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZN-JG-oDo">
-                                <rect key="frame" x="0.0" y="331" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="336" width="375" height="75"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHE-p2-jLk" customClass="StreakSlider" customModule="Champy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                        <color key="backgroundColor" red="1" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                     </scrollView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eao-Yd-obl">
-                                        <rect key="frame" x="8" y="74" width="367" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="H6W-cz-qYv"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CHE-p2-jLk" secondAttribute="trailing" id="FBI-IM-Kwp"/>
-                                    <constraint firstAttribute="trailing" secondItem="eao-Yd-obl" secondAttribute="trailing" id="Lmr-Af-Jyj"/>
                                     <constraint firstItem="CHE-p2-jLk" firstAttribute="leading" secondItem="PZN-JG-oDo" secondAttribute="leading" id="LpX-cJ-ogk"/>
                                     <constraint firstAttribute="bottom" secondItem="CHE-p2-jLk" secondAttribute="bottom" id="Oc0-a0-P1i"/>
-                                    <constraint firstItem="eao-Yd-obl" firstAttribute="leading" secondItem="PZN-JG-oDo" secondAttribute="leading" constant="8" id="SGG-iM-asg"/>
                                     <constraint firstAttribute="height" constant="75" id="bnG-cJ-Lwk"/>
-                                    <constraint firstAttribute="bottom" secondItem="eao-Yd-obl" secondAttribute="bottom" id="uVj-Yv-x8o"/>
                                     <constraint firstItem="CHE-p2-jLk" firstAttribute="top" secondItem="PZN-JG-oDo" secondAttribute="top" id="w4n-ff-Nbg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bH-s6-30c">
-                                <rect key="frame" x="0.0" y="414" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="435" width="375" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge Rules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-b7-JL5">
                                         <rect key="frame" x="8" y="11" width="306" height="21"/>
@@ -336,21 +302,32 @@ You win the challenge by completing all 4 streaks.</string>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euV-rA-nZN">
                                         <rect key="frame" x="8" y="42" width="367" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ruo-MW-ubO"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eao-Yd-obl">
+                                        <rect key="frame" x="8" y="0.0" width="367" height="1"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="H6W-cz-qYv"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Tss-AG-JSt"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="EwV-Yt-Wdl" firstAttribute="top" secondItem="5bH-s6-30c" secondAttribute="top" constant="-2" id="FcP-pq-xUw"/>
                                     <constraint firstItem="EwV-Yt-Wdl" firstAttribute="leading" secondItem="tPb-b7-JL5" secondAttribute="trailing" constant="8" id="Fov-oo-aCn"/>
+                                    <constraint firstAttribute="trailing" secondItem="eao-Yd-obl" secondAttribute="trailing" id="JPz-cv-aZa"/>
                                     <constraint firstAttribute="trailing" secondItem="EwV-Yt-Wdl" secondAttribute="trailing" id="KxF-LO-jTb"/>
                                     <constraint firstAttribute="bottom" secondItem="tPb-b7-JL5" secondAttribute="bottom" constant="11" id="MTf-gp-Iry"/>
+                                    <constraint firstItem="eao-Yd-obl" firstAttribute="leading" secondItem="5bH-s6-30c" secondAttribute="leading" constant="8" id="a6f-ek-6qU"/>
                                     <constraint firstAttribute="bottom" secondItem="euV-rA-nZN" secondAttribute="bottom" id="dgf-FV-FzW"/>
                                     <constraint firstItem="tPb-b7-JL5" firstAttribute="top" secondItem="5bH-s6-30c" secondAttribute="top" constant="11" id="ecg-A0-t7y"/>
                                     <constraint firstAttribute="height" constant="43" id="faa-AX-gMm"/>
+                                    <constraint firstItem="eao-Yd-obl" firstAttribute="top" secondItem="5bH-s6-30c" secondAttribute="top" id="gUj-z8-aJs"/>
                                     <constraint firstItem="euV-rA-nZN" firstAttribute="leading" secondItem="5bH-s6-30c" secondAttribute="leading" constant="8" id="j4U-Cc-5gd"/>
                                     <constraint firstItem="tPb-b7-JL5" firstAttribute="leading" secondItem="5bH-s6-30c" secondAttribute="leading" constant="8" id="oA3-Zt-DaB"/>
                                     <constraint firstAttribute="trailing" secondItem="euV-rA-nZN" secondAttribute="trailing" id="rnO-Qo-SNl"/>
@@ -358,35 +335,35 @@ You win the challenge by completing all 4 streaks.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jl7-kx-cR2">
-                                <rect key="frame" x="0.0" y="465" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="478" width="375" height="43"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvU-Ju-dfe">
                                         <rect key="frame" x="8" y="42" width="367" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="5bZ-WS-jSv"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3B-8H-F37">
-                                        <rect key="frame" x="8" y="11" width="302" height="21"/>
+                                        <rect key="frame" x="8" y="11" width="288" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzv-Wv-IRQ">
-                                        <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                        <rect key="frame" x="304" y="6" width="51" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="49" id="E8z-zw-Qxi"/>
                                             <constraint firstAttribute="height" constant="31" id="GTe-de-rSb"/>
                                         </constraints>
                                     </switch>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="W3B-8H-F37" firstAttribute="leading" secondItem="Jl7-kx-cR2" secondAttribute="leading" constant="8" id="3qV-aW-i3N"/>
                                     <constraint firstItem="QvU-Ju-dfe" firstAttribute="leading" secondItem="Jl7-kx-cR2" secondAttribute="leading" constant="8" id="5mh-je-Gk7"/>
                                     <constraint firstAttribute="trailing" secondItem="QvU-Ju-dfe" secondAttribute="trailing" id="F4w-gP-I01"/>
-                                    <constraint firstAttribute="trailing" secondItem="gzv-Wv-IRQ" secondAttribute="trailing" constant="8" id="ba3-It-zCN"/>
+                                    <constraint firstAttribute="trailing" secondItem="gzv-Wv-IRQ" secondAttribute="trailing" constant="22" id="ba3-It-zCN"/>
                                     <constraint firstAttribute="bottom" secondItem="QvU-Ju-dfe" secondAttribute="bottom" id="eQt-73-AMl"/>
                                     <constraint firstAttribute="height" constant="43" id="fWe-yw-7yZ"/>
                                     <constraint firstAttribute="bottom" secondItem="W3B-8H-F37" secondAttribute="bottom" constant="11" id="gN5-00-MEd"/>
@@ -406,16 +383,16 @@ You win the challenge by completing all 4 streaks.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="DkS-E4-Ymk"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLc-yc-J4g">
                                                 <rect key="frame" x="0.0" y="21" width="115" height="64"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="44"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="NCW-Gj-taS" secondAttribute="trailing" id="2Dt-ln-RRl"/>
                                             <constraint firstItem="NCW-Gj-taS" firstAttribute="top" secondItem="arW-Ms-UOw" secondAttribute="top" id="5Tr-x6-dNK"/>
@@ -438,16 +415,16 @@ You win the challenge by completing all 4 streaks.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="JX6-1E-uXZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-gm-QQX">
                                                 <rect key="frame" x="0.0" y="21" width="130" height="64"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="44"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9PS-Da-y6I" secondAttribute="trailing" id="02h-is-NNC"/>
                                             <constraint firstItem="9PS-Da-y6I" firstAttribute="leading" secondItem="pBW-ag-jJr" secondAttribute="leading" id="Jmq-Ev-6iW"/>
@@ -469,16 +446,16 @@ You win the challenge by completing all 4 streaks.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="zMl-3N-U6u"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9q-z4-f4U">
                                                 <rect key="frame" x="0.0" y="21" width="130" height="64"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="44"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="zwm-De-vJ6" firstAttribute="leading" secondItem="xBk-6F-InC" secondAttribute="leading" id="2k5-AU-uG2"/>
                                             <constraint firstItem="zwm-De-vJ6" firstAttribute="leading" secondItem="xBk-6F-InC" secondAttribute="leading" id="8d6-li-S9p"/>
@@ -493,7 +470,7 @@ You win the challenge by completing all 4 streaks.</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="pBW-ag-jJr" firstAttribute="top" secondItem="hcA-eR-PUw" secondAttribute="top" id="0MC-kL-3JO"/>
                                     <constraint firstAttribute="trailing" secondItem="xBk-6F-InC" secondAttribute="trailing" id="FOS-nG-4Oc"/>
@@ -513,7 +490,7 @@ You win the challenge by completing all 4 streaks.</string>
                                 <rect key="frame" x="332" y="120" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opT-85-r15">
-                                        <rect key="frame" x="127" y="88" width="120" height="120"/>
+                                        <rect key="frame" x="127" y="91" width="120" height="120"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Duel" translatesAutoresizingMaskIntoConstraints="NO" id="pHM-Et-DcE">
                                                 <rect key="frame" x="10" y="10" width="100" height="100"/>
@@ -543,7 +520,7 @@ You win the challenge by completing all 4 streaks.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great Job!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-DF-oIH">
-                                        <rect key="frame" x="8" y="216" width="359" height="61"/>
+                                        <rect key="frame" x="8" y="219" width="359" height="61"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="61" id="THs-5D-O0D"/>
                                         </constraints>
@@ -552,7 +529,7 @@ You win the challenge by completing all 4 streaks.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Completed Day 5 of your Challenge" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7K-DS-87H">
-                                        <rect key="frame" x="45" y="281" width="284" height="78"/>
+                                        <rect key="frame" x="45" y="284" width="284" height="78"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="78" id="CxJ-CT-1Fw"/>
                                         </constraints>
@@ -561,7 +538,7 @@ You win the challenge by completing all 4 streaks.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGO-4s-0wY">
-                                        <rect key="frame" x="164" y="390" width="46" height="30"/>
+                                        <rect key="frame" x="164" y="393" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="2ai-9Z-LlG"/>
                                             <constraint firstAttribute="width" constant="46" id="EB1-14-Rjj"/>
@@ -590,7 +567,7 @@ You win the challenge by completing all 4 streaks.</string>
                                     <constraint firstItem="opT-85-r15" firstAttribute="centerX" secondItem="VwF-mv-7zH" secondAttribute="centerX" id="6PR-ps-Fhv"/>
                                     <constraint firstItem="cAe-DF-oIH" firstAttribute="leading" secondItem="VwF-mv-7zH" secondAttribute="leading" constant="8" id="Ab9-OC-Gmc"/>
                                     <constraint firstItem="G7K-DS-87H" firstAttribute="leading" secondItem="VwF-mv-7zH" secondAttribute="leading" constant="45" id="TwQ-Xd-Brx"/>
-                                    <constraint firstItem="opT-85-r15" firstAttribute="top" secondItem="VwF-mv-7zH" secondAttribute="top" constant="88" id="ZwC-yE-wjG"/>
+                                    <constraint firstItem="opT-85-r15" firstAttribute="top" secondItem="VwF-mv-7zH" secondAttribute="top" constant="91" id="ZwC-yE-wjG"/>
                                     <constraint firstItem="cAe-DF-oIH" firstAttribute="top" secondItem="opT-85-r15" secondAttribute="bottom" constant="8" id="aeK-jB-rCp"/>
                                     <constraint firstItem="fGO-4s-0wY" firstAttribute="centerX" secondItem="VwF-mv-7zH" secondAttribute="centerX" id="buc-It-D5a"/>
                                     <constraint firstAttribute="bottom" secondItem="0qH-cO-lYE" secondAttribute="bottom" constant="8" id="dzC-c4-WGl"/>
@@ -601,27 +578,27 @@ You win the challenge by completing all 4 streaks.</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wj9-wM-cIg" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="1oH-HO-UnO"/>
                             <constraint firstItem="hcA-eR-PUw" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="3Ag-aJ-iQQ"/>
                             <constraint firstAttribute="trailing" secondItem="wj9-wM-cIg" secondAttribute="trailing" id="3np-eD-UZ5"/>
-                            <constraint firstAttribute="trailing" secondItem="6V7-zz-4un" secondAttribute="trailing" id="6E0-3k-5Of"/>
+                            <constraint firstAttribute="trailing" secondItem="6V7-zz-4un" secondAttribute="trailing" constant="8" id="6E0-3k-5Of"/>
                             <constraint firstAttribute="trailing" secondItem="occ-lZ-IdC" secondAttribute="trailing" id="6PP-rp-Sy8"/>
-                            <constraint firstItem="5bH-s6-30c" firstAttribute="top" secondItem="PZN-JG-oDo" secondAttribute="bottom" constant="8" id="DbR-VK-eBg"/>
-                            <constraint firstItem="PZN-JG-oDo" firstAttribute="top" secondItem="hcA-eR-PUw" secondAttribute="bottom" id="ENB-6v-yTG"/>
-                            <constraint firstItem="WN6-2e-rKA" firstAttribute="top" secondItem="6V7-zz-4un" secondAttribute="bottom" id="HAe-ml-1Vs"/>
+                            <constraint firstItem="5bH-s6-30c" firstAttribute="top" secondItem="PZN-JG-oDo" secondAttribute="bottom" constant="24" id="DbR-VK-eBg"/>
+                            <constraint firstItem="PZN-JG-oDo" firstAttribute="top" secondItem="hcA-eR-PUw" secondAttribute="bottom" constant="5" id="ENB-6v-yTG"/>
+                            <constraint firstItem="WN6-2e-rKA" firstAttribute="top" secondItem="6V7-zz-4un" secondAttribute="bottom" constant="16" id="HAe-ml-1Vs"/>
                             <constraint firstItem="wj9-wM-cIg" firstAttribute="top" secondItem="occ-lZ-IdC" secondAttribute="bottom" id="KQD-df-Ysd"/>
                             <constraint firstItem="Jl7-kx-cR2" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="Kww-OZ-Xp8"/>
                             <constraint firstAttribute="trailing" secondItem="PZN-JG-oDo" secondAttribute="trailing" id="NhF-y0-DBu"/>
                             <constraint firstItem="occ-lZ-IdC" firstAttribute="top" secondItem="tZU-nG-wiI" secondAttribute="bottom" id="NuQ-of-xpe"/>
                             <constraint firstAttribute="trailing" secondItem="Jl7-kx-cR2" secondAttribute="trailing" id="QKb-gp-Mpn"/>
-                            <constraint firstItem="6V7-zz-4un" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="Sd9-ZI-CV0"/>
+                            <constraint firstItem="6V7-zz-4un" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" constant="8" id="Sd9-ZI-CV0"/>
                             <constraint firstItem="WN6-2e-rKA" firstAttribute="top" secondItem="VwF-mv-7zH" secondAttribute="bottom" id="Sds-PA-TvE"/>
                             <constraint firstItem="hcA-eR-PUw" firstAttribute="top" secondItem="wj9-wM-cIg" secondAttribute="bottom" constant="8" id="Wgo-DF-Etb"/>
                             <constraint firstItem="VwF-mv-7zH" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="dSt-OY-qPJ"/>
                             <constraint firstItem="PZN-JG-oDo" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="hDC-OB-POn"/>
-                            <constraint firstItem="Jl7-kx-cR2" firstAttribute="top" secondItem="5bH-s6-30c" secondAttribute="bottom" constant="8" id="hHG-1A-p8t"/>
+                            <constraint firstItem="Jl7-kx-cR2" firstAttribute="top" secondItem="5bH-s6-30c" secondAttribute="bottom" id="hHG-1A-p8t"/>
                             <constraint firstItem="occ-lZ-IdC" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="kbK-5Q-uUc"/>
                             <constraint firstItem="5bH-s6-30c" firstAttribute="leading" secondItem="n4n-uL-RwY" secondAttribute="leading" id="kyA-7C-ECd"/>
                             <constraint firstAttribute="trailing" secondItem="hcA-eR-PUw" secondAttribute="trailing" id="shC-jJ-tGZ"/>
@@ -634,13 +611,11 @@ You win the challenge by completing all 4 streaks.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="checkIn" destination="gpw-KW-7cR" id="BFu-C4-hru"/>
-                        <outlet property="checkInNeedsToCheck" destination="q9L-Nm-cah" id="Nf1-zf-7DH"/>
                         <outlet property="completitionLabel" destination="tLc-yc-J4g" id="eqv-Ww-6S4"/>
                         <outlet property="dayLabel" destination="V9q-z4-f4U" id="cTc-l6-Vbj"/>
                         <outlet property="navigationBar" destination="occ-lZ-IdC" id="FOT-dU-eHq"/>
                         <outlet property="navigationItemView" destination="AKX-f3-dcn" id="eTF-s6-Air"/>
                         <outlet property="resultView" destination="VwF-mv-7zH" id="q4K-65-uvZ"/>
-                        <outlet property="skipAdayNeedsToCheck" destination="5sv-n8-Cr7" id="mhO-uQ-IxX"/>
                         <outlet property="streakNumberLabel" destination="Ykt-gm-QQX" id="s2p-fy-JGN"/>
                         <outlet property="streakSlider" destination="CHE-p2-jLk" id="a13-RG-U99"/>
                     </connections>

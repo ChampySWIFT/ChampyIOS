@@ -48,6 +48,26 @@
                ReferencedContainer = "container:Champy.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "57DBA4AA1D366E7D00DD0035"
+               BuildableName = "ChampyTests.xctest"
+               BlueprintName = "ChampyTests"
+               ReferencedContainer = "container:Champy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "579C18771CCB595800D6EEA9"
+               BuildableName = "ChampyUITests.xctest"
+               BlueprintName = "ChampyUITests"
+               ReferencedContainer = "container:Champy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
