@@ -517,6 +517,7 @@
 			isa = PBXGroup;
 			children = (
 				57C763631CE9AF8100C3695A /* Fonts */,
+				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
 				57A3C6D31CDB7C2200997E41 /* privacy.html */,
 				571F789A1CF880AD008A45DE /* out.caf */,
 				0D9E29431DB4F7BA000F2833 /* champy.png */,
@@ -524,7 +525,6 @@
 				0D74E95C1DBE51AA00081CCD /* sub.caf */,
 				57E9740C1D2685FD00E573CA /* out.wav */,
 				579C18591CCB595700D6EEA9 /* AppDelegate.swift */,
-				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
 				57C795D01D67409A007A861F /* GoogleService-Info.plist */,
 				579C18681CCB595700D6EEA9 /* Info.plist */,
 				57DBF6281CEC6DF500659B79 /* Entitlements.plist */,

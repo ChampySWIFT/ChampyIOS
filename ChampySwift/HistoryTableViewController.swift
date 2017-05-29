@@ -148,9 +148,9 @@ class HistoryTableViewController: UITableViewController {
     self.identifiers.removeAll()
     for item in array  {
       self.identifiers.append(item["_id"].stringValue)
-      let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
-      content.setUp(item)
-      self.historyItems.append(content)
+//      let content = HistoryCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 80))
+//      content.setUp(item)
+//      self.historyItems.append(content)
     }
     
     if historyItems.count == 0 {
