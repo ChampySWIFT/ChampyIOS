@@ -159,6 +159,7 @@
 		57FCDC781D3672DD00BE9262 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
 		57FCDC791D3672DD00BE9262 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */; };
 		57FCDC7A1D3672DD00BE9262 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */; };
+		5968EA331EDC61BC0015D735 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968EA321EDC61BC0015D735 /* ProfileSettingsViewController.swift */; };
 		597AA5341EDC0E1300F4BBD7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */; };
 		6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */; };
 		790CB9DA136B31D9BDEE5AA4 /* Pods_ChampyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */; };
@@ -369,6 +370,7 @@
 		57FBC97E1CD9F49900341A2D /* APCustomBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCustomBlurView.swift; sourceTree = "<group>"; };
 		583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5968EA321EDC61BC0015D735 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTestsSwift3.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0.debug.xcconfig"; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 				0D2AC94C1E7D5FD7008BEC4E /* ChallengeDetailsViewController.swift */,
 				0D2AC94E1E7D6F8F008BEC4E /* ChallengeRulesViewController.swift */,
 				0DAA18EE1E7FCDBD00F34E06 /* StreakSlider.swift */,
+				5968EA321EDC61BC0015D735 /* ProfileSettingsViewController.swift */,
 				0DA6285C1E8E356C0024F7C9 /* CreateChallengeViewController.swift */,
 				0DA6285E1E8E3F720024F7C9 /* NewChallengeDetailsViewController.swift */,
 				0DA628601E8E43600024F7C9 /* CreateChallengeFinishViewController.swift */,
@@ -1427,6 +1430,7 @@
 				0D97F3E41E1FC21E00B24B46 /* StepCounterDuelChecked.swift in Sources */,
 				0D959BA31DA6610A00B3F4BE /* MNMBottomPullToRefreshManager.swift in Sources */,
 				572626C71CD8F7F90022C389 /* CHPush.swift in Sources */,
+				5968EA331EDC61BC0015D735 /* ProfileSettingsViewController.swift in Sources */,
 				0DAA18EF1E7FCDBD00F34E06 /* StreakSlider.swift in Sources */,
 				5770CCF41CD9E99700D10E5A /* CHImages.swift in Sources */,
 				57B632C81CD78A35000D6868 /* SelfImprovementWin.swift in Sources */,
