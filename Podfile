@@ -6,7 +6,7 @@ use_frameworks!
 target 'Champy' do
   pod  'SwiftRandom'
   pod 'SideMenu'
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
+  pod 'Socket.IO-Client-Swift' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
   pod 'SwiftHTTP', '~> 2.0.0' # swift 3
@@ -23,7 +23,7 @@ target 'Champy' do
 end
 
 target 'ChampyUITests' do
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
+  pod 'Socket.IO-Client-Swift' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
   pod 'SwiftHTTP', '~> 2.0.0' # swift 3
@@ -51,7 +51,7 @@ target 'ChampyTests' do
  end
 
 target 'ChampyTestsSwift3.0' do
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
+  pod 'Socket.IO-Client-Swift' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
   pod 'SwiftHTTP', '~> 2.0.0' # swift 3
@@ -66,7 +66,7 @@ target 'ChampyTestsSwift3.0' do
   end
 
 target 'ChampyUITests3.0' do
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2' # swift 3
+  pod 'Socket.IO-Client-Swift' # swift 3
   pod 'Alamofire', '~> 4.0' # swift 3
   pod 'SwiftyJSON' # swift 3
   pod 'SwiftHTTP', '~> 2.0.0' # swift 3
