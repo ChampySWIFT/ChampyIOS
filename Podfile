@@ -3,7 +3,7 @@ platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-target 'Champy' do
+def pods
   pod  'SwiftRandom'
   pod 'SideMenu'
   pod 'Socket.IO-Client-Swift' # swift 3
@@ -17,69 +17,32 @@ target 'Champy' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Device', '~> 2.0.0'
-  #pod 'FacebookCore'
-  #pod 'FacebookLogin'
-  #pod 'FacebookShare'
+end
+
+target 'Champy' do
+  pods
 end
 
 target 'ChampyUITests' do
-  pod 'Socket.IO-Client-Swift' # swift 3
-  pod 'Alamofire', '~> 4.0' # swift 3
-  pod 'SwiftyJSON' # swift 3
-  pod 'SwiftHTTP', '~> 2.0.0' # swift 3
-  pod 'AsyncSwift' # swift 3
-  pod 'JSONWebToken' # swift 3
-  pod 'Kingfisher', '~> 3.0' # swift 3
-  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
-  pod 'Device', '~> 2.0.0'
+  pods
   
 end
 
 target 'ChampyTests' do
-  pod 'Socket.IO-Client-Swift', '~> 8.0.2'
-  pod 'Alamofire', '~> 4.0'
-  pod 'SwiftyJSON'
-  pod 'SwiftHTTP', '~> 2.0.0'
-  pod 'AsyncSwift'
-  pod 'JSONWebToken'
-  pod 'Kingfisher', '~> 3.0'
-  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
-  pod 'Device', '~> 2.0.0'
+  pods
   
- end
+end
 
 target 'ChampyTestsSwift3.0' do
-  pod 'Socket.IO-Client-Swift' # swift 3
-  pod 'Alamofire', '~> 4.0' # swift 3
-  pod 'SwiftyJSON' # swift 3
-  pod 'SwiftHTTP', '~> 2.0.0' # swift 3
-  pod 'AsyncSwift' # swift 3
-  pod 'JSONWebToken' # swift 3
-  pod 'Kingfisher', '~> 3.0' # swift 3
-  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
-  pod 'Device', '~> 2.0.0'
+  pods
   
-  end
+end
 
 target 'ChampyUITests3.0' do
-  pod 'Socket.IO-Client-Swift' # swift 3
-  pod 'Alamofire', '~> 4.0' # swift 3
-  pod 'SwiftyJSON' # swift 3
-  pod 'SwiftHTTP', '~> 2.0.0' # swift 3
-  pod 'AsyncSwift' # swift 3
-  pod 'JSONWebToken' # swift 3
-  pod 'Kingfisher', '~> 3.0' # swift 3
-  pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :commit => '503865a'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
-  pod 'Device', '~> 2.0.0'
+  pods
   
   
-  end
+end
 
 post_install do |installer|
   installer.pods_project.targets.each do

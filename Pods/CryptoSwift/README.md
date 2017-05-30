@@ -29,6 +29,7 @@ Good mood
 - [SHA256](http://tools.ietf.org/html/rfc6234)
 - [SHA384](http://tools.ietf.org/html/rfc6234)
 - [SHA512](http://tools.ietf.org/html/rfc6234)
+- [SHA3](http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf)
 
 #### Cyclic Redundancy Check (CRC)
 - [CRC32](http://en.wikipedia.org/wiki/Cyclic_redundancy_check)
@@ -38,6 +39,7 @@ Good mood
 - [AES-128, AES-192, AES-256](http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf)
 - [ChaCha20](http://cr.yp.to/chacha/chacha-20080128.pdf)
 - [Rabbit](https://tools.ietf.org/html/rfc4503)
+- [Blowfish](https://www.schneier.com/academic/blowfish/)
 
 #### Message authenticators
 - [Poly1305](http://cr.yp.to/mac/poly1305-20050329.pdf)
@@ -65,7 +67,7 @@ Good mood
 
 ##Contribution
 
-For the latest version, please check **develop** branch. Changes from this branch will be merged into the **master** branch at some point.
+For the latest version, please check [develop](https://github.com/krzyzanowskim/CryptoSwift/tree/develop) branch. Changes from this branch will be merged into the [master](https://github.com/krzyzanowskim/CryptoSwift/tree/master) branch at some point.
 
 - If you want to contribute, submit a [pull request](https://github.com/krzyzanowskim/CryptoSwift/pulls) against a development `develop` branch.
 - If you found a bug, [open an issue](https://github.com/krzyzanowskim/CryptoSwift/issues).
@@ -76,6 +78,8 @@ For the latest version, please check **develop** branch. Changes from this branc
 To install CryptoSwift, add it as a submodule to your project (on the top level project directory):
 
     git submodule add https://github.com/krzyzanowskim/CryptoSwift.git
+    
+It is recommended to enable [Whole-Module Optimization](https://swift.org/blog/whole-module-optimizations/) to gain better performance. Non-optimized build results in significantly worse performance.
 
 ####Embedded Framework
 
@@ -92,22 +96,23 @@ Sometimes "embedded framework" option is not available. In that case, you have t
 In the project, you'll find [single scheme](http://promisekit.org/news/2016/08/Multiplatform-Single-Scheme-Xcode-Projects/) for all platforms:
 - CryptoSwift
 
-####Older Swift
+####Older Swift versions
 
-- Swift 1.2: branch [swift12](https://github.com/krzyzanowskim/CryptoSwift/tree/swift12).
-- Swift 2.1: branch [swift21](https://github.com/krzyzanowskim/CryptoSwift/tree/swift21)
-- Swift 2.x: branch [swift2](https://github.com/krzyzanowskim/CryptoSwift/tree/swift2)
+- Swift 1.2: branch [swift12](https://github.com/krzyzanowskim/CryptoSwift/tree/swift12) version <= 0.0.13
+- Swift 2.1: branch [swift21](https://github.com/krzyzanowskim/CryptoSwift/tree/swift21) version <= 0.2.3
+- Swift 2.2, 2.3: branch [swift2](https://github.com/krzyzanowskim/CryptoSwift/tree/swift2) version <= 0.5.2
 
 ####CocoaPods
 
 You can use [CocoaPods](http://cocoapods.org/?q=cryptoSwift).
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'CryptoSwift'
+target 'MyApp' do
+  pod 'CryptoSwift'
+end
 ```
 
 or for newest version from specified branch of code:
@@ -115,6 +120,8 @@ or for newest version from specified branch of code:
 ```ruby
 pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
 ```
+
+Bear in mind that CocoaPods will build CryptoSwift without [Whole-Module Optimization](https://swift.org/blog/whole-module-optimizations/) that my impact performance. You can change it manually after installation, or use [cocoapods-wholemodule](https://github.com/jedlewison/cocoapods-wholemodule) plugin.
 
 ####Carthage 
 You can use [Carthage](https://github.com/Carthage/Carthage). 
@@ -140,10 +147,11 @@ See: [Package.swift - manual](http://blog.krzyzanowskim.com/2016/08/09/package-s
 * [Basics (data types, conversion, ...)](#basics)
 * [Digest (MD5, SHA...)](#calculate-digest)
 * [Message authenticators (HMAC...)](#message-authenticators)
-* [Password-Based Key Derivation Function (PBKDF2, ...)](password-based-key-derivation-functions)
+* [Password-Based Key Derivation Function (PBKDF2, ...)](#password-based-key-derivation-functions)
 * [Data Padding](#data-padding)
 * [ChaCha20](#chacha20)
 * [Rabbit](#rabbit)
+* [Blowfish](#blowfish)
 * [Advanced Encryption Standard (AES)](#aes)
 
 
@@ -182,7 +190,7 @@ let hex   = bytes.toHexString()            // "010203"
 
 Build bytes out of `String`
 ```swift
-let bytes = "string".utf8.map({$0})
+let bytes = Array("string".utf8)
 ```
 
 Also... check out helpers that work with **Base64** encoded data:
@@ -250,10 +258,8 @@ try HMAC(key: key, variant: .sha256).authenticate(bytes)
 #####Password-Based Key Derivation Functions
 
 ```swift
-let password: Array<UInt8> = "s33krit".utf8.map {$0}
-let salt: Array<UInt8> = "nacllcan".utf8.map {$0}
-
-try PKCS5.PBKDF1(password: password, salt: salt, variant: .sha1, iterations: 4096).calculate()
+let password: Array<UInt8> = Array("s33krit".utf8)
+let salt: Array<UInt8> = Array("nacllcan".utf8)
 
 try PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, variant: .sha256).calculate()
 ```
@@ -280,16 +286,33 @@ let decrypted = try ChaCha20(key: key, iv: iv).decrypt(encrypted)
 let encrypted = try Rabbit(key: key, iv: iv).encrypt(message)
 let decrypted = try Rabbit(key: key, iv: iv).decrypt(encrypted)
 ```
+#####Blowfish
+
+```swift
+let encrypted = try Blowfish(key: key, iv: iv, blockMode: .CBC, padding: PKCS7()).encrypt(message)
+let decrypted = try Blowfish(key: key, iv: iv, blockMode: .CBC, padding: PKCS7()).decrypt(encrypted)
+```
 
 #####AES
 
 Notice regarding padding: *Manual padding of data is optional, and CryptoSwift is using PKCS7 padding by default. If you need manually disable/enable padding, you can do this by setting parameter for __AES__ class*
 
+Variant of AES encryption (AES-128, AES-192, AES-256) depends on given key length:
+
+- AES-128 = 16 bytes
+- AES-192 = 24 bytes
+- AES-256 = 32 bytes
+
+AES-256 example
+```swift
+try AES(key: [1,2,3,...,32], iv: [1,2,3,...,16], blockMode: .CBC, padding: PKCS7())
+```
+ 
 ######All at once
 ```swift
 do {
     let aes = try AES(key: "passwordpassword", iv: "drowssapdrowssap") // aes128
-    let ciphertext = try aes.encrypt("Nullam quis risus eget urna mollis ornare vel eu leo.".utf8.map({$0}))
+    let ciphertext = try aes.encrypt(Array("Nullam quis risus eget urna mollis ornare vel eu leo.".utf8))
 } catch { }
 ```
 
@@ -303,9 +326,9 @@ do {
 
     var ciphertext = Array<UInt8>()
     // aggregate partial results
-    ciphertext += try encryptor.update(withBytes: "Nullam quis risus ".utf8.map({$0}))
-    ciphertext += try encryptor.update(withBytes: "eget urna mollis ".utf8.map({$0}))
-    ciphertext += try encryptor.update(withBytes: "ornare vel eu leo.".utf8.map({$0}))
+    ciphertext += try encryptor.update(withBytes: Array("Nullam quis risus ".utf8))
+    ciphertext += try encryptor.update(withBytes: Array("eget urna mollis ".utf8))
+    ciphertext += try encryptor.update(withBytes: Array("ornare vel eu leo.".utf8))
     // finish at the end
     ciphertext += try encryptor.finish()
 

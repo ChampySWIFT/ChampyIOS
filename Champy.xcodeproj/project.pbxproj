@@ -72,6 +72,8 @@
 		57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */; };
 		57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */; };
 		574CE87A1D3CB9E8004A9345 /* FacebookAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */; };
+		574FFCB61EDC653900C6E869 /* ProfileSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */; };
+		574FFCB81EDDA1CF00C6E869 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */; };
 		575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */; };
 		575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */; };
 		575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */; };
@@ -270,6 +272,8 @@
 		57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementWin.xib; sourceTree = "<group>"; };
 		57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementDone.swift; sourceTree = "<group>"; };
 		574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuthViewController.swift; sourceTree = "<group>"; };
+		574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSliderViewController.swift; sourceTree = "<group>"; };
+		574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnConfirmedDuelSender.swift; sourceTree = "<group>"; };
 		575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmedDuel.xib; sourceTree = "<group>"; };
 		575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmedDuel.swift; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				57C763631CE9AF8100C3695A /* Fonts */,
+				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
 				57A3C6D31CDB7C2200997E41 /* privacy.html */,
 				571F789A1CF880AD008A45DE /* out.caf */,
 				0D9E29431DB4F7BA000F2833 /* champy.png */,
@@ -528,7 +533,6 @@
 				0D74E95C1DBE51AA00081CCD /* sub.caf */,
 				57E9740C1D2685FD00E573CA /* out.wav */,
 				579C18591CCB595700D6EEA9 /* AppDelegate.swift */,
-				577D5F961CCE33A50002F0E0 /* Images.xcassets */,
 				57C795D01D67409A007A861F /* GoogleService-Info.plist */,
 				579C18681CCB595700D6EEA9 /* Info.plist */,
 				57DBF6281CEC6DF500659B79 /* Entitlements.plist */,
@@ -557,6 +561,7 @@
 				57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */,
 				574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */,
 				57C763641CE9BC4900C3695A /* TableViews */,
+				574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				0D7D9EA31E97AE8600D2E408 /* Segues.swift */,
 				0D7D9EA71E97B7EE00D2E408 /* FacebookFriendsViewController.swift */,
 				597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */,
+				574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1187,7 +1193,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		27E938CBF4A2CBE37C49ACDC /* [CP] Embed Pods Frameworks */ = {
@@ -1217,7 +1223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3D9D28E2E2ECD6659858A8FE /* [CP] Copy Pods Resources */ = {
@@ -1337,7 +1343,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		99A4546EDF1335B970AE583A /* [CP] Check Pods Manifest.lock */ = {
@@ -1352,7 +1358,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B2C6F00EEA3781B8286252D8 /* [CP] Copy Pods Resources */ = {
@@ -1382,7 +1388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FF1B59DDAA9B6822DB0A116C /* [CP] Copy Pods Resources */ = {
@@ -1473,8 +1479,10 @@
 				5784FF911D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift in Sources */,
 				0D5571CF1E7D31A500A043D0 /* GlobalUse.swift in Sources */,
 				577D5F9F1CCE5A010002F0E0 /* CHUIElements.swift in Sources */,
+				574FFCB81EDDA1CF00C6E869 /* AboutViewController.swift in Sources */,
 				575DC72D1CEDECE700CF92D3 /* CheckedDuel.swift in Sources */,
 				0D7D9EA81E97B7EE00D2E408 /* FacebookFriendsViewController.swift in Sources */,
+				574FFCB61EDC653900C6E869 /* ProfileSliderViewController.swift in Sources */,
 				0D9AF18E1E7BEF87008F3DAA /* ChallnegesTableViewController.swift in Sources */,
 				57FBC97F1CD9F49900341A2D /* APCustomBlurView.swift in Sources */,
 				5730E6EE1D0842B400D1EEA4 /* InviteFriendsView.swift in Sources */,
