@@ -25,6 +25,7 @@ class CHUIElements: NSObject {
     "title": UIColor(red: 246/255.0, green: 201/255.0, blue: 133/255.0, alpha: 1),
     ]
   
+  var borderColor = UIColor(red: 205/255.0, green: 206/255.0, blue: 210/255.0, alpha: 0.2)
   var bombSoundEffect: AVAudioPlayer!
   var font12:UIFont     = UIFont(name: "BebasNeueRegular", size: 12)!
   var font16:UIFont     = UIFont(name: "BebasNeueRegular", size: 16)!

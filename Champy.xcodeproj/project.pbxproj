@@ -72,6 +72,8 @@
 		57336C291CD786ED00C5B6F1 /* SelfImprovementWin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */; };
 		57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */; };
 		574CE87A1D3CB9E8004A9345 /* FacebookAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */; };
+		574FFCB61EDC653900C6E869 /* ProfileSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */; };
+		574FFCB81EDDA1CF00C6E869 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */; };
 		575DC7251CEDD64300CF92D3 /* UnConfirmedDuelSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */; };
 		575DC7271CEDE0C700CF92D3 /* ConfirmedDuel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */; };
 		575DC7291CEDE2B600CF92D3 /* ConfirmedDuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */; };
@@ -159,6 +161,7 @@
 		57FCDC781D3672DD00BE9262 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48B1D36677300DD0035 /* FBSDKLoginKit.framework */; };
 		57FCDC791D3672DD00BE9262 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48C1D36677300DD0035 /* FBSDKMessengerShareKit.framework */; };
 		57FCDC7A1D3672DD00BE9262 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBA48D1D36677300DD0035 /* FBSDKShareKit.framework */; };
+		597AA5341EDC0E1300F4BBD7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */; };
 		6748C2F78E1A71A64683A05D /* Pods_Champy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA16A9F277D0C2418E1DB7CF /* Pods_Champy.framework */; };
 		790CB9DA136B31D9BDEE5AA4 /* Pods_ChampyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */; };
 		A79081C971694F3E4F89DEB6 /* Pods_ChampyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */; };
@@ -268,6 +271,8 @@
 		57336C281CD786ED00C5B6F1 /* SelfImprovementWin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfImprovementWin.xib; sourceTree = "<group>"; };
 		57336C2A1CD7894100C5B6F1 /* SelfImprovementDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfImprovementDone.swift; sourceTree = "<group>"; };
 		574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuthViewController.swift; sourceTree = "<group>"; };
+		574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSliderViewController.swift; sourceTree = "<group>"; };
+		574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		575DC7241CEDD64300CF92D3 /* UnConfirmedDuelSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnConfirmedDuelSender.swift; sourceTree = "<group>"; };
 		575DC7261CEDE0C700CF92D3 /* ConfirmedDuel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmedDuel.xib; sourceTree = "<group>"; };
 		575DC7281CEDE2B600CF92D3 /* ConfirmedDuel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmedDuel.swift; sourceTree = "<group>"; };
@@ -368,6 +373,7 @@
 		57FBC97E1CD9F49900341A2D /* APCustomBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCustomBlurView.swift; sourceTree = "<group>"; };
 		583C4CC745DCC13735FCF2AA /* Pods_ChampyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5900DAE7495BACC74D478702 /* Pods_ChampyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5C181D8D8C2CCB4AF8A70744 /* Pods-ChampyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTests/Pods-ChampyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69ED0F623544C6A9FEBDFBAA /* Pods-ChampyTestsSwift3.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChampyTestsSwift3.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChampyTestsSwift3.0/Pods-ChampyTestsSwift3.0.debug.xcconfig"; sourceTree = "<group>"; };
 		6BC2793E37D08AD310290985 /* Pods_ChampyTestsSwift3_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChampyTestsSwift3_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -553,6 +559,7 @@
 				57ED480A1CD8BD3300E2CCFF /* RoleControlViewController.swift */,
 				574CE8791D3CB9E8004A9345 /* FacebookAuthViewController.swift */,
 				57C763641CE9BC4900C3695A /* TableViews */,
+				574FFCB51EDC653900C6E869 /* ProfileSliderViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -635,6 +642,8 @@
 				0D99366B1E964EB300D38E55 /* Colors.swift */,
 				0D7D9EA31E97AE8600D2E408 /* Segues.swift */,
 				0D7D9EA71E97B7EE00D2E408 /* FacebookFriendsViewController.swift */,
+				597AA5331EDC0E1300F4BBD7 /* SettingsViewController.swift */,
+				574FFCB71EDDA1CF00C6E869 /* AboutViewController.swift */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1440,6 +1449,7 @@
 				57336C2B1CD7894100C5B6F1 /* SelfImprovementDone.swift in Sources */,
 				57336C191CD7753000C5B6F1 /* CHGradients.swift in Sources */,
 				57D29E8C1D0076FF0016CBF5 /* HistoryCell.swift in Sources */,
+				597AA5341EDC0E1300F4BBD7 /* SettingsViewController.swift in Sources */,
 				577D5F931CCE2AB20002F0E0 /* ScoreBorder.swift in Sources */,
 				57336C131CD771CE00C5B6F1 /* WakeUpChallenge.swift in Sources */,
 				0D7D3ED61E0AC6270071BF0F /* Extentions.swift in Sources */,
@@ -1465,8 +1475,10 @@
 				5784FF911D352E2500E1C743 /* HeaderViewForPendingFriendsCells.swift in Sources */,
 				0D5571CF1E7D31A500A043D0 /* GlobalUse.swift in Sources */,
 				577D5F9F1CCE5A010002F0E0 /* CHUIElements.swift in Sources */,
+				574FFCB81EDDA1CF00C6E869 /* AboutViewController.swift in Sources */,
 				575DC72D1CEDECE700CF92D3 /* CheckedDuel.swift in Sources */,
 				0D7D9EA81E97B7EE00D2E408 /* FacebookFriendsViewController.swift in Sources */,
+				574FFCB61EDC653900C6E869 /* ProfileSliderViewController.swift in Sources */,
 				0D9AF18E1E7BEF87008F3DAA /* ChallnegesTableViewController.swift in Sources */,
 				57FBC97F1CD9F49900341A2D /* APCustomBlurView.swift in Sources */,
 				5730E6EE1D0842B400D1EEA4 /* InviteFriendsView.swift in Sources */,
