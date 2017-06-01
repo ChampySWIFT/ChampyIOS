@@ -52,6 +52,8 @@ class CHWakeUpper: NSObject {
     dateFire = calendar.date(from: fireComponents)!
     
     let localNotification = UILocalNotification()
+//    localNotification.userInfo = ["actionName": "syncMyData"]
+    localNotification.userInfo = ["syncMyData": true]
     localNotification.fireDate = dateFire
     localNotification.alertBody = "Hey! Looks like you still have some challenges for today."
     localNotification.repeatInterval = .day

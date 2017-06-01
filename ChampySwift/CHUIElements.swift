@@ -77,13 +77,74 @@ class CHUIElements: NSObject {
   }
   
   func initAndSetUpDatePicker(_ interval:Int) -> UIDatePicker {
-    let picker = UIDatePicker()
-    picker.datePickerMode = UIDatePickerMode.time
-    picker.backgroundColor = UIColor.lightGray
-    picker.tintColor = CHUIElements().APPColors["navigationBar"]
-    picker.minuteInterval = interval
+
     
-    return picker
+   
+     let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "HH"
+     dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+     let date = dateFormatter.date(from: "10") 
+     
+     
+     let picker = UIDatePicker()
+     
+     
+     picker.datePickerMode = UIDatePickerMode.time
+     picker.locale = NSLocale(localeIdentifier: "en_GB") as Locale
+     
+     picker.maximumDate = date
+     picker.backgroundColor = UIColor.lightGray
+     picker.tintColor = CHUIElements().APPColors["navigationBar"]
+     picker.minuteInterval = interval
+     
+     return picker
+
+    
+     
+    
+    
+    
+    /* Working!!!  
+     let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "HH"
+     dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+     let date = dateFormatter.date(from: "10") 
+     
+     
+     let picker = UIDatePicker()
+     
+     
+     picker.datePickerMode = UIDatePickerMode.time
+     picker.locale = NSLocale(localeIdentifier: "en_GB") as Locale
+     picker.maximumDate = date
+     picker.backgroundColor = UIColor.lightGray
+     picker.tintColor = CHUIElements().APPColors["navigationBar"]
+     picker.minuteInterval = interval
+     
+     return picker
+*/
+    
+    /* let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "HH:mm a"
+     dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+     let date = dateFormatter.date(from: "10") 
+     
+     
+     let picker = UIDatePicker()
+     
+     
+     picker.datePickerMode = UIDatePickerMode.time
+     picker.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+     
+     picker.maximumDate = date
+     picker.backgroundColor = UIColor.lightGray
+     picker.tintColor = CHUIElements().APPColors["navigationBar"]
+     picker.minuteInterval = interval
+     
+     return picker
+     */
+    
+    
   }
   
   func setUpDailyReminderCredentials(_ status:Bool, switcher:UISwitch, picker:UIView, label:UILabel) {

@@ -81,17 +81,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
   func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) { }
   
-  func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-    if notification.userInfo != nil {
-      let data = notification.userInfo as! [String:String]
-      if data["type"] == "WakeUp" {
-        CHBanners().setTimeout(3.0, block: {
-          CHPush().localPush("refreshIcarousel", object: self)
-        })
-      }
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        reactToNotification(notif: notification)
     }
-  }
+    
+    
+//  func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+//    reactToNotification(notif: notification)
+//    
+//    
+//    if notification.userInfo != nil {
+//      let data = notification.userInfo as! [String:String]
+//      if data["type"] == "WakeUp" {
+//        CHBanners().setTimeout(3.0, block: {
+//          CHPush().localPush("refreshIcarousel", object: self)
+//        })
+//      }
+//    }
+//  }
   
+    func reactToNotification(notif:UILocalNotification) {
+            
+        if let userinfo = notif.userInfo {
+//            if userinfo["actionName"] as! String == "syncMyData" {
+            if userinfo["syncMyData"] as! Bool {
+                // do some actions
+            }
+        }
+        
+    }  
+    
+    
   func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) { }
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
