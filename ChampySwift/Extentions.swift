@@ -402,3 +402,60 @@ extension UIImage {
     
   }
 }
+
+
+/*
+var materialKey: Bool = false
+
+var isChangedShadowOffset:Bool = false
+var viewsShadowOffset:CGSize = CGSize(width: 0.0, height: 0.0)
+var shadowRect:CGRect = CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0)
+
+extension UIView {
+    @IBInspectable var viewsShadowOffset:CGRect {
+        get {
+            return shadowRect
+        }
+        
+        set {
+            shadowRect = newValue
+            
+        }
+    }
+    
+    @IBInspectable var materialDesigne: Bool {
+        
+        get {
+            return materialKey
+        }
+        
+        set {
+            materialKey = newValue
+            
+            if materialKey {
+                let shadowPathForImage = UIBezierPath(roundedRect: shadowRect, cornerRadius: self.layer.cornerRadius)
+                self.layer.shadowColor = UIColor.green.cgColor
+                self.layer.shadowOpacity = 0.30
+                self.layer.shadowPath = shadowPathForImage.cgPath
+                
+
+                
+//                self.layer.masksToBounds = false
+//                self.layer.cornerRadius = 3.0
+//                self.layer.shadowOpacity = 0.3
+//                self.layer.shadowRadius = 3.0
+//                self.layer.shadowOffset = viewsShadowOffset //CGSize(width: 0.0, height: 2.0)
+//                self.layer.shadowColor = UIColor.green.cgColor
+            } else {
+//                self.layer.cornerRadius = 0.0
+                self.layer.shadowOpacity = 0.0
+                self.layer.shadowColor = nil
+            }
+        }
+        
+    }    
+    
+
+}
+*/
+

@@ -84,10 +84,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UITextFiel
         self.viewBehindImageView.layer.borderWidth = 1
         self.viewBehindImageView.layer.borderColor = CHUIElements().borderColor.cgColor
         
+        
         let shadowPathForImage = UIBezierPath(roundedRect: CGRect(x: 0, y: 6, width: self.viewBehindImageView.frame.width, height: self.viewBehindImageView.frame.height), cornerRadius: self.viewBehindImageView.layer.cornerRadius)
         self.viewBehindImageView.layer.shadowColor = UIColor.green.cgColor
         self.viewBehindImageView.layer.shadowOpacity = 0.30
         self.viewBehindImageView.layer.shadowPath = shadowPathForImage.cgPath
+        
+        
         
         self.imageView.layer.masksToBounds = true
         
@@ -116,8 +119,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UITextFiel
         self.reminderTimeTextfield.text = strDate
         
         self.reminderTimeTextfield.resignFirstResponder()
-        
+        if hour! < 10 {
         CHSession().CurrentUser.set(hour, forKey: "hoursDN")
+        } else {
+            CHSession().CurrentUser.set(hour, forKey: "hoursDN")
+        }
         CHSession().CurrentUser.set(minute, forKey: "minsDN")
         
     }
